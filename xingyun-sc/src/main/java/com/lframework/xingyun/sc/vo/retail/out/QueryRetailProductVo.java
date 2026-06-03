@@ -1,0 +1,43 @@
+package com.lframework.xingyun.sc.vo.retail.out;
+
+import com.lframework.starter.web.core.vo.PageVo;
+import io.swagger.annotations.ApiModelProperty;
+import javax.validation.constraints.NotBlank;
+import lombok.Data;
+
+@Data
+public class QueryRetailProductVo extends PageVo {
+
+  private static final long serialVersionUID = 1L;
+
+  /**
+   * 仓库ID
+   */
+  @ApiModelProperty(value = "仓库ID", required = true)
+  @NotBlank(message = "仓库ID不能为空！")
+  private String scId;
+
+  /**
+   * 检索关键字
+   */
+  @ApiModelProperty("检索关键字")
+  private String condition;
+
+  /**
+   * 分类ID
+   */
+  @ApiModelProperty("分类ID")
+  private String categoryId;
+
+  /**
+   * 品牌ID
+   */
+  @ApiModelProperty("品牌ID")
+  private String brandId;
+
+  /**
+   * 是否退货
+   */
+  @ApiModelProperty("是否退货")
+  private Boolean isReturn = Boolean.FALSE;
+}

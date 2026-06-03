@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lframework.xingyun.sc.mappers.ProductStockLogMapper">
+    <resultMap id="ProductStockLog" type="com.lframework.xingyun.sc.entity.ProductStockLog">
+        <id column="id" property="id"/>
+        <result column="product_id" property="productId"/>
+        <result column="sc_id" property="scId"/>
+        <result column="ori_stock_num" property="oriStockNum"/>
+        <result column="cur_stock_num" property="curStockNum"/>
+        <result column="ori_tax_price" property="oriTaxPrice"/>
+        <result column="cur_tax_price" property="curTaxPrice"/>
+        <result column="stock_num" property="stockNum"/>
+        <result column="tax_amount" property="taxAmount"/>
+        <result column="create_by" property="createBy"/>
+        <result column="create_time" property="createTime"/>
+        <result column="biz_id" property="bizId"/>
+        <result column="biz_code" property="bizCode"/>
+        <result column="biz_detail_id" property="bizDetailId"/>
+        <result column="biz_type" property="bizType"/>
+    </resultMap>
+
+    <sql id="ProductStockLogDto_sql">
+        SELECT
+            gsl.id,
+            gsl.product_id,
+            gsl.sc_id,
+            gsl.ori_stock_num,
+            gsl.cur_stock_num,
+            gsl.ori_tax_price,
+            gsl.cur_tax_price,
+            gsl.stock_num,
+            gsl.tax_amount,
+            gsl.create_by,
+            gsl.create_time,
+            gsl.biz_id,
+            gsl.biz_code,
+            gsl.biz_detail_id,
+            gsl.biz_type
+        FROM tbl_product_stock_log AS gsl
+        INNER JOIN base_data_product AS g ON g.id = gsl.product_id AND g.product_type = 1
+        LEFT JOIN base_data_product_brand AS b ON b.id = g.brand_id
+        LEFT JOIN base_data_product_category AS c ON c.id = g.category_id
+    </sql>
+    <select id="query" resultMap="ProductStockLog">
+        <include refid="ProductStockLogDto_sql"/>
+        INNER JOIN base_data_store_center AS sc ON sc.id = gsl.sc_id
+        LEFT JOIN recursion_mapping AS rm ON rm.node_id = g.category_id and rm.node_type = 2
+        <where>
+            <if test="vo != null">
+                <if test="vo.scId != null and vo.scId != ''">
+                    AND gsl.sc_id = #{vo.scId}
+                </if>
+                <if test="vo.productCode != null and vo.productCode != ''">
+                    AND g.id IN (SELECT product_id FROM base_data_product_code WHERE code = #{vo.productCode})
+                </if>
+                <if test="vo.productName != null and vo.productName != ''">
+                    AND g.name LIKE CONCAT('%', #{vo.productName}, '%')
+                </if>
+                <if test="vo.brandId != null and vo.brandId != ''">
+                    AND g.brand_id = #{vo.brandId}
+                </if>
+                <if test="vo.categoryId != null and vo.categoryId != ''">
+                    AND (g.category_id = #{vo.categoryId} OR FIND_IN_SET(#{vo.categoryId}, rm.path))
+                </if>
+                <if test="vo.createStartTime != null">
+                    AND gsl.create_time >= #{vo.createStartTime}
+                </if>
+                <if test="vo.createEndTime != null">
+                    <![CDATA[
+                    AND gsl.create_time <= #{vo.createEndTime}
+                    ]]>
+                </if>
+                <if test="vo.bizType != null">
+                    <![CDATA[
+                    AND gsl.biz_type = #{vo.bizType}
+                    ]]>
+                </if>
+            </if>
+        </where>
+        ORDER BY gsl.create_time DESC, sc.code, g.code
+    </select>
+</mapper>

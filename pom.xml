@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.2.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <groupId>com.lframework</groupId>
+    <artifactId>xingyun</artifactId>
+    <name>【${project.artifactId}】星云ERP</name>
+    <version>1.0.0-SNAPSHOT</version>
+
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>xingyun-core</module>
+        <module>xingyun-api</module>
+        <module>xingyun-basedata</module>
+        <module>xingyun-sc</module>
+        <module>xingyun-chart</module>
+        <module>xingyun-settle</module>
+        <module>cloud/xingyun-cloud-api</module>
+        <module>xingyun-comp</module>
+        <module>cloud/xingyun-cloud-gateway</module>
+    </modules>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <xingyun.version>1.0.0-SNAPSHOT</xingyun.version>
+        <jugg.version>4.1.2</jugg.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.lframework</groupId>
+                <artifactId>parent</artifactId>
+                <version>${jugg.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.lframework</groupId>
+                <artifactId>mq-starter</artifactId>
+                <version>${jugg.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.lframework</groupId>
+                <artifactId>xingyun-basedata</artifactId>
+                <version>${xingyun.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.lframework</groupId>
+                <artifactId>xingyun-comp</artifactId>
+                <version>${xingyun.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lframework</groupId>
+                <artifactId>xingyun-sc</artifactId>
+                <version>${xingyun.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.lframework</groupId>
+                <artifactId>xingyun-chart</artifactId>
+                <version>${xingyun.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.lframework</groupId>
+                <artifactId>xingyun-settle</artifactId>
+                <version>${xingyun.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.lframework</groupId>
+                <artifactId>xingyun-core</artifactId>
+                <version>${xingyun.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+    <!-- 指定仓库 -->
+    <repositories>
+        <repository>
+            <id>ali-public</id>
+            <name>阿里云public库</name>
+            <url>https://maven.aliyun.com/repository/public</url>
+            <layout>default</layout>
+        </repository>
+
+        <repository>
+            <id>ali-central</id>
+            <name>阿里云central库</name>
+            <url>https://maven.aliyun.com/repository/central</url>
+        </repository>
+
+        <repository>
+            <id>ali-central-old</id>
+            <name>阿里云central库old</name>
+            <url>https://maven.aliyun.com/nexus/content/groups/public</url>
+        </repository>
+    </repositories>
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <profiles-active>dev</profiles-active>
+                <discovery-server>127.0.0.1:7000</discovery-server>
+            </properties>
+        </profile>
+        <profile>
+            <id>test</id>
+            <properties>
+                <profiles-active>test</profiles-active>
+                <discovery-server>127.0.0.1:10000</discovery-server>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <profiles-active>prod</profiles-active>
+                <discovery-server>127.0.0.1:10000</discovery-server>
+            </properties>
+        </profile>
+    </profiles>
+</project>

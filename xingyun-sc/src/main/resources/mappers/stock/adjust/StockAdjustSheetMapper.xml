@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lframework.xingyun.sc.mappers.StockAdjustSheetMapper">
+
+    <resultMap id="StockAdjustSheetFullDto" type="com.lframework.xingyun.sc.dto.stock.adjust.stock.StockAdjustSheetFullDto">
+        <id column="id" property="id"/>
+        <result column="code" property="code"/>
+        <result column="sc_id" property="scId"/>
+        <result column="biz_type" property="bizType"/>
+        <result column="reason_id" property="reasonId"/>
+        <result column="status" property="status"/>
+        <result column="description" property="description"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="approve_by" property="approveBy"/>
+        <result column="approve_time" property="approveTime"/>
+        <result column="refuse_reason" property="refuseReason"/>
+        <collection property="details" ofType="com.lframework.xingyun.sc.dto.stock.adjust.stock.StockAdjustSheetFullDto$DetailDto" javaType="java.util.ArrayList">
+            <id column="detail_id" property="id" />
+            <result column="detail_product_id" property="productId" />
+            <result column="detail_stock_num" property="stockNum" />
+            <result column="detail_description" property="description" />
+        </collection>
+    </resultMap>
+
+    <resultMap id="StockAdjustProductDto" type="com.lframework.xingyun.sc.dto.stock.adjust.stock.StockAdjustProductDto">
+        <id column="id" property="id"/>
+        <result column="code" property="code"/>
+        <result column="name" property="name"/>
+        <result column="category_id" property="categoryId"/>
+        <result column="category_name" property="categoryName"/>
+        <result column="brand_id" property="brandId"/>
+        <result column="brand_name" property="brandName"/>
+        <result column="spec" property="spec"/>
+        <result column="unit" property="unit"/>
+    </resultMap>
+
+    <sql id="StockAdjustSheetDto_sql">
+        SELECT
+            tb.*
+        FROM tbl_stock_adjust_sheet AS tb
+    </sql>
+
+    <sql id="StockAdjustSheetFullDto_sql">
+        SELECT
+            tb.id,
+            tb.code,
+            tb.sc_id,
+            tb.biz_type,
+            tb.reason_id,
+            tb.status,
+            tb.description,
+            tb.create_by,
+            tb.create_time,
+            tb.update_by,
+            tb.update_time,
+            tb.approve_by,
+            tb.approve_time,
+            tb.refuse_reason,
+            d.id AS detail_id,
+            d.product_id AS detail_product_id,
+            d.stock_num AS detail_stock_num,
+            d.description AS detail_description
+        FROM tbl_stock_adjust_sheet AS tb
+        LEFT JOIN tbl_stock_adjust_sheet_detail AS d ON d.sheet_id = tb.id
+    </sql>
+
+    <sql id="StockAdjustProductDto_sql">
+        SELECT
+            g.id,
+            g.code,
+            g.name,
+            c.id AS category_id,
+            c.name AS category_name,
+            b.id AS brand_id,
+            b.name AS brand_name,
+            g.spec,
+            g.unit
+        FROM base_data_product AS g
+        LEFT JOIN base_data_product_category AS c ON c.id = g.category_id
+        LEFT JOIN base_data_product_brand AS b ON b.id = g.brand_id
+        LEFT JOIN recursion_mapping AS rm ON rm.node_id = c.id and rm.node_type = 2
+    </sql>
+
+    <select id="query" resultType="com.lframework.xingyun.sc.entity.StockAdjustSheet">
+        <include refid="StockAdjustSheetDto_sql"/>
+        <where>
+            <if test="vo.code != null and vo.code != ''">
+                AND tb.code = #{vo.code}
+            </if>
+            <if test="vo.scId != null and vo.scId != ''">
+                AND tb.sc_id = #{vo.scId}
+            </if>
+            <if test="vo.bizType != null">
+                AND tb.biz_type = #{vo.bizType}
+            </if>
+            <if test="vo.reasonId != null and vo.reasonId != ''">
+                AND tb.reason_id = #{vo.reasonId}
+            </if>
+            <if test="vo.status != null">
+                AND tb.status = #{vo.status}
+            </if>
+            <if test="vo.updateBy != null and vo.updateBy != ''">
+                AND tb.update_by_id = #{vo.updateBy}
+            </if>
+            <if test="vo.updateTimeStart != null">
+                AND tb.update_time >= #{vo.updateTimeStart}
+            </if>
+            <if test="vo.updateTimeEnd != null">
+                <![CDATA[
+            AND tb.update_time <= #{vo.updateTimeEnd}
+            ]]>
+            </if>
+            <if test="vo.approveBy != null and vo.approveBy != ''">
+                AND tb.approve_by = #{vo.approveBy}
+            </if>
+            <if test="vo.approveTimeStart != null">
+                AND tb.approve_time >= #{vo.approveTimeStart}
+            </if>
+            <if test="vo.approveTimeEnd != null">
+                <![CDATA[
+            AND tb.approve_time <= #{vo.approveTimeEnd}
+            ]]>
+            </if>
+        </where>
+        ORDER BY tb.update_time DESC
+    </select>
+
+    <select id="getDetail" resultMap="StockAdjustSheetFullDto">
+        <include refid="StockAdjustSheetFullDto_sql"/>
+        WHERE tb.id = #{id}
+        ORDER BY d.order_no
+    </select>
+
+    <select id="queryStockAdjustByCondition" resultMap="StockAdjustProductDto">
+        <include refid="StockAdjustProductDto_sql"/>
+        <where>
+            AND (
+            g.name LIKE CONCAT('%', #{condition}, '%')
+            OR g.id IN (SELECT product_id FROM base_data_product_code WHERE code LIKE CONCAT('%', #{condition}, '%'))
+            )
+            AND g.product_type = 1
+        </where>
+        ORDER BY g.code
+    </select>
+    <select id="queryStockAdjustList" resultMap="StockAdjustProductDto">
+        <include refid="StockAdjustProductDto_sql"/>
+        <where>
+            <if test="vo != null">
+                <if test="vo.condition != null and vo.condition != ''">
+                    AND (
+                    g.name LIKE CONCAT('%', #{vo.condition}, '%')
+                    OR g.id IN (SELECT product_id FROM base_data_product_code WHERE code LIKE CONCAT('%', #{vo.condition}, '%'))
+                    )
+                </if>
+                <if test="vo.brandId != null and vo.brandId != ''">
+                    AND b.id = #{vo.brandId}
+                </if>
+                <if test="vo.categoryId != null and vo.categoryId != ''">
+                    AND (c.id = #{vo.categoryId} OR FIND_IN_SET(#{vo.categoryId}, rm.path))
+                </if>
+            </if>
+            AND g.product_type = 1
+        </where>
+        ORDER BY g.code
+    </select>
+</mapper>
