@@ -2,6 +2,7 @@ package com.lframework.xingyun.comp.controller;
 
 import cn.dev33.satoken.session.SaSession;
 import cn.dev33.satoken.stp.StpUtil;
+import com.lframework.starter.web.core.components.security.DefaultUserDetails;
 import com.lframework.starter.web.core.components.tenant.TenantContextHolder;
 import com.lframework.starter.web.core.utils.HttpUtil;
 import com.lframework.starter.web.core.utils.JsonUtil;
@@ -37,6 +38,8 @@ import java.util.stream.Collectors;
 @RequestMapping("/auth/sso/jianyou")
 public class SsoJianyouController {
 
+    private static final String USER_INFO_SESSION_KEY = "user_info_key";
+
     private static final String DEFAULT_SSO_ERROR_MESSAGE = "星云单点登录失败，请联系管理员";
     private static final List<String> ALLOWED_SSO_ERROR_MESSAGES = new ArrayList<>();
 
@@ -66,6 +69,9 @@ public class SsoJianyouController {
 
     @Value("${xingyun.sso.jianyou.front-base-url:}")
     private String frontBaseUrl;
+
+    @Value("${xingyun.sso.jianyou.front-hash-route:true}")
+    private Boolean frontHashRoute;
 
     @Value("${xingyun.sso.jianyou.allowed-redirect-prefixes:/dashboard,/profile,/settings,/basedata,/sc,/settle}")
     private String allowedRedirectPrefixes;
@@ -138,6 +144,7 @@ public class SsoJianyouController {
             StpUtil.login(targetUser.getId());
             String token = StpUtil.getTokenValue();
             SaSession session = StpUtil.getSession();
+            session.set(USER_INFO_SESSION_KEY, buildUserDetails(targetUser, targetTenantId, token));
             session.set("ssoSource", "jianyou-health-org-web");
             session.set("sourceOrgUserId", data.get("orgUserId"));
             session.set("sourceOrgUserName", data.get("orgUserName"));
@@ -174,30 +181,39 @@ public class SsoJianyouController {
     }
 
     private String buildResultUrl(String token, String redirect, SysUser targetUser, List<String> roleCodes) {
-        UriComponentsBuilder builder = buildFrontPath(resultPath)
-                .queryParam("token", token)
-                .queryParam("redirect", redirect)
-                .queryParam("userId", targetUser.getId())
-                .queryParam("name", StringUtils.defaultIfBlank(targetUser.getName(), targetUser.getUsername()))
-                .queryParam("roles", String.join(",", roleCodes));
-        return buildEncodedUri(builder);
+        Map<String, Object> queryParams = new HashMap<>();
+        queryParams.put("token", token);
+        queryParams.put("redirect", redirect);
+        queryParams.put("userId", targetUser.getId());
+        queryParams.put("name", StringUtils.defaultIfBlank(targetUser.getName(), targetUser.getUsername()));
+        queryParams.put("roles", String.join(",", roleCodes));
+        return buildFrontUrl(resultPath, queryParams);
     }
 
     private String buildLoginFailUrl(String message) {
-        UriComponentsBuilder builder = buildFrontPath("/login");
+        Map<String, Object> queryParams = new HashMap<>();
         if (StringUtils.isNotBlank(message)) {
-            builder.queryParam("ssoError", sanitizeErrorMessage(StringUtils.abbreviate(message, 60)));
+            queryParams.put("ssoError", sanitizeErrorMessage(StringUtils.abbreviate(message, 60)));
         }
-        return buildEncodedUri(builder);
+        return buildFrontUrl("/login", queryParams);
     }
 
-    private UriComponentsBuilder buildFrontPath(String path) {
+    private String buildFrontUrl(String path, Map<String, Object> queryParams) {
         String normalizedPath = path.startsWith("/") ? path : "/" + path;
-        if (StringUtils.isBlank(frontBaseUrl)) {
-            return UriComponentsBuilder.fromPath(normalizedPath);
+        UriComponentsBuilder routeBuilder = UriComponentsBuilder.fromPath(normalizedPath);
+        if (queryParams != null && !queryParams.isEmpty()) {
+            queryParams.forEach(routeBuilder::queryParam);
         }
+        String encodedRoute = buildEncodedUri(routeBuilder);
+        if (StringUtils.isBlank(frontBaseUrl)) {
+            return Boolean.TRUE.equals(frontHashRoute) ? "/#" + encodedRoute : encodedRoute;
+        }
+
         String baseUrl = StringUtils.removeEnd(frontBaseUrl, "/");
-        return UriComponentsBuilder.fromHttpUrl(baseUrl + normalizedPath);
+        if (Boolean.TRUE.equals(frontHashRoute)) {
+            return baseUrl + "/#" + encodedRoute;
+        }
+        return baseUrl + encodedRoute;
     }
 
     private String normalizeRedirect(String redirect) {
@@ -284,6 +300,23 @@ public class SsoJianyouController {
 
     private String toStringValue(Object value) {
         return value == null ? null : String.valueOf(value);
+    }
+
+    private DefaultUserDetails buildUserDetails(SysUser targetUser, Integer targetTenantId, String loginId) {
+        DefaultUserDetails userDetails = new DefaultUserDetails();
+        userDetails.setId(targetUser.getId());
+        userDetails.setUsername(targetUser.getUsername());
+        userDetails.setName(StringUtils.defaultIfBlank(targetUser.getName(), targetUser.getUsername()));
+        userDetails.setPassword(targetUser.getPassword());
+        userDetails.setEmail(targetUser.getEmail());
+        userDetails.setTelephone(targetUser.getTelephone());
+        userDetails.setAvailable(targetUser.getAvailable());
+        userDetails.setLockStatus(targetUser.getLockStatus());
+        userDetails.setTenantId(targetTenantId);
+        userDetails.setIsAdmin(true);
+        userDetails.setIsPlatform(false);
+        userDetails.setLoginId(loginId);
+        return userDetails;
     }
 
     private String buildEncodedUri(UriComponentsBuilder builder) {
