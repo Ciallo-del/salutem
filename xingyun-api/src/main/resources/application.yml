@@ -216,3 +216,9 @@ warm-flow:
   logic_delete_value: 2
   # 逻辑未删除字段（开启后默认为0）
   logic_not_delete_value: 0
+
+xingyun:
+  sso:
+    jianyou:
+      consume-url: http://localhost:8097/sso/xingyun/ticket/consume
+      front-base-url: http://localhost:5173
