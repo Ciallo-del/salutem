@@ -134,6 +134,6 @@ public class QueryStockAdjustSheetBo extends BaseBo<StockAdjustSheet> {
     StockAdjustReasonService stockAdjustReasonService = ApplicationUtil.getBean(
         StockAdjustReasonService.class);
     StockAdjustReason reason = stockAdjustReasonService.findById(dto.getReasonId());
-    this.reasonName = reason.getName();
+    this.reasonName = reason == null ? StringPool.EMPTY_STR : reason.getName();
   }
 }

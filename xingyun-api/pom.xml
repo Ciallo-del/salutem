@@ -96,6 +96,13 @@
                 <directory>src/main/resources</directory>
                 <filtering>false</filtering>
                 <includes>
+                    <include>db/all/tenant.sql</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+                <includes>
                     <include>**</include>
                 </includes>
                 <excludes>

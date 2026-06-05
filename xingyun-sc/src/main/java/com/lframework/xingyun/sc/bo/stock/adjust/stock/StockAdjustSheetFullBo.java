@@ -160,7 +160,7 @@ public class StockAdjustSheetFullBo extends BaseBo<StockAdjustSheetFullDto> {
 
     StockAdjustReasonService stockAdjustReasonService = ApplicationUtil.getBean(StockAdjustReasonService.class);
     StockAdjustReason reason = stockAdjustReasonService.findById(dto.getReasonId());
-    this.reasonName = reason.getName();
+    this.reasonName = reason == null ? StringPool.EMPTY_STR : reason.getName();
 
     this.details = dto.getDetails().stream().map(t -> new DetailBo(t, this.scId, this.status))
         .collect(Collectors.toList());

@@ -2,16 +2,22 @@ package com.lframework.xingyun.comp.controller;
 
 import cn.dev33.satoken.session.SaSession;
 import cn.dev33.satoken.stp.StpUtil;
-import com.lframework.starter.web.core.components.security.DefaultUserDetails;
+import com.lframework.starter.common.exceptions.impl.DefaultClientException;
+import com.lframework.starter.web.core.components.resp.InvokeResult;
+import com.lframework.starter.web.core.components.resp.InvokeResultBuilder;
+import com.lframework.starter.web.core.components.security.AbstractUserDetails;
+import com.lframework.starter.web.core.components.security.UserDetailsService;
 import com.lframework.starter.web.core.components.tenant.TenantContextHolder;
+import com.lframework.starter.web.core.controller.DefaultBaseController;
 import com.lframework.starter.web.core.utils.HttpUtil;
 import com.lframework.starter.web.core.utils.JsonUtil;
 import com.lframework.starter.web.inner.entity.SysOpenDomain;
-import com.lframework.starter.web.inner.entity.SysRole;
 import com.lframework.starter.web.inner.entity.SysUser;
 import com.lframework.starter.web.inner.service.system.SysOpenDomainService;
-import com.lframework.starter.web.inner.service.system.SysRoleService;
 import com.lframework.starter.web.inner.service.system.SysUserService;
+import com.lframework.xingyun.comp.bo.SsoJianyouCurrentUserBo;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,40 +32,51 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 /**
- * 接收机构端发起的星云 SSO
+ * 接收机构端发起的星云 SSO。
  */
+@Api(tags = "建友星云单点登录")
 @Slf4j
 @RestController
 @RequestMapping("/auth/sso/jianyou")
-public class SsoJianyouController {
+public class SsoJianyouController extends DefaultBaseController {
 
     private static final String USER_INFO_SESSION_KEY = "user_info_key";
 
-    private static final String DEFAULT_SSO_ERROR_MESSAGE = "星云单点登录失败，请联系管理员";
+    private static final String DEFAULT_SSO_ERROR_MESSAGE = "星云单点登录失败，请联系系统管理员！";
+
+    private static final String CORE_DEPT_PERMISSION = "system:dept:query";
+
+    private static final String CORE_USER_PERMISSION = "system:user:query";
+
     private static final List<String> ALLOWED_SSO_ERROR_MESSAGES = new ArrayList<>();
 
     static {
-        ALLOWED_SSO_ERROR_MESSAGES.add("机构端票据消费地址未配置");
-        ALLOWED_SSO_ERROR_MESSAGES.add("跳转页面不在允许范围内");
-        ALLOWED_SSO_ERROR_MESSAGES.add("受信任客户端未启用");
-        ALLOWED_SSO_ERROR_MESSAGES.add("机构端未返回有效票据数据");
-        ALLOWED_SSO_ERROR_MESSAGES.add("星云租户未配置");
-        ALLOWED_SSO_ERROR_MESSAGES.add("星云租户校验失败");
-        ALLOWED_SSO_ERROR_MESSAGES.add("星云账号不存在");
-        ALLOWED_SSO_ERROR_MESSAGES.add("星云账号已禁用");
+        ALLOWED_SSO_ERROR_MESSAGES.add("机构端票据消费地址未配置！");
+        ALLOWED_SSO_ERROR_MESSAGES.add("跳转页面不在允许范围内！");
+        ALLOWED_SSO_ERROR_MESSAGES.add("受信任客户端未启用！");
+        ALLOWED_SSO_ERROR_MESSAGES.add("机构端未返回有效票据数据！");
+        ALLOWED_SSO_ERROR_MESSAGES.add("星云租户未配置！");
+        ALLOWED_SSO_ERROR_MESSAGES.add("星云租户校验失败！");
+        ALLOWED_SSO_ERROR_MESSAGES.add("星云账号不存在！");
+        ALLOWED_SSO_ERROR_MESSAGES.add("星云账号已禁用！");
+        ALLOWED_SSO_ERROR_MESSAGES.add("星云 SSO 登录态初始化失败：未加载到任何权限！");
+        ALLOWED_SSO_ERROR_MESSAGES.add("星云 SSO 登录态初始化失败：未加载到用户信息！");
     }
 
     @Autowired
     private SysOpenDomainService sysOpenDomainService;
+
     @Autowired
     private SysUserService sysUserService;
+
     @Autowired
-    private SysRoleService sysRoleService;
+    private UserDetailsService userDetailsService;
 
     @Value("${xingyun.sso.jianyou.consume-url:}")
     private String consumeUrl;
@@ -76,6 +93,7 @@ public class SsoJianyouController {
     @Value("${xingyun.sso.jianyou.allowed-redirect-prefixes:/dashboard,/profile,/settings,/basedata,/sc,/settle}")
     private String allowedRedirectPrefixes;
 
+    @ApiOperation("建友 SSO 回调")
     @GetMapping("/callback")
     public void callback(@RequestParam("clientId") String clientId,
                          @RequestParam("ticket") String ticket,
@@ -86,16 +104,16 @@ public class SsoJianyouController {
         boolean tenantSwitched = false;
         try {
             if (StringUtils.isBlank(consumeUrl)) {
-                throw new IllegalStateException("机构端票据消费地址未配置");
+                throw new IllegalStateException("机构端票据消费地址未配置！");
             }
             String normalizedRedirect = normalizeRedirect(redirect);
             if (normalizedRedirect == null) {
-                throw new IllegalArgumentException("跳转页面不在允许范围内");
+                throw new IllegalArgumentException("跳转页面不在允许范围内！");
             }
 
             SysOpenDomain openDomain = getOpenDomain(clientId);
             if (openDomain == null || !Boolean.TRUE.equals(openDomain.getAvailable())) {
-                throw new IllegalArgumentException("受信任客户端未启用");
+                throw new IllegalArgumentException("受信任客户端未启用！");
             }
 
             Map<String, Object> requestParams = new HashMap<>();
@@ -114,15 +132,15 @@ public class SsoJianyouController {
 
             Map data = JsonUtil.convert(respMap.get("data"), Map.class);
             if (data == null) {
-                throw new IllegalStateException("机构端未返回有效票据数据");
+                throw new IllegalStateException("机构端未返回有效票据数据！");
             }
 
             Integer targetTenantId = toInteger(data.get("targetTenantId"));
             if (targetTenantId == null) {
-                throw new IllegalStateException("星云租户未配置");
+                throw new IllegalStateException("星云租户未配置！");
             }
             if (openDomain.getTenantId() != null && !openDomain.getTenantId().equals(targetTenantId)) {
-                throw new IllegalStateException("星云租户校验失败");
+                throw new IllegalStateException("星云租户校验失败！");
             }
 
             TenantContextHolder.setTenantId(targetTenantId);
@@ -130,21 +148,24 @@ public class SsoJianyouController {
 
             String targetUserId = toStringValue(data.get("targetXingyunUserId"));
             if (StringUtils.isBlank(targetUserId)) {
-                throw new IllegalStateException("星云账号不存在");
+                throw new IllegalStateException("星云账号不存在！");
             }
 
             SysUser targetUser = sysUserService.findById(targetUserId);
             if (targetUser == null) {
-                throw new IllegalStateException("星云账号不存在");
+                throw new IllegalStateException("星云账号不存在！");
             }
             if (!Boolean.TRUE.equals(targetUser.getAvailable()) || Boolean.TRUE.equals(targetUser.getLockStatus())) {
-                throw new IllegalStateException("星云账号已禁用");
+                throw new IllegalStateException("星云账号已禁用！");
             }
 
             StpUtil.login(targetUser.getId());
             String token = StpUtil.getTokenValue();
+
+            AbstractUserDetails userDetails = loadUserDetails(targetUser, targetTenantId, token);
+
             SaSession session = StpUtil.getSession();
-            session.set(USER_INFO_SESSION_KEY, buildUserDetails(targetUser, targetTenantId, token));
+            session.set(USER_INFO_SESSION_KEY, userDetails);
             session.set("ssoSource", "jianyou-health-org-web");
             session.set("sourceOrgUserId", data.get("orgUserId"));
             session.set("sourceOrgUserName", data.get("orgUserName"));
@@ -155,22 +176,74 @@ public class SsoJianyouController {
             session.set("sourceTenantId", targetTenantId);
             session.set("sourceOpenDomainId", openDomain.getId());
 
-            List<SysRole> roles = sysRoleService.getByUserId(targetUser.getId());
-            List<String> roleCodes = roles == null ? new ArrayList<>() : roles.stream()
-                    .filter(item -> item != null && StringUtils.isNotBlank(item.getCode()))
-                    .map(SysRole::getCode)
-                    .collect(Collectors.toList());
+            List<String> permissionCodes = new ArrayList<>(userDetails.getPermissions());
+            log.info("建友 SSO 登录成功，tenantId={}, userId={}, username={}, permissionCount={}, hasUserQueryPermission={}, hasDeptQueryPermission={}",
+                    targetTenantId, targetUser.getId(), targetUser.getUsername(),
+                    permissionCodes.size(),
+                    permissionCodes.contains(CORE_USER_PERMISSION),
+                    permissionCodes.contains(CORE_DEPT_PERMISSION));
 
-            String redirectUrl = buildResultUrl(token, normalizedRedirect, targetUser, roleCodes);
+            String redirectUrl = buildResultUrl(token, normalizedRedirect);
             response.sendRedirect(redirectUrl);
         } catch (Exception e) {
-            log.error("jianyou sso callback failed, clientId={}, ticket={}", clientId, ticket, e);
+            log.error("建友 SSO 回调失败，clientId={}, ticket={}", clientId, ticket, e);
             response.sendRedirect(buildLoginFailUrl(resolveErrorMessage(e)));
         } finally {
             if (tenantSwitched) {
                 TenantContextHolder.clearTenantId();
             }
         }
+    }
+
+    @ApiOperation("获取当前建友 SSO 登录用户信息")
+    @GetMapping("/current-user")
+    public InvokeResult<SsoJianyouCurrentUserBo> currentUser() {
+        AbstractUserDetails currentUser = getCurrentUser();
+        if (currentUser == null) {
+            throw new DefaultClientException("星云 SSO 登录态初始化失败：未加载到用户信息！");
+        }
+        Set<String> permissions = currentUser.getPermissions();
+        if (permissions == null || permissions.isEmpty()) {
+            throw new DefaultClientException("星云 SSO 登录态初始化失败：未加载到任何权限！");
+        }
+
+        SysUser user = sysUserService.findById(String.valueOf(currentUser.getId()));
+        if (user == null) {
+            throw new DefaultClientException("星云账号不存在！");
+        }
+
+        SsoJianyouCurrentUserBo bo = new SsoJianyouCurrentUserBo();
+        bo.setUserId(user.getId());
+        bo.setUsername(user.getUsername());
+        bo.setName(StringUtils.defaultIfBlank(user.getName(), user.getUsername()));
+        bo.setAvatar("");
+        bo.setHomePath("/dashboard");
+        bo.setPermissions(new ArrayList<>(permissions));
+        return InvokeResultBuilder.success(bo);
+    }
+
+    private AbstractUserDetails loadUserDetails(SysUser targetUser, Integer targetTenantId, String loginId) {
+        AbstractUserDetails userDetails = userDetailsService.loadUserByUsername(targetUser.getUsername());
+        if (userDetails == null) {
+            throw new DefaultClientException("星云 SSO 登录态初始化失败：未加载到用户信息！");
+        }
+
+        userDetails.setTenantId(targetTenantId);
+        userDetails.setLoginId(loginId);
+        userDetails.setIsPlatform(false);
+
+        Set<String> permissions = userDetails.getPermissions() == null
+                ? new HashSet<>()
+                : new HashSet<>(userDetails.getPermissions());
+        userDetails.setPermissions(permissions);
+
+        if (permissions.isEmpty()) {
+            log.error("建友 SSO 登录态权限为空，tenantId={}, userId={}, username={}",
+                    targetTenantId, targetUser.getId(), targetUser.getUsername());
+            throw new DefaultClientException("星云 SSO 登录态初始化失败：未加载到任何权限！");
+        }
+
+        return userDetails;
     }
 
     private SysOpenDomain getOpenDomain(String clientId) {
@@ -180,13 +253,10 @@ public class SsoJianyouController {
         return sysOpenDomainService.findById(Integer.valueOf(clientId));
     }
 
-    private String buildResultUrl(String token, String redirect, SysUser targetUser, List<String> roleCodes) {
+    private String buildResultUrl(String token, String redirect) {
         Map<String, Object> queryParams = new HashMap<>();
         queryParams.put("token", token);
         queryParams.put("redirect", redirect);
-        queryParams.put("userId", targetUser.getId());
-        queryParams.put("name", StringUtils.defaultIfBlank(targetUser.getName(), targetUser.getUsername()));
-        queryParams.put("roles", String.join(",", roleCodes));
         return buildFrontUrl(resultPath, queryParams);
     }
 
@@ -300,23 +370,6 @@ public class SsoJianyouController {
 
     private String toStringValue(Object value) {
         return value == null ? null : String.valueOf(value);
-    }
-
-    private DefaultUserDetails buildUserDetails(SysUser targetUser, Integer targetTenantId, String loginId) {
-        DefaultUserDetails userDetails = new DefaultUserDetails();
-        userDetails.setId(targetUser.getId());
-        userDetails.setUsername(targetUser.getUsername());
-        userDetails.setName(StringUtils.defaultIfBlank(targetUser.getName(), targetUser.getUsername()));
-        userDetails.setPassword(targetUser.getPassword());
-        userDetails.setEmail(targetUser.getEmail());
-        userDetails.setTelephone(targetUser.getTelephone());
-        userDetails.setAvailable(targetUser.getAvailable());
-        userDetails.setLockStatus(targetUser.getLockStatus());
-        userDetails.setTenantId(targetTenantId);
-        userDetails.setIsAdmin(true);
-        userDetails.setIsPlatform(false);
-        userDetails.setLoginId(loginId);
-        return userDetails;
     }
 
     private String buildEncodedUri(UriComponentsBuilder builder) {

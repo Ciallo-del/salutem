@@ -6523,7 +6523,7 @@ CREATE TABLE `tbl_logistics_sheet_detail`  (
   `biz_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '业务单据ID',
   `biz_type` tinyint(3) NOT NULL COMMENT '业务类型',
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX ```biz_id```(`biz_id`, `biz_type`) USING BTREE,
+  UNIQUE INDEX `biz_id`(`biz_id`, `biz_type`) USING BTREE,
   INDEX `sheet_id`(`sheet_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '物流单明细' ROW_FORMAT = DYNAMIC;
 
