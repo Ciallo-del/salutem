@@ -41,7 +41,7 @@ public class JianyouMerchantProvisionController extends DefaultBaseController {
   @Autowired
   private JianyouPlatformProvisionService jianyouPlatformProvisionService;
 
-  @ApiOperation("建佑平台商资源初始化")
+  @ApiOperation("建友平台商资源初始化")
   @PostMapping("/platform/provision")
   public InvokeResult<JianyouPlatformProvisionBo> provisionPlatform(
       @RequestHeader(value = SECRET_HEADER, required = false) String apiSecret,
@@ -51,7 +51,7 @@ public class JianyouMerchantProvisionController extends DefaultBaseController {
     return InvokeResultBuilder.success(jianyouPlatformProvisionService.provision(vo));
   }
 
-  @ApiOperation("建佑商户初始化")
+  @ApiOperation("建友商户初始化")
   @PostMapping("/merchant/provision")
   public InvokeResult<JianyouMerchantProvisionBo> provisionMerchant(
       @RequestHeader(value = SECRET_HEADER, required = false) String apiSecret,

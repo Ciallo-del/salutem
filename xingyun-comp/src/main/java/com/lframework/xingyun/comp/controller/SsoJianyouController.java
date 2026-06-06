@@ -16,12 +16,15 @@ import com.lframework.starter.web.inner.entity.SysUser;
 import com.lframework.starter.web.inner.service.system.SysOpenDomainService;
 import com.lframework.starter.web.inner.service.system.SysUserService;
 import com.lframework.xingyun.comp.bo.SsoJianyouCurrentUserBo;
+import com.lframework.xingyun.comp.bo.SsoJianyouMenuPreviewGroupBo;
+import com.lframework.xingyun.comp.service.SsoJianyouMenuPreviewService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,6 +33,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -78,6 +82,9 @@ public class SsoJianyouController extends DefaultBaseController {
     @Autowired
     private UserDetailsService userDetailsService;
 
+    @Autowired
+    private SsoJianyouMenuPreviewService ssoJianyouMenuPreviewService;
+
     @Value("${xingyun.sso.jianyou.consume-url:}")
     private String consumeUrl;
 
@@ -90,8 +97,14 @@ public class SsoJianyouController extends DefaultBaseController {
     @Value("${xingyun.sso.jianyou.front-hash-route:true}")
     private Boolean frontHashRoute;
 
-    @Value("${xingyun.sso.jianyou.allowed-redirect-prefixes:/dashboard,/profile,/settings,/basedata,/sc,/settle}")
+    @Value("${xingyun.sso.jianyou.allowed-redirect-prefixes:/dashboard,/profile,/settings,/basedata,/base-data,/system,/msg-center,/product,/sc,/stock,/sale,/settle}")
     private String allowedRedirectPrefixes;
+
+    @Value("${xingyun.sso.jianyou.api-secret:}")
+    private String apiSecret;
+
+    @Value("${xingyun.sso.jianyou.timestamp-skew-seconds:300}")
+    private Integer timestampSkewSeconds;
 
     @ApiOperation("建友 SSO 回调")
     @GetMapping("/callback")
@@ -140,6 +153,8 @@ public class SsoJianyouController extends DefaultBaseController {
                 throw new IllegalStateException("星云租户未配置！");
             }
             if (openDomain.getTenantId() != null && !openDomain.getTenantId().equals(targetTenantId)) {
+                log.warn("建友 SSO 回调租户校验失败，scene=callback, clientId={}, openDomainTenantId={}, targetTenantId={}, targetUserId={}",
+                        clientId, openDomain.getTenantId(), targetTenantId, toStringValue(data.get("targetXingyunUserId")));
                 throw new IllegalStateException("星云租户校验失败！");
             }
 
@@ -222,6 +237,63 @@ public class SsoJianyouController extends DefaultBaseController {
         return InvokeResultBuilder.success(bo);
     }
 
+    @ApiOperation("获取建友 inventory 可用菜单")
+    @GetMapping("/menu-preview")
+    public InvokeResult<List<SsoJianyouMenuPreviewGroupBo>> menuPreview(@RequestParam("clientId") String clientId,
+                                                                        @RequestParam("targetTenantId") Integer targetTenantId,
+                                                                        @RequestParam("targetUserId") String targetUserId,
+                                                                        @RequestParam("timestamp") Long timestamp,
+                                                                        @RequestParam("sign") String sign,
+                                                                        HttpServletResponse response) {
+        disableCache(response);
+        if (StringUtils.isAnyBlank(clientId, targetUserId, sign) || targetTenantId == null || timestamp == null) {
+            throw new DefaultClientException("SSO 参数不完整！");
+        }
+        if (StringUtils.isBlank(apiSecret)) {
+            throw new DefaultClientException(DEFAULT_SSO_ERROR_MESSAGE);
+        }
+
+        long now = System.currentTimeMillis();
+        if (Math.abs(now - timestamp) > timestampSkewSeconds * 1000L) {
+            throw new DefaultClientException("请求已过期，请重新进入 inventory！");
+        }
+
+        SysOpenDomain openDomain = getOpenDomain(clientId);
+        if (openDomain == null || !Boolean.TRUE.equals(openDomain.getAvailable())) {
+            throw new DefaultClientException("受信任客户端未启用！");
+        }
+        if (openDomain.getTenantId() != null && !openDomain.getTenantId().equals(targetTenantId)) {
+            log.warn("建友 inventory 菜单预览租户校验失败，scene=menu-preview, clientId={}, openDomainTenantId={}, targetTenantId={}, targetUserId={}",
+                    clientId, openDomain.getTenantId(), targetTenantId, targetUserId);
+            throw new DefaultClientException("星云租户校验失败！");
+        }
+
+        String expectedSign = buildMenuPreviewSign(clientId, targetTenantId, targetUserId, timestamp);
+        if (!StringUtils.equalsIgnoreCase(expectedSign, sign)) {
+            throw new DefaultClientException("菜单预览签名校验失败！");
+        }
+
+        boolean tenantSwitched = false;
+        try {
+            TenantContextHolder.setTenantId(targetTenantId);
+            tenantSwitched = true;
+
+            SysUser targetUser = sysUserService.findById(targetUserId);
+            if (targetUser == null) {
+                throw new DefaultClientException("星云账号不存在！");
+            }
+            if (!Boolean.TRUE.equals(targetUser.getAvailable()) || Boolean.TRUE.equals(targetUser.getLockStatus())) {
+                throw new DefaultClientException("星云账号已禁用！");
+            }
+
+            return InvokeResultBuilder.success(ssoJianyouMenuPreviewService.getMenuPreview(targetUserId));
+        } finally {
+            if (tenantSwitched) {
+                TenantContextHolder.clearTenantId();
+            }
+        }
+    }
+
     private AbstractUserDetails loadUserDetails(SysUser targetUser, Integer targetTenantId, String loginId) {
         AbstractUserDetails userDetails = userDetailsService.loadUserByUsername(targetUser.getUsername());
         if (userDetails == null) {
@@ -260,6 +332,11 @@ public class SsoJianyouController extends DefaultBaseController {
         return buildFrontUrl(resultPath, queryParams);
     }
 
+    private String buildMenuPreviewSign(String clientId, Integer targetTenantId, String targetUserId, Long timestamp) {
+        String source = clientId + "|" + targetTenantId + "|" + targetUserId + "|" + timestamp + "|" + apiSecret;
+        return DigestUtils.md5DigestAsHex(source.getBytes(StandardCharsets.UTF_8)).toUpperCase();
+    }
+
     private String buildLoginFailUrl(String message) {
         Map<String, Object> queryParams = new HashMap<>();
         if (StringUtils.isNotBlank(message)) {
@@ -291,15 +368,27 @@ public class SsoJianyouController extends DefaultBaseController {
         if (StringUtils.isBlank(target)) {
             return "/dashboard";
         }
-        if (!target.startsWith("/") || target.startsWith("//") || target.contains("://")) {
+        if (!target.startsWith("/") || target.startsWith("//") || target.contains("://") || target.contains("#")) {
+            return null;
+        }
+        String path = extractRedirectPath(target);
+        if (StringUtils.isBlank(path)) {
             return null;
         }
         for (String prefix : getAllowedRedirectPrefixList()) {
-            if (target.equals(prefix) || target.startsWith(prefix + "/")) {
+            if (path.equals(prefix) || path.startsWith(prefix + "/")) {
                 return target;
             }
         }
         return null;
+    }
+
+    private String extractRedirectPath(String redirect) {
+        int queryIndex = redirect.indexOf('?');
+        if (queryIndex < 0) {
+            return redirect;
+        }
+        return redirect.substring(0, queryIndex);
     }
 
     private List<String> getAllowedRedirectPrefixList() {
@@ -374,5 +463,14 @@ public class SsoJianyouController extends DefaultBaseController {
 
     private String buildEncodedUri(UriComponentsBuilder builder) {
         return builder.build().encode().toUriString();
+    }
+
+    private void disableCache(HttpServletResponse response) {
+        if (response == null) {
+            return;
+        }
+        response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
+        response.setHeader("Pragma", "no-cache");
+        response.setDateHeader("Expires", 0L);
     }
 }

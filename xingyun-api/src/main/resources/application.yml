@@ -85,7 +85,7 @@ jugg:
     default-user-name: 系统管理员
   web:
     #不需要认证的Url
-    filter-url: ${magic-api.push_path},/auth/sso/jianyou/callback,/xy/xingyun/jianyou/platform/provision,/xy/xingyun/jianyou/merchant/provision
+    filter-url: ${magic-api.push_path},/auth/sso/jianyou/callback,/auth/sso/jianyou/menu-preview,/xy/xingyun/jianyou/platform/provision,/xy/xingyun/jianyou/merchant/provision
     #终端ID
     worker-id: 1
     #数据中心ID
@@ -222,4 +222,7 @@ xingyun:
     jianyou:
       consume-url: http://localhost:8097/sso/xingyun/ticket/consume
       front-base-url: http://localhost:5173
+      api-secret: B9A98667BD1FBC409768AEA8F9B33D09C3A1
+      timestamp-skew-seconds: 300
+      allowed-redirect-prefixes: /dashboard,/profile,/settings,/basedata,/base-data,/system,/msg-center,/product,/sc,/stock,/sale,/settle
       provision-secret: change-me
