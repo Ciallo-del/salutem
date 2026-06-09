@@ -94,7 +94,9 @@ public class SsoJianyouMenuPreviewServiceImpl implements SsoJianyouMenuPreviewSe
         for (GroupConfig groupConfig : GROUP_CONFIGS) {
             SsoJianyouMenuPreviewGroupBo group = new SsoJianyouMenuPreviewGroupBo();
             group.setGroupKey(groupConfig.getGroupKey());
-            group.setGroupName(groupConfig.getGroupName());
+            group.setGroupName(StringUtils.equals(groupConfig.getGroupKey(), "SaleOutSheet")
+                    ? "销售管理"
+                    : groupConfig.getGroupName());
 
             for (MenuRecord menu : visibleLeafMenus) {
                 String rootMenuName = findRootMenuName(menu, menuMap);

@@ -5,11 +5,15 @@ import com.lframework.starter.web.core.components.resp.InvokeResult;
 import com.lframework.starter.web.core.components.resp.InvokeResultBuilder;
 import com.lframework.starter.web.core.controller.DefaultBaseController;
 import com.lframework.xingyun.comp.bo.JianyouMerchantProvisionBo;
+import com.lframework.xingyun.comp.bo.JianyouMerchantRepairBo;
 import com.lframework.xingyun.comp.bo.JianyouPlatformProvisionBo;
+import com.lframework.xingyun.comp.bo.JianyouPlatformRepairBo;
 import com.lframework.xingyun.comp.service.JianyouMerchantProvisionService;
 import com.lframework.xingyun.comp.service.JianyouPlatformProvisionService;
 import com.lframework.xingyun.comp.vo.JianyouMerchantProvisionVo;
+import com.lframework.xingyun.comp.vo.JianyouMerchantRepairVo;
 import com.lframework.xingyun.comp.vo.JianyouPlatformProvisionVo;
+import com.lframework.xingyun.comp.vo.JianyouPlatformRepairVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
@@ -24,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
-@Api(tags = "建友星云初始化接口")
+@Api(tags = "建友星陨初始化接口")
 @Validated
 @RestController
 @RequestMapping("/xy/xingyun/jianyou")
@@ -51,6 +55,16 @@ public class JianyouMerchantProvisionController extends DefaultBaseController {
     return InvokeResultBuilder.success(jianyouPlatformProvisionService.provision(vo));
   }
 
+  @ApiOperation("修复已存在的建友平台商资源")
+  @PostMapping("/platform/repair")
+  public InvokeResult<JianyouPlatformRepairBo> repairPlatform(
+      @RequestHeader(value = SECRET_HEADER, required = false) String apiSecret,
+      @Valid @RequestBody JianyouPlatformRepairVo vo) {
+
+    validateSecret(apiSecret);
+    return InvokeResultBuilder.success(jianyouPlatformProvisionService.repairExisting(vo));
+  }
+
   @ApiOperation("建友商户初始化")
   @PostMapping("/merchant/provision")
   public InvokeResult<JianyouMerchantProvisionBo> provisionMerchant(
@@ -59,6 +73,16 @@ public class JianyouMerchantProvisionController extends DefaultBaseController {
 
     validateSecret(apiSecret);
     return InvokeResultBuilder.success(jianyouMerchantProvisionService.provision(vo));
+  }
+
+  @ApiOperation("修复已存在的建友商户用户")
+  @PostMapping("/merchant/repair")
+  public InvokeResult<JianyouMerchantRepairBo> repairMerchant(
+      @RequestHeader(value = SECRET_HEADER, required = false) String apiSecret,
+      @Valid @RequestBody JianyouMerchantRepairVo vo) {
+
+    validateSecret(apiSecret);
+    return InvokeResultBuilder.success(jianyouMerchantProvisionService.repairExisting(vo));
   }
 
   private void validateSecret(String apiSecret) {

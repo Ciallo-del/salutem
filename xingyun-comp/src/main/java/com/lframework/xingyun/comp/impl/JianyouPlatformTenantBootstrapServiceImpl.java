@@ -56,7 +56,7 @@ public class JianyouPlatformTenantBootstrapServiceImpl implements JianyouPlatfor
   public JianyouPlatformTenantInitBo initializeTenantResources(Integer tenantId, String tenantJdbcUrl,
       String platformOrgCard, String token, Set<Integer> availableModuleIds) {
     if (tenantId == null) {
-      throw new DefaultClientException("平台商租户不存在！");
+      throw new DefaultClientException("平台商租户不存在");
     }
 
     validateCurrentTenantDatabase(tenantId, tenantJdbcUrl);
@@ -67,25 +67,38 @@ public class JianyouPlatformTenantBootstrapServiceImpl implements JianyouPlatfor
     return bo;
   }
 
+  @Override
+  public void ensureRoleMenus(List<String> roleIds, Set<Integer> availableModuleIds) {
+    if (CollectionUtil.isEmpty(roleIds)) {
+      throw new DefaultClientException("默认角色不存在，无法初始化菜单权限");
+    }
+
+    for (String roleId : roleIds) {
+      if (StringUtils.isNotBlank(roleId)) {
+        backfillRoleMenusIfNeeded(roleId, availableModuleIds);
+      }
+    }
+  }
+
   private void validateCurrentTenantDatabase(Integer tenantId, String tenantJdbcUrl) {
     String expectedDatabaseName = extractDatabaseName(tenantJdbcUrl);
     if (StringUtils.isBlank(expectedDatabaseName)) {
-      throw new DefaultClientException("平台商租户 JDBC 地址不合法，请修正后重试！");
+      throw new DefaultClientException("平台商租户JDBC地址不合法，请修正后重试");
     }
 
     DataSource dataSource = ApplicationUtil.safeGetBean(DataSource.class);
     if (dataSource == null) {
-      throw new DefaultClientException("平台商租户数据源未初始化完成，请稍后重试！");
+      throw new DefaultClientException("平台商租户数据源未初始化完成，请稍后重试");
     }
 
     try (Connection connection = dataSource.getConnection()) {
       String currentDatabaseName = StringUtils.defaultIfBlank(connection.getCatalog(), connection.getSchema());
       if (StringUtils.isBlank(currentDatabaseName)) {
-        throw new DefaultClientException("租户库业务初始化未切换到目标数据源，请稍后重试！");
+        throw new DefaultClientException("租户库业务初始化未切换到目标数据源，请稍后重试");
       }
       if (!StringUtils.equalsIgnoreCase(expectedDatabaseName, currentDatabaseName)) {
-        throw new DefaultClientException("租户库业务初始化未切换到目标数据源，当前事务仍绑定平台库连接，"
-            + "tenantId=" + tenantId + "，期望数据库：" + expectedDatabaseName + "，实际数据库：" + currentDatabaseName);
+        throw new DefaultClientException("租户库业务初始化未切换到目标数据源，tenantId=" + tenantId
+            + "，期望数据库：" + expectedDatabaseName + "，实际数据库：" + currentDatabaseName);
       }
     } catch (DefaultClientException e) {
       throw e;
@@ -123,7 +136,7 @@ public class JianyouPlatformTenantBootstrapServiceImpl implements JianyouPlatfor
 
     SysRoleCategory defaultRoleCategory = findDefaultRoleCategory();
     if (defaultRoleCategory == null) {
-      throw new DefaultClientException("默认角色分类不存在！");
+      throw new DefaultClientException("默认角色分类不存在");
     }
 
     CreateSysRoleVo createVo = new CreateSysRoleVo();
@@ -134,7 +147,7 @@ public class JianyouPlatformTenantBootstrapServiceImpl implements JianyouPlatfor
     createVo.setDescription("建友平台商默认角色");
     String roleId = sysRoleService.create(createVo);
     if (StringUtils.isBlank(roleId)) {
-      throw new DefaultClientException("创建平台商默认角色失败！");
+      throw new DefaultClientException("创建平台商默认角色失败");
     }
     backfillRoleMenusIfNeeded(roleId, availableModuleIds);
     return roleId;
@@ -142,36 +155,16 @@ public class JianyouPlatformTenantBootstrapServiceImpl implements JianyouPlatfor
 
   private void backfillRoleMenusIfNeeded(String roleId, Set<Integer> availableModuleIds) {
     if (StringUtils.isBlank(roleId)) {
-      throw new DefaultClientException("默认角色不存在，无法初始化菜单权限！");
+      throw new DefaultClientException("默认角色不存在，无法初始化菜单权限");
     }
 
     JdbcTemplate jdbcTemplate = currentTenantJdbcTemplate();
-    if (useEnhancedRoleMenuBackfill()) {
-      backfillRoleMenusIncrementally(jdbcTemplate, roleId, availableModuleIds);
-      return;
-    }
-    Integer existingCount = jdbcTemplate.queryForObject(
-        "SELECT COUNT(*) FROM sys_role_menu WHERE role_id = ?",
-        Integer.class, roleId);
-    if (existingCount != null && existingCount > 0) {
-      return;
-    }
-
-    List<String> availableMenuIds = loadAllAvailableMenuIds(jdbcTemplate, availableModuleIds);
-    if (CollectionUtil.isEmpty(availableMenuIds)) {
-      throw new DefaultClientException("当前租户可用模块下没有任何可授权菜单！");
-    }
-
-    List<Object[]> params = new ArrayList<>();
-    for (String menuId : availableMenuIds) {
-      params.add(new Object[] {IdUtil.getId(), roleId, menuId});
-    }
-    jdbcTemplate.batchUpdate("INSERT INTO sys_role_menu (id, role_id, menu_id) VALUES (?, ?, ?)", params);
+    backfillRoleMenusIncrementally(jdbcTemplate, roleId, availableModuleIds);
   }
 
   private List<String> loadAllAvailableMenuIds(JdbcTemplate jdbcTemplate, Set<Integer> availableModuleIds) {
     if (CollectionUtil.isEmpty(availableModuleIds)) {
-      throw new DefaultClientException("当前租户可用模块为空，无法初始化默认角色权限！");
+      throw new DefaultClientException("当前租户可用模块为空，无法初始化默认角色权限");
     }
 
     Set<String> availableModuleIdStrings = availableModuleIds.stream()
@@ -179,7 +172,7 @@ public class JianyouPlatformTenantBootstrapServiceImpl implements JianyouPlatfor
         .map(String::valueOf)
         .collect(Collectors.toCollection(LinkedHashSet::new));
     if (CollectionUtil.isEmpty(availableModuleIdStrings)) {
-      throw new DefaultClientException("当前租户可用模块为空，无法初始化默认角色权限！");
+      throw new DefaultClientException("当前租户可用模块为空，无法初始化默认角色权限");
     }
 
     List<Object> params = new ArrayList<>(availableModuleIdStrings);
@@ -197,19 +190,15 @@ public class JianyouPlatformTenantBootstrapServiceImpl implements JianyouPlatfor
   private JdbcTemplate currentTenantJdbcTemplate() {
     DataSource dataSource = ApplicationUtil.safeGetBean(DataSource.class);
     if (dataSource == null) {
-      throw new DefaultClientException("平台商租户数据源未初始化完成，请稍后重试！");
+      throw new DefaultClientException("平台商租户数据源未初始化完成，请稍后重试");
     }
     return new JdbcTemplate(dataSource);
-  }
-
-  private boolean useEnhancedRoleMenuBackfill() {
-    return true;
   }
 
   private void backfillRoleMenusIncrementally(JdbcTemplate jdbcTemplate, String roleId, Set<Integer> availableModuleIds) {
     List<String> availableMenuIds = loadAllAvailableMenuIds(jdbcTemplate, availableModuleIds);
     if (CollectionUtil.isEmpty(availableMenuIds)) {
-      throw new DefaultClientException("当前租户可用模块下没有任何可授权菜单！");
+      throw new DefaultClientException("当前租户可用模块下没有任何可授权菜单");
     }
 
     Set<String> existingMenuIds = new LinkedHashSet<>(loadRoleMenuIds(jdbcTemplate, roleId));
@@ -222,7 +211,7 @@ public class JianyouPlatformTenantBootstrapServiceImpl implements JianyouPlatfor
     if (!CollectionUtil.isEmpty(missingMenuIds)) {
       List<Object[]> params = new ArrayList<>();
       for (String menuId : missingMenuIds) {
-        params.add(new Object[] {IdUtil.getId(), roleId, menuId});
+        params.add(new Object[]{IdUtil.getId(), roleId, menuId});
       }
       jdbcTemplate.batchUpdate("INSERT INTO sys_role_menu (id, role_id, menu_id) VALUES (?, ?, ?)", params);
       log.info("平台商默认角色菜单授权补齐完成: roleId={}, appendedMenuCount={}", roleId, missingMenuIds.size());
@@ -297,7 +286,7 @@ public class JianyouPlatformTenantBootstrapServiceImpl implements JianyouPlatfor
   }
 
   private String buildDeptName(String platformOrgCard) {
-    return "建佑默认部门-" + platformOrgCard;
+    return "建友默认部门-" + platformOrgCard;
   }
 
   private String buildRoleName(String platformOrgCard) {
