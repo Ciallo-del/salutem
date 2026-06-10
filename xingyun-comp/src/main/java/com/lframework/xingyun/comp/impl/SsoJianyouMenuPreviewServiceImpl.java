@@ -28,10 +28,15 @@ public class SsoJianyouMenuPreviewServiceImpl implements SsoJianyouMenuPreviewSe
     private static final String ROOT_MENU_STOCK_MANAGE = "StockManage";
     private static final String ROOT_MENU_TAKE_STOCK = "TakeStock";
     private static final String ROOT_MENU_STOCK_ADJUST = "StockAdjust";
+    private static final String ROOT_MENU_SALE = "Sale";
+
+    private static final String GROUP_KEY_IN_OUT_MANAGE = "SaleOutSheet";
 
     private static final Map<String, String> ROOT_REDIRECT_PREFIX_MAPPING;
 
     private static final Map<String, String> LEAF_REDIRECT_MAPPING;
+
+    private static final Map<String, String> PREVIEW_MENU_NAME_MAPPING;
 
     static {
         Map<String, String> rootMappings = new LinkedHashMap<>();
@@ -47,19 +52,30 @@ public class SsoJianyouMenuPreviewServiceImpl implements SsoJianyouMenuPreviewSe
         leafMappings.put("TakeStockSheet", "/stock/take/sheet");
         leafMappings.put("StockAdjustReason", "/stock/adjust/reason");
         leafMappings.put("StockAdjustSheet", "/stock/stock-adjust");
+        leafMappings.put("SaleInSheet", "/sale/in");
+        leafMappings.put("SaleOutSheet", "/sale/out");
         LEAF_REDIRECT_MAPPING = Collections.unmodifiableMap(leafMappings);
+
+        Map<String, String> previewMenuNames = new LinkedHashMap<>();
+        previewMenuNames.put("SaleInSheet", "入库管理");
+        previewMenuNames.put("SaleOutSheet", "出库管理");
+        PREVIEW_MENU_NAME_MAPPING = Collections.unmodifiableMap(previewMenuNames);
     }
 
     private static final List<GroupConfig> GROUP_CONFIGS = Collections.unmodifiableList(Arrays.asList(
-            new GroupConfig("System", "系统管理", "System", menu -> true),
-            new GroupConfig("MsgCenter", "消息中心", "MsgCenter", menu -> true),
-            new GroupConfig("BaseData", "基础信息管理", "BaseData", menu -> true),
-            new GroupConfig("Product", "商品中心", "Product", menu -> true),
-            new GroupConfig("StockManage", "库存管理", ROOT_MENU_STOCK_MANAGE, menu -> true),
-            new GroupConfig("TakeStock", "库存盘点", ROOT_MENU_TAKE_STOCK, menu -> true),
-            new GroupConfig("StockAdjust", "库存调整", ROOT_MENU_STOCK_ADJUST, menu -> true),
-            new GroupConfig("SaleOutSheet", "销售管理-销售出库管理", "Sale",
-                    menu -> StringUtils.equals(menu.getName(), "SaleOutSheet"))
+            new GroupConfig("System", "系统管理", Collections.singleton("System"), menu -> true),
+            new GroupConfig("MsgCenter", "消息中心", Collections.singleton("MsgCenter"), menu -> true),
+            new GroupConfig("BaseData", "基础信息管理", Collections.singleton("BaseData"), menu -> true),
+            new GroupConfig("Product", "商品中心", Collections.singleton("Product"), menu -> true),
+            new GroupConfig("StockManage", "库存管理", Collections.singleton(ROOT_MENU_STOCK_MANAGE), menu -> true),
+            new GroupConfig("TakeStock", "库存盘点", Collections.singleton(ROOT_MENU_TAKE_STOCK), menu -> true),
+            new GroupConfig("StockAdjust", "库存调整", Collections.singleton(ROOT_MENU_STOCK_ADJUST), menu -> true),
+            new GroupConfig(
+                    GROUP_KEY_IN_OUT_MANAGE,
+                    "入库/出库管理",
+                    Collections.singleton(ROOT_MENU_SALE),
+                    menu -> StringUtils.equalsAny(menu.getName(), "SaleInSheet", "SaleOutSheet")
+            )
     ));
 
     @Override
@@ -94,13 +110,11 @@ public class SsoJianyouMenuPreviewServiceImpl implements SsoJianyouMenuPreviewSe
         for (GroupConfig groupConfig : GROUP_CONFIGS) {
             SsoJianyouMenuPreviewGroupBo group = new SsoJianyouMenuPreviewGroupBo();
             group.setGroupKey(groupConfig.getGroupKey());
-            group.setGroupName(StringUtils.equals(groupConfig.getGroupKey(), "SaleOutSheet")
-                    ? "销售管理"
-                    : groupConfig.getGroupName());
+            group.setGroupName(groupConfig.getGroupName());
 
             for (MenuRecord menu : visibleLeafMenus) {
                 String rootMenuName = findRootMenuName(menu, menuMap);
-                if (!StringUtils.equals(rootMenuName, groupConfig.getRootMenuName())) {
+                if (!groupConfig.getRootMenuNames().contains(rootMenuName)) {
                     continue;
                 }
                 if (!groupConfig.getFilter().test(menu)) {
@@ -112,7 +126,7 @@ public class SsoJianyouMenuPreviewServiceImpl implements SsoJianyouMenuPreviewSe
                 }
                 SsoJianyouMenuPreviewItemBo item = new SsoJianyouMenuPreviewItemBo();
                 item.setMenuKey(menu.getName());
-                item.setMenuName(StringUtils.defaultIfBlank(menu.getTitle(), menu.getName()));
+                item.setMenuName(resolvePreviewMenuName(menu));
                 item.setRedirect(redirect);
                 group.getItems().add(item);
             }
@@ -176,6 +190,14 @@ public class SsoJianyouMenuPreviewServiceImpl implements SsoJianyouMenuPreviewSe
             return leafRedirect;
         }
         return buildRedirectPath(currentMenu, menuMap, rootMenuName);
+    }
+
+    private String resolvePreviewMenuName(MenuRecord menu) {
+        String previewMenuName = PREVIEW_MENU_NAME_MAPPING.get(menu.getName());
+        if (StringUtils.isNotBlank(previewMenuName)) {
+            return previewMenuName;
+        }
+        return StringUtils.defaultIfBlank(menu.getTitle(), menu.getName());
     }
 
     private String buildRedirectPath(MenuRecord currentMenu, Map<String, MenuRecord> menuMap, String rootMenuName) {
@@ -272,7 +294,7 @@ public class SsoJianyouMenuPreviewServiceImpl implements SsoJianyouMenuPreviewSe
 
         private final String groupName;
 
-        private final String rootMenuName;
+        private final Set<String> rootMenuNames;
 
         private final Predicate<MenuRecord> filter;
     }

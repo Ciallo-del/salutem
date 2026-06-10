@@ -143,6 +143,7 @@ UPDATE `sys_menu` SET `sys_module_id` = '6' WHERE `id` = '2003002003';
 UPDATE `sys_menu` SET `sys_module_id` = '6' WHERE `id` = '2003002004';
 UPDATE `sys_menu` SET `sys_module_id` = '6' WHERE `id` = '2003002005';
 UPDATE `sys_menu` SET `sys_module_id` = '6' WHERE `id` = '2003003';
+UPDATE `sys_menu` SET `sys_module_id` = '6' WHERE `id` = '2003005';
 UPDATE `sys_menu` SET `sys_module_id` = '6' WHERE `id` = '2003003001';
 UPDATE `sys_menu` SET `sys_module_id` = '6' WHERE `id` = '2003003002';
 UPDATE `sys_menu` SET `sys_module_id` = '6' WHERE `id` = '2003003003';
