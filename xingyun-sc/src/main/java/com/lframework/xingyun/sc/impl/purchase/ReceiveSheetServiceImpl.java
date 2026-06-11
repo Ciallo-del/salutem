@@ -223,9 +223,7 @@ public class ReceiveSheetServiceImpl extends
     sheet.setId(IdUtil.getId());
     sheet.setCode(generateCodeService.generate(GenerateCodeTypePool.RECEIVE_SHEET));
 
-    PurchaseConfig purchaseConfig = purchaseConfigService.get();
-
-    this.create(sheet, vo, purchaseConfig.getReceiveRequirePurchase());
+    this.create(sheet, vo, false);
 
     sheet.setStatus(ReceiveSheetStatus.CREATED);
 
@@ -322,7 +320,8 @@ public class ReceiveSheetServiceImpl extends
 
     PurchaseConfig purchaseConfig = purchaseConfigService.get();
 
-    if (!purchaseConfig.getReceiveMultipleRelatePurchase()) {
+    if (StringUtil.isNotBlank(sheet.getPurchaseOrderId())
+        && !purchaseConfig.getReceiveMultipleRelatePurchase()) {
       Wrapper<ReceiveSheet> checkWrapper = Wrappers.lambdaQuery(ReceiveSheet.class)
           .eq(ReceiveSheet::getPurchaseOrderId, sheet.getPurchaseOrderId())
           .ne(ReceiveSheet::getId, sheet.getId());

@@ -1,6 +1,5 @@
 package com.lframework.xingyun.sc.controller.purchase;
 
-import com.lframework.starter.common.exceptions.impl.DefaultClientException;
 import com.lframework.starter.common.utils.CollectionUtil;
 import com.lframework.starter.web.core.annotations.security.HasPermission;
 import com.lframework.starter.web.core.controller.DefaultBaseController;
@@ -19,14 +18,12 @@ import com.lframework.xingyun.sc.bo.purchase.receive.ReceiveSheetWithReturnBo;
 import com.lframework.xingyun.sc.dto.purchase.receive.GetPaymentDateDto;
 import com.lframework.xingyun.sc.dto.purchase.receive.ReceiveSheetFullDto;
 import com.lframework.xingyun.sc.dto.purchase.receive.ReceiveSheetWithReturnDto;
-import com.lframework.xingyun.sc.entity.PurchaseConfig;
 import com.lframework.xingyun.sc.entity.ReceiveSheet;
 import com.lframework.xingyun.sc.excel.purchase.receive.ReceiveSheetExportTaskWorker;
 import com.lframework.xingyun.sc.excel.purchase.receive.ReceiveSheetImportListener;
 import com.lframework.xingyun.sc.excel.purchase.receive.ReceiveSheetImportModel;
 import com.lframework.xingyun.sc.excel.purchase.receive.ReceiveSheetPayTypeImportListener;
 import com.lframework.xingyun.sc.excel.purchase.receive.ReceiveSheetPayTypeImportModel;
-import com.lframework.xingyun.sc.service.purchase.PurchaseConfigService;
 import com.lframework.xingyun.sc.service.purchase.ReceiveSheetService;
 import com.lframework.xingyun.sc.vo.purchase.receive.ApprovePassReceiveSheetVo;
 import com.lframework.xingyun.sc.vo.purchase.receive.ApproveRefuseReceiveSheetVo;
@@ -67,9 +64,6 @@ public class ReceiveSheetController extends DefaultBaseController {
 
   @Autowired
   private ReceiveSheetService receiveSheetService;
-
-  @Autowired
-  private PurchaseConfigService purchaseConfigService;
 
   /**
    * 打印
@@ -316,11 +310,6 @@ public class ReceiveSheetController extends DefaultBaseController {
   @PostMapping("/import")
   public InvokeResult<Void> importExcel(@NotBlank(message = "ID不能为空") String id,
       @NotNull(message = "请上传文件") MultipartFile file) {
-
-    PurchaseConfig config = purchaseConfigService.get();
-    if (config.getReceiveRequirePurchase()) {
-      throw new DefaultClientException("“采购收货单是否关联采购订单”必须设置为“否”才可以导入！");
-    }
 
     ReceiveSheetImportListener listener = new ReceiveSheetImportListener();
     listener.setTaskId(id);

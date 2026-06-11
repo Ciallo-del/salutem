@@ -159,8 +159,6 @@ public class ReceiveSheetImportListener extends ExcelImportListener<ReceiveSheet
       createReceiveSheetVo.setAllowModifyPaymentDate(Boolean.TRUE);
       createReceiveSheetVo.setReceiveDate(DateUtil.toLocalDate(valueObj.getReceiveDate()));
       createReceiveSheetVo.setDescription(valueObj.getDescription());
-      createReceiveSheetVo.setRequired(Boolean.FALSE);
-
       List<ReceiveProductVo> products = new ArrayList<>();
       for (ReceiveSheetImportModel data : value) {
         ReceiveProductVo purchaseProductVo = new ReceiveProductVo();

@@ -44,9 +44,6 @@ public class PurchaseConfigServiceImpl extends
     PurchaseConfig config = getBaseMapper().selectOne(Wrappers.query());
     LambdaUpdateWrapper<PurchaseConfig> updateWrapper = Wrappers.lambdaUpdate(PurchaseConfig.class)
         .eq(PurchaseConfig::getId, config.getId())
-        .set(PurchaseConfig::getReceiveRequirePurchase, vo.getReceiveRequirePurchase())
-        .set(PurchaseConfig::getReceiveMultipleRelatePurchase,
-            vo.getReceiveMultipleRelatePurchase())
         .set(PurchaseConfig::getPurchaseReturnRequireReceive, vo.getPurchaseReturnRequireReceive())
         .set(PurchaseConfig::getPurchaseReturnMultipleRelateReceive,
             vo.getPurchaseReturnMultipleRelateReceive())

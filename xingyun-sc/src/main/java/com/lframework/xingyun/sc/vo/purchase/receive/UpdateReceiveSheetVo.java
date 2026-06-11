@@ -13,19 +13,16 @@ public class UpdateReceiveSheetVo extends CreateReceiveSheetVo {
 
   private static final long serialVersionUID = 1L;
 
-  /**
-   * 收货单ID
-   */
   @ApiModelProperty(value = "收货单ID", required = true)
   @NotBlank(message = "收货单ID不能为空！")
   private String id;
 
   @Override
   public void validate() {
-
     ReceiveSheetService receiveSheetService = ApplicationUtil.getBean(ReceiveSheetService.class);
     ReceiveSheet receiveSheet = receiveSheetService.getById(this.getId());
+    boolean requirePurchase = !StringUtil.isBlank(receiveSheet.getPurchaseOrderId());
 
-    this.validate(!StringUtil.isBlank(receiveSheet.getPurchaseOrderId()));
+    this.validate(requirePurchase);
   }
 }

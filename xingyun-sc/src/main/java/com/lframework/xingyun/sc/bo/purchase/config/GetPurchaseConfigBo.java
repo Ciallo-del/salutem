@@ -8,54 +8,29 @@ import lombok.Data;
 @Data
 public class GetPurchaseConfigBo extends BaseBo<PurchaseConfig> {
 
-    /**
-     * 采购收货单是否关联采购订单
-     */
-    @ApiModelProperty("采购收货单是否关联采购订单")
-    private Boolean receiveRequirePurchase;
+  @ApiModelProperty("采购收货单是否关联采购订单")
+  private Boolean receiveRequirePurchase;
 
-    /**
-     * 采购收货单是否多次关联采购订单
-     */
-    @ApiModelProperty("采购收货单是否多次关联采购订单")
-    private Boolean receiveMultipleRelatePurchase;
+  @ApiModelProperty("采购退货单是否关联采购收货单")
+  private Boolean purchaseReturnRequireReceive;
 
-    /**
-     * 采购退货单是否关联采购收货单
-     */
-    @ApiModelProperty("采购退货单是否关联采购收货单")
-    private Boolean purchaseReturnRequireReceive;
+  @ApiModelProperty("采购退货单是否多次关联采购收货单")
+  private Boolean purchaseReturnMultipleRelateReceive;
 
-    /**
-     * 采购退货单是否多次关联采购收货单
-     */
-    @ApiModelProperty("采购退货单是否多次关联采购收货单")
-    private Boolean purchaseReturnMultipleRelateReceive;
+  @ApiModelProperty("采购订单是否开启审批流程")
+  private Boolean purchaseRequireBpm;
 
-    /**
-     * 采购订单是否开启审批流程
-     */
-    @ApiModelProperty("采购订单是否开启审批流程")
-    private Boolean purchaseRequireBpm;
+  @ApiModelProperty("采购订单关联的审批流程ID")
+  private String purchaseBpmProcessId;
 
-    /**
-     * 采购订单关联的审批流程ID
-     */
-    @ApiModelProperty("采购订单关联的审批流程ID")
-    private String purchaseBpmProcessId;
+  @ApiModelProperty("采购订单关联的审批流程编号")
+  private String purchaseBpmProcessCode;
 
-    /**
-     * 采购订单关联的审批流程编号
-     */
-    @ApiModelProperty("采购订单关联的审批流程编号")
-    private String purchaseBpmProcessCode;
+  public GetPurchaseConfigBo() {
 
-    public GetPurchaseConfigBo() {
+  }
 
-    }
-
-    public GetPurchaseConfigBo(PurchaseConfig dto) {
-
-        super(dto);
-    }
+  public GetPurchaseConfigBo(PurchaseConfig dto) {
+    super(dto);
+  }
 }

@@ -198,10 +198,7 @@ public class PurchaseOrderServiceImpl extends
   @Override
   public PurchaseOrderWithReceiveDto getWithReceive(String id) {
 
-    PurchaseConfig purchaseConfig = purchaseConfigService.get();
-
-    PurchaseOrderWithReceiveDto order = getBaseMapper().getWithReceive(id,
-        purchaseConfig.getReceiveRequirePurchase());
+    PurchaseOrderWithReceiveDto order = getBaseMapper().getWithReceive(id, Boolean.TRUE);
     if (order == null) {
       throw new InputErrorException("订单不存在！");
     }
