@@ -85,7 +85,7 @@ public interface RetailOutSheetMapper extends BaseMapper<RetailOutSheet> {
       @Param("multipleRelate") boolean multipleRelate);
 
   /**
-   * 根据关键字零售采购商品信息
+   * 根据关键字零售采购药品信息
    *
    * @param condition
    * @return
@@ -99,7 +99,7 @@ public interface RetailOutSheetMapper extends BaseMapper<RetailOutSheet> {
       @Param("condition") String condition, @Param("isReturn") Boolean isReturn);
 
   /**
-   * 查询可零售商品信息
+   * 查询可零售药品信息
    *
    * @param vo
    * @return

@@ -218,6 +218,10 @@ warm-flow:
   logic_not_delete_value: 0
 
 xingyun:
+  tenant-sql-migration:
+    enabled: true
+    min-version: "1.32"
+    fail-fast: false
   sso:
     jianyou:
       consume-url: http://localhost:8097/sso/xingyun/ticket/consume

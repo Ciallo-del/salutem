@@ -1,0 +1,7986 @@
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for base_data_address
+-- ----------------------------
+DROP TABLE IF EXISTS `base_data_address`;
+CREATE TABLE `base_data_address`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `entity_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '瀹炰綋ID',
+  `entity_type` tinyint(3) NOT NULL COMMENT '瀹炰綋绫诲瀷',
+  `address_type` tinyint(3) NOT NULL COMMENT '鍦板潃绫诲瀷',
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '濮撳悕',
+  `telephone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鎵嬫満鍙',
+  `province_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鐪',
+  `city_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '甯',
+  `district_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍖',
+  `address` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '璇︾粏鍦板潃',
+  `is_default` tinyint(1) NOT NULL DEFAULT 0 COMMENT '鏄惁榛樿鍦板潃',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `entity_id`(`entity_id`, `entity_type`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鍦板潃搴' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of base_data_address
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for base_data_customer
+-- ----------------------------
+DROP TABLE IF EXISTS `base_data_customer`;
+CREATE TABLE `base_data_customer`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '缂栧彿',
+  `name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍚嶇О',
+  `mnemonic_code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '绠€鐮',
+  `contact` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鑱旂郴浜',
+  `telephone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鑱旂郴鐢佃瘽',
+  `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鐢靛瓙閭',
+  `zip_code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '閭紪',
+  `fax` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '浼犵湡',
+  `city_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鍦板尯ID',
+  `address` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鍦板潃',
+  `settle_type` tinyint(3) NOT NULL DEFAULT 1 COMMENT '缁撶畻鏂瑰紡',
+  `credit_code` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '缁熶竴绀句細淇＄敤浠ｇ爜',
+  `tax_identify_no` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '绾崇◣浜鸿瘑鍒彿',
+  `bank_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '寮€鎴烽摱琛',
+  `account_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鎴峰悕',
+  `account_no` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '閾惰璐﹀彿',
+  `available` tinyint(1) NOT NULL COMMENT '鐘舵€',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `code`(`code`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鏀惰揣鏂' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of base_data_customer
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for base_data_logistics_company
+-- ----------------------------
+DROP TABLE IF EXISTS `base_data_logistics_company`;
+CREATE TABLE `base_data_logistics_company`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '缂栧彿',
+  `name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍚嶇О',
+  `contact` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鑱旂郴浜',
+  `telephone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鑱旂郴鐢佃瘽',
+  `city_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鍦板尯ID',
+  `address` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鍦板潃',
+  `available` tinyint(1) NOT NULL DEFAULT 1 COMMENT '鐘舵€',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `code`(`code`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鐗╂祦鍏徃' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of base_data_logistics_company
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for base_data_member
+-- ----------------------------
+DROP TABLE IF EXISTS `base_data_member`;
+CREATE TABLE `base_data_member`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '缂栧彿',
+  `name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍚嶇О',
+  `gender` tinyint(3) NOT NULL DEFAULT 0 COMMENT '鎬у埆',
+  `telephone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鑱旂郴鐢佃瘽',
+  `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鐢靛瓙閭',
+  `birthday` date NULL DEFAULT NULL COMMENT '鍑虹敓鏃ユ湡',
+  `join_day` date NOT NULL COMMENT '鍏ヤ細鏃ユ湡',
+  `shop_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鎵€灞為棬搴',
+  `guider_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鎵€灞炲璐',
+  `city_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鍦板尯ID',
+  `available` tinyint(1) NOT NULL COMMENT '鐘舵€',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `code`(`code`) USING BTREE,
+  INDEX `telephone`(`telephone`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '浼氬憳' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of base_data_member
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for base_data_pay_type
+-- ----------------------------
+DROP TABLE IF EXISTS `base_data_pay_type`;
+CREATE TABLE `base_data_pay_type`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '缂栧彿',
+  `name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍚嶇О',
+  `rec_text` tinyint(1) NOT NULL COMMENT '鏄惁璁板綍鍐呭',
+  `available` tinyint(1) NOT NULL DEFAULT 1 COMMENT '鐘舵€',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `code`(`code`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鏀粯鏂瑰紡' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of base_data_pay_type
+-- ----------------------------
+INSERT INTO `base_data_pay_type` VALUES ('1', '001', '鐜伴噾', 0, 1, '', '绯荤粺绠＄悊鍛', '1', '2023-03-21 10:09:44', '绯荤粺绠＄悊鍛', '1', '2023-03-21 10:12:30');
+INSERT INTO `base_data_pay_type` VALUES ('2', '002', '寰俊鏀粯', 0, 1, '', '绯荤粺绠＄悊鍛', '1', '2023-03-21 10:09:44', '绯荤粺绠＄悊鍛', '1', '2023-03-21 10:12:30');
+INSERT INTO `base_data_pay_type` VALUES ('3', '003', '鏀粯瀹濇敮浠', 0, 1, '', '绯荤粺绠＄悊鍛', '1', '2023-03-21 10:09:44', '绯荤粺绠＄悊鍛', '1', '2023-03-21 10:12:30');
+INSERT INTO `base_data_pay_type` VALUES ('4', '004', '绉诲姩鏀粯', 0, 1, '', '绯荤粺绠＄悊鍛', '1', '2023-03-21 10:09:44', '绯荤粺绠＄悊鍛', '1', '2023-03-21 10:12:30');
+INSERT INTO `base_data_pay_type` VALUES ('5', '005', '浼樻儬鍒', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2023-03-21 10:09:44', '绯荤粺绠＄悊鍛', '1', '2023-03-21 10:12:30');
+INSERT INTO `base_data_pay_type` VALUES ('6', '006', '绉垎', 0, 1, '', '绯荤粺绠＄悊鍛', '1', '2023-03-21 10:09:44', '绯荤粺绠＄悊鍛', '1', '2023-03-21 10:12:30');
+
+-- ----------------------------
+-- Table structure for base_data_product
+-- ----------------------------
+DROP TABLE IF EXISTS `base_data_product`;
+CREATE TABLE `base_data_product`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '缂栧彿',
+  `multi_code` tinyint(1) NOT NULL DEFAULT 0 COMMENT '鏄惁涓€鍝佸鐮',
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍚嶇О',
+  `short_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '绠€绉',
+  `category_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '绫荤洰ID',
+  `brand_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鍝佺墝ID',
+  `product_type` tinyint(3) NOT NULL DEFAULT 1 COMMENT '鍟嗗搧绫诲瀷',
+  `tax_rate` decimal(16, 2) NOT NULL COMMENT '杩涢」绋庣巼锛?锛',
+  `sale_tax_rate` decimal(16, 2) NOT NULL COMMENT '閿€椤圭◣鐜',
+  `spec` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '瑙勬牸',
+  `unit` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鍗曚綅',
+  `weight` decimal(16, 2) NULL DEFAULT NULL COMMENT '閲嶉噺锛坘g锛',
+  `volume` decimal(16, 2) NULL DEFAULT NULL COMMENT '浣撶Н锛坈m3锛',
+  `production_time` date NOT NULL COMMENT '生产时间',
+  `deadline_time` date NOT NULL COMMENT '截止时间',
+  `available` tinyint(1) NOT NULL COMMENT '鐘舵€',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `code`(`code`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鍟嗗搧' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of base_data_product
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for base_data_product_brand
+-- ----------------------------
+DROP TABLE IF EXISTS `base_data_product_brand`;
+CREATE TABLE `base_data_product_brand`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '缂栧彿',
+  `name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍚嶇О',
+  `short_name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '绠€绉',
+  `logo` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT 'logo',
+  `introduction` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '绠€浠',
+  `available` tinyint(1) NOT NULL COMMENT '鐘舵€',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `code`(`code`) USING BTREE,
+  INDEX `name`(`name`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鍟嗗搧鍝佺墝' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of base_data_product_brand
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for base_data_product_bundle
+-- ----------------------------
+DROP TABLE IF EXISTS `base_data_product_bundle`;
+CREATE TABLE `base_data_product_bundle`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `main_product_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '涓诲晢鍝両D',
+  `product_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍗曞搧ID',
+  `bundle_num` int(11) NOT NULL COMMENT '鍖呭惈鏁伴噺',
+  `purchase_price` decimal(24, 6) NOT NULL COMMENT '閲囪喘浠',
+  `sale_price` decimal(24, 6) NOT NULL COMMENT '閿€鍞环',
+  `retail_price` decimal(24, 6) NOT NULL COMMENT '闆跺敭浠',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `main_product_id`(`main_product_id`, `product_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '缁勫悎鍟嗗搧' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of base_data_product_bundle
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for base_data_product_category
+-- ----------------------------
+DROP TABLE IF EXISTS `base_data_product_category`;
+CREATE TABLE `base_data_product_category`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '缂栧彿',
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍚嶇О',
+  `parent_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鐖剁骇ID',
+  `available` tinyint(1) NOT NULL COMMENT '鐘舵€',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `code`(`code`) USING BTREE,
+  INDEX `name`(`name`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鍟嗗搧绫荤洰' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of base_data_product_category
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for base_data_product_category_property
+-- ----------------------------
+DROP TABLE IF EXISTS `base_data_product_category_property`;
+CREATE TABLE `base_data_product_category_property`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `property_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍟嗗搧灞炴€D',
+  `category_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍟嗗搧绫荤洰ID',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `property_id`(`property_id`, `category_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鍟嗗搧绫荤洰鍜屽晢鍝佸睘鎬у叧绯昏〃' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of base_data_product_category_property
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for base_data_product_code
+-- ----------------------------
+DROP TABLE IF EXISTS `base_data_product_code`;
+CREATE TABLE `base_data_product_code`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `product_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍟嗗搧ID',
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '缂栧彿',
+  `is_main` tinyint(1) NOT NULL DEFAULT 0 COMMENT '鏄惁涓荤紪鍙',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `product_id`(`product_id`, `code`) USING BTREE,
+  INDEX `code`(`code`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鍟嗗搧缂栧彿' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of base_data_product_code
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for base_data_product_property
+-- ----------------------------
+DROP TABLE IF EXISTS `base_data_product_property`;
+CREATE TABLE `base_data_product_property`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '缂栧彿',
+  `name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍚嶇О',
+  `is_required` tinyint(1) NOT NULL COMMENT '鏄惁蹇呭～',
+  `column_type` tinyint(3) NOT NULL COMMENT '褰曞叆绫诲瀷',
+  `column_data_type` tinyint(3) NULL DEFAULT NULL COMMENT '鏁版嵁绫诲瀷',
+  `property_type` tinyint(3) NOT NULL COMMENT '灞炴€х被鍒',
+  `available` tinyint(1) NOT NULL COMMENT '鐘舵€',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `code`(`code`) USING BTREE,
+  INDEX `name`(`name`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鍟嗗搧灞炴€' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of base_data_product_property
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for base_data_product_property_item
+-- ----------------------------
+DROP TABLE IF EXISTS `base_data_product_property_item`;
+CREATE TABLE `base_data_product_property_item`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '缂栧彿',
+  `name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍚嶇О',
+  `property_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '灞炴€D',
+  `available` tinyint(1) NOT NULL COMMENT '鐘舵€',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `property_id`(`property_id`, `code`) USING BTREE,
+  INDEX `property_id2`(`name`, `property_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鍟嗗搧灞炴€у€' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of base_data_product_property_item
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for base_data_product_property_relation
+-- ----------------------------
+DROP TABLE IF EXISTS `base_data_product_property_relation`;
+CREATE TABLE `base_data_product_property_relation`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `product_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍟嗗搧ID',
+  `property_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍟嗗搧灞炴€D',
+  `property_item_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '灞炴€у€糏D',
+  `property_text` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鍟嗗搧灞炴€у€',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `product_id`(`product_id`, `property_id`, `property_item_id`) USING BTREE,
+  INDEX `property_id`(`property_id`, `property_item_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鍟嗗搧鍜屽晢鍝佸睘鎬у叧绯昏〃' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of base_data_product_property_relation
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for base_data_product_purchase
+-- ----------------------------
+DROP TABLE IF EXISTS `base_data_product_purchase`;
+CREATE TABLE `base_data_product_purchase`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `price` decimal(24, 6) NOT NULL COMMENT '閲囪喘浠',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鍟嗗搧閲囪喘浠' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of base_data_product_purchase
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for base_data_product_retail
+-- ----------------------------
+DROP TABLE IF EXISTS `base_data_product_retail`;
+CREATE TABLE `base_data_product_retail`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `price` decimal(24, 6) NOT NULL COMMENT '闆跺敭浠',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鍟嗗搧闆跺敭浠' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of base_data_product_retail
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for base_data_product_sale
+-- ----------------------------
+DROP TABLE IF EXISTS `base_data_product_sale`;
+CREATE TABLE `base_data_product_sale`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `price` decimal(24, 6) NOT NULL COMMENT '閿€鍞环',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鍟嗗搧閿€鍞环' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of base_data_product_sale
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for base_data_stock_cell
+-- ----------------------------
+DROP TABLE IF EXISTS `base_data_stock_cell`;
+CREATE TABLE `base_data_stock_cell`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `sc_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '浠撳簱ID',
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '缂栧彿',
+  `name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍚嶇О',
+  `cell_type` tinyint(3) NOT NULL DEFAULT 1 COMMENT '浠撲綅绫诲埆',
+  `available` tinyint(1) NOT NULL COMMENT '鐘舵€',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `code`(`code`) USING BTREE,
+  INDEX `name`(`name`) USING BTREE,
+  INDEX `sc_id`(`sc_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '浠撲綅' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of base_data_stock_cell
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for base_data_store_center
+-- ----------------------------
+DROP TABLE IF EXISTS `base_data_store_center`;
+CREATE TABLE `base_data_store_center`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '缂栧彿',
+  `name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍚嶇О',
+  `contact` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鑱旂郴浜',
+  `telephone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鑱旂郴浜烘墜鏈哄彿鐮',
+  `city_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鍦板尯ID',
+  `address` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鍦板潃',
+  `people_num` int(11) NULL DEFAULT NULL COMMENT '浠撳簱浜烘暟',
+  `available` tinyint(1) NOT NULL COMMENT '鐘舵€',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `code`(`code`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '浠撳簱' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of base_data_store_center
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for base_data_supplier
+-- ----------------------------
+DROP TABLE IF EXISTS `base_data_supplier`;
+CREATE TABLE `base_data_supplier`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '缂栧彿',
+  `name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍚嶇О',
+  `mnemonic_code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '绠€鐮',
+  `contact` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鑱旂郴浜',
+  `telephone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鑱旂郴鐢佃瘽',
+  `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鐢靛瓙閭',
+  `zip_code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '閭紪',
+  `fax` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '浼犵湡',
+  `city_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鍦板尯ID',
+  `address` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鍦板潃',
+  `delivery_cycle` int(11) NULL DEFAULT NULL COMMENT '鍙戣揣鍛ㄦ湡锛堝ぉ锛',
+  `manage_type` tinyint(3) NOT NULL DEFAULT 1 COMMENT '缁忚惀鏂瑰紡',
+  `settle_type` tinyint(3) NOT NULL DEFAULT 1 COMMENT '缁撶畻鏂瑰紡',
+  `credit_code` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '缁熶竴绀句細淇＄敤浠ｇ爜',
+  `tax_identify_no` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '绾崇◣浜鸿瘑鍒彿',
+  `bank_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '寮€鎴烽摱琛',
+  `account_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鎴峰悕',
+  `account_no` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '閾惰璐﹀彿',
+  `available` tinyint(1) NOT NULL COMMENT '鐘舵€',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `code`(`code`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '渚涘簲鍟' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of base_data_supplier
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for customer_settle_check_sheet
+-- ----------------------------
+DROP TABLE IF EXISTS `customer_settle_check_sheet`;
+CREATE TABLE `customer_settle_check_sheet`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `code` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍗曞彿',
+  `customer_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鏀惰揣鏂笽D',
+  `total_amount` decimal(32, 2) NOT NULL COMMENT '鎬婚噾棰',
+  `total_pay_amount` decimal(32, 2) NOT NULL COMMENT '搴斾粯閲戦',
+  `total_payed_amount` decimal(32, 2) NOT NULL COMMENT '宸蹭粯閲戦',
+  `total_discount_amount` decimal(32, 2) NOT NULL COMMENT '宸蹭紭鎯犻噾棰',
+  `start_date` date NOT NULL COMMENT '璧峰鏃ユ湡',
+  `end_date` date NOT NULL COMMENT '鎴鏃ユ湡',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  `approve_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '瀹℃牳浜',
+  `approve_time` datetime NULL DEFAULT NULL COMMENT '瀹℃牳鏃堕棿',
+  `status` tinyint(3) NOT NULL COMMENT '鐘舵€',
+  `refuse_reason` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鎷掔粷鍘熷洜',
+  `settle_status` tinyint(3) NOT NULL DEFAULT 0 COMMENT '缁撶畻鐘舵€',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `code`(`code`) USING BTREE,
+  INDEX `customer_id`(`customer_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鏀惰揣鏂瑰璐﹀崟' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of customer_settle_check_sheet
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for customer_settle_check_sheet_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `customer_settle_check_sheet_detail`;
+CREATE TABLE `customer_settle_check_sheet_detail`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `sheet_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '瀵硅处鍗旾D',
+  `biz_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍗曟嵁ID',
+  `biz_type` tinyint(3) NOT NULL COMMENT '涓氬姟绫诲瀷',
+  `calc_type` tinyint(3) NOT NULL COMMENT '璁＄畻绫诲瀷',
+  `pay_amount` decimal(32, 2) NOT NULL COMMENT '搴斾粯閲戦',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶囨敞',
+  `order_no` int(11) NOT NULL COMMENT '鎺掑簭缂栧彿',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `sheet_id`(`sheet_id`, `biz_id`) USING BTREE,
+  INDEX `biz_id`(`biz_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鏀惰揣鏂瑰璐﹀崟鏄庣粏' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of customer_settle_check_sheet_detail
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for customer_settle_fee_sheet
+-- ----------------------------
+DROP TABLE IF EXISTS `customer_settle_fee_sheet`;
+CREATE TABLE `customer_settle_fee_sheet`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `code` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍗曞彿',
+  `customer_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鏀惰揣鏂笽D',
+  `sheet_type` tinyint(3) NOT NULL COMMENT '鍗曟嵁绫诲瀷',
+  `total_amount` decimal(32, 2) NOT NULL COMMENT '鎬婚噾棰',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  `approve_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '瀹℃牳浜',
+  `approve_time` datetime NULL DEFAULT NULL COMMENT '瀹℃牳鏃堕棿',
+  `status` tinyint(3) NOT NULL COMMENT '鐘舵€',
+  `refuse_reason` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鎷掔粷鍘熷洜',
+  `settle_status` tinyint(3) NOT NULL DEFAULT 0 COMMENT '缁撶畻鐘舵€',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `code`(`code`) USING BTREE,
+  INDEX `customer_id`(`customer_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鏀惰揣鏂硅垂鐢ㄥ崟' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of customer_settle_fee_sheet
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for customer_settle_fee_sheet_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `customer_settle_fee_sheet_detail`;
+CREATE TABLE `customer_settle_fee_sheet_detail`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `sheet_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '璐圭敤鍗旾D',
+  `item_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '椤圭洰ID',
+  `amount` decimal(32, 2) NOT NULL COMMENT '閲戦',
+  `order_no` int(11) NOT NULL COMMENT '鎺掑簭缂栧彿',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `sheet_id`(`sheet_id`, `item_id`) USING BTREE,
+  INDEX `item_id`(`item_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鏀惰揣鏂硅垂鐢ㄥ崟鏄庣粏' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of customer_settle_fee_sheet_detail
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for customer_settle_pre_sheet
+-- ----------------------------
+DROP TABLE IF EXISTS `customer_settle_pre_sheet`;
+CREATE TABLE `customer_settle_pre_sheet`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `code` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍗曞彿',
+  `customer_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鏀惰揣鏂笽D',
+  `total_amount` decimal(32, 2) NOT NULL COMMENT '鎬婚噾棰',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  `approve_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '瀹℃牳浜',
+  `approve_time` datetime NULL DEFAULT NULL COMMENT '瀹℃牳鏃堕棿',
+  `status` tinyint(3) NOT NULL COMMENT '鐘舵€',
+  `refuse_reason` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鎷掔粷鍘熷洜',
+  `settle_status` tinyint(3) NOT NULL DEFAULT 0 COMMENT '缁撶畻鐘舵€',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `code`(`code`) USING BTREE,
+  INDEX `customer_id`(`customer_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鏀惰揣鏂归浠樻鍗' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of customer_settle_pre_sheet
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for customer_settle_pre_sheet_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `customer_settle_pre_sheet_detail`;
+CREATE TABLE `customer_settle_pre_sheet_detail`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `sheet_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '棰勪粯娆惧崟ID',
+  `item_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '椤圭洰ID',
+  `amount` decimal(32, 2) NOT NULL COMMENT '閲戦',
+  `order_no` int(11) NOT NULL COMMENT '鎺掑簭缂栧彿',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `sheet_id`(`sheet_id`, `item_id`) USING BTREE,
+  INDEX `item_id`(`item_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鏀惰揣鏂归浠樻鍗曟槑缁' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of customer_settle_pre_sheet_detail
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for customer_settle_sheet
+-- ----------------------------
+DROP TABLE IF EXISTS `customer_settle_sheet`;
+CREATE TABLE `customer_settle_sheet`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `code` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍗曞彿',
+  `customer_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鏀惰揣鏂笽D',
+  `total_amount` decimal(32, 2) NOT NULL COMMENT '鎬婚噾棰',
+  `total_discount_amount` decimal(32, 2) NOT NULL COMMENT '宸蹭紭鎯犻噾棰',
+  `start_date` date NOT NULL COMMENT '璧峰鏃ユ湡',
+  `end_date` date NOT NULL COMMENT '鎴鏃ユ湡',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  `approve_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '瀹℃牳浜',
+  `approve_time` datetime NULL DEFAULT NULL COMMENT '瀹℃牳鏃堕棿',
+  `status` tinyint(3) NOT NULL COMMENT '鐘舵€',
+  `refuse_reason` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鎷掔粷鍘熷洜',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `code`(`code`) USING BTREE,
+  INDEX `customer_id`(`customer_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鏀惰揣鏂圭粨绠楀崟' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of customer_settle_sheet
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for customer_settle_sheet_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `customer_settle_sheet_detail`;
+CREATE TABLE `customer_settle_sheet_detail`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `sheet_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '缁撶畻鍗旾D',
+  `biz_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍗曟嵁ID',
+  `pay_amount` decimal(32, 2) NOT NULL COMMENT '瀹炰粯閲戦',
+  `discount_amount` decimal(32, 2) NOT NULL COMMENT '浼樻儬閲戦',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶囨敞',
+  `order_no` int(11) NOT NULL COMMENT '鎺掑簭缂栧彿',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `sheet_id`(`sheet_id`, `biz_id`) USING BTREE,
+  INDEX `biz_id`(`biz_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鏀惰揣鏂圭粨绠楀崟鏄庣粏' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of customer_settle_sheet_detail
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for dic_city
+-- ----------------------------
+DROP TABLE IF EXISTS `dic_city`;
+CREATE TABLE `dic_city`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '缂栧彿',
+  `name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍚嶇О',
+  `parent_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鐖剁骇ID',
+  `level` int(11) NOT NULL COMMENT '灞傜骇',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `code`(`code`) USING BTREE,
+  INDEX `parent_id`(`parent_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鍦板尯瀛楀吀琛' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of dic_city
+-- ----------------------------
+INSERT INTO `dic_city` VALUES ('11', '11', '鍖椾含甯', NULL, 1);
+INSERT INTO `dic_city` VALUES ('1101', '1101', '甯傝緰鍖', '11', 2);
+INSERT INTO `dic_city` VALUES ('110101', '110101', '涓滃煄鍖', '1101', 3);
+INSERT INTO `dic_city` VALUES ('110102', '110102', '瑗垮煄鍖', '1101', 3);
+INSERT INTO `dic_city` VALUES ('110105', '110105', '鏈濋槼鍖', '1101', 3);
+INSERT INTO `dic_city` VALUES ('110106', '110106', '涓板彴鍖', '1101', 3);
+INSERT INTO `dic_city` VALUES ('110107', '110107', '鐭虫櫙灞卞尯', '1101', 3);
+INSERT INTO `dic_city` VALUES ('110108', '110108', '娴锋穩鍖', '1101', 3);
+INSERT INTO `dic_city` VALUES ('110109', '110109', '闂ㄥご娌熷尯', '1101', 3);
+INSERT INTO `dic_city` VALUES ('110111', '110111', '鎴垮北鍖', '1101', 3);
+INSERT INTO `dic_city` VALUES ('110112', '110112', '閫氬窞鍖', '1101', 3);
+INSERT INTO `dic_city` VALUES ('110113', '110113', '椤轰箟鍖', '1101', 3);
+INSERT INTO `dic_city` VALUES ('110114', '110114', '鏄屽钩鍖', '1101', 3);
+INSERT INTO `dic_city` VALUES ('110115', '110115', '澶у叴鍖', '1101', 3);
+INSERT INTO `dic_city` VALUES ('110116', '110116', '鎬€鏌斿尯', '1101', 3);
+INSERT INTO `dic_city` VALUES ('110117', '110117', '骞宠胺鍖', '1101', 3);
+INSERT INTO `dic_city` VALUES ('110118', '110118', '瀵嗕簯鍖', '1101', 3);
+INSERT INTO `dic_city` VALUES ('110119', '110119', '寤跺簡鍖', '1101', 3);
+INSERT INTO `dic_city` VALUES ('12', '12', '澶╂触甯', NULL, 1);
+INSERT INTO `dic_city` VALUES ('1201', '1201', '甯傝緰鍖', '12', 2);
+INSERT INTO `dic_city` VALUES ('120101', '120101', '鍜屽钩鍖', '1201', 3);
+INSERT INTO `dic_city` VALUES ('120102', '120102', '娌充笢鍖', '1201', 3);
+INSERT INTO `dic_city` VALUES ('120103', '120103', '娌宠タ鍖', '1201', 3);
+INSERT INTO `dic_city` VALUES ('120104', '120104', '鍗楀紑鍖', '1201', 3);
+INSERT INTO `dic_city` VALUES ('120105', '120105', '娌冲寳鍖', '1201', 3);
+INSERT INTO `dic_city` VALUES ('120106', '120106', '绾㈡ˉ鍖', '1201', 3);
+INSERT INTO `dic_city` VALUES ('120110', '120110', '涓滀附鍖', '1201', 3);
+INSERT INTO `dic_city` VALUES ('120111', '120111', '瑗块潚鍖', '1201', 3);
+INSERT INTO `dic_city` VALUES ('120112', '120112', '娲ュ崡鍖', '1201', 3);
+INSERT INTO `dic_city` VALUES ('120113', '120113', '鍖楄景鍖', '1201', 3);
+INSERT INTO `dic_city` VALUES ('120114', '120114', '姝︽竻鍖', '1201', 3);
+INSERT INTO `dic_city` VALUES ('120115', '120115', '瀹濆澔鍖', '1201', 3);
+INSERT INTO `dic_city` VALUES ('120116', '120116', '婊ㄦ捣鏂板尯', '1201', 3);
+INSERT INTO `dic_city` VALUES ('120117', '120117', '瀹佹渤鍖', '1201', 3);
+INSERT INTO `dic_city` VALUES ('120118', '120118', '闈欐捣鍖', '1201', 3);
+INSERT INTO `dic_city` VALUES ('120119', '120119', '钃熷窞鍖', '1201', 3);
+INSERT INTO `dic_city` VALUES ('13', '13', '娌冲寳鐪', NULL, 1);
+INSERT INTO `dic_city` VALUES ('1301', '1301', '鐭冲搴勫競', '13', 2);
+INSERT INTO `dic_city` VALUES ('130102', '130102', '闀垮畨鍖', '1301', 3);
+INSERT INTO `dic_city` VALUES ('130104', '130104', '妗ヨタ鍖', '1301', 3);
+INSERT INTO `dic_city` VALUES ('130105', '130105', '鏂板崕鍖', '1301', 3);
+INSERT INTO `dic_city` VALUES ('130107', '130107', '浜曢檳鐭垮尯', '1301', 3);
+INSERT INTO `dic_city` VALUES ('130108', '130108', '瑁曞崕鍖', '1301', 3);
+INSERT INTO `dic_city` VALUES ('130109', '130109', '钘佸煄鍖', '1301', 3);
+INSERT INTO `dic_city` VALUES ('130110', '130110', '楣挎硥鍖', '1301', 3);
+INSERT INTO `dic_city` VALUES ('130111', '130111', '鏍惧煄鍖', '1301', 3);
+INSERT INTO `dic_city` VALUES ('130121', '130121', '浜曢檳鍘', '1301', 3);
+INSERT INTO `dic_city` VALUES ('130123', '130123', '姝ｅ畾鍘', '1301', 3);
+INSERT INTO `dic_city` VALUES ('130125', '130125', '琛屽攼鍘', '1301', 3);
+INSERT INTO `dic_city` VALUES ('130126', '130126', '鐏靛鍘', '1301', 3);
+INSERT INTO `dic_city` VALUES ('130127', '130127', '楂橀倯鍘', '1301', 3);
+INSERT INTO `dic_city` VALUES ('130128', '130128', '娣辨辰鍘', '1301', 3);
+INSERT INTO `dic_city` VALUES ('130129', '130129', '璧炵殗鍘', '1301', 3);
+INSERT INTO `dic_city` VALUES ('130130', '130130', '鏃犳瀬鍘', '1301', 3);
+INSERT INTO `dic_city` VALUES ('130131', '130131', '骞冲北鍘', '1301', 3);
+INSERT INTO `dic_city` VALUES ('130132', '130132', '鍏冩皬鍘', '1301', 3);
+INSERT INTO `dic_city` VALUES ('130133', '130133', '璧靛幙', '1301', 3);
+INSERT INTO `dic_city` VALUES ('130171', '130171', '鐭冲搴勯珮鏂版妧鏈骇涓氬紑鍙戝尯', '1301', 3);
+INSERT INTO `dic_city` VALUES ('130172', '130172', '鐭冲搴勫惊鐜寲宸ュ洯鍖', '1301', 3);
+INSERT INTO `dic_city` VALUES ('130181', '130181', '杈涢泦甯', '1301', 3);
+INSERT INTO `dic_city` VALUES ('130183', '130183', '鏅嬪窞甯', '1301', 3);
+INSERT INTO `dic_city` VALUES ('130184', '130184', '鏂颁箰甯', '1301', 3);
+INSERT INTO `dic_city` VALUES ('1302', '1302', '鍞愬北甯', '13', 2);
+INSERT INTO `dic_city` VALUES ('130202', '130202', '璺崡鍖', '1302', 3);
+INSERT INTO `dic_city` VALUES ('130203', '130203', '璺寳鍖', '1302', 3);
+INSERT INTO `dic_city` VALUES ('130204', '130204', '鍙ゅ喍鍖', '1302', 3);
+INSERT INTO `dic_city` VALUES ('130205', '130205', '寮€骞冲尯', '1302', 3);
+INSERT INTO `dic_city` VALUES ('130207', '130207', '涓板崡鍖', '1302', 3);
+INSERT INTO `dic_city` VALUES ('130208', '130208', '涓版鼎鍖', '1302', 3);
+INSERT INTO `dic_city` VALUES ('130209', '130209', '鏇瑰鐢稿尯', '1302', 3);
+INSERT INTO `dic_city` VALUES ('130224', '130224', '婊﹀崡鍘', '1302', 3);
+INSERT INTO `dic_city` VALUES ('130225', '130225', '涔愪涵鍘', '1302', 3);
+INSERT INTO `dic_city` VALUES ('130227', '130227', '杩佽タ鍘', '1302', 3);
+INSERT INTO `dic_city` VALUES ('130229', '130229', '鐜夌敯鍘', '1302', 3);
+INSERT INTO `dic_city` VALUES ('130271', '130271', '娌冲寳鍞愬北鑺﹀彴缁忔祹寮€鍙戝尯', '1302', 3);
+INSERT INTO `dic_city` VALUES ('130272', '130272', '鍞愬北甯傛眽娌界鐞嗗尯', '1302', 3);
+INSERT INTO `dic_city` VALUES ('130273', '130273', '鍞愬北楂樻柊鎶€鏈骇涓氬紑鍙戝尯', '1302', 3);
+INSERT INTO `dic_city` VALUES ('130274', '130274', '娌冲寳鍞愬北娴锋腐缁忔祹寮€鍙戝尯', '1302', 3);
+INSERT INTO `dic_city` VALUES ('130281', '130281', '閬靛寲甯', '1302', 3);
+INSERT INTO `dic_city` VALUES ('130283', '130283', '杩佸畨甯', '1302', 3);
+INSERT INTO `dic_city` VALUES ('130284', '130284', '婊﹀窞甯', '1302', 3);
+INSERT INTO `dic_city` VALUES ('1303', '1303', '绉︾殗宀涘競', '13', 2);
+INSERT INTO `dic_city` VALUES ('130302', '130302', '娴锋腐鍖', '1303', 3);
+INSERT INTO `dic_city` VALUES ('130303', '130303', '灞辨捣鍏冲尯', '1303', 3);
+INSERT INTO `dic_city` VALUES ('130304', '130304', '鍖楁埓娌冲尯', '1303', 3);
+INSERT INTO `dic_city` VALUES ('130306', '130306', '鎶氬畞鍖', '1303', 3);
+INSERT INTO `dic_city` VALUES ('130321', '130321', '闈掗緳婊℃棌鑷不鍘', '1303', 3);
+INSERT INTO `dic_city` VALUES ('130322', '130322', '鏄岄粠鍘', '1303', 3);
+INSERT INTO `dic_city` VALUES ('130324', '130324', '鍗㈤緳鍘', '1303', 3);
+INSERT INTO `dic_city` VALUES ('130371', '130371', '绉︾殗宀涘競缁忔祹鎶€鏈紑鍙戝尯', '1303', 3);
+INSERT INTO `dic_city` VALUES ('130372', '130372', '鍖楁埓娌虫柊鍖', '1303', 3);
+INSERT INTO `dic_city` VALUES ('1304', '1304', '閭兏甯', '13', 2);
+INSERT INTO `dic_city` VALUES ('130402', '130402', '閭北鍖', '1304', 3);
+INSERT INTO `dic_city` VALUES ('130403', '130403', '涓涘彴鍖', '1304', 3);
+INSERT INTO `dic_city` VALUES ('130404', '130404', '澶嶅叴鍖', '1304', 3);
+INSERT INTO `dic_city` VALUES ('130406', '130406', '宄板嘲鐭垮尯', '1304', 3);
+INSERT INTO `dic_city` VALUES ('130407', '130407', '鑲ヤ埂鍖', '1304', 3);
+INSERT INTO `dic_city` VALUES ('130408', '130408', '姘稿勾鍖', '1304', 3);
+INSERT INTO `dic_city` VALUES ('130423', '130423', '涓存汲鍘', '1304', 3);
+INSERT INTO `dic_city` VALUES ('130424', '130424', '鎴愬畨鍘', '1304', 3);
+INSERT INTO `dic_city` VALUES ('130425', '130425', '澶у悕鍘', '1304', 3);
+INSERT INTO `dic_city` VALUES ('130426', '130426', '娑夊幙', '1304', 3);
+INSERT INTO `dic_city` VALUES ('130427', '130427', '纾佸幙', '1304', 3);
+INSERT INTO `dic_city` VALUES ('130430', '130430', '閭卞幙', '1304', 3);
+INSERT INTO `dic_city` VALUES ('130431', '130431', '楦℃辰鍘', '1304', 3);
+INSERT INTO `dic_city` VALUES ('130432', '130432', '骞垮钩鍘', '1304', 3);
+INSERT INTO `dic_city` VALUES ('130433', '130433', '棣嗛櫠鍘', '1304', 3);
+INSERT INTO `dic_city` VALUES ('130434', '130434', '榄忓幙', '1304', 3);
+INSERT INTO `dic_city` VALUES ('130435', '130435', '鏇插懆鍘', '1304', 3);
+INSERT INTO `dic_city` VALUES ('130471', '130471', '閭兏缁忔祹鎶€鏈紑鍙戝尯', '1304', 3);
+INSERT INTO `dic_city` VALUES ('130473', '130473', '閭兏鍐€鍗楁柊鍖', '1304', 3);
+INSERT INTO `dic_city` VALUES ('130481', '130481', '姝﹀畨甯', '1304', 3);
+INSERT INTO `dic_city` VALUES ('1305', '1305', '閭㈠彴甯', '13', 2);
+INSERT INTO `dic_city` VALUES ('130502', '130502', '瑗勯兘鍖', '1305', 3);
+INSERT INTO `dic_city` VALUES ('130503', '130503', '淇￠兘鍖', '1305', 3);
+INSERT INTO `dic_city` VALUES ('130505', '130505', '浠绘辰鍖', '1305', 3);
+INSERT INTO `dic_city` VALUES ('130506', '130506', '鍗楀拰鍖', '1305', 3);
+INSERT INTO `dic_city` VALUES ('130522', '130522', '涓村煄鍘', '1305', 3);
+INSERT INTO `dic_city` VALUES ('130523', '130523', '鍐呬笜鍘', '1305', 3);
+INSERT INTO `dic_city` VALUES ('130524', '130524', '鏌忎埂鍘', '1305', 3);
+INSERT INTO `dic_city` VALUES ('130525', '130525', '闅嗗哀鍘', '1305', 3);
+INSERT INTO `dic_city` VALUES ('130528', '130528', '瀹佹檵鍘', '1305', 3);
+INSERT INTO `dic_city` VALUES ('130529', '130529', '宸ㄩ箍鍘', '1305', 3);
+INSERT INTO `dic_city` VALUES ('130530', '130530', '鏂版渤鍘', '1305', 3);
+INSERT INTO `dic_city` VALUES ('130531', '130531', '骞垮畻鍘', '1305', 3);
+INSERT INTO `dic_city` VALUES ('130532', '130532', '骞充埂鍘', '1305', 3);
+INSERT INTO `dic_city` VALUES ('130533', '130533', '濞佸幙', '1305', 3);
+INSERT INTO `dic_city` VALUES ('130534', '130534', '娓呮渤鍘', '1305', 3);
+INSERT INTO `dic_city` VALUES ('130535', '130535', '涓磋タ鍘', '1305', 3);
+INSERT INTO `dic_city` VALUES ('130571', '130571', '娌冲寳閭㈠彴缁忔祹寮€鍙戝尯', '1305', 3);
+INSERT INTO `dic_city` VALUES ('130581', '130581', '鍗楀甯', '1305', 3);
+INSERT INTO `dic_city` VALUES ('130582', '130582', '娌欐渤甯', '1305', 3);
+INSERT INTO `dic_city` VALUES ('1306', '1306', '淇濆畾甯', '13', 2);
+INSERT INTO `dic_city` VALUES ('130602', '130602', '绔炵鍖', '1306', 3);
+INSERT INTO `dic_city` VALUES ('130606', '130606', '鑾叉睜鍖', '1306', 3);
+INSERT INTO `dic_city` VALUES ('130607', '130607', '婊″煄鍖', '1306', 3);
+INSERT INTO `dic_city` VALUES ('130608', '130608', '娓呰嫅鍖', '1306', 3);
+INSERT INTO `dic_city` VALUES ('130609', '130609', '寰愭按鍖', '1306', 3);
+INSERT INTO `dic_city` VALUES ('130623', '130623', '娑炴按鍘', '1306', 3);
+INSERT INTO `dic_city` VALUES ('130624', '130624', '闃滃钩鍘', '1306', 3);
+INSERT INTO `dic_city` VALUES ('130626', '130626', '瀹氬叴鍘', '1306', 3);
+INSERT INTO `dic_city` VALUES ('130627', '130627', '鍞愬幙', '1306', 3);
+INSERT INTO `dic_city` VALUES ('130628', '130628', '楂橀槼鍘', '1306', 3);
+INSERT INTO `dic_city` VALUES ('130629', '130629', '瀹瑰煄鍘', '1306', 3);
+INSERT INTO `dic_city` VALUES ('130630', '130630', '娑炴簮鍘', '1306', 3);
+INSERT INTO `dic_city` VALUES ('130631', '130631', '鏈涢兘鍘', '1306', 3);
+INSERT INTO `dic_city` VALUES ('130632', '130632', '瀹夋柊鍘', '1306', 3);
+INSERT INTO `dic_city` VALUES ('130633', '130633', '鏄撳幙', '1306', 3);
+INSERT INTO `dic_city` VALUES ('130634', '130634', '鏇查槼鍘', '1306', 3);
+INSERT INTO `dic_city` VALUES ('130635', '130635', '锠″幙', '1306', 3);
+INSERT INTO `dic_city` VALUES ('130636', '130636', '椤哄钩鍘', '1306', 3);
+INSERT INTO `dic_city` VALUES ('130637', '130637', '鍗氶噹鍘', '1306', 3);
+INSERT INTO `dic_city` VALUES ('130638', '130638', '闆勫幙', '1306', 3);
+INSERT INTO `dic_city` VALUES ('130671', '130671', '淇濆畾楂樻柊鎶€鏈骇涓氬紑鍙戝尯', '1306', 3);
+INSERT INTO `dic_city` VALUES ('130672', '130672', '淇濆畾鐧芥矡鏂板煄', '1306', 3);
+INSERT INTO `dic_city` VALUES ('130681', '130681', '娑垮窞甯', '1306', 3);
+INSERT INTO `dic_city` VALUES ('130682', '130682', '瀹氬窞甯', '1306', 3);
+INSERT INTO `dic_city` VALUES ('130683', '130683', '瀹夊浗甯', '1306', 3);
+INSERT INTO `dic_city` VALUES ('130684', '130684', '楂樼搴楀競', '1306', 3);
+INSERT INTO `dic_city` VALUES ('1307', '1307', '寮犲鍙ｅ競', '13', 2);
+INSERT INTO `dic_city` VALUES ('130702', '130702', '妗ヤ笢鍖', '1307', 3);
+INSERT INTO `dic_city` VALUES ('130703', '130703', '妗ヨタ鍖', '1307', 3);
+INSERT INTO `dic_city` VALUES ('130705', '130705', '瀹ｅ寲鍖', '1307', 3);
+INSERT INTO `dic_city` VALUES ('130706', '130706', '涓嬭姳鍥尯', '1307', 3);
+INSERT INTO `dic_city` VALUES ('130708', '130708', '涓囧叏鍖', '1307', 3);
+INSERT INTO `dic_city` VALUES ('130709', '130709', '宕囩ぜ鍖', '1307', 3);
+INSERT INTO `dic_city` VALUES ('130722', '130722', '寮犲寳鍘', '1307', 3);
+INSERT INTO `dic_city` VALUES ('130723', '130723', '搴蜂繚鍘', '1307', 3);
+INSERT INTO `dic_city` VALUES ('130724', '130724', '娌芥簮鍘', '1307', 3);
+INSERT INTO `dic_city` VALUES ('130725', '130725', '灏氫箟鍘', '1307', 3);
+INSERT INTO `dic_city` VALUES ('130726', '130726', '钄氬幙', '1307', 3);
+INSERT INTO `dic_city` VALUES ('130727', '130727', '闃冲師鍘', '1307', 3);
+INSERT INTO `dic_city` VALUES ('130728', '130728', '鎬€瀹夊幙', '1307', 3);
+INSERT INTO `dic_city` VALUES ('130730', '130730', '鎬€鏉ュ幙', '1307', 3);
+INSERT INTO `dic_city` VALUES ('130731', '130731', '娑块箍鍘', '1307', 3);
+INSERT INTO `dic_city` VALUES ('130732', '130732', '璧ゅ煄鍘', '1307', 3);
+INSERT INTO `dic_city` VALUES ('130771', '130771', '寮犲鍙ｇ粡娴庡紑鍙戝尯', '1307', 3);
+INSERT INTO `dic_city` VALUES ('130772', '130772', '寮犲鍙ｅ競瀵熷寳绠＄悊鍖', '1307', 3);
+INSERT INTO `dic_city` VALUES ('130773', '130773', '寮犲鍙ｅ競濉炲寳绠＄悊鍖', '1307', 3);
+INSERT INTO `dic_city` VALUES ('1308', '1308', '鎵垮痉甯', '13', 2);
+INSERT INTO `dic_city` VALUES ('130802', '130802', '鍙屾ˉ鍖', '1308', 3);
+INSERT INTO `dic_city` VALUES ('130803', '130803', '鍙屾沪鍖', '1308', 3);
+INSERT INTO `dic_city` VALUES ('130804', '130804', '楣版墜钀ュ瓙鐭垮尯', '1308', 3);
+INSERT INTO `dic_city` VALUES ('130821', '130821', '鎵垮痉鍘', '1308', 3);
+INSERT INTO `dic_city` VALUES ('130822', '130822', '鍏撮殕鍘', '1308', 3);
+INSERT INTO `dic_city` VALUES ('130824', '130824', '婊﹀钩鍘', '1308', 3);
+INSERT INTO `dic_city` VALUES ('130825', '130825', '闅嗗寲鍘', '1308', 3);
+INSERT INTO `dic_city` VALUES ('130826', '130826', '涓板畞婊℃棌鑷不鍘', '1308', 3);
+INSERT INTO `dic_city` VALUES ('130827', '130827', '瀹藉煄婊℃棌鑷不鍘', '1308', 3);
+INSERT INTO `dic_city` VALUES ('130828', '130828', '鍥村満婊℃棌钂欏彜鏃忚嚜娌诲幙', '1308', 3);
+INSERT INTO `dic_city` VALUES ('130871', '130871', '鎵垮痉楂樻柊鎶€鏈骇涓氬紑鍙戝尯', '1308', 3);
+INSERT INTO `dic_city` VALUES ('130881', '130881', '骞虫硥甯', '1308', 3);
+INSERT INTO `dic_city` VALUES ('1309', '1309', '娌у窞甯', '13', 2);
+INSERT INTO `dic_city` VALUES ('130902', '130902', '鏂板崕鍖', '1309', 3);
+INSERT INTO `dic_city` VALUES ('130903', '130903', '杩愭渤鍖', '1309', 3);
+INSERT INTO `dic_city` VALUES ('130921', '130921', '娌у幙', '1309', 3);
+INSERT INTO `dic_city` VALUES ('130922', '130922', '闈掑幙', '1309', 3);
+INSERT INTO `dic_city` VALUES ('130923', '130923', '涓滃厜鍘', '1309', 3);
+INSERT INTO `dic_city` VALUES ('130924', '130924', '娴峰叴鍘', '1309', 3);
+INSERT INTO `dic_city` VALUES ('130925', '130925', '鐩愬北鍘', '1309', 3);
+INSERT INTO `dic_city` VALUES ('130926', '130926', '鑲冨畞鍘', '1309', 3);
+INSERT INTO `dic_city` VALUES ('130927', '130927', '鍗楃毊鍘', '1309', 3);
+INSERT INTO `dic_city` VALUES ('130928', '130928', '鍚存ˉ鍘', '1309', 3);
+INSERT INTO `dic_city` VALUES ('130929', '130929', '鐚幙', '1309', 3);
+INSERT INTO `dic_city` VALUES ('130930', '130930', '瀛熸潙鍥炴棌鑷不鍘', '1309', 3);
+INSERT INTO `dic_city` VALUES ('130971', '130971', '娌冲寳娌у窞缁忔祹寮€鍙戝尯', '1309', 3);
+INSERT INTO `dic_city` VALUES ('130972', '130972', '娌у窞楂樻柊鎶€鏈骇涓氬紑鍙戝尯', '1309', 3);
+INSERT INTO `dic_city` VALUES ('130973', '130973', '娌у窞娓ゆ捣鏂板尯', '1309', 3);
+INSERT INTO `dic_city` VALUES ('130981', '130981', '娉婂ご甯', '1309', 3);
+INSERT INTO `dic_city` VALUES ('130982', '130982', '浠讳笜甯', '1309', 3);
+INSERT INTO `dic_city` VALUES ('130983', '130983', '榛勯獏甯', '1309', 3);
+INSERT INTO `dic_city` VALUES ('130984', '130984', '娌抽棿甯', '1309', 3);
+INSERT INTO `dic_city` VALUES ('1310', '1310', '寤婂潑甯', '13', 2);
+INSERT INTO `dic_city` VALUES ('131002', '131002', '瀹夋鍖', '1310', 3);
+INSERT INTO `dic_city` VALUES ('131003', '131003', '骞块槼鍖', '1310', 3);
+INSERT INTO `dic_city` VALUES ('131022', '131022', '鍥哄畨鍘', '1310', 3);
+INSERT INTO `dic_city` VALUES ('131023', '131023', '姘告竻鍘', '1310', 3);
+INSERT INTO `dic_city` VALUES ('131024', '131024', '棣欐渤鍘', '1310', 3);
+INSERT INTO `dic_city` VALUES ('131025', '131025', '澶у煄鍘', '1310', 3);
+INSERT INTO `dic_city` VALUES ('131026', '131026', '鏂囧畨鍘', '1310', 3);
+INSERT INTO `dic_city` VALUES ('131028', '131028', '澶у巶鍥炴棌鑷不鍘', '1310', 3);
+INSERT INTO `dic_city` VALUES ('131071', '131071', '寤婂潑缁忔祹鎶€鏈紑鍙戝尯', '1310', 3);
+INSERT INTO `dic_city` VALUES ('131081', '131081', '闇稿窞甯', '1310', 3);
+INSERT INTO `dic_city` VALUES ('131082', '131082', '涓夋渤甯', '1310', 3);
+INSERT INTO `dic_city` VALUES ('1311', '1311', '琛℃按甯', '13', 2);
+INSERT INTO `dic_city` VALUES ('131102', '131102', '妗冨煄鍖', '1311', 3);
+INSERT INTO `dic_city` VALUES ('131103', '131103', '鍐€宸炲尯', '1311', 3);
+INSERT INTO `dic_city` VALUES ('131121', '131121', '鏋ｅ己鍘', '1311', 3);
+INSERT INTO `dic_city` VALUES ('131122', '131122', '姝﹂倯鍘', '1311', 3);
+INSERT INTO `dic_city` VALUES ('131123', '131123', '姝﹀己鍘', '1311', 3);
+INSERT INTO `dic_city` VALUES ('131124', '131124', '楗堕槼鍘', '1311', 3);
+INSERT INTO `dic_city` VALUES ('131125', '131125', '瀹夊钩鍘', '1311', 3);
+INSERT INTO `dic_city` VALUES ('131126', '131126', '鏁呭煄鍘', '1311', 3);
+INSERT INTO `dic_city` VALUES ('131127', '131127', '鏅幙', '1311', 3);
+INSERT INTO `dic_city` VALUES ('131128', '131128', '闃滃煄鍘', '1311', 3);
+INSERT INTO `dic_city` VALUES ('131171', '131171', '娌冲寳琛℃按楂樻柊鎶€鏈骇涓氬紑鍙戝尯', '1311', 3);
+INSERT INTO `dic_city` VALUES ('131172', '131172', '琛℃按婊ㄦ箹鏂板尯', '1311', 3);
+INSERT INTO `dic_city` VALUES ('131182', '131182', '娣卞窞甯', '1311', 3);
+INSERT INTO `dic_city` VALUES ('14', '14', '灞辫タ鐪', NULL, 1);
+INSERT INTO `dic_city` VALUES ('1401', '1401', '澶師甯', '14', 2);
+INSERT INTO `dic_city` VALUES ('140105', '140105', '灏忓簵鍖', '1401', 3);
+INSERT INTO `dic_city` VALUES ('140106', '140106', '杩庢辰鍖', '1401', 3);
+INSERT INTO `dic_city` VALUES ('140107', '140107', '鏉忚姳宀尯', '1401', 3);
+INSERT INTO `dic_city` VALUES ('140108', '140108', '灏栬崏鍧尯', '1401', 3);
+INSERT INTO `dic_city` VALUES ('140109', '140109', '涓囨煆鏋楀尯', '1401', 3);
+INSERT INTO `dic_city` VALUES ('140110', '140110', '鏅嬫簮鍖', '1401', 3);
+INSERT INTO `dic_city` VALUES ('140121', '140121', '娓呭緪鍘', '1401', 3);
+INSERT INTO `dic_city` VALUES ('140122', '140122', '闃虫洸鍘', '1401', 3);
+INSERT INTO `dic_city` VALUES ('140123', '140123', '濞勭儲鍘', '1401', 3);
+INSERT INTO `dic_city` VALUES ('140171', '140171', '灞辫タ杞瀷缁煎悎鏀归潻绀鸿寖鍖', '1401', 3);
+INSERT INTO `dic_city` VALUES ('140181', '140181', '鍙や氦甯', '1401', 3);
+INSERT INTO `dic_city` VALUES ('1402', '1402', '澶у悓甯', '14', 2);
+INSERT INTO `dic_city` VALUES ('140212', '140212', '鏂拌崳鍖', '1402', 3);
+INSERT INTO `dic_city` VALUES ('140213', '140213', '骞冲煄鍖', '1402', 3);
+INSERT INTO `dic_city` VALUES ('140214', '140214', '浜戝唸鍖', '1402', 3);
+INSERT INTO `dic_city` VALUES ('140215', '140215', '浜戝窞鍖', '1402', 3);
+INSERT INTO `dic_city` VALUES ('140221', '140221', '闃抽珮鍘', '1402', 3);
+INSERT INTO `dic_city` VALUES ('140222', '140222', '澶╅晣鍘', '1402', 3);
+INSERT INTO `dic_city` VALUES ('140223', '140223', '骞跨伒鍘', '1402', 3);
+INSERT INTO `dic_city` VALUES ('140224', '140224', '鐏典笜鍘', '1402', 3);
+INSERT INTO `dic_city` VALUES ('140225', '140225', '娴戞簮鍘', '1402', 3);
+INSERT INTO `dic_city` VALUES ('140226', '140226', '宸︿簯鍘', '1402', 3);
+INSERT INTO `dic_city` VALUES ('140271', '140271', '灞辫タ澶у悓缁忔祹寮€鍙戝尯', '1402', 3);
+INSERT INTO `dic_city` VALUES ('1403', '1403', '闃虫硥甯', '14', 2);
+INSERT INTO `dic_city` VALUES ('140302', '140302', '鍩庡尯', '1403', 3);
+INSERT INTO `dic_city` VALUES ('140303', '140303', '鐭垮尯', '1403', 3);
+INSERT INTO `dic_city` VALUES ('140311', '140311', '閮婂尯', '1403', 3);
+INSERT INTO `dic_city` VALUES ('140321', '140321', '骞冲畾鍘', '1403', 3);
+INSERT INTO `dic_city` VALUES ('140322', '140322', '鐩傚幙', '1403', 3);
+INSERT INTO `dic_city` VALUES ('1404', '1404', '闀挎不甯', '14', 2);
+INSERT INTO `dic_city` VALUES ('140403', '140403', '娼炲窞鍖', '1404', 3);
+INSERT INTO `dic_city` VALUES ('140404', '140404', '涓婂厷鍖', '1404', 3);
+INSERT INTO `dic_city` VALUES ('140405', '140405', '灞暀鍖', '1404', 3);
+INSERT INTO `dic_city` VALUES ('140406', '140406', '娼炲煄鍖', '1404', 3);
+INSERT INTO `dic_city` VALUES ('140423', '140423', '瑗勫灒鍘', '1404', 3);
+INSERT INTO `dic_city` VALUES ('140425', '140425', '骞抽『鍘', '1404', 3);
+INSERT INTO `dic_city` VALUES ('140426', '140426', '榛庡煄鍘', '1404', 3);
+INSERT INTO `dic_city` VALUES ('140427', '140427', '澹跺叧鍘', '1404', 3);
+INSERT INTO `dic_city` VALUES ('140428', '140428', '闀垮瓙鍘', '1404', 3);
+INSERT INTO `dic_city` VALUES ('140429', '140429', '姝︿埂鍘', '1404', 3);
+INSERT INTO `dic_city` VALUES ('140430', '140430', '娌佸幙', '1404', 3);
+INSERT INTO `dic_city` VALUES ('140431', '140431', '娌佹簮鍘', '1404', 3);
+INSERT INTO `dic_city` VALUES ('140471', '140471', '灞辫タ闀挎不楂樻柊鎶€鏈骇涓氬洯鍖', '1404', 3);
+INSERT INTO `dic_city` VALUES ('1405', '1405', '鏅嬪煄甯', '14', 2);
+INSERT INTO `dic_city` VALUES ('140502', '140502', '鍩庡尯', '1405', 3);
+INSERT INTO `dic_city` VALUES ('140521', '140521', '娌佹按鍘', '1405', 3);
+INSERT INTO `dic_city` VALUES ('140522', '140522', '闃冲煄鍘', '1405', 3);
+INSERT INTO `dic_city` VALUES ('140524', '140524', '闄靛窛鍘', '1405', 3);
+INSERT INTO `dic_city` VALUES ('140525', '140525', '娉藉窞鍘', '1405', 3);
+INSERT INTO `dic_city` VALUES ('140581', '140581', '楂樺钩甯', '1405', 3);
+INSERT INTO `dic_city` VALUES ('1406', '1406', '鏈斿窞甯', '14', 2);
+INSERT INTO `dic_city` VALUES ('140602', '140602', '鏈斿煄鍖', '1406', 3);
+INSERT INTO `dic_city` VALUES ('140603', '140603', '骞抽瞾鍖', '1406', 3);
+INSERT INTO `dic_city` VALUES ('140621', '140621', '灞遍槾鍘', '1406', 3);
+INSERT INTO `dic_city` VALUES ('140622', '140622', '搴斿幙', '1406', 3);
+INSERT INTO `dic_city` VALUES ('140623', '140623', '鍙崇帀鍘', '1406', 3);
+INSERT INTO `dic_city` VALUES ('140671', '140671', '灞辫タ鏈斿窞缁忔祹寮€鍙戝尯', '1406', 3);
+INSERT INTO `dic_city` VALUES ('140681', '140681', '鎬€浠佸競', '1406', 3);
+INSERT INTO `dic_city` VALUES ('1407', '1407', '鏅嬩腑甯', '14', 2);
+INSERT INTO `dic_city` VALUES ('140702', '140702', '姒嗘鍖', '1407', 3);
+INSERT INTO `dic_city` VALUES ('140703', '140703', '澶胺鍖', '1407', 3);
+INSERT INTO `dic_city` VALUES ('140721', '140721', '姒嗙ぞ鍘', '1407', 3);
+INSERT INTO `dic_city` VALUES ('140722', '140722', '宸︽潈鍘', '1407', 3);
+INSERT INTO `dic_city` VALUES ('140723', '140723', '鍜岄『鍘', '1407', 3);
+INSERT INTO `dic_city` VALUES ('140724', '140724', '鏄旈槼鍘', '1407', 3);
+INSERT INTO `dic_city` VALUES ('140725', '140725', '瀵块槼鍘', '1407', 3);
+INSERT INTO `dic_city` VALUES ('140727', '140727', '绁佸幙', '1407', 3);
+INSERT INTO `dic_city` VALUES ('140728', '140728', '骞抽仴鍘', '1407', 3);
+INSERT INTO `dic_city` VALUES ('140729', '140729', '鐏电煶鍘', '1407', 3);
+INSERT INTO `dic_city` VALUES ('140781', '140781', '浠嬩紤甯', '1407', 3);
+INSERT INTO `dic_city` VALUES ('1408', '1408', '杩愬煄甯', '14', 2);
+INSERT INTO `dic_city` VALUES ('140802', '140802', '鐩愭箹鍖', '1408', 3);
+INSERT INTO `dic_city` VALUES ('140821', '140821', '涓寸寳鍘', '1408', 3);
+INSERT INTO `dic_city` VALUES ('140822', '140822', '涓囪崳鍘', '1408', 3);
+INSERT INTO `dic_city` VALUES ('140823', '140823', '闂诲枩鍘', '1408', 3);
+INSERT INTO `dic_city` VALUES ('140824', '140824', '绋峰北鍘', '1408', 3);
+INSERT INTO `dic_city` VALUES ('140825', '140825', '鏂扮粵鍘', '1408', 3);
+INSERT INTO `dic_city` VALUES ('140826', '140826', '缁涘幙', '1408', 3);
+INSERT INTO `dic_city` VALUES ('140827', '140827', '鍨ｆ洸鍘', '1408', 3);
+INSERT INTO `dic_city` VALUES ('140828', '140828', '澶忓幙', '1408', 3);
+INSERT INTO `dic_city` VALUES ('140829', '140829', '骞抽檰鍘', '1408', 3);
+INSERT INTO `dic_city` VALUES ('140830', '140830', '鑺煄鍘', '1408', 3);
+INSERT INTO `dic_city` VALUES ('140881', '140881', '姘告祹甯', '1408', 3);
+INSERT INTO `dic_city` VALUES ('140882', '140882', '娌虫触甯', '1408', 3);
+INSERT INTO `dic_city` VALUES ('1409', '1409', '蹇诲窞甯', '14', 2);
+INSERT INTO `dic_city` VALUES ('140902', '140902', '蹇诲簻鍖', '1409', 3);
+INSERT INTO `dic_city` VALUES ('140921', '140921', '瀹氳鍘', '1409', 3);
+INSERT INTO `dic_city` VALUES ('140922', '140922', '浜斿彴鍘', '1409', 3);
+INSERT INTO `dic_city` VALUES ('140923', '140923', '浠ｅ幙', '1409', 3);
+INSERT INTO `dic_city` VALUES ('140924', '140924', '绻佸硻鍘', '1409', 3);
+INSERT INTO `dic_city` VALUES ('140925', '140925', '瀹佹鍘', '1409', 3);
+INSERT INTO `dic_city` VALUES ('140926', '140926', '闈欎箰鍘', '1409', 3);
+INSERT INTO `dic_city` VALUES ('140927', '140927', '绁炴睜鍘', '1409', 3);
+INSERT INTO `dic_city` VALUES ('140928', '140928', '浜斿鍘', '1409', 3);
+INSERT INTO `dic_city` VALUES ('140929', '140929', '宀㈠矚鍘', '1409', 3);
+INSERT INTO `dic_city` VALUES ('140930', '140930', '娌虫洸鍘', '1409', 3);
+INSERT INTO `dic_city` VALUES ('140931', '140931', '淇濆痉鍘', '1409', 3);
+INSERT INTO `dic_city` VALUES ('140932', '140932', '鍋忓叧鍘', '1409', 3);
+INSERT INTO `dic_city` VALUES ('140971', '140971', '浜斿彴灞遍鏅悕鑳滃尯', '1409', 3);
+INSERT INTO `dic_city` VALUES ('140981', '140981', '鍘熷钩甯', '1409', 3);
+INSERT INTO `dic_city` VALUES ('1410', '1410', '涓存本甯', '14', 2);
+INSERT INTO `dic_city` VALUES ('141002', '141002', '灏ч兘鍖', '1410', 3);
+INSERT INTO `dic_city` VALUES ('141021', '141021', '鏇叉矁鍘', '1410', 3);
+INSERT INTO `dic_city` VALUES ('141022', '141022', '缈煎煄鍘', '1410', 3);
+INSERT INTO `dic_city` VALUES ('141023', '141023', '瑗勬本鍘', '1410', 3);
+INSERT INTO `dic_city` VALUES ('141024', '141024', '娲礊鍘', '1410', 3);
+INSERT INTO `dic_city` VALUES ('141025', '141025', '鍙ゅ幙', '1410', 3);
+INSERT INTO `dic_city` VALUES ('141026', '141026', '瀹夋辰鍘', '1410', 3);
+INSERT INTO `dic_city` VALUES ('141027', '141027', '娴北鍘', '1410', 3);
+INSERT INTO `dic_city` VALUES ('141028', '141028', '鍚夊幙', '1410', 3);
+INSERT INTO `dic_city` VALUES ('141029', '141029', '涔″畞鍘', '1410', 3);
+INSERT INTO `dic_city` VALUES ('141030', '141030', '澶у畞鍘', '1410', 3);
+INSERT INTO `dic_city` VALUES ('141031', '141031', '闅板幙', '1410', 3);
+INSERT INTO `dic_city` VALUES ('141032', '141032', '姘稿拰鍘', '1410', 3);
+INSERT INTO `dic_city` VALUES ('141033', '141033', '钂插幙', '1410', 3);
+INSERT INTO `dic_city` VALUES ('141034', '141034', '姹捐タ鍘', '1410', 3);
+INSERT INTO `dic_city` VALUES ('141081', '141081', '渚┈甯', '1410', 3);
+INSERT INTO `dic_city` VALUES ('141082', '141082', '闇嶅窞甯', '1410', 3);
+INSERT INTO `dic_city` VALUES ('1411', '1411', '鍚曟甯', '14', 2);
+INSERT INTO `dic_city` VALUES ('141102', '141102', '绂荤煶鍖', '1411', 3);
+INSERT INTO `dic_city` VALUES ('141121', '141121', '鏂囨按鍘', '1411', 3);
+INSERT INTO `dic_city` VALUES ('141122', '141122', '浜ゅ煄鍘', '1411', 3);
+INSERT INTO `dic_city` VALUES ('141123', '141123', '鍏村幙', '1411', 3);
+INSERT INTO `dic_city` VALUES ('141124', '141124', '涓村幙', '1411', 3);
+INSERT INTO `dic_city` VALUES ('141125', '141125', '鏌虫灄鍘', '1411', 3);
+INSERT INTO `dic_city` VALUES ('141126', '141126', '鐭虫ゼ鍘', '1411', 3);
+INSERT INTO `dic_city` VALUES ('141127', '141127', '宀氬幙', '1411', 3);
+INSERT INTO `dic_city` VALUES ('141128', '141128', '鏂瑰北鍘', '1411', 3);
+INSERT INTO `dic_city` VALUES ('141129', '141129', '涓槼鍘', '1411', 3);
+INSERT INTO `dic_city` VALUES ('141130', '141130', '浜ゅ彛鍘', '1411', 3);
+INSERT INTO `dic_city` VALUES ('141181', '141181', '瀛濅箟甯', '1411', 3);
+INSERT INTO `dic_city` VALUES ('141182', '141182', '姹鹃槼甯', '1411', 3);
+INSERT INTO `dic_city` VALUES ('15', '15', '鍐呰挋鍙よ嚜娌诲尯', NULL, 1);
+INSERT INTO `dic_city` VALUES ('1501', '1501', '鍛煎拰娴╃壒甯', '15', 2);
+INSERT INTO `dic_city` VALUES ('150102', '150102', '鏂板煄鍖', '1501', 3);
+INSERT INTO `dic_city` VALUES ('150103', '150103', '鍥炴皯鍖', '1501', 3);
+INSERT INTO `dic_city` VALUES ('150104', '150104', '鐜夋硥鍖', '1501', 3);
+INSERT INTO `dic_city` VALUES ('150105', '150105', '璧涚綍鍖', '1501', 3);
+INSERT INTO `dic_city` VALUES ('150121', '150121', '鍦熼粯鐗瑰乏鏃', '1501', 3);
+INSERT INTO `dic_city` VALUES ('150122', '150122', '鎵樺厠鎵樺幙', '1501', 3);
+INSERT INTO `dic_city` VALUES ('150123', '150123', '鍜屾灄鏍煎皵鍘', '1501', 3);
+INSERT INTO `dic_city` VALUES ('150124', '150124', '娓呮按娌冲幙', '1501', 3);
+INSERT INTO `dic_city` VALUES ('150125', '150125', '姝﹀窛鍘', '1501', 3);
+INSERT INTO `dic_city` VALUES ('150172', '150172', '鍛煎拰娴╃壒缁忔祹鎶€鏈紑鍙戝尯', '1501', 3);
+INSERT INTO `dic_city` VALUES ('1502', '1502', '鍖呭ご甯', '15', 2);
+INSERT INTO `dic_city` VALUES ('150202', '150202', '涓滄渤鍖', '1502', 3);
+INSERT INTO `dic_city` VALUES ('150203', '150203', '鏄嗛兘浠戝尯', '1502', 3);
+INSERT INTO `dic_city` VALUES ('150204', '150204', '闈掑北鍖', '1502', 3);
+INSERT INTO `dic_city` VALUES ('150205', '150205', '鐭虫嫄鍖', '1502', 3);
+INSERT INTO `dic_city` VALUES ('150206', '150206', '鐧戒簯閯傚崥鐭垮尯', '1502', 3);
+INSERT INTO `dic_city` VALUES ('150207', '150207', '涔濆師鍖', '1502', 3);
+INSERT INTO `dic_city` VALUES ('150221', '150221', '鍦熼粯鐗瑰彸鏃', '1502', 3);
+INSERT INTO `dic_city` VALUES ('150222', '150222', '鍥洪槼鍘', '1502', 3);
+INSERT INTO `dic_city` VALUES ('150223', '150223', '杈惧皵缃曡寕鏄庡畨鑱斿悎鏃', '1502', 3);
+INSERT INTO `dic_city` VALUES ('150271', '150271', '鍖呭ご绋€鍦熼珮鏂版妧鏈骇涓氬紑鍙戝尯', '1502', 3);
+INSERT INTO `dic_city` VALUES ('1503', '1503', '涔屾捣甯', '15', 2);
+INSERT INTO `dic_city` VALUES ('150302', '150302', '娴峰媰婀惧尯', '1503', 3);
+INSERT INTO `dic_city` VALUES ('150303', '150303', '娴峰崡鍖', '1503', 3);
+INSERT INTO `dic_city` VALUES ('150304', '150304', '涔岃揪鍖', '1503', 3);
+INSERT INTO `dic_city` VALUES ('1504', '1504', '璧ゅ嘲甯', '15', 2);
+INSERT INTO `dic_city` VALUES ('150402', '150402', '绾㈠北鍖', '1504', 3);
+INSERT INTO `dic_city` VALUES ('150403', '150403', '鍏冨疂灞卞尯', '1504', 3);
+INSERT INTO `dic_city` VALUES ('150404', '150404', '鏉惧北鍖', '1504', 3);
+INSERT INTO `dic_city` VALUES ('150421', '150421', '闃块瞾绉戝皵娌佹棗', '1504', 3);
+INSERT INTO `dic_city` VALUES ('150422', '150422', '宸存灄宸︽棗', '1504', 3);
+INSERT INTO `dic_city` VALUES ('150423', '150423', '宸存灄鍙虫棗', '1504', 3);
+INSERT INTO `dic_city` VALUES ('150424', '150424', '鏋楄タ鍘', '1504', 3);
+INSERT INTO `dic_city` VALUES ('150425', '150425', '鍏嬩粈鍏嬭吘鏃', '1504', 3);
+INSERT INTO `dic_city` VALUES ('150426', '150426', '缈佺墰鐗规棗', '1504', 3);
+INSERT INTO `dic_city` VALUES ('150428', '150428', '鍠€鍠囨瞾鏃', '1504', 3);
+INSERT INTO `dic_city` VALUES ('150429', '150429', '瀹佸煄鍘', '1504', 3);
+INSERT INTO `dic_city` VALUES ('150430', '150430', '鏁栨眽鏃', '1504', 3);
+INSERT INTO `dic_city` VALUES ('1505', '1505', '閫氳窘甯', '15', 2);
+INSERT INTO `dic_city` VALUES ('150502', '150502', '绉戝皵娌佸尯', '1505', 3);
+INSERT INTO `dic_city` VALUES ('150521', '150521', '绉戝皵娌佸乏缈间腑鏃', '1505', 3);
+INSERT INTO `dic_city` VALUES ('150522', '150522', '绉戝皵娌佸乏缈煎悗鏃', '1505', 3);
+INSERT INTO `dic_city` VALUES ('150523', '150523', '寮€椴佸幙', '1505', 3);
+INSERT INTO `dic_city` VALUES ('150524', '150524', '搴撲鸡鏃', '1505', 3);
+INSERT INTO `dic_city` VALUES ('150525', '150525', '濂堟浖鏃', '1505', 3);
+INSERT INTO `dic_city` VALUES ('150526', '150526', '鎵庨瞾鐗规棗', '1505', 3);
+INSERT INTO `dic_city` VALUES ('150571', '150571', '閫氳窘缁忔祹鎶€鏈紑鍙戝尯', '1505', 3);
+INSERT INTO `dic_city` VALUES ('150581', '150581', '闇嶆灄閮嫆甯', '1505', 3);
+INSERT INTO `dic_city` VALUES ('1506', '1506', '閯傚皵澶氭柉甯', '15', 2);
+INSERT INTO `dic_city` VALUES ('150602', '150602', '涓滆儨鍖', '1506', 3);
+INSERT INTO `dic_city` VALUES ('150603', '150603', '搴峰反浠€鍖', '1506', 3);
+INSERT INTO `dic_city` VALUES ('150621', '150621', '杈炬媺鐗规棗', '1506', 3);
+INSERT INTO `dic_city` VALUES ('150622', '150622', '鍑嗘牸灏旀棗', '1506', 3);
+INSERT INTO `dic_city` VALUES ('150623', '150623', '閯傛墭鍏嬪墠鏃', '1506', 3);
+INSERT INTO `dic_city` VALUES ('150624', '150624', '閯傛墭鍏嬫棗', '1506', 3);
+INSERT INTO `dic_city` VALUES ('150625', '150625', '鏉敠鏃', '1506', 3);
+INSERT INTO `dic_city` VALUES ('150626', '150626', '涔屽鏃', '1506', 3);
+INSERT INTO `dic_city` VALUES ('150627', '150627', '浼婇噾闇嶆礇鏃', '1506', 3);
+INSERT INTO `dic_city` VALUES ('1507', '1507', '鍛间鸡璐濆皵甯', '15', 2);
+INSERT INTO `dic_city` VALUES ('150702', '150702', '娴锋媺灏斿尯', '1507', 3);
+INSERT INTO `dic_city` VALUES ('150703', '150703', '鎵庤祲璇哄皵鍖', '1507', 3);
+INSERT INTO `dic_city` VALUES ('150721', '150721', '闃胯崳鏃', '1507', 3);
+INSERT INTO `dic_city` VALUES ('150722', '150722', '鑾姏杈剧摝杈炬枴灏旀棌鑷不鏃', '1507', 3);
+INSERT INTO `dic_city` VALUES ('150723', '150723', '閯備鸡鏄ヨ嚜娌绘棗', '1507', 3);
+INSERT INTO `dic_city` VALUES ('150724', '150724', '閯傛俯鍏嬫棌鑷不鏃', '1507', 3);
+INSERT INTO `dic_city` VALUES ('150725', '150725', '闄堝反灏旇檸鏃', '1507', 3);
+INSERT INTO `dic_city` VALUES ('150726', '150726', '鏂板反灏旇檸宸︽棗', '1507', 3);
+INSERT INTO `dic_city` VALUES ('150727', '150727', '鏂板反灏旇檸鍙虫棗', '1507', 3);
+INSERT INTO `dic_city` VALUES ('150781', '150781', '婊℃床閲屽競', '1507', 3);
+INSERT INTO `dic_city` VALUES ('150782', '150782', '鐗欏厠鐭冲競', '1507', 3);
+INSERT INTO `dic_city` VALUES ('150783', '150783', '鎵庡叞灞競', '1507', 3);
+INSERT INTO `dic_city` VALUES ('150784', '150784', '棰濆皵鍙ょ撼甯', '1507', 3);
+INSERT INTO `dic_city` VALUES ('150785', '150785', '鏍规渤甯', '1507', 3);
+INSERT INTO `dic_city` VALUES ('1508', '1508', '宸村溅娣栧皵甯', '15', 2);
+INSERT INTO `dic_city` VALUES ('150802', '150802', '涓存渤鍖', '1508', 3);
+INSERT INTO `dic_city` VALUES ('150821', '150821', '浜斿師鍘', '1508', 3);
+INSERT INTO `dic_city` VALUES ('150822', '150822', '纾村彛鍘', '1508', 3);
+INSERT INTO `dic_city` VALUES ('150823', '150823', '涔屾媺鐗瑰墠鏃', '1508', 3);
+INSERT INTO `dic_city` VALUES ('150824', '150824', '涔屾媺鐗逛腑鏃', '1508', 3);
+INSERT INTO `dic_city` VALUES ('150825', '150825', '涔屾媺鐗瑰悗鏃', '1508', 3);
+INSERT INTO `dic_city` VALUES ('150826', '150826', '鏉敠鍚庢棗', '1508', 3);
+INSERT INTO `dic_city` VALUES ('1509', '1509', '涔屽叞瀵熷竷甯', '15', 2);
+INSERT INTO `dic_city` VALUES ('150902', '150902', '闆嗗畞鍖', '1509', 3);
+INSERT INTO `dic_city` VALUES ('150921', '150921', '鍗撹祫鍘', '1509', 3);
+INSERT INTO `dic_city` VALUES ('150922', '150922', '鍖栧痉鍘', '1509', 3);
+INSERT INTO `dic_city` VALUES ('150923', '150923', '鍟嗛兘鍘', '1509', 3);
+INSERT INTO `dic_city` VALUES ('150924', '150924', '鍏村拰鍘', '1509', 3);
+INSERT INTO `dic_city` VALUES ('150925', '150925', '鍑夊煄鍘', '1509', 3);
+INSERT INTO `dic_city` VALUES ('150926', '150926', '瀵熷搱灏斿彸缈煎墠鏃', '1509', 3);
+INSERT INTO `dic_city` VALUES ('150927', '150927', '瀵熷搱灏斿彸缈间腑鏃', '1509', 3);
+INSERT INTO `dic_city` VALUES ('150928', '150928', '瀵熷搱灏斿彸缈煎悗鏃', '1509', 3);
+INSERT INTO `dic_city` VALUES ('150929', '150929', '鍥涘瓙鐜嬫棗', '1509', 3);
+INSERT INTO `dic_city` VALUES ('150981', '150981', '涓伴晣甯', '1509', 3);
+INSERT INTO `dic_city` VALUES ('1522', '1522', '鍏村畨鐩', '15', 2);
+INSERT INTO `dic_city` VALUES ('152201', '152201', '涔屽叞娴╃壒甯', '1522', 3);
+INSERT INTO `dic_city` VALUES ('152202', '152202', '闃垮皵灞卞競', '1522', 3);
+INSERT INTO `dic_city` VALUES ('152221', '152221', '绉戝皵娌佸彸缈煎墠鏃', '1522', 3);
+INSERT INTO `dic_city` VALUES ('152222', '152222', '绉戝皵娌佸彸缈间腑鏃', '1522', 3);
+INSERT INTO `dic_city` VALUES ('152223', '152223', '鎵庤祲鐗规棗', '1522', 3);
+INSERT INTO `dic_city` VALUES ('152224', '152224', '绐佹硥鍘', '1522', 3);
+INSERT INTO `dic_city` VALUES ('1525', '1525', '閿℃灄閮嫆鐩', '15', 2);
+INSERT INTO `dic_city` VALUES ('152501', '152501', '浜岃繛娴╃壒甯', '1525', 3);
+INSERT INTO `dic_city` VALUES ('152502', '152502', '閿℃灄娴╃壒甯', '1525', 3);
+INSERT INTO `dic_city` VALUES ('152522', '152522', '闃垮反鍢庢棗', '1525', 3);
+INSERT INTO `dic_city` VALUES ('152523', '152523', '鑻忓凹鐗瑰乏鏃', '1525', 3);
+INSERT INTO `dic_city` VALUES ('152524', '152524', '鑻忓凹鐗瑰彸鏃', '1525', 3);
+INSERT INTO `dic_city` VALUES ('152525', '152525', '涓滀箤鐝犵﹩娌佹棗', '1525', 3);
+INSERT INTO `dic_city` VALUES ('152526', '152526', '瑗夸箤鐝犵﹩娌佹棗', '1525', 3);
+INSERT INTO `dic_city` VALUES ('152527', '152527', '澶粏瀵烘棗', '1525', 3);
+INSERT INTO `dic_city` VALUES ('152528', '152528', '闀堕粍鏃', '1525', 3);
+INSERT INTO `dic_city` VALUES ('152529', '152529', '姝ｉ暥鐧芥棗', '1525', 3);
+INSERT INTO `dic_city` VALUES ('152530', '152530', '姝ｈ摑鏃', '1525', 3);
+INSERT INTO `dic_city` VALUES ('152531', '152531', '澶氫鸡鍘', '1525', 3);
+INSERT INTO `dic_city` VALUES ('152571', '152571', '涔屾媺鐩栫濮斾細', '1525', 3);
+INSERT INTO `dic_city` VALUES ('1529', '1529', '闃挎媺鍠勭洘', '15', 2);
+INSERT INTO `dic_city` VALUES ('152921', '152921', '闃挎媺鍠勫乏鏃', '1529', 3);
+INSERT INTO `dic_city` VALUES ('152922', '152922', '闃挎媺鍠勫彸鏃', '1529', 3);
+INSERT INTO `dic_city` VALUES ('152923', '152923', '棰濇祹绾虫棗', '1529', 3);
+INSERT INTO `dic_city` VALUES ('152971', '152971', '鍐呰挋鍙ら樋鎷夊杽缁忔祹寮€鍙戝尯', '1529', 3);
+INSERT INTO `dic_city` VALUES ('21', '21', '杈藉畞鐪', NULL, 1);
+INSERT INTO `dic_city` VALUES ('2101', '2101', '娌堥槼甯', '21', 2);
+INSERT INTO `dic_city` VALUES ('210102', '210102', '鍜屽钩鍖', '2101', 3);
+INSERT INTO `dic_city` VALUES ('210103', '210103', '娌堟渤鍖', '2101', 3);
+INSERT INTO `dic_city` VALUES ('210104', '210104', '澶т笢鍖', '2101', 3);
+INSERT INTO `dic_city` VALUES ('210105', '210105', '鐨囧鍖', '2101', 3);
+INSERT INTO `dic_city` VALUES ('210106', '210106', '閾佽タ鍖', '2101', 3);
+INSERT INTO `dic_city` VALUES ('210111', '210111', '鑻忓灞尯', '2101', 3);
+INSERT INTO `dic_city` VALUES ('210112', '210112', '娴戝崡鍖', '2101', 3);
+INSERT INTO `dic_city` VALUES ('210113', '210113', '娌堝寳鏂板尯', '2101', 3);
+INSERT INTO `dic_city` VALUES ('210114', '210114', '浜庢椽鍖', '2101', 3);
+INSERT INTO `dic_city` VALUES ('210115', '210115', '杈戒腑鍖', '2101', 3);
+INSERT INTO `dic_city` VALUES ('210123', '210123', '搴峰钩鍘', '2101', 3);
+INSERT INTO `dic_city` VALUES ('210124', '210124', '娉曞簱鍘', '2101', 3);
+INSERT INTO `dic_city` VALUES ('210181', '210181', '鏂版皯甯', '2101', 3);
+INSERT INTO `dic_city` VALUES ('2102', '2102', '澶ц繛甯', '21', 2);
+INSERT INTO `dic_city` VALUES ('210202', '210202', '涓北鍖', '2102', 3);
+INSERT INTO `dic_city` VALUES ('210203', '210203', '瑗垮矖鍖', '2102', 3);
+INSERT INTO `dic_city` VALUES ('210204', '210204', '娌欐渤鍙ｅ尯', '2102', 3);
+INSERT INTO `dic_city` VALUES ('210211', '210211', '鐢樹簳瀛愬尯', '2102', 3);
+INSERT INTO `dic_city` VALUES ('210212', '210212', '鏃呴『鍙ｅ尯', '2102', 3);
+INSERT INTO `dic_city` VALUES ('210213', '210213', '閲戝窞鍖', '2102', 3);
+INSERT INTO `dic_city` VALUES ('210214', '210214', '鏅叞搴楀尯', '2102', 3);
+INSERT INTO `dic_city` VALUES ('210224', '210224', '闀挎捣鍘', '2102', 3);
+INSERT INTO `dic_city` VALUES ('210281', '210281', '鐡︽埧搴楀競', '2102', 3);
+INSERT INTO `dic_city` VALUES ('210283', '210283', '搴勬渤甯', '2102', 3);
+INSERT INTO `dic_city` VALUES ('2103', '2103', '闉嶅北甯', '21', 2);
+INSERT INTO `dic_city` VALUES ('210302', '210302', '閾佷笢鍖', '2103', 3);
+INSERT INTO `dic_city` VALUES ('210303', '210303', '閾佽タ鍖', '2103', 3);
+INSERT INTO `dic_city` VALUES ('210304', '210304', '绔嬪北鍖', '2103', 3);
+INSERT INTO `dic_city` VALUES ('210311', '210311', '鍗冨北鍖', '2103', 3);
+INSERT INTO `dic_city` VALUES ('210321', '210321', '鍙板畨鍘', '2103', 3);
+INSERT INTO `dic_city` VALUES ('210323', '210323', '宀博婊℃棌鑷不鍘', '2103', 3);
+INSERT INTO `dic_city` VALUES ('210381', '210381', '娴峰煄甯', '2103', 3);
+INSERT INTO `dic_city` VALUES ('2104', '2104', '鎶氶『甯', '21', 2);
+INSERT INTO `dic_city` VALUES ('210402', '210402', '鏂版姎鍖', '2104', 3);
+INSERT INTO `dic_city` VALUES ('210403', '210403', '涓滄床鍖', '2104', 3);
+INSERT INTO `dic_city` VALUES ('210404', '210404', '鏈涜姳鍖', '2104', 3);
+INSERT INTO `dic_city` VALUES ('210411', '210411', '椤哄煄鍖', '2104', 3);
+INSERT INTO `dic_city` VALUES ('210421', '210421', '鎶氶『鍘', '2104', 3);
+INSERT INTO `dic_city` VALUES ('210422', '210422', '鏂板婊℃棌鑷不鍘', '2104', 3);
+INSERT INTO `dic_city` VALUES ('210423', '210423', '娓呭師婊℃棌鑷不鍘', '2104', 3);
+INSERT INTO `dic_city` VALUES ('2105', '2105', '鏈邯甯', '21', 2);
+INSERT INTO `dic_city` VALUES ('210502', '210502', '骞冲北鍖', '2105', 3);
+INSERT INTO `dic_city` VALUES ('210503', '210503', '婧箹鍖', '2105', 3);
+INSERT INTO `dic_city` VALUES ('210504', '210504', '鏄庡北鍖', '2105', 3);
+INSERT INTO `dic_city` VALUES ('210505', '210505', '鍗楄姮鍖', '2105', 3);
+INSERT INTO `dic_city` VALUES ('210521', '210521', '鏈邯婊℃棌鑷不鍘', '2105', 3);
+INSERT INTO `dic_city` VALUES ('210522', '210522', '妗撲粊婊℃棌鑷不鍘', '2105', 3);
+INSERT INTO `dic_city` VALUES ('2106', '2106', '涓逛笢甯', '21', 2);
+INSERT INTO `dic_city` VALUES ('210602', '210602', '鍏冨疂鍖', '2106', 3);
+INSERT INTO `dic_city` VALUES ('210603', '210603', '鎸叴鍖', '2106', 3);
+INSERT INTO `dic_city` VALUES ('210604', '210604', '鎸畨鍖', '2106', 3);
+INSERT INTO `dic_city` VALUES ('210624', '210624', '瀹界敻婊℃棌鑷不鍘', '2106', 3);
+INSERT INTO `dic_city` VALUES ('210681', '210681', '涓滄腐甯', '2106', 3);
+INSERT INTO `dic_city` VALUES ('210682', '210682', '鍑ゅ煄甯', '2106', 3);
+INSERT INTO `dic_city` VALUES ('2107', '2107', '閿﹀窞甯', '21', 2);
+INSERT INTO `dic_city` VALUES ('210702', '210702', '鍙ゅ鍖', '2107', 3);
+INSERT INTO `dic_city` VALUES ('210703', '210703', '鍑屾渤鍖', '2107', 3);
+INSERT INTO `dic_city` VALUES ('210711', '210711', '澶拰鍖', '2107', 3);
+INSERT INTO `dic_city` VALUES ('210726', '210726', '榛戝北鍘', '2107', 3);
+INSERT INTO `dic_city` VALUES ('210727', '210727', '涔夊幙', '2107', 3);
+INSERT INTO `dic_city` VALUES ('210781', '210781', '鍑屾捣甯', '2107', 3);
+INSERT INTO `dic_city` VALUES ('210782', '210782', '鍖楅晣甯', '2107', 3);
+INSERT INTO `dic_city` VALUES ('2108', '2108', '钀ュ彛甯', '21', 2);
+INSERT INTO `dic_city` VALUES ('210802', '210802', '绔欏墠鍖', '2108', 3);
+INSERT INTO `dic_city` VALUES ('210803', '210803', '瑗垮競鍖', '2108', 3);
+INSERT INTO `dic_city` VALUES ('210804', '210804', '椴呴奔鍦堝尯', '2108', 3);
+INSERT INTO `dic_city` VALUES ('210811', '210811', '鑰佽竟鍖', '2108', 3);
+INSERT INTO `dic_city` VALUES ('210881', '210881', '鐩栧窞甯', '2108', 3);
+INSERT INTO `dic_city` VALUES ('210882', '210882', '澶х煶妗ュ競', '2108', 3);
+INSERT INTO `dic_city` VALUES ('2109', '2109', '闃滄柊甯', '21', 2);
+INSERT INTO `dic_city` VALUES ('210902', '210902', '娴峰窞鍖', '2109', 3);
+INSERT INTO `dic_city` VALUES ('210903', '210903', '鏂伴偙鍖', '2109', 3);
+INSERT INTO `dic_city` VALUES ('210904', '210904', '澶钩鍖', '2109', 3);
+INSERT INTO `dic_city` VALUES ('210905', '210905', '娓呮渤闂ㄥ尯', '2109', 3);
+INSERT INTO `dic_city` VALUES ('210911', '210911', '缁嗘渤鍖', '2109', 3);
+INSERT INTO `dic_city` VALUES ('210921', '210921', '闃滄柊钂欏彜鏃忚嚜娌诲幙', '2109', 3);
+INSERT INTO `dic_city` VALUES ('210922', '210922', '褰版鍘', '2109', 3);
+INSERT INTO `dic_city` VALUES ('2110', '2110', '杈介槼甯', '21', 2);
+INSERT INTO `dic_city` VALUES ('211002', '211002', '鐧藉鍖', '2110', 3);
+INSERT INTO `dic_city` VALUES ('211003', '211003', '鏂囧湥鍖', '2110', 3);
+INSERT INTO `dic_city` VALUES ('211004', '211004', '瀹忎紵鍖', '2110', 3);
+INSERT INTO `dic_city` VALUES ('211005', '211005', '寮撻暱宀尯', '2110', 3);
+INSERT INTO `dic_city` VALUES ('211011', '211011', '澶瓙娌冲尯', '2110', 3);
+INSERT INTO `dic_city` VALUES ('211021', '211021', '杈介槼鍘', '2110', 3);
+INSERT INTO `dic_city` VALUES ('211081', '211081', '鐏甯', '2110', 3);
+INSERT INTO `dic_city` VALUES ('2111', '2111', '鐩橀敠甯', '21', 2);
+INSERT INTO `dic_city` VALUES ('211102', '211102', '鍙屽彴瀛愬尯', '2111', 3);
+INSERT INTO `dic_city` VALUES ('211103', '211103', '鍏撮殕鍙板尯', '2111', 3);
+INSERT INTO `dic_city` VALUES ('211104', '211104', '澶ф醇鍖', '2111', 3);
+INSERT INTO `dic_city` VALUES ('211122', '211122', '鐩樺北鍘', '2111', 3);
+INSERT INTO `dic_city` VALUES ('2112', '2112', '閾佸箔甯', '21', 2);
+INSERT INTO `dic_city` VALUES ('211202', '211202', '閾跺窞鍖', '2112', 3);
+INSERT INTO `dic_city` VALUES ('211204', '211204', '娓呮渤鍖', '2112', 3);
+INSERT INTO `dic_city` VALUES ('211221', '211221', '閾佸箔鍘', '2112', 3);
+INSERT INTO `dic_city` VALUES ('211223', '211223', '瑗夸赴鍘', '2112', 3);
+INSERT INTO `dic_city` VALUES ('211224', '211224', '鏄屽浘鍘', '2112', 3);
+INSERT INTO `dic_city` VALUES ('211281', '211281', '璋冨叺灞卞競', '2112', 3);
+INSERT INTO `dic_city` VALUES ('211282', '211282', '寮€鍘熷競', '2112', 3);
+INSERT INTO `dic_city` VALUES ('2113', '2113', '鏈濋槼甯', '21', 2);
+INSERT INTO `dic_city` VALUES ('211302', '211302', '鍙屽鍖', '2113', 3);
+INSERT INTO `dic_city` VALUES ('211303', '211303', '榫欏煄鍖', '2113', 3);
+INSERT INTO `dic_city` VALUES ('211321', '211321', '鏈濋槼鍘', '2113', 3);
+INSERT INTO `dic_city` VALUES ('211322', '211322', '寤哄钩鍘', '2113', 3);
+INSERT INTO `dic_city` VALUES ('211324', '211324', '鍠€鍠囨瞾宸︾考钂欏彜鏃忚嚜娌诲幙', '2113', 3);
+INSERT INTO `dic_city` VALUES ('211381', '211381', '鍖楃エ甯', '2113', 3);
+INSERT INTO `dic_city` VALUES ('211382', '211382', '鍑屾簮甯', '2113', 3);
+INSERT INTO `dic_city` VALUES ('2114', '2114', '钁姦宀涘競', '21', 2);
+INSERT INTO `dic_city` VALUES ('211402', '211402', '杩炲北鍖', '2114', 3);
+INSERT INTO `dic_city` VALUES ('211403', '211403', '榫欐腐鍖', '2114', 3);
+INSERT INTO `dic_city` VALUES ('211404', '211404', '鍗楃エ鍖', '2114', 3);
+INSERT INTO `dic_city` VALUES ('211421', '211421', '缁ヤ腑鍘', '2114', 3);
+INSERT INTO `dic_city` VALUES ('211422', '211422', '寤烘槍鍘', '2114', 3);
+INSERT INTO `dic_city` VALUES ('211481', '211481', '鍏村煄甯', '2114', 3);
+INSERT INTO `dic_city` VALUES ('22', '22', '鍚夋灄鐪', NULL, 1);
+INSERT INTO `dic_city` VALUES ('2201', '2201', '闀挎槬甯', '22', 2);
+INSERT INTO `dic_city` VALUES ('220102', '220102', '鍗楀叧鍖', '2201', 3);
+INSERT INTO `dic_city` VALUES ('220103', '220103', '瀹藉煄鍖', '2201', 3);
+INSERT INTO `dic_city` VALUES ('220104', '220104', '鏈濋槼鍖', '2201', 3);
+INSERT INTO `dic_city` VALUES ('220105', '220105', '浜岄亾鍖', '2201', 3);
+INSERT INTO `dic_city` VALUES ('220106', '220106', '缁垮洯鍖', '2201', 3);
+INSERT INTO `dic_city` VALUES ('220112', '220112', '鍙岄槼鍖', '2201', 3);
+INSERT INTO `dic_city` VALUES ('220113', '220113', '涔濆彴鍖', '2201', 3);
+INSERT INTO `dic_city` VALUES ('220122', '220122', '鍐滃畨鍘', '2201', 3);
+INSERT INTO `dic_city` VALUES ('220171', '220171', '闀挎槬缁忔祹鎶€鏈紑鍙戝尯', '2201', 3);
+INSERT INTO `dic_city` VALUES ('220172', '220172', '闀挎槬鍑€鏈堥珮鏂版妧鏈骇涓氬紑鍙戝尯', '2201', 3);
+INSERT INTO `dic_city` VALUES ('220173', '220173', '闀挎槬楂樻柊鎶€鏈骇涓氬紑鍙戝尯', '2201', 3);
+INSERT INTO `dic_city` VALUES ('220174', '220174', '闀挎槬姹借溅缁忔祹鎶€鏈紑鍙戝尯', '2201', 3);
+INSERT INTO `dic_city` VALUES ('220182', '220182', '姒嗘爲甯', '2201', 3);
+INSERT INTO `dic_city` VALUES ('220183', '220183', '寰锋儬甯', '2201', 3);
+INSERT INTO `dic_city` VALUES ('220184', '220184', '鍏富宀競', '2201', 3);
+INSERT INTO `dic_city` VALUES ('2202', '2202', '鍚夋灄甯', '22', 2);
+INSERT INTO `dic_city` VALUES ('220202', '220202', '鏄岄倯鍖', '2202', 3);
+INSERT INTO `dic_city` VALUES ('220203', '220203', '榫欐江鍖', '2202', 3);
+INSERT INTO `dic_city` VALUES ('220204', '220204', '鑸硅惀鍖', '2202', 3);
+INSERT INTO `dic_city` VALUES ('220211', '220211', '涓版弧鍖', '2202', 3);
+INSERT INTO `dic_city` VALUES ('220221', '220221', '姘稿悏鍘', '2202', 3);
+INSERT INTO `dic_city` VALUES ('220271', '220271', '鍚夋灄缁忔祹寮€鍙戝尯', '2202', 3);
+INSERT INTO `dic_city` VALUES ('220272', '220272', '鍚夋灄楂樻柊鎶€鏈骇涓氬紑鍙戝尯', '2202', 3);
+INSERT INTO `dic_city` VALUES ('220273', '220273', '鍚夋灄涓浗鏂板姞鍧￠鍝佸尯', '2202', 3);
+INSERT INTO `dic_city` VALUES ('220281', '220281', '铔熸渤甯', '2202', 3);
+INSERT INTO `dic_city` VALUES ('220282', '220282', '妗︾敻甯', '2202', 3);
+INSERT INTO `dic_city` VALUES ('220283', '220283', '鑸掑叞甯', '2202', 3);
+INSERT INTO `dic_city` VALUES ('220284', '220284', '纾愮煶甯', '2202', 3);
+INSERT INTO `dic_city` VALUES ('2203', '2203', '鍥涘钩甯', '22', 2);
+INSERT INTO `dic_city` VALUES ('220302', '220302', '閾佽タ鍖', '2203', 3);
+INSERT INTO `dic_city` VALUES ('220303', '220303', '閾佷笢鍖', '2203', 3);
+INSERT INTO `dic_city` VALUES ('220322', '220322', '姊ㄦ爲鍘', '2203', 3);
+INSERT INTO `dic_city` VALUES ('220323', '220323', '浼婇€氭弧鏃忚嚜娌诲幙', '2203', 3);
+INSERT INTO `dic_city` VALUES ('220382', '220382', '鍙岃窘甯', '2203', 3);
+INSERT INTO `dic_city` VALUES ('2204', '2204', '杈芥簮甯', '22', 2);
+INSERT INTO `dic_city` VALUES ('220402', '220402', '榫欏北鍖', '2204', 3);
+INSERT INTO `dic_city` VALUES ('220403', '220403', '瑗垮畨鍖', '2204', 3);
+INSERT INTO `dic_city` VALUES ('220421', '220421', '涓滀赴鍘', '2204', 3);
+INSERT INTO `dic_city` VALUES ('220422', '220422', '涓滆窘鍘', '2204', 3);
+INSERT INTO `dic_city` VALUES ('2205', '2205', '閫氬寲甯', '22', 2);
+INSERT INTO `dic_city` VALUES ('220502', '220502', '涓滄槍鍖', '2205', 3);
+INSERT INTO `dic_city` VALUES ('220503', '220503', '浜岄亾姹熷尯', '2205', 3);
+INSERT INTO `dic_city` VALUES ('220521', '220521', '閫氬寲鍘', '2205', 3);
+INSERT INTO `dic_city` VALUES ('220523', '220523', '杈夊崡鍘', '2205', 3);
+INSERT INTO `dic_city` VALUES ('220524', '220524', '鏌虫渤鍘', '2205', 3);
+INSERT INTO `dic_city` VALUES ('220581', '220581', '姊呮渤鍙ｅ競', '2205', 3);
+INSERT INTO `dic_city` VALUES ('220582', '220582', '闆嗗畨甯', '2205', 3);
+INSERT INTO `dic_city` VALUES ('2206', '2206', '鐧藉北甯', '22', 2);
+INSERT INTO `dic_city` VALUES ('220602', '220602', '娴戞睙鍖', '2206', 3);
+INSERT INTO `dic_city` VALUES ('220605', '220605', '姹熸簮鍖', '2206', 3);
+INSERT INTO `dic_city` VALUES ('220621', '220621', '鎶氭澗鍘', '2206', 3);
+INSERT INTO `dic_city` VALUES ('220622', '220622', '闈栧畤鍘', '2206', 3);
+INSERT INTO `dic_city` VALUES ('220623', '220623', '闀跨櫧鏈濋矞鏃忚嚜娌诲幙', '2206', 3);
+INSERT INTO `dic_city` VALUES ('220681', '220681', '涓存睙甯', '2206', 3);
+INSERT INTO `dic_city` VALUES ('2207', '2207', '鏉惧師甯', '22', 2);
+INSERT INTO `dic_city` VALUES ('220702', '220702', '瀹佹睙鍖', '2207', 3);
+INSERT INTO `dic_city` VALUES ('220721', '220721', '鍓嶉儹灏旂綏鏂挋鍙ゆ棌鑷不鍘', '2207', 3);
+INSERT INTO `dic_city` VALUES ('220722', '220722', '闀垮箔鍘', '2207', 3);
+INSERT INTO `dic_city` VALUES ('220723', '220723', '涔惧畨鍘', '2207', 3);
+INSERT INTO `dic_city` VALUES ('220771', '220771', '鍚夋灄鏉惧師缁忔祹寮€鍙戝尯', '2207', 3);
+INSERT INTO `dic_city` VALUES ('220781', '220781', '鎵朵綑甯', '2207', 3);
+INSERT INTO `dic_city` VALUES ('2208', '2208', '鐧藉煄甯', '22', 2);
+INSERT INTO `dic_city` VALUES ('220802', '220802', '娲寳鍖', '2208', 3);
+INSERT INTO `dic_city` VALUES ('220821', '220821', '闀囪祲鍘', '2208', 3);
+INSERT INTO `dic_city` VALUES ('220822', '220822', '閫氭鍘', '2208', 3);
+INSERT INTO `dic_city` VALUES ('220871', '220871', '鍚夋灄鐧藉煄缁忔祹寮€鍙戝尯', '2208', 3);
+INSERT INTO `dic_city` VALUES ('220881', '220881', '娲崡甯', '2208', 3);
+INSERT INTO `dic_city` VALUES ('220882', '220882', '澶у畨甯', '2208', 3);
+INSERT INTO `dic_city` VALUES ('2224', '2224', '寤惰竟鏈濋矞鏃忚嚜娌诲窞', '22', 2);
+INSERT INTO `dic_city` VALUES ('222401', '222401', '寤跺悏甯', '2224', 3);
+INSERT INTO `dic_city` VALUES ('222402', '222402', '鍥句滑甯', '2224', 3);
+INSERT INTO `dic_city` VALUES ('222403', '222403', '鏁﹀寲甯', '2224', 3);
+INSERT INTO `dic_city` VALUES ('222404', '222404', '鐝叉槬甯', '2224', 3);
+INSERT INTO `dic_city` VALUES ('222405', '222405', '榫欎簳甯', '2224', 3);
+INSERT INTO `dic_city` VALUES ('222406', '222406', '鍜岄緳甯', '2224', 3);
+INSERT INTO `dic_city` VALUES ('222424', '222424', '姹竻鍘', '2224', 3);
+INSERT INTO `dic_city` VALUES ('222426', '222426', '瀹夊浘鍘', '2224', 3);
+INSERT INTO `dic_city` VALUES ('23', '23', '榛戦緳姹熺渷', NULL, 1);
+INSERT INTO `dic_city` VALUES ('2301', '2301', '鍝堝皵婊ㄥ競', '23', 2);
+INSERT INTO `dic_city` VALUES ('230102', '230102', '閬撻噷鍖', '2301', 3);
+INSERT INTO `dic_city` VALUES ('230103', '230103', '鍗楀矖鍖', '2301', 3);
+INSERT INTO `dic_city` VALUES ('230104', '230104', '閬撳鍖', '2301', 3);
+INSERT INTO `dic_city` VALUES ('230108', '230108', '骞虫埧鍖', '2301', 3);
+INSERT INTO `dic_city` VALUES ('230109', '230109', '鏉惧寳鍖', '2301', 3);
+INSERT INTO `dic_city` VALUES ('230110', '230110', '棣欏潑鍖', '2301', 3);
+INSERT INTO `dic_city` VALUES ('230111', '230111', '鍛煎叞鍖', '2301', 3);
+INSERT INTO `dic_city` VALUES ('230112', '230112', '闃垮煄鍖', '2301', 3);
+INSERT INTO `dic_city` VALUES ('230113', '230113', '鍙屽煄鍖', '2301', 3);
+INSERT INTO `dic_city` VALUES ('230123', '230123', '渚濆叞鍘', '2301', 3);
+INSERT INTO `dic_city` VALUES ('230124', '230124', '鏂规鍘', '2301', 3);
+INSERT INTO `dic_city` VALUES ('230125', '230125', '瀹惧幙', '2301', 3);
+INSERT INTO `dic_city` VALUES ('230126', '230126', '宸村溅鍘', '2301', 3);
+INSERT INTO `dic_city` VALUES ('230127', '230127', '鏈ㄥ叞鍘', '2301', 3);
+INSERT INTO `dic_city` VALUES ('230128', '230128', '閫氭渤鍘', '2301', 3);
+INSERT INTO `dic_city` VALUES ('230129', '230129', '寤跺鍘', '2301', 3);
+INSERT INTO `dic_city` VALUES ('230183', '230183', '灏氬織甯', '2301', 3);
+INSERT INTO `dic_city` VALUES ('230184', '230184', '浜斿父甯', '2301', 3);
+INSERT INTO `dic_city` VALUES ('2302', '2302', '榻愰綈鍝堝皵甯', '23', 2);
+INSERT INTO `dic_city` VALUES ('230202', '230202', '榫欐矙鍖', '2302', 3);
+INSERT INTO `dic_city` VALUES ('230203', '230203', '寤哄崕鍖', '2302', 3);
+INSERT INTO `dic_city` VALUES ('230204', '230204', '閾侀攱鍖', '2302', 3);
+INSERT INTO `dic_city` VALUES ('230205', '230205', '鏄傛槀婧尯', '2302', 3);
+INSERT INTO `dic_city` VALUES ('230206', '230206', '瀵屾媺灏斿熀鍖', '2302', 3);
+INSERT INTO `dic_city` VALUES ('230207', '230207', '纰惧瓙灞卞尯', '2302', 3);
+INSERT INTO `dic_city` VALUES ('230208', '230208', '姊呴噷鏂揪鏂″皵鏃忓尯', '2302', 3);
+INSERT INTO `dic_city` VALUES ('230221', '230221', '榫欐睙鍘', '2302', 3);
+INSERT INTO `dic_city` VALUES ('230223', '230223', '渚濆畨鍘', '2302', 3);
+INSERT INTO `dic_city` VALUES ('230224', '230224', '娉版潵鍘', '2302', 3);
+INSERT INTO `dic_city` VALUES ('230225', '230225', '鐢樺崡鍘', '2302', 3);
+INSERT INTO `dic_city` VALUES ('230227', '230227', '瀵岃鍘', '2302', 3);
+INSERT INTO `dic_city` VALUES ('230229', '230229', '鍏嬪北鍘', '2302', 3);
+INSERT INTO `dic_city` VALUES ('230230', '230230', '鍏嬩笢鍘', '2302', 3);
+INSERT INTO `dic_city` VALUES ('230231', '230231', '鎷滄硥鍘', '2302', 3);
+INSERT INTO `dic_city` VALUES ('230281', '230281', '璁锋渤甯', '2302', 3);
+INSERT INTO `dic_city` VALUES ('2303', '2303', '楦¤タ甯', '23', 2);
+INSERT INTO `dic_city` VALUES ('230302', '230302', '楦″啝鍖', '2303', 3);
+INSERT INTO `dic_city` VALUES ('230303', '230303', '鎭掑北鍖', '2303', 3);
+INSERT INTO `dic_city` VALUES ('230304', '230304', '婊撮亾鍖', '2303', 3);
+INSERT INTO `dic_city` VALUES ('230305', '230305', '姊ㄦ爲鍖', '2303', 3);
+INSERT INTO `dic_city` VALUES ('230306', '230306', '鍩庡瓙娌冲尯', '2303', 3);
+INSERT INTO `dic_city` VALUES ('230307', '230307', '楹诲北鍖', '2303', 3);
+INSERT INTO `dic_city` VALUES ('230321', '230321', '楦′笢鍘', '2303', 3);
+INSERT INTO `dic_city` VALUES ('230381', '230381', '铏庢灄甯', '2303', 3);
+INSERT INTO `dic_city` VALUES ('230382', '230382', '瀵嗗北甯', '2303', 3);
+INSERT INTO `dic_city` VALUES ('2304', '2304', '楣ゅ矖甯', '23', 2);
+INSERT INTO `dic_city` VALUES ('230402', '230402', '鍚戦槼鍖', '2304', 3);
+INSERT INTO `dic_city` VALUES ('230403', '230403', '宸ュ啘鍖', '2304', 3);
+INSERT INTO `dic_city` VALUES ('230404', '230404', '鍗楀北鍖', '2304', 3);
+INSERT INTO `dic_city` VALUES ('230405', '230405', '鍏村畨鍖', '2304', 3);
+INSERT INTO `dic_city` VALUES ('230406', '230406', '涓滃北鍖', '2304', 3);
+INSERT INTO `dic_city` VALUES ('230407', '230407', '鍏村北鍖', '2304', 3);
+INSERT INTO `dic_city` VALUES ('230421', '230421', '钀濆寳鍘', '2304', 3);
+INSERT INTO `dic_city` VALUES ('230422', '230422', '缁ユ花鍘', '2304', 3);
+INSERT INTO `dic_city` VALUES ('2305', '2305', '鍙岄腑灞卞競', '23', 2);
+INSERT INTO `dic_city` VALUES ('230502', '230502', '灏栧北鍖', '2305', 3);
+INSERT INTO `dic_city` VALUES ('230503', '230503', '宀笢鍖', '2305', 3);
+INSERT INTO `dic_city` VALUES ('230505', '230505', '鍥涙柟鍙板尯', '2305', 3);
+INSERT INTO `dic_city` VALUES ('230506', '230506', '瀹濆北鍖', '2305', 3);
+INSERT INTO `dic_city` VALUES ('230521', '230521', '闆嗚搐鍘', '2305', 3);
+INSERT INTO `dic_city` VALUES ('230522', '230522', '鍙嬭皧鍘', '2305', 3);
+INSERT INTO `dic_city` VALUES ('230523', '230523', '瀹濇竻鍘', '2305', 3);
+INSERT INTO `dic_city` VALUES ('230524', '230524', '楗舵渤鍘', '2305', 3);
+INSERT INTO `dic_city` VALUES ('2306', '2306', '澶у簡甯', '23', 2);
+INSERT INTO `dic_city` VALUES ('230602', '230602', '钀ㄥ皵鍥惧尯', '2306', 3);
+INSERT INTO `dic_city` VALUES ('230603', '230603', '榫欏嚖鍖', '2306', 3);
+INSERT INTO `dic_city` VALUES ('230604', '230604', '璁╄儭璺尯', '2306', 3);
+INSERT INTO `dic_city` VALUES ('230605', '230605', '绾㈠矖鍖', '2306', 3);
+INSERT INTO `dic_city` VALUES ('230606', '230606', '澶у悓鍖', '2306', 3);
+INSERT INTO `dic_city` VALUES ('230621', '230621', '鑲囧窞鍘', '2306', 3);
+INSERT INTO `dic_city` VALUES ('230622', '230622', '鑲囨簮鍘', '2306', 3);
+INSERT INTO `dic_city` VALUES ('230623', '230623', '鏋楃敻鍘', '2306', 3);
+INSERT INTO `dic_city` VALUES ('230624', '230624', '鏉滃皵浼壒钂欏彜鏃忚嚜娌诲幙', '2306', 3);
+INSERT INTO `dic_city` VALUES ('230671', '230671', '澶у簡楂樻柊鎶€鏈骇涓氬紑鍙戝尯', '2306', 3);
+INSERT INTO `dic_city` VALUES ('2307', '2307', '浼婃槬甯', '23', 2);
+INSERT INTO `dic_city` VALUES ('230717', '230717', '浼婄編鍖', '2307', 3);
+INSERT INTO `dic_city` VALUES ('230718', '230718', '涔岀繝鍖', '2307', 3);
+INSERT INTO `dic_city` VALUES ('230719', '230719', '鍙嬪ソ鍖', '2307', 3);
+INSERT INTO `dic_city` VALUES ('230722', '230722', '鍢夎崼鍘', '2307', 3);
+INSERT INTO `dic_city` VALUES ('230723', '230723', '姹ゆ椇鍘', '2307', 3);
+INSERT INTO `dic_city` VALUES ('230724', '230724', '涓版灄鍘', '2307', 3);
+INSERT INTO `dic_city` VALUES ('230725', '230725', '澶х異灞卞幙', '2307', 3);
+INSERT INTO `dic_city` VALUES ('230726', '230726', '鍗楀矓鍘', '2307', 3);
+INSERT INTO `dic_city` VALUES ('230751', '230751', '閲戞灄鍖', '2307', 3);
+INSERT INTO `dic_city` VALUES ('230781', '230781', '閾佸姏甯', '2307', 3);
+INSERT INTO `dic_city` VALUES ('2308', '2308', '浣虫湪鏂競', '23', 2);
+INSERT INTO `dic_city` VALUES ('230803', '230803', '鍚戦槼鍖', '2308', 3);
+INSERT INTO `dic_city` VALUES ('230804', '230804', '鍓嶈繘鍖', '2308', 3);
+INSERT INTO `dic_city` VALUES ('230805', '230805', '涓滈鍖', '2308', 3);
+INSERT INTO `dic_city` VALUES ('230811', '230811', '閮婂尯', '2308', 3);
+INSERT INTO `dic_city` VALUES ('230822', '230822', '妗﹀崡鍘', '2308', 3);
+INSERT INTO `dic_city` VALUES ('230826', '230826', '妗﹀窛鍘', '2308', 3);
+INSERT INTO `dic_city` VALUES ('230828', '230828', '姹ゅ師鍘', '2308', 3);
+INSERT INTO `dic_city` VALUES ('230881', '230881', '鍚屾睙甯', '2308', 3);
+INSERT INTO `dic_city` VALUES ('230882', '230882', '瀵岄敠甯', '2308', 3);
+INSERT INTO `dic_city` VALUES ('230883', '230883', '鎶氳繙甯', '2308', 3);
+INSERT INTO `dic_city` VALUES ('2309', '2309', '涓冨彴娌冲競', '23', 2);
+INSERT INTO `dic_city` VALUES ('230902', '230902', '鏂板叴鍖', '2309', 3);
+INSERT INTO `dic_city` VALUES ('230903', '230903', '妗冨北鍖', '2309', 3);
+INSERT INTO `dic_city` VALUES ('230904', '230904', '鑼勫瓙娌冲尯', '2309', 3);
+INSERT INTO `dic_city` VALUES ('230921', '230921', '鍕冨埄鍘', '2309', 3);
+INSERT INTO `dic_city` VALUES ('2310', '2310', '鐗′腹姹熷競', '23', 2);
+INSERT INTO `dic_city` VALUES ('231002', '231002', '涓滃畨鍖', '2310', 3);
+INSERT INTO `dic_city` VALUES ('231003', '231003', '闃虫槑鍖', '2310', 3);
+INSERT INTO `dic_city` VALUES ('231004', '231004', '鐖辨皯鍖', '2310', 3);
+INSERT INTO `dic_city` VALUES ('231005', '231005', '瑗垮畨鍖', '2310', 3);
+INSERT INTO `dic_city` VALUES ('231025', '231025', '鏋楀彛鍘', '2310', 3);
+INSERT INTO `dic_city` VALUES ('231071', '231071', '鐗′腹姹熺粡娴庢妧鏈紑鍙戝尯', '2310', 3);
+INSERT INTO `dic_city` VALUES ('231081', '231081', '缁ヨ姮娌冲競', '2310', 3);
+INSERT INTO `dic_city` VALUES ('231083', '231083', '娴锋灄甯', '2310', 3);
+INSERT INTO `dic_city` VALUES ('231084', '231084', '瀹佸畨甯', '2310', 3);
+INSERT INTO `dic_city` VALUES ('231085', '231085', '绌嗘１甯', '2310', 3);
+INSERT INTO `dic_city` VALUES ('231086', '231086', '涓滃畞甯', '2310', 3);
+INSERT INTO `dic_city` VALUES ('2311', '2311', '榛戞渤甯', '23', 2);
+INSERT INTO `dic_city` VALUES ('231102', '231102', '鐖辫緣鍖', '2311', 3);
+INSERT INTO `dic_city` VALUES ('231123', '231123', '閫婂厠鍘', '2311', 3);
+INSERT INTO `dic_city` VALUES ('231124', '231124', '瀛欏惔鍘', '2311', 3);
+INSERT INTO `dic_city` VALUES ('231181', '231181', '鍖楀畨甯', '2311', 3);
+INSERT INTO `dic_city` VALUES ('231182', '231182', '浜斿ぇ杩炴睜甯', '2311', 3);
+INSERT INTO `dic_city` VALUES ('231183', '231183', '瀚╂睙甯', '2311', 3);
+INSERT INTO `dic_city` VALUES ('2312', '2312', '缁ュ寲甯', '23', 2);
+INSERT INTO `dic_city` VALUES ('231202', '231202', '鍖楁灄鍖', '2312', 3);
+INSERT INTO `dic_city` VALUES ('231221', '231221', '鏈涘鍘', '2312', 3);
+INSERT INTO `dic_city` VALUES ('231222', '231222', '鍏拌タ鍘', '2312', 3);
+INSERT INTO `dic_city` VALUES ('231223', '231223', '闈掑唸鍘', '2312', 3);
+INSERT INTO `dic_city` VALUES ('231224', '231224', '搴嗗畨鍘', '2312', 3);
+INSERT INTO `dic_city` VALUES ('231225', '231225', '鏄庢按鍘', '2312', 3);
+INSERT INTO `dic_city` VALUES ('231226', '231226', '缁ユ１鍘', '2312', 3);
+INSERT INTO `dic_city` VALUES ('231281', '231281', '瀹夎揪甯', '2312', 3);
+INSERT INTO `dic_city` VALUES ('231282', '231282', '鑲囦笢甯', '2312', 3);
+INSERT INTO `dic_city` VALUES ('231283', '231283', '娴蜂鸡甯', '2312', 3);
+INSERT INTO `dic_city` VALUES ('2327', '2327', '澶у叴瀹夊箔鍦板尯', '23', 2);
+INSERT INTO `dic_city` VALUES ('232701', '232701', '婕犳渤甯', '2327', 3);
+INSERT INTO `dic_city` VALUES ('232721', '232721', '鍛肩帥鍘', '2327', 3);
+INSERT INTO `dic_city` VALUES ('232722', '232722', '濉旀渤鍘', '2327', 3);
+INSERT INTO `dic_city` VALUES ('232761', '232761', '鍔犳牸杈惧鍖', '2327', 3);
+INSERT INTO `dic_city` VALUES ('232762', '232762', '鏉惧箔鍖', '2327', 3);
+INSERT INTO `dic_city` VALUES ('232763', '232763', '鏂版灄鍖', '2327', 3);
+INSERT INTO `dic_city` VALUES ('232764', '232764', '鍛间腑鍖', '2327', 3);
+INSERT INTO `dic_city` VALUES ('31', '31', '涓婃捣甯', NULL, 1);
+INSERT INTO `dic_city` VALUES ('3101', '3101', '甯傝緰鍖', '31', 2);
+INSERT INTO `dic_city` VALUES ('310101', '310101', '榛勬郸鍖', '3101', 3);
+INSERT INTO `dic_city` VALUES ('310104', '310104', '寰愭眹鍖', '3101', 3);
+INSERT INTO `dic_city` VALUES ('310105', '310105', '闀垮畞鍖', '3101', 3);
+INSERT INTO `dic_city` VALUES ('310106', '310106', '闈欏畨鍖', '3101', 3);
+INSERT INTO `dic_city` VALUES ('310107', '310107', '鏅檧鍖', '3101', 3);
+INSERT INTO `dic_city` VALUES ('310109', '310109', '铏瑰彛鍖', '3101', 3);
+INSERT INTO `dic_city` VALUES ('310110', '310110', '鏉ㄦ郸鍖', '3101', 3);
+INSERT INTO `dic_city` VALUES ('310112', '310112', '闂佃鍖', '3101', 3);
+INSERT INTO `dic_city` VALUES ('310113', '310113', '瀹濆北鍖', '3101', 3);
+INSERT INTO `dic_city` VALUES ('310114', '310114', '鍢夊畾鍖', '3101', 3);
+INSERT INTO `dic_city` VALUES ('310115', '310115', '娴︿笢鏂板尯', '3101', 3);
+INSERT INTO `dic_city` VALUES ('310116', '310116', '閲戝北鍖', '3101', 3);
+INSERT INTO `dic_city` VALUES ('310117', '310117', '鏉炬睙鍖', '3101', 3);
+INSERT INTO `dic_city` VALUES ('310118', '310118', '闈掓郸鍖', '3101', 3);
+INSERT INTO `dic_city` VALUES ('310120', '310120', '濂夎搐鍖', '3101', 3);
+INSERT INTO `dic_city` VALUES ('310151', '310151', '宕囨槑鍖', '3101', 3);
+INSERT INTO `dic_city` VALUES ('32', '32', '姹熻嫃鐪', NULL, 1);
+INSERT INTO `dic_city` VALUES ('3201', '3201', '鍗椾含甯', '32', 2);
+INSERT INTO `dic_city` VALUES ('320102', '320102', '鐜勬鍖', '3201', 3);
+INSERT INTO `dic_city` VALUES ('320104', '320104', '绉︽樊鍖', '3201', 3);
+INSERT INTO `dic_city` VALUES ('320105', '320105', '寤洪偤鍖', '3201', 3);
+INSERT INTO `dic_city` VALUES ('320106', '320106', '榧撴ゼ鍖', '3201', 3);
+INSERT INTO `dic_city` VALUES ('320111', '320111', '娴﹀彛鍖', '3201', 3);
+INSERT INTO `dic_city` VALUES ('320113', '320113', '鏍栭湠鍖', '3201', 3);
+INSERT INTO `dic_city` VALUES ('320114', '320114', '闆ㄨ姳鍙板尯', '3201', 3);
+INSERT INTO `dic_city` VALUES ('320115', '320115', '姹熷畞鍖', '3201', 3);
+INSERT INTO `dic_city` VALUES ('320116', '320116', '鍏悎鍖', '3201', 3);
+INSERT INTO `dic_city` VALUES ('320117', '320117', '婧ф按鍖', '3201', 3);
+INSERT INTO `dic_city` VALUES ('320118', '320118', '楂樻烦鍖', '3201', 3);
+INSERT INTO `dic_city` VALUES ('3202', '3202', '鏃犻敗甯', '32', 2);
+INSERT INTO `dic_city` VALUES ('320205', '320205', '閿″北鍖', '3202', 3);
+INSERT INTO `dic_city` VALUES ('320206', '320206', '鎯犲北鍖', '3202', 3);
+INSERT INTO `dic_city` VALUES ('320211', '320211', '婊ㄦ箹鍖', '3202', 3);
+INSERT INTO `dic_city` VALUES ('320213', '320213', '姊佹邯鍖', '3202', 3);
+INSERT INTO `dic_city` VALUES ('320214', '320214', '鏂板惔鍖', '3202', 3);
+INSERT INTO `dic_city` VALUES ('320281', '320281', '姹熼槾甯', '3202', 3);
+INSERT INTO `dic_city` VALUES ('320282', '320282', '瀹滃叴甯', '3202', 3);
+INSERT INTO `dic_city` VALUES ('3203', '3203', '寰愬窞甯', '32', 2);
+INSERT INTO `dic_city` VALUES ('320302', '320302', '榧撴ゼ鍖', '3203', 3);
+INSERT INTO `dic_city` VALUES ('320303', '320303', '浜戦緳鍖', '3203', 3);
+INSERT INTO `dic_city` VALUES ('320305', '320305', '璐炬豹鍖', '3203', 3);
+INSERT INTO `dic_city` VALUES ('320311', '320311', '娉夊北鍖', '3203', 3);
+INSERT INTO `dic_city` VALUES ('320312', '320312', '閾滃北鍖', '3203', 3);
+INSERT INTO `dic_city` VALUES ('320321', '320321', '涓板幙', '3203', 3);
+INSERT INTO `dic_city` VALUES ('320322', '320322', '娌涘幙', '3203', 3);
+INSERT INTO `dic_city` VALUES ('320324', '320324', '鐫㈠畞鍘', '3203', 3);
+INSERT INTO `dic_city` VALUES ('320371', '320371', '寰愬窞缁忔祹鎶€鏈紑鍙戝尯', '3203', 3);
+INSERT INTO `dic_city` VALUES ('320381', '320381', '鏂版矀甯', '3203', 3);
+INSERT INTO `dic_city` VALUES ('320382', '320382', '閭冲窞甯', '3203', 3);
+INSERT INTO `dic_city` VALUES ('3204', '3204', '甯稿窞甯', '32', 2);
+INSERT INTO `dic_city` VALUES ('320402', '320402', '澶╁畞鍖', '3204', 3);
+INSERT INTO `dic_city` VALUES ('320404', '320404', '閽熸ゼ鍖', '3204', 3);
+INSERT INTO `dic_city` VALUES ('320411', '320411', '鏂板寳鍖', '3204', 3);
+INSERT INTO `dic_city` VALUES ('320412', '320412', '姝﹁繘鍖', '3204', 3);
+INSERT INTO `dic_city` VALUES ('320413', '320413', '閲戝潧鍖', '3204', 3);
+INSERT INTO `dic_city` VALUES ('320481', '320481', '婧ч槼甯', '3204', 3);
+INSERT INTO `dic_city` VALUES ('3205', '3205', '鑻忓窞甯', '32', 2);
+INSERT INTO `dic_city` VALUES ('320505', '320505', '铏庝笜鍖', '3205', 3);
+INSERT INTO `dic_city` VALUES ('320506', '320506', '鍚翠腑鍖', '3205', 3);
+INSERT INTO `dic_city` VALUES ('320507', '320507', '鐩稿煄鍖', '3205', 3);
+INSERT INTO `dic_city` VALUES ('320508', '320508', '濮戣嫃鍖', '3205', 3);
+INSERT INTO `dic_city` VALUES ('320509', '320509', '鍚存睙鍖', '3205', 3);
+INSERT INTO `dic_city` VALUES ('320571', '320571', '鑻忓窞宸ヤ笟鍥尯', '3205', 3);
+INSERT INTO `dic_city` VALUES ('320581', '320581', '甯哥啛甯', '3205', 3);
+INSERT INTO `dic_city` VALUES ('320582', '320582', '寮犲娓競', '3205', 3);
+INSERT INTO `dic_city` VALUES ('320583', '320583', '鏄嗗北甯', '3205', 3);
+INSERT INTO `dic_city` VALUES ('320585', '320585', '澶粨甯', '3205', 3);
+INSERT INTO `dic_city` VALUES ('3206', '3206', '鍗楅€氬競', '32', 2);
+INSERT INTO `dic_city` VALUES ('320602', '320602', '宕囧窛鍖', '3206', 3);
+INSERT INTO `dic_city` VALUES ('320611', '320611', '娓椄鍖', '3206', 3);
+INSERT INTO `dic_city` VALUES ('320612', '320612', '閫氬窞鍖', '3206', 3);
+INSERT INTO `dic_city` VALUES ('320623', '320623', '濡備笢鍘', '3206', 3);
+INSERT INTO `dic_city` VALUES ('320671', '320671', '鍗楅€氱粡娴庢妧鏈紑鍙戝尯', '3206', 3);
+INSERT INTO `dic_city` VALUES ('320681', '320681', '鍚笢甯', '3206', 3);
+INSERT INTO `dic_city` VALUES ('320682', '320682', '濡傜殝甯', '3206', 3);
+INSERT INTO `dic_city` VALUES ('320684', '320684', '娴烽棬甯', '3206', 3);
+INSERT INTO `dic_city` VALUES ('320685', '320685', '娴峰畨甯', '3206', 3);
+INSERT INTO `dic_city` VALUES ('3207', '3207', '杩炰簯娓競', '32', 2);
+INSERT INTO `dic_city` VALUES ('320703', '320703', '杩炰簯鍖', '3207', 3);
+INSERT INTO `dic_city` VALUES ('320706', '320706', '娴峰窞鍖', '3207', 3);
+INSERT INTO `dic_city` VALUES ('320707', '320707', '璧ｆ鍖', '3207', 3);
+INSERT INTO `dic_city` VALUES ('320722', '320722', '涓滄捣鍘', '3207', 3);
+INSERT INTO `dic_city` VALUES ('320723', '320723', '鐏屼簯鍘', '3207', 3);
+INSERT INTO `dic_city` VALUES ('320724', '320724', '鐏屽崡鍘', '3207', 3);
+INSERT INTO `dic_city` VALUES ('320771', '320771', '杩炰簯娓粡娴庢妧鏈紑鍙戝尯', '3207', 3);
+INSERT INTO `dic_city` VALUES ('320772', '320772', '杩炰簯娓珮鏂版妧鏈骇涓氬紑鍙戝尯', '3207', 3);
+INSERT INTO `dic_city` VALUES ('3208', '3208', '娣畨甯', '32', 2);
+INSERT INTO `dic_city` VALUES ('320803', '320803', '娣畨鍖', '3208', 3);
+INSERT INTO `dic_city` VALUES ('320804', '320804', '娣槾鍖', '3208', 3);
+INSERT INTO `dic_city` VALUES ('320812', '320812', '娓呮睙娴﹀尯', '3208', 3);
+INSERT INTO `dic_city` VALUES ('320813', '320813', '娲辰鍖', '3208', 3);
+INSERT INTO `dic_city` VALUES ('320826', '320826', '娑熸按鍘', '3208', 3);
+INSERT INTO `dic_city` VALUES ('320830', '320830', '鐩辩湙鍘', '3208', 3);
+INSERT INTO `dic_city` VALUES ('320831', '320831', '閲戞箹鍘', '3208', 3);
+INSERT INTO `dic_city` VALUES ('320871', '320871', '娣畨缁忔祹鎶€鏈紑鍙戝尯', '3208', 3);
+INSERT INTO `dic_city` VALUES ('3209', '3209', '鐩愬煄甯', '32', 2);
+INSERT INTO `dic_city` VALUES ('320902', '320902', '浜箹鍖', '3209', 3);
+INSERT INTO `dic_city` VALUES ('320903', '320903', '鐩愰兘鍖', '3209', 3);
+INSERT INTO `dic_city` VALUES ('320904', '320904', '澶т赴鍖', '3209', 3);
+INSERT INTO `dic_city` VALUES ('320921', '320921', '鍝嶆按鍘', '3209', 3);
+INSERT INTO `dic_city` VALUES ('320922', '320922', '婊ㄦ捣鍘', '3209', 3);
+INSERT INTO `dic_city` VALUES ('320923', '320923', '闃滃畞鍘', '3209', 3);
+INSERT INTO `dic_city` VALUES ('320924', '320924', '灏勯槼鍘', '3209', 3);
+INSERT INTO `dic_city` VALUES ('320925', '320925', '寤烘箹鍘', '3209', 3);
+INSERT INTO `dic_city` VALUES ('320971', '320971', '鐩愬煄缁忔祹鎶€鏈紑鍙戝尯', '3209', 3);
+INSERT INTO `dic_city` VALUES ('320981', '320981', '涓滃彴甯', '3209', 3);
+INSERT INTO `dic_city` VALUES ('3210', '3210', '鎵窞甯', '32', 2);
+INSERT INTO `dic_city` VALUES ('321002', '321002', '骞块櫟鍖', '3210', 3);
+INSERT INTO `dic_city` VALUES ('321003', '321003', '閭楁睙鍖', '3210', 3);
+INSERT INTO `dic_city` VALUES ('321012', '321012', '姹熼兘鍖', '3210', 3);
+INSERT INTO `dic_city` VALUES ('321023', '321023', '瀹濆簲鍘', '3210', 3);
+INSERT INTO `dic_city` VALUES ('321071', '321071', '鎵窞缁忔祹鎶€鏈紑鍙戝尯', '3210', 3);
+INSERT INTO `dic_city` VALUES ('321081', '321081', '浠緛甯', '3210', 3);
+INSERT INTO `dic_city` VALUES ('321084', '321084', '楂橀偖甯', '3210', 3);
+INSERT INTO `dic_city` VALUES ('3211', '3211', '闀囨睙甯', '32', 2);
+INSERT INTO `dic_city` VALUES ('321102', '321102', '浜彛鍖', '3211', 3);
+INSERT INTO `dic_city` VALUES ('321111', '321111', '娑﹀窞鍖', '3211', 3);
+INSERT INTO `dic_city` VALUES ('321112', '321112', '涓瑰緬鍖', '3211', 3);
+INSERT INTO `dic_city` VALUES ('321171', '321171', '闀囨睙鏂板尯', '3211', 3);
+INSERT INTO `dic_city` VALUES ('321181', '321181', '涓归槼甯', '3211', 3);
+INSERT INTO `dic_city` VALUES ('321182', '321182', '鎵腑甯', '3211', 3);
+INSERT INTO `dic_city` VALUES ('321183', '321183', '鍙ュ甯', '3211', 3);
+INSERT INTO `dic_city` VALUES ('3212', '3212', '娉板窞甯', '32', 2);
+INSERT INTO `dic_city` VALUES ('321202', '321202', '娴烽櫟鍖', '3212', 3);
+INSERT INTO `dic_city` VALUES ('321203', '321203', '楂樻腐鍖', '3212', 3);
+INSERT INTO `dic_city` VALUES ('321204', '321204', '濮滃牥鍖', '3212', 3);
+INSERT INTO `dic_city` VALUES ('321271', '321271', '娉板窞鍖昏嵂楂樻柊鎶€鏈骇涓氬紑鍙戝尯', '3212', 3);
+INSERT INTO `dic_city` VALUES ('321281', '321281', '鍏村寲甯', '3212', 3);
+INSERT INTO `dic_city` VALUES ('321282', '321282', '闈栨睙甯', '3212', 3);
+INSERT INTO `dic_city` VALUES ('321283', '321283', '娉板叴甯', '3212', 3);
+INSERT INTO `dic_city` VALUES ('3213', '3213', '瀹胯縼甯', '32', 2);
+INSERT INTO `dic_city` VALUES ('321302', '321302', '瀹垮煄鍖', '3213', 3);
+INSERT INTO `dic_city` VALUES ('321311', '321311', '瀹胯鲍鍖', '3213', 3);
+INSERT INTO `dic_city` VALUES ('321322', '321322', '娌槼鍘', '3213', 3);
+INSERT INTO `dic_city` VALUES ('321323', '321323', '娉楅槼鍘', '3213', 3);
+INSERT INTO `dic_city` VALUES ('321324', '321324', '娉楁椽鍘', '3213', 3);
+INSERT INTO `dic_city` VALUES ('321371', '321371', '瀹胯縼缁忔祹鎶€鏈紑鍙戝尯', '3213', 3);
+INSERT INTO `dic_city` VALUES ('33', '33', '娴欐睙鐪', NULL, 1);
+INSERT INTO `dic_city` VALUES ('3301', '3301', '鏉窞甯', '33', 2);
+INSERT INTO `dic_city` VALUES ('330102', '330102', '涓婂煄鍖', '3301', 3);
+INSERT INTO `dic_city` VALUES ('330103', '330103', '涓嬪煄鍖', '3301', 3);
+INSERT INTO `dic_city` VALUES ('330104', '330104', '姹熷共鍖', '3301', 3);
+INSERT INTO `dic_city` VALUES ('330105', '330105', '鎷卞鍖', '3301', 3);
+INSERT INTO `dic_city` VALUES ('330106', '330106', '瑗挎箹鍖', '3301', 3);
+INSERT INTO `dic_city` VALUES ('330108', '330108', '婊ㄦ睙鍖', '3301', 3);
+INSERT INTO `dic_city` VALUES ('330109', '330109', '钀у北鍖', '3301', 3);
+INSERT INTO `dic_city` VALUES ('330110', '330110', '浣欐澀鍖', '3301', 3);
+INSERT INTO `dic_city` VALUES ('330111', '330111', '瀵岄槼鍖', '3301', 3);
+INSERT INTO `dic_city` VALUES ('330112', '330112', '涓村畨鍖', '3301', 3);
+INSERT INTO `dic_city` VALUES ('330122', '330122', '妗愬簮鍘', '3301', 3);
+INSERT INTO `dic_city` VALUES ('330127', '330127', '娣冲畨鍘', '3301', 3);
+INSERT INTO `dic_city` VALUES ('330182', '330182', '寤哄痉甯', '3301', 3);
+INSERT INTO `dic_city` VALUES ('3302', '3302', '瀹佹尝甯', '33', 2);
+INSERT INTO `dic_city` VALUES ('330203', '330203', '娴锋洐鍖', '3302', 3);
+INSERT INTO `dic_city` VALUES ('330205', '330205', '姹熷寳鍖', '3302', 3);
+INSERT INTO `dic_city` VALUES ('330206', '330206', '鍖椾粦鍖', '3302', 3);
+INSERT INTO `dic_city` VALUES ('330211', '330211', '闀囨捣鍖', '3302', 3);
+INSERT INTO `dic_city` VALUES ('330212', '330212', '閯炲窞鍖', '3302', 3);
+INSERT INTO `dic_city` VALUES ('330213', '330213', '濂夊寲鍖', '3302', 3);
+INSERT INTO `dic_city` VALUES ('330225', '330225', '璞″北鍘', '3302', 3);
+INSERT INTO `dic_city` VALUES ('330226', '330226', '瀹佹捣鍘', '3302', 3);
+INSERT INTO `dic_city` VALUES ('330281', '330281', '浣欏甯', '3302', 3);
+INSERT INTO `dic_city` VALUES ('330282', '330282', '鎱堟邯甯', '3302', 3);
+INSERT INTO `dic_city` VALUES ('3303', '3303', '娓╁窞甯', '33', 2);
+INSERT INTO `dic_city` VALUES ('330302', '330302', '楣垮煄鍖', '3303', 3);
+INSERT INTO `dic_city` VALUES ('330303', '330303', '榫欐咕鍖', '3303', 3);
+INSERT INTO `dic_city` VALUES ('330304', '330304', '鐡捣鍖', '3303', 3);
+INSERT INTO `dic_city` VALUES ('330305', '330305', '娲炲ご鍖', '3303', 3);
+INSERT INTO `dic_city` VALUES ('330324', '330324', '姘稿槈鍘', '3303', 3);
+INSERT INTO `dic_city` VALUES ('330326', '330326', '骞抽槼鍘', '3303', 3);
+INSERT INTO `dic_city` VALUES ('330327', '330327', '鑻嶅崡鍘', '3303', 3);
+INSERT INTO `dic_city` VALUES ('330328', '330328', '鏂囨垚鍘', '3303', 3);
+INSERT INTO `dic_city` VALUES ('330329', '330329', '娉伴『鍘', '3303', 3);
+INSERT INTO `dic_city` VALUES ('330371', '330371', '娓╁窞缁忔祹鎶€鏈紑鍙戝尯', '3303', 3);
+INSERT INTO `dic_city` VALUES ('330381', '330381', '鐟炲畨甯', '3303', 3);
+INSERT INTO `dic_city` VALUES ('330382', '330382', '涔愭竻甯', '3303', 3);
+INSERT INTO `dic_city` VALUES ('330383', '330383', '榫欐腐甯', '3303', 3);
+INSERT INTO `dic_city` VALUES ('3304', '3304', '鍢夊叴甯', '33', 2);
+INSERT INTO `dic_city` VALUES ('330402', '330402', '鍗楁箹鍖', '3304', 3);
+INSERT INTO `dic_city` VALUES ('330411', '330411', '绉€娲插尯', '3304', 3);
+INSERT INTO `dic_city` VALUES ('330421', '330421', '鍢夊杽鍘', '3304', 3);
+INSERT INTO `dic_city` VALUES ('330424', '330424', '娴风洂鍘', '3304', 3);
+INSERT INTO `dic_city` VALUES ('330481', '330481', '娴峰畞甯', '3304', 3);
+INSERT INTO `dic_city` VALUES ('330482', '330482', '骞虫箹甯', '3304', 3);
+INSERT INTO `dic_city` VALUES ('330483', '330483', '妗愪埂甯', '3304', 3);
+INSERT INTO `dic_city` VALUES ('3305', '3305', '婀栧窞甯', '33', 2);
+INSERT INTO `dic_city` VALUES ('330502', '330502', '鍚村叴鍖', '3305', 3);
+INSERT INTO `dic_city` VALUES ('330503', '330503', '鍗楁禂鍖', '3305', 3);
+INSERT INTO `dic_city` VALUES ('330521', '330521', '寰锋竻鍘', '3305', 3);
+INSERT INTO `dic_city` VALUES ('330522', '330522', '闀垮叴鍘', '3305', 3);
+INSERT INTO `dic_city` VALUES ('330523', '330523', '瀹夊悏鍘', '3305', 3);
+INSERT INTO `dic_city` VALUES ('3306', '3306', '缁嶅叴甯', '33', 2);
+INSERT INTO `dic_city` VALUES ('330602', '330602', '瓒婂煄鍖', '3306', 3);
+INSERT INTO `dic_city` VALUES ('330603', '330603', '鏌ˉ鍖', '3306', 3);
+INSERT INTO `dic_city` VALUES ('330604', '330604', '涓婅櫈鍖', '3306', 3);
+INSERT INTO `dic_city` VALUES ('330624', '330624', '鏂版槍鍘', '3306', 3);
+INSERT INTO `dic_city` VALUES ('330681', '330681', '璇告毃甯', '3306', 3);
+INSERT INTO `dic_city` VALUES ('330683', '330683', '宓婂窞甯', '3306', 3);
+INSERT INTO `dic_city` VALUES ('3307', '3307', '閲戝崕甯', '33', 2);
+INSERT INTO `dic_city` VALUES ('330702', '330702', '濠哄煄鍖', '3307', 3);
+INSERT INTO `dic_city` VALUES ('330703', '330703', '閲戜笢鍖', '3307', 3);
+INSERT INTO `dic_city` VALUES ('330723', '330723', '姝︿箟鍘', '3307', 3);
+INSERT INTO `dic_city` VALUES ('330726', '330726', '娴︽睙鍘', '3307', 3);
+INSERT INTO `dic_city` VALUES ('330727', '330727', '纾愬畨鍘', '3307', 3);
+INSERT INTO `dic_city` VALUES ('330781', '330781', '鍏版邯甯', '3307', 3);
+INSERT INTO `dic_city` VALUES ('330782', '330782', '涔変箤甯', '3307', 3);
+INSERT INTO `dic_city` VALUES ('330783', '330783', '涓滈槼甯', '3307', 3);
+INSERT INTO `dic_city` VALUES ('330784', '330784', '姘稿悍甯', '3307', 3);
+INSERT INTO `dic_city` VALUES ('3308', '3308', '琛㈠窞甯', '33', 2);
+INSERT INTO `dic_city` VALUES ('330802', '330802', '鏌煄鍖', '3308', 3);
+INSERT INTO `dic_city` VALUES ('330803', '330803', '琛㈡睙鍖', '3308', 3);
+INSERT INTO `dic_city` VALUES ('330822', '330822', '甯稿北鍘', '3308', 3);
+INSERT INTO `dic_city` VALUES ('330824', '330824', '寮€鍖栧幙', '3308', 3);
+INSERT INTO `dic_city` VALUES ('330825', '330825', '榫欐父鍘', '3308', 3);
+INSERT INTO `dic_city` VALUES ('330881', '330881', '姹熷北甯', '3308', 3);
+INSERT INTO `dic_city` VALUES ('3309', '3309', '鑸熷北甯', '33', 2);
+INSERT INTO `dic_city` VALUES ('330902', '330902', '瀹氭捣鍖', '3309', 3);
+INSERT INTO `dic_city` VALUES ('330903', '330903', '鏅檧鍖', '3309', 3);
+INSERT INTO `dic_city` VALUES ('330921', '330921', '宀卞北鍘', '3309', 3);
+INSERT INTO `dic_city` VALUES ('330922', '330922', '宓婃硹鍘', '3309', 3);
+INSERT INTO `dic_city` VALUES ('3310', '3310', '鍙板窞甯', '33', 2);
+INSERT INTO `dic_city` VALUES ('331002', '331002', '妞掓睙鍖', '3310', 3);
+INSERT INTO `dic_city` VALUES ('331003', '331003', '榛勫博鍖', '3310', 3);
+INSERT INTO `dic_city` VALUES ('331004', '331004', '璺ˉ鍖', '3310', 3);
+INSERT INTO `dic_city` VALUES ('331022', '331022', '涓夐棬鍘', '3310', 3);
+INSERT INTO `dic_city` VALUES ('331023', '331023', '澶╁彴鍘', '3310', 3);
+INSERT INTO `dic_city` VALUES ('331024', '331024', '浠欏眳鍘', '3310', 3);
+INSERT INTO `dic_city` VALUES ('331081', '331081', '娓╁箔甯', '3310', 3);
+INSERT INTO `dic_city` VALUES ('331082', '331082', '涓存捣甯', '3310', 3);
+INSERT INTO `dic_city` VALUES ('331083', '331083', '鐜夌幆甯', '3310', 3);
+INSERT INTO `dic_city` VALUES ('3311', '3311', '涓芥按甯', '33', 2);
+INSERT INTO `dic_city` VALUES ('331102', '331102', '鑾查兘鍖', '3311', 3);
+INSERT INTO `dic_city` VALUES ('331121', '331121', '闈掔敯鍘', '3311', 3);
+INSERT INTO `dic_city` VALUES ('331122', '331122', '缂欎簯鍘', '3311', 3);
+INSERT INTO `dic_city` VALUES ('331123', '331123', '閬傛槍鍘', '3311', 3);
+INSERT INTO `dic_city` VALUES ('331124', '331124', '鏉鹃槼鍘', '3311', 3);
+INSERT INTO `dic_city` VALUES ('331125', '331125', '浜戝拰鍘', '3311', 3);
+INSERT INTO `dic_city` VALUES ('331126', '331126', '搴嗗厓鍘', '3311', 3);
+INSERT INTO `dic_city` VALUES ('331127', '331127', '鏅畞鐣叉棌鑷不鍘', '3311', 3);
+INSERT INTO `dic_city` VALUES ('331181', '331181', '榫欐硥甯', '3311', 3);
+INSERT INTO `dic_city` VALUES ('34', '34', '瀹夊窘鐪', NULL, 1);
+INSERT INTO `dic_city` VALUES ('3401', '3401', '鍚堣偉甯', '34', 2);
+INSERT INTO `dic_city` VALUES ('340102', '340102', '鐟舵捣鍖', '3401', 3);
+INSERT INTO `dic_city` VALUES ('340103', '340103', '搴愰槼鍖', '3401', 3);
+INSERT INTO `dic_city` VALUES ('340104', '340104', '铚€灞卞尯', '3401', 3);
+INSERT INTO `dic_city` VALUES ('340111', '340111', '鍖呮渤鍖', '3401', 3);
+INSERT INTO `dic_city` VALUES ('340121', '340121', '闀夸赴鍘', '3401', 3);
+INSERT INTO `dic_city` VALUES ('340122', '340122', '鑲ヤ笢鍘', '3401', 3);
+INSERT INTO `dic_city` VALUES ('340123', '340123', '鑲ヨタ鍘', '3401', 3);
+INSERT INTO `dic_city` VALUES ('340124', '340124', '搴愭睙鍘', '3401', 3);
+INSERT INTO `dic_city` VALUES ('340171', '340171', '鍚堣偉楂樻柊鎶€鏈骇涓氬紑鍙戝尯', '3401', 3);
+INSERT INTO `dic_city` VALUES ('340172', '340172', '鍚堣偉缁忔祹鎶€鏈紑鍙戝尯', '3401', 3);
+INSERT INTO `dic_city` VALUES ('340173', '340173', '鍚堣偉鏂扮珯楂樻柊鎶€鏈骇涓氬紑鍙戝尯', '3401', 3);
+INSERT INTO `dic_city` VALUES ('340181', '340181', '宸㈡箹甯', '3401', 3);
+INSERT INTO `dic_city` VALUES ('3402', '3402', '鑺滄箹甯', '34', 2);
+INSERT INTO `dic_city` VALUES ('340202', '340202', '闀滄箹鍖', '3402', 3);
+INSERT INTO `dic_city` VALUES ('340203', '340203', '寮嬫睙鍖', '3402', 3);
+INSERT INTO `dic_city` VALUES ('340207', '340207', '楦犳睙鍖', '3402', 3);
+INSERT INTO `dic_city` VALUES ('340208', '340208', '涓夊北鍖', '3402', 3);
+INSERT INTO `dic_city` VALUES ('340221', '340221', '鑺滄箹鍘', '3402', 3);
+INSERT INTO `dic_city` VALUES ('340222', '340222', '绻佹槍鍘', '3402', 3);
+INSERT INTO `dic_city` VALUES ('340223', '340223', '鍗楅櫟鍘', '3402', 3);
+INSERT INTO `dic_city` VALUES ('340271', '340271', '鑺滄箹缁忔祹鎶€鏈紑鍙戝尯', '3402', 3);
+INSERT INTO `dic_city` VALUES ('340272', '340272', '瀹夊窘鑺滄箹闀挎睙澶фˉ缁忔祹寮€鍙戝尯', '3402', 3);
+INSERT INTO `dic_city` VALUES ('340281', '340281', '鏃犱负甯', '3402', 3);
+INSERT INTO `dic_city` VALUES ('3403', '3403', '铓屽煚甯', '34', 2);
+INSERT INTO `dic_city` VALUES ('340302', '340302', '榫欏瓙婀栧尯', '3403', 3);
+INSERT INTO `dic_city` VALUES ('340303', '340303', '铓屽北鍖', '3403', 3);
+INSERT INTO `dic_city` VALUES ('340304', '340304', '绂逛細鍖', '3403', 3);
+INSERT INTO `dic_city` VALUES ('340311', '340311', '娣笂鍖', '3403', 3);
+INSERT INTO `dic_city` VALUES ('340321', '340321', '鎬€杩滃幙', '3403', 3);
+INSERT INTO `dic_city` VALUES ('340322', '340322', '浜旀渤鍘', '3403', 3);
+INSERT INTO `dic_city` VALUES ('340323', '340323', '鍥洪晣鍘', '3403', 3);
+INSERT INTO `dic_city` VALUES ('340371', '340371', '铓屽煚甯傞珮鏂版妧鏈紑鍙戝尯', '3403', 3);
+INSERT INTO `dic_city` VALUES ('340372', '340372', '铓屽煚甯傜粡娴庡紑鍙戝尯', '3403', 3);
+INSERT INTO `dic_city` VALUES ('3404', '3404', '娣崡甯', '34', 2);
+INSERT INTO `dic_city` VALUES ('340402', '340402', '澶ч€氬尯', '3404', 3);
+INSERT INTO `dic_city` VALUES ('340403', '340403', '鐢板搴靛尯', '3404', 3);
+INSERT INTO `dic_city` VALUES ('340404', '340404', '璋㈠闆嗗尯', '3404', 3);
+INSERT INTO `dic_city` VALUES ('340405', '340405', '鍏叕灞卞尯', '3404', 3);
+INSERT INTO `dic_city` VALUES ('340406', '340406', '娼橀泦鍖', '3404', 3);
+INSERT INTO `dic_city` VALUES ('340421', '340421', '鍑ゅ彴鍘', '3404', 3);
+INSERT INTO `dic_city` VALUES ('340422', '340422', '瀵垮幙', '3404', 3);
+INSERT INTO `dic_city` VALUES ('3405', '3405', '椹瀺灞卞競', '34', 2);
+INSERT INTO `dic_city` VALUES ('340503', '340503', '鑺卞北鍖', '3405', 3);
+INSERT INTO `dic_city` VALUES ('340504', '340504', '闆ㄥ北鍖', '3405', 3);
+INSERT INTO `dic_city` VALUES ('340506', '340506', '鍗氭湜鍖', '3405', 3);
+INSERT INTO `dic_city` VALUES ('340521', '340521', '褰撴秱鍘', '3405', 3);
+INSERT INTO `dic_city` VALUES ('340522', '340522', '鍚北鍘', '3405', 3);
+INSERT INTO `dic_city` VALUES ('340523', '340523', '鍜屽幙', '3405', 3);
+INSERT INTO `dic_city` VALUES ('3406', '3406', '娣寳甯', '34', 2);
+INSERT INTO `dic_city` VALUES ('340602', '340602', '鏉滈泦鍖', '3406', 3);
+INSERT INTO `dic_city` VALUES ('340603', '340603', '鐩稿北鍖', '3406', 3);
+INSERT INTO `dic_city` VALUES ('340604', '340604', '鐑堝北鍖', '3406', 3);
+INSERT INTO `dic_city` VALUES ('340621', '340621', '婵夋邯鍘', '3406', 3);
+INSERT INTO `dic_city` VALUES ('3407', '3407', '閾滈櫟甯', '34', 2);
+INSERT INTO `dic_city` VALUES ('340705', '340705', '閾滃畼鍖', '3407', 3);
+INSERT INTO `dic_city` VALUES ('340706', '340706', '涔夊畨鍖', '3407', 3);
+INSERT INTO `dic_city` VALUES ('340711', '340711', '閮婂尯', '3407', 3);
+INSERT INTO `dic_city` VALUES ('340722', '340722', '鏋為槼鍘', '3407', 3);
+INSERT INTO `dic_city` VALUES ('3408', '3408', '瀹夊簡甯', '34', 2);
+INSERT INTO `dic_city` VALUES ('340802', '340802', '杩庢睙鍖', '3408', 3);
+INSERT INTO `dic_city` VALUES ('340803', '340803', '澶ц鍖', '3408', 3);
+INSERT INTO `dic_city` VALUES ('340811', '340811', '瀹滅鍖', '3408', 3);
+INSERT INTO `dic_city` VALUES ('340822', '340822', '鎬€瀹佸幙', '3408', 3);
+INSERT INTO `dic_city` VALUES ('340825', '340825', '澶箹鍘', '3408', 3);
+INSERT INTO `dic_city` VALUES ('340826', '340826', '瀹挎澗鍘', '3408', 3);
+INSERT INTO `dic_city` VALUES ('340827', '340827', '鏈涙睙鍘', '3408', 3);
+INSERT INTO `dic_city` VALUES ('340828', '340828', '宀宠タ鍘', '3408', 3);
+INSERT INTO `dic_city` VALUES ('340871', '340871', '瀹夊窘瀹夊簡缁忔祹寮€鍙戝尯', '3408', 3);
+INSERT INTO `dic_city` VALUES ('340881', '340881', '妗愬煄甯', '3408', 3);
+INSERT INTO `dic_city` VALUES ('340882', '340882', '娼滃北甯', '3408', 3);
+INSERT INTO `dic_city` VALUES ('3410', '3410', '榛勫北甯', '34', 2);
+INSERT INTO `dic_city` VALUES ('341002', '341002', '灞邯鍖', '3410', 3);
+INSERT INTO `dic_city` VALUES ('341003', '341003', '榛勫北鍖', '3410', 3);
+INSERT INTO `dic_city` VALUES ('341004', '341004', '寰藉窞鍖', '3410', 3);
+INSERT INTO `dic_city` VALUES ('341021', '341021', '姝欏幙', '3410', 3);
+INSERT INTO `dic_city` VALUES ('341022', '341022', '浼戝畞鍘', '3410', 3);
+INSERT INTO `dic_city` VALUES ('341023', '341023', '榛熷幙', '3410', 3);
+INSERT INTO `dic_city` VALUES ('341024', '341024', '绁侀棬鍘', '3410', 3);
+INSERT INTO `dic_city` VALUES ('3411', '3411', '婊佸窞甯', '34', 2);
+INSERT INTO `dic_city` VALUES ('341102', '341102', '鐞呯悐鍖', '3411', 3);
+INSERT INTO `dic_city` VALUES ('341103', '341103', '鍗楄隘鍖', '3411', 3);
+INSERT INTO `dic_city` VALUES ('341122', '341122', '鏉ュ畨鍘', '3411', 3);
+INSERT INTO `dic_city` VALUES ('341124', '341124', '鍏ㄦ鍘', '3411', 3);
+INSERT INTO `dic_city` VALUES ('341125', '341125', '瀹氳繙鍘', '3411', 3);
+INSERT INTO `dic_city` VALUES ('341126', '341126', '鍑ら槼鍘', '3411', 3);
+INSERT INTO `dic_city` VALUES ('341171', '341171', '鑻忔粊鐜颁唬浜т笟鍥', '3411', 3);
+INSERT INTO `dic_city` VALUES ('341172', '341172', '婊佸窞缁忔祹鎶€鏈紑鍙戝尯', '3411', 3);
+INSERT INTO `dic_city` VALUES ('341181', '341181', '澶╅暱甯', '3411', 3);
+INSERT INTO `dic_city` VALUES ('341182', '341182', '鏄庡厜甯', '3411', 3);
+INSERT INTO `dic_city` VALUES ('3412', '3412', '闃滈槼甯', '34', 2);
+INSERT INTO `dic_city` VALUES ('341202', '341202', '棰嶅窞鍖', '3412', 3);
+INSERT INTO `dic_city` VALUES ('341203', '341203', '棰嶄笢鍖', '3412', 3);
+INSERT INTO `dic_city` VALUES ('341204', '341204', '棰嶆硥鍖', '3412', 3);
+INSERT INTO `dic_city` VALUES ('341221', '341221', '涓存硥鍘', '3412', 3);
+INSERT INTO `dic_city` VALUES ('341222', '341222', '澶拰鍘', '3412', 3);
+INSERT INTO `dic_city` VALUES ('341225', '341225', '闃滃崡鍘', '3412', 3);
+INSERT INTO `dic_city` VALUES ('341226', '341226', '棰嶄笂鍘', '3412', 3);
+INSERT INTO `dic_city` VALUES ('341271', '341271', '闃滈槼鍚堣偉鐜颁唬浜т笟鍥尯', '3412', 3);
+INSERT INTO `dic_city` VALUES ('341272', '341272', '闃滈槼缁忔祹鎶€鏈紑鍙戝尯', '3412', 3);
+INSERT INTO `dic_city` VALUES ('341282', '341282', '鐣岄甯', '3412', 3);
+INSERT INTO `dic_city` VALUES ('3413', '3413', '瀹垮窞甯', '34', 2);
+INSERT INTO `dic_city` VALUES ('341302', '341302', '鍩囨ˉ鍖', '3413', 3);
+INSERT INTO `dic_city` VALUES ('341321', '341321', '鐮€灞卞幙', '3413', 3);
+INSERT INTO `dic_city` VALUES ('341322', '341322', '钀у幙', '3413', 3);
+INSERT INTO `dic_city` VALUES ('341323', '341323', '鐏电挧鍘', '3413', 3);
+INSERT INTO `dic_city` VALUES ('341324', '341324', '娉楀幙', '3413', 3);
+INSERT INTO `dic_city` VALUES ('341371', '341371', '瀹垮窞椹瀺灞辩幇浠ｄ骇涓氬洯鍖', '3413', 3);
+INSERT INTO `dic_city` VALUES ('341372', '341372', '瀹垮窞缁忔祹鎶€鏈紑鍙戝尯', '3413', 3);
+INSERT INTO `dic_city` VALUES ('3415', '3415', '鍏畨甯', '34', 2);
+INSERT INTO `dic_city` VALUES ('341502', '341502', '閲戝畨鍖', '3415', 3);
+INSERT INTO `dic_city` VALUES ('341503', '341503', '瑁曞畨鍖', '3415', 3);
+INSERT INTO `dic_city` VALUES ('341504', '341504', '鍙堕泦鍖', '3415', 3);
+INSERT INTO `dic_city` VALUES ('341522', '341522', '闇嶉偙鍘', '3415', 3);
+INSERT INTO `dic_city` VALUES ('341523', '341523', '鑸掑煄鍘', '3415', 3);
+INSERT INTO `dic_city` VALUES ('341524', '341524', '閲戝鍘', '3415', 3);
+INSERT INTO `dic_city` VALUES ('341525', '341525', '闇嶅北鍘', '3415', 3);
+INSERT INTO `dic_city` VALUES ('3416', '3416', '浜冲窞甯', '34', 2);
+INSERT INTO `dic_city` VALUES ('341602', '341602', '璋煄鍖', '3416', 3);
+INSERT INTO `dic_city` VALUES ('341621', '341621', '娑￠槼鍘', '3416', 3);
+INSERT INTO `dic_city` VALUES ('341622', '341622', '钂欏煄鍘', '3416', 3);
+INSERT INTO `dic_city` VALUES ('341623', '341623', '鍒╄緵鍘', '3416', 3);
+INSERT INTO `dic_city` VALUES ('3417', '3417', '姹犲窞甯', '34', 2);
+INSERT INTO `dic_city` VALUES ('341702', '341702', '璐垫睜鍖', '3417', 3);
+INSERT INTO `dic_city` VALUES ('341721', '341721', '涓滆嚦鍘', '3417', 3);
+INSERT INTO `dic_city` VALUES ('341722', '341722', '鐭冲彴鍘', '3417', 3);
+INSERT INTO `dic_city` VALUES ('341723', '341723', '闈掗槼鍘', '3417', 3);
+INSERT INTO `dic_city` VALUES ('3418', '3418', '瀹ｅ煄甯', '34', 2);
+INSERT INTO `dic_city` VALUES ('341802', '341802', '瀹ｅ窞鍖', '3418', 3);
+INSERT INTO `dic_city` VALUES ('341821', '341821', '閮庢邯鍘', '3418', 3);
+INSERT INTO `dic_city` VALUES ('341823', '341823', '娉惧幙', '3418', 3);
+INSERT INTO `dic_city` VALUES ('341824', '341824', '缁╂邯鍘', '3418', 3);
+INSERT INTO `dic_city` VALUES ('341825', '341825', '鏃屽痉鍘', '3418', 3);
+INSERT INTO `dic_city` VALUES ('341871', '341871', '瀹ｅ煄甯傜粡娴庡紑鍙戝尯', '3418', 3);
+INSERT INTO `dic_city` VALUES ('341881', '341881', '瀹佸浗甯', '3418', 3);
+INSERT INTO `dic_city` VALUES ('341882', '341882', '骞垮痉甯', '3418', 3);
+INSERT INTO `dic_city` VALUES ('35', '35', '绂忓缓鐪', NULL, 1);
+INSERT INTO `dic_city` VALUES ('3501', '3501', '绂忓窞甯', '35', 2);
+INSERT INTO `dic_city` VALUES ('350102', '350102', '榧撴ゼ鍖', '3501', 3);
+INSERT INTO `dic_city` VALUES ('350103', '350103', '鍙版睙鍖', '3501', 3);
+INSERT INTO `dic_city` VALUES ('350104', '350104', '浠撳北鍖', '3501', 3);
+INSERT INTO `dic_city` VALUES ('350105', '350105', '椹熬鍖', '3501', 3);
+INSERT INTO `dic_city` VALUES ('350111', '350111', '鏅嬪畨鍖', '3501', 3);
+INSERT INTO `dic_city` VALUES ('350112', '350112', '闀夸箰鍖', '3501', 3);
+INSERT INTO `dic_city` VALUES ('350121', '350121', '闂戒警鍘', '3501', 3);
+INSERT INTO `dic_city` VALUES ('350122', '350122', '杩炴睙鍘', '3501', 3);
+INSERT INTO `dic_city` VALUES ('350123', '350123', '缃楁簮鍘', '3501', 3);
+INSERT INTO `dic_city` VALUES ('350124', '350124', '闂芥竻鍘', '3501', 3);
+INSERT INTO `dic_city` VALUES ('350125', '350125', '姘告嘲鍘', '3501', 3);
+INSERT INTO `dic_city` VALUES ('350128', '350128', '骞虫江鍘', '3501', 3);
+INSERT INTO `dic_city` VALUES ('350181', '350181', '绂忔竻甯', '3501', 3);
+INSERT INTO `dic_city` VALUES ('3502', '3502', '鍘﹂棬甯', '35', 2);
+INSERT INTO `dic_city` VALUES ('350203', '350203', '鎬濇槑鍖', '3502', 3);
+INSERT INTO `dic_city` VALUES ('350205', '350205', '娴锋钵鍖', '3502', 3);
+INSERT INTO `dic_city` VALUES ('350206', '350206', '婀栭噷鍖', '3502', 3);
+INSERT INTO `dic_city` VALUES ('350211', '350211', '闆嗙編鍖', '3502', 3);
+INSERT INTO `dic_city` VALUES ('350212', '350212', '鍚屽畨鍖', '3502', 3);
+INSERT INTO `dic_city` VALUES ('350213', '350213', '缈斿畨鍖', '3502', 3);
+INSERT INTO `dic_city` VALUES ('3503', '3503', '鑾嗙敯甯', '35', 2);
+INSERT INTO `dic_city` VALUES ('350302', '350302', '鍩庡帰鍖', '3503', 3);
+INSERT INTO `dic_city` VALUES ('350303', '350303', '娑垫睙鍖', '3503', 3);
+INSERT INTO `dic_city` VALUES ('350304', '350304', '鑽斿煄鍖', '3503', 3);
+INSERT INTO `dic_city` VALUES ('350305', '350305', '绉€灞垮尯', '3503', 3);
+INSERT INTO `dic_city` VALUES ('350322', '350322', '浠欐父鍘', '3503', 3);
+INSERT INTO `dic_city` VALUES ('3504', '3504', '涓夋槑甯', '35', 2);
+INSERT INTO `dic_city` VALUES ('350402', '350402', '姊呭垪鍖', '3504', 3);
+INSERT INTO `dic_city` VALUES ('350403', '350403', '涓夊厓鍖', '3504', 3);
+INSERT INTO `dic_city` VALUES ('350421', '350421', '鏄庢邯鍘', '3504', 3);
+INSERT INTO `dic_city` VALUES ('350423', '350423', '娓呮祦鍘', '3504', 3);
+INSERT INTO `dic_city` VALUES ('350424', '350424', '瀹佸寲鍘', '3504', 3);
+INSERT INTO `dic_city` VALUES ('350425', '350425', '澶х敯鍘', '3504', 3);
+INSERT INTO `dic_city` VALUES ('350426', '350426', '灏ゆ邯鍘', '3504', 3);
+INSERT INTO `dic_city` VALUES ('350427', '350427', '娌欏幙', '3504', 3);
+INSERT INTO `dic_city` VALUES ('350428', '350428', '灏嗕箰鍘', '3504', 3);
+INSERT INTO `dic_city` VALUES ('350429', '350429', '娉板畞鍘', '3504', 3);
+INSERT INTO `dic_city` VALUES ('350430', '350430', '寤哄畞鍘', '3504', 3);
+INSERT INTO `dic_city` VALUES ('350481', '350481', '姘稿畨甯', '3504', 3);
+INSERT INTO `dic_city` VALUES ('3505', '3505', '娉夊窞甯', '35', 2);
+INSERT INTO `dic_city` VALUES ('350502', '350502', '椴ゅ煄鍖', '3505', 3);
+INSERT INTO `dic_city` VALUES ('350503', '350503', '涓版辰鍖', '3505', 3);
+INSERT INTO `dic_city` VALUES ('350504', '350504', '娲涙睙鍖', '3505', 3);
+INSERT INTO `dic_city` VALUES ('350505', '350505', '娉夋腐鍖', '3505', 3);
+INSERT INTO `dic_city` VALUES ('350521', '350521', '鎯犲畨鍘', '3505', 3);
+INSERT INTO `dic_city` VALUES ('350524', '350524', '瀹夋邯鍘', '3505', 3);
+INSERT INTO `dic_city` VALUES ('350525', '350525', '姘告槬鍘', '3505', 3);
+INSERT INTO `dic_city` VALUES ('350526', '350526', '寰峰寲鍘', '3505', 3);
+INSERT INTO `dic_city` VALUES ('350527', '350527', '閲戦棬鍘', '3505', 3);
+INSERT INTO `dic_city` VALUES ('350581', '350581', '鐭崇嫯甯', '3505', 3);
+INSERT INTO `dic_city` VALUES ('350582', '350582', '鏅嬫睙甯', '3505', 3);
+INSERT INTO `dic_city` VALUES ('350583', '350583', '鍗楀畨甯', '3505', 3);
+INSERT INTO `dic_city` VALUES ('3506', '3506', '婕冲窞甯', '35', 2);
+INSERT INTO `dic_city` VALUES ('350602', '350602', '鑺楀煄鍖', '3506', 3);
+INSERT INTO `dic_city` VALUES ('350603', '350603', '榫欐枃鍖', '3506', 3);
+INSERT INTO `dic_city` VALUES ('350622', '350622', '浜戦渼鍘', '3506', 3);
+INSERT INTO `dic_city` VALUES ('350623', '350623', '婕虫郸鍘', '3506', 3);
+INSERT INTO `dic_city` VALUES ('350624', '350624', '璇忓畨鍘', '3506', 3);
+INSERT INTO `dic_city` VALUES ('350625', '350625', '闀挎嘲鍘', '3506', 3);
+INSERT INTO `dic_city` VALUES ('350626', '350626', '涓滃北鍘', '3506', 3);
+INSERT INTO `dic_city` VALUES ('350627', '350627', '鍗楅潠鍘', '3506', 3);
+INSERT INTO `dic_city` VALUES ('350628', '350628', '骞冲拰鍘', '3506', 3);
+INSERT INTO `dic_city` VALUES ('350629', '350629', '鍗庡畨鍘', '3506', 3);
+INSERT INTO `dic_city` VALUES ('350681', '350681', '榫欐捣甯', '3506', 3);
+INSERT INTO `dic_city` VALUES ('3507', '3507', '鍗楀钩甯', '35', 2);
+INSERT INTO `dic_city` VALUES ('350702', '350702', '寤跺钩鍖', '3507', 3);
+INSERT INTO `dic_city` VALUES ('350703', '350703', '寤洪槼鍖', '3507', 3);
+INSERT INTO `dic_city` VALUES ('350721', '350721', '椤烘槍鍘', '3507', 3);
+INSERT INTO `dic_city` VALUES ('350722', '350722', '娴﹀煄鍘', '3507', 3);
+INSERT INTO `dic_city` VALUES ('350723', '350723', '鍏夋辰鍘', '3507', 3);
+INSERT INTO `dic_city` VALUES ('350724', '350724', '鏉炬邯鍘', '3507', 3);
+INSERT INTO `dic_city` VALUES ('350725', '350725', '鏀垮拰鍘', '3507', 3);
+INSERT INTO `dic_city` VALUES ('350781', '350781', '閭垫甯', '3507', 3);
+INSERT INTO `dic_city` VALUES ('350782', '350782', '姝﹀し灞卞競', '3507', 3);
+INSERT INTO `dic_city` VALUES ('350783', '350783', '寤虹摨甯', '3507', 3);
+INSERT INTO `dic_city` VALUES ('3508', '3508', '榫欏博甯', '35', 2);
+INSERT INTO `dic_city` VALUES ('350802', '350802', '鏂扮綏鍖', '3508', 3);
+INSERT INTO `dic_city` VALUES ('350803', '350803', '姘稿畾鍖', '3508', 3);
+INSERT INTO `dic_city` VALUES ('350821', '350821', '闀挎眬鍘', '3508', 3);
+INSERT INTO `dic_city` VALUES ('350823', '350823', '涓婃澀鍘', '3508', 3);
+INSERT INTO `dic_city` VALUES ('350824', '350824', '姝﹀钩鍘', '3508', 3);
+INSERT INTO `dic_city` VALUES ('350825', '350825', '杩炲煄鍘', '3508', 3);
+INSERT INTO `dic_city` VALUES ('350881', '350881', '婕冲钩甯', '3508', 3);
+INSERT INTO `dic_city` VALUES ('3509', '3509', '瀹佸痉甯', '35', 2);
+INSERT INTO `dic_city` VALUES ('350902', '350902', '钑夊煄鍖', '3509', 3);
+INSERT INTO `dic_city` VALUES ('350921', '350921', '闇炴郸鍘', '3509', 3);
+INSERT INTO `dic_city` VALUES ('350922', '350922', '鍙ょ敯鍘', '3509', 3);
+INSERT INTO `dic_city` VALUES ('350923', '350923', '灞忓崡鍘', '3509', 3);
+INSERT INTO `dic_city` VALUES ('350924', '350924', '瀵垮畞鍘', '3509', 3);
+INSERT INTO `dic_city` VALUES ('350925', '350925', '鍛ㄥ畞鍘', '3509', 3);
+INSERT INTO `dic_city` VALUES ('350926', '350926', '鏌樿崳鍘', '3509', 3);
+INSERT INTO `dic_city` VALUES ('350981', '350981', '绂忓畨甯', '3509', 3);
+INSERT INTO `dic_city` VALUES ('350982', '350982', '绂忛紟甯', '3509', 3);
+INSERT INTO `dic_city` VALUES ('36', '36', '姹熻タ鐪', NULL, 1);
+INSERT INTO `dic_city` VALUES ('3601', '3601', '鍗楁槍甯', '36', 2);
+INSERT INTO `dic_city` VALUES ('360102', '360102', '涓滄箹鍖', '3601', 3);
+INSERT INTO `dic_city` VALUES ('360103', '360103', '瑗挎箹鍖', '3601', 3);
+INSERT INTO `dic_city` VALUES ('360104', '360104', '闈掍簯璋卞尯', '3601', 3);
+INSERT INTO `dic_city` VALUES ('360111', '360111', '闈掑北婀栧尯', '3601', 3);
+INSERT INTO `dic_city` VALUES ('360112', '360112', '鏂板缓鍖', '3601', 3);
+INSERT INTO `dic_city` VALUES ('360113', '360113', '绾㈣胺婊╁尯', '3601', 3);
+INSERT INTO `dic_city` VALUES ('360121', '360121', '鍗楁槍鍘', '3601', 3);
+INSERT INTO `dic_city` VALUES ('360123', '360123', '瀹変箟鍘', '3601', 3);
+INSERT INTO `dic_city` VALUES ('360124', '360124', '杩涜搐鍘', '3601', 3);
+INSERT INTO `dic_city` VALUES ('3602', '3602', '鏅痉闀囧競', '36', 2);
+INSERT INTO `dic_city` VALUES ('360202', '360202', '鏄屾睙鍖', '3602', 3);
+INSERT INTO `dic_city` VALUES ('360203', '360203', '鐝犲北鍖', '3602', 3);
+INSERT INTO `dic_city` VALUES ('360222', '360222', '娴鍘', '3602', 3);
+INSERT INTO `dic_city` VALUES ('360281', '360281', '涔愬钩甯', '3602', 3);
+INSERT INTO `dic_city` VALUES ('3603', '3603', '钀嶄埂甯', '36', 2);
+INSERT INTO `dic_city` VALUES ('360302', '360302', '瀹夋簮鍖', '3603', 3);
+INSERT INTO `dic_city` VALUES ('360313', '360313', '婀樹笢鍖', '3603', 3);
+INSERT INTO `dic_city` VALUES ('360321', '360321', '鑾茶姳鍘', '3603', 3);
+INSERT INTO `dic_city` VALUES ('360322', '360322', '涓婃牀鍘', '3603', 3);
+INSERT INTO `dic_city` VALUES ('360323', '360323', '鑺︽邯鍘', '3603', 3);
+INSERT INTO `dic_city` VALUES ('3604', '3604', '涔濇睙甯', '36', 2);
+INSERT INTO `dic_city` VALUES ('360402', '360402', '婵傛邯鍖', '3604', 3);
+INSERT INTO `dic_city` VALUES ('360403', '360403', '娴旈槼鍖', '3604', 3);
+INSERT INTO `dic_city` VALUES ('360404', '360404', '鏌存鍖', '3604', 3);
+INSERT INTO `dic_city` VALUES ('360423', '360423', '姝﹀畞鍘', '3604', 3);
+INSERT INTO `dic_city` VALUES ('360424', '360424', '淇按鍘', '3604', 3);
+INSERT INTO `dic_city` VALUES ('360425', '360425', '姘镐慨鍘', '3604', 3);
+INSERT INTO `dic_city` VALUES ('360426', '360426', '寰峰畨鍘', '3604', 3);
+INSERT INTO `dic_city` VALUES ('360428', '360428', '閮芥槍鍘', '3604', 3);
+INSERT INTO `dic_city` VALUES ('360429', '360429', '婀栧彛鍘', '3604', 3);
+INSERT INTO `dic_city` VALUES ('360430', '360430', '褰辰鍘', '3604', 3);
+INSERT INTO `dic_city` VALUES ('360481', '360481', '鐟炴槍甯', '3604', 3);
+INSERT INTO `dic_city` VALUES ('360482', '360482', '鍏遍潚鍩庡競', '3604', 3);
+INSERT INTO `dic_city` VALUES ('360483', '360483', '搴愬北甯', '3604', 3);
+INSERT INTO `dic_city` VALUES ('3605', '3605', '鏂颁綑甯', '36', 2);
+INSERT INTO `dic_city` VALUES ('360502', '360502', '娓濇按鍖', '3605', 3);
+INSERT INTO `dic_city` VALUES ('360521', '360521', '鍒嗗疁鍘', '3605', 3);
+INSERT INTO `dic_city` VALUES ('3606', '3606', '楣版江甯', '36', 2);
+INSERT INTO `dic_city` VALUES ('360602', '360602', '鏈堟箹鍖', '3606', 3);
+INSERT INTO `dic_city` VALUES ('360603', '360603', '浣欐睙鍖', '3606', 3);
+INSERT INTO `dic_city` VALUES ('360681', '360681', '璐垫邯甯', '3606', 3);
+INSERT INTO `dic_city` VALUES ('3607', '3607', '璧ｅ窞甯', '36', 2);
+INSERT INTO `dic_city` VALUES ('360702', '360702', '绔犺础鍖', '3607', 3);
+INSERT INTO `dic_city` VALUES ('360703', '360703', '鍗楀悍鍖', '3607', 3);
+INSERT INTO `dic_city` VALUES ('360704', '360704', '璧ｅ幙鍖', '3607', 3);
+INSERT INTO `dic_city` VALUES ('360722', '360722', '淇′赴鍘', '3607', 3);
+INSERT INTO `dic_city` VALUES ('360723', '360723', '澶т綑鍘', '3607', 3);
+INSERT INTO `dic_city` VALUES ('360724', '360724', '涓婄姽鍘', '3607', 3);
+INSERT INTO `dic_city` VALUES ('360725', '360725', '宕囦箟鍘', '3607', 3);
+INSERT INTO `dic_city` VALUES ('360726', '360726', '瀹夎繙鍘', '3607', 3);
+INSERT INTO `dic_city` VALUES ('360728', '360728', '瀹氬崡鍘', '3607', 3);
+INSERT INTO `dic_city` VALUES ('360729', '360729', '鍏ㄥ崡鍘', '3607', 3);
+INSERT INTO `dic_city` VALUES ('360730', '360730', '瀹侀兘鍘', '3607', 3);
+INSERT INTO `dic_city` VALUES ('360731', '360731', '浜庨兘鍘', '3607', 3);
+INSERT INTO `dic_city` VALUES ('360732', '360732', '鍏村浗鍘', '3607', 3);
+INSERT INTO `dic_city` VALUES ('360733', '360733', '浼氭槍鍘', '3607', 3);
+INSERT INTO `dic_city` VALUES ('360734', '360734', '瀵讳箤鍘', '3607', 3);
+INSERT INTO `dic_city` VALUES ('360735', '360735', '鐭冲煄鍘', '3607', 3);
+INSERT INTO `dic_city` VALUES ('360781', '360781', '鐟為噾甯', '3607', 3);
+INSERT INTO `dic_city` VALUES ('360783', '360783', '榫欏崡甯', '3607', 3);
+INSERT INTO `dic_city` VALUES ('3608', '3608', '鍚夊畨甯', '36', 2);
+INSERT INTO `dic_city` VALUES ('360802', '360802', '鍚夊窞鍖', '3608', 3);
+INSERT INTO `dic_city` VALUES ('360803', '360803', '闈掑師鍖', '3608', 3);
+INSERT INTO `dic_city` VALUES ('360821', '360821', '鍚夊畨鍘', '3608', 3);
+INSERT INTO `dic_city` VALUES ('360822', '360822', '鍚夋按鍘', '3608', 3);
+INSERT INTO `dic_city` VALUES ('360823', '360823', '宄℃睙鍘', '3608', 3);
+INSERT INTO `dic_city` VALUES ('360824', '360824', '鏂板共鍘', '3608', 3);
+INSERT INTO `dic_city` VALUES ('360825', '360825', '姘镐赴鍘', '3608', 3);
+INSERT INTO `dic_city` VALUES ('360826', '360826', '娉板拰鍘', '3608', 3);
+INSERT INTO `dic_city` VALUES ('360827', '360827', '閬傚窛鍘', '3608', 3);
+INSERT INTO `dic_city` VALUES ('360828', '360828', '涓囧畨鍘', '3608', 3);
+INSERT INTO `dic_city` VALUES ('360829', '360829', '瀹夌鍘', '3608', 3);
+INSERT INTO `dic_city` VALUES ('360830', '360830', '姘告柊鍘', '3608', 3);
+INSERT INTO `dic_city` VALUES ('360881', '360881', '浜曞唸灞卞競', '3608', 3);
+INSERT INTO `dic_city` VALUES ('3609', '3609', '瀹滄槬甯', '36', 2);
+INSERT INTO `dic_city` VALUES ('360902', '360902', '琚佸窞鍖', '3609', 3);
+INSERT INTO `dic_city` VALUES ('360921', '360921', '濂夋柊鍘', '3609', 3);
+INSERT INTO `dic_city` VALUES ('360922', '360922', '涓囪浇鍘', '3609', 3);
+INSERT INTO `dic_city` VALUES ('360923', '360923', '涓婇珮鍘', '3609', 3);
+INSERT INTO `dic_city` VALUES ('360924', '360924', '瀹滀赴鍘', '3609', 3);
+INSERT INTO `dic_city` VALUES ('360925', '360925', '闈栧畨鍘', '3609', 3);
+INSERT INTO `dic_city` VALUES ('360926', '360926', '閾滈紦鍘', '3609', 3);
+INSERT INTO `dic_city` VALUES ('360981', '360981', '涓板煄甯', '3609', 3);
+INSERT INTO `dic_city` VALUES ('360982', '360982', '妯熸爲甯', '3609', 3);
+INSERT INTO `dic_city` VALUES ('360983', '360983', '楂樺畨甯', '3609', 3);
+INSERT INTO `dic_city` VALUES ('3610', '3610', '鎶氬窞甯', '36', 2);
+INSERT INTO `dic_city` VALUES ('361002', '361002', '涓村窛鍖', '3610', 3);
+INSERT INTO `dic_city` VALUES ('361003', '361003', '涓滀埂鍖', '3610', 3);
+INSERT INTO `dic_city` VALUES ('361021', '361021', '鍗楀煄鍘', '3610', 3);
+INSERT INTO `dic_city` VALUES ('361022', '361022', '榛庡窛鍘', '3610', 3);
+INSERT INTO `dic_city` VALUES ('361023', '361023', '鍗椾赴鍘', '3610', 3);
+INSERT INTO `dic_city` VALUES ('361024', '361024', '宕囦粊鍘', '3610', 3);
+INSERT INTO `dic_city` VALUES ('361025', '361025', '涔愬畨鍘', '3610', 3);
+INSERT INTO `dic_city` VALUES ('361026', '361026', '瀹滈粍鍘', '3610', 3);
+INSERT INTO `dic_city` VALUES ('361027', '361027', '閲戞邯鍘', '3610', 3);
+INSERT INTO `dic_city` VALUES ('361028', '361028', '璧勬邯鍘', '3610', 3);
+INSERT INTO `dic_city` VALUES ('361030', '361030', '骞挎槍鍘', '3610', 3);
+INSERT INTO `dic_city` VALUES ('3611', '3611', '涓婇ザ甯', '36', 2);
+INSERT INTO `dic_city` VALUES ('361102', '361102', '淇″窞鍖', '3611', 3);
+INSERT INTO `dic_city` VALUES ('361103', '361103', '骞夸赴鍖', '3611', 3);
+INSERT INTO `dic_city` VALUES ('361104', '361104', '骞夸俊鍖', '3611', 3);
+INSERT INTO `dic_city` VALUES ('361123', '361123', '鐜夊北鍘', '3611', 3);
+INSERT INTO `dic_city` VALUES ('361124', '361124', '閾呭北鍘', '3611', 3);
+INSERT INTO `dic_city` VALUES ('361125', '361125', '妯嘲鍘', '3611', 3);
+INSERT INTO `dic_city` VALUES ('361126', '361126', '寮嬮槼鍘', '3611', 3);
+INSERT INTO `dic_city` VALUES ('361127', '361127', '浣欏共鍘', '3611', 3);
+INSERT INTO `dic_city` VALUES ('361128', '361128', '閯遍槼鍘', '3611', 3);
+INSERT INTO `dic_city` VALUES ('361129', '361129', '涓囧勾鍘', '3611', 3);
+INSERT INTO `dic_city` VALUES ('361130', '361130', '濠烘簮鍘', '3611', 3);
+INSERT INTO `dic_city` VALUES ('361181', '361181', '寰峰叴甯', '3611', 3);
+INSERT INTO `dic_city` VALUES ('37', '37', '灞变笢鐪', NULL, 1);
+INSERT INTO `dic_city` VALUES ('3701', '3701', '娴庡崡甯', '37', 2);
+INSERT INTO `dic_city` VALUES ('370102', '370102', '鍘嗕笅鍖', '3701', 3);
+INSERT INTO `dic_city` VALUES ('370103', '370103', '甯備腑鍖', '3701', 3);
+INSERT INTO `dic_city` VALUES ('370104', '370104', '妲愯崼鍖', '3701', 3);
+INSERT INTO `dic_city` VALUES ('370105', '370105', '澶╂ˉ鍖', '3701', 3);
+INSERT INTO `dic_city` VALUES ('370112', '370112', '鍘嗗煄鍖', '3701', 3);
+INSERT INTO `dic_city` VALUES ('370113', '370113', '闀挎竻鍖', '3701', 3);
+INSERT INTO `dic_city` VALUES ('370114', '370114', '绔犱笜鍖', '3701', 3);
+INSERT INTO `dic_city` VALUES ('370115', '370115', '娴庨槼鍖', '3701', 3);
+INSERT INTO `dic_city` VALUES ('370116', '370116', '鑾辫姕鍖', '3701', 3);
+INSERT INTO `dic_city` VALUES ('370117', '370117', '閽㈠煄鍖', '3701', 3);
+INSERT INTO `dic_city` VALUES ('370124', '370124', '骞抽槾鍘', '3701', 3);
+INSERT INTO `dic_city` VALUES ('370126', '370126', '鍟嗘渤鍘', '3701', 3);
+INSERT INTO `dic_city` VALUES ('370171', '370171', '娴庡崡楂樻柊鎶€鏈骇涓氬紑鍙戝尯', '3701', 3);
+INSERT INTO `dic_city` VALUES ('3702', '3702', '闈掑矝甯', '37', 2);
+INSERT INTO `dic_city` VALUES ('370202', '370202', '甯傚崡鍖', '3702', 3);
+INSERT INTO `dic_city` VALUES ('370203', '370203', '甯傚寳鍖', '3702', 3);
+INSERT INTO `dic_city` VALUES ('370211', '370211', '榛勫矝鍖', '3702', 3);
+INSERT INTO `dic_city` VALUES ('370212', '370212', '宕傚北鍖', '3702', 3);
+INSERT INTO `dic_city` VALUES ('370213', '370213', '鏉庢钵鍖', '3702', 3);
+INSERT INTO `dic_city` VALUES ('370214', '370214', '鍩庨槼鍖', '3702', 3);
+INSERT INTO `dic_city` VALUES ('370215', '370215', '鍗冲ⅷ鍖', '3702', 3);
+INSERT INTO `dic_city` VALUES ('370271', '370271', '闈掑矝楂樻柊鎶€鏈骇涓氬紑鍙戝尯', '3702', 3);
+INSERT INTO `dic_city` VALUES ('370281', '370281', '鑳跺窞甯', '3702', 3);
+INSERT INTO `dic_city` VALUES ('370283', '370283', '骞冲害甯', '3702', 3);
+INSERT INTO `dic_city` VALUES ('370285', '370285', '鑾辫タ甯', '3702', 3);
+INSERT INTO `dic_city` VALUES ('3703', '3703', '娣勫崥甯', '37', 2);
+INSERT INTO `dic_city` VALUES ('370302', '370302', '娣勫窛鍖', '3703', 3);
+INSERT INTO `dic_city` VALUES ('370303', '370303', '寮犲簵鍖', '3703', 3);
+INSERT INTO `dic_city` VALUES ('370304', '370304', '鍗氬北鍖', '3703', 3);
+INSERT INTO `dic_city` VALUES ('370305', '370305', '涓存穭鍖', '3703', 3);
+INSERT INTO `dic_city` VALUES ('370306', '370306', '鍛ㄦ潙鍖', '3703', 3);
+INSERT INTO `dic_city` VALUES ('370321', '370321', '妗撳彴鍘', '3703', 3);
+INSERT INTO `dic_city` VALUES ('370322', '370322', '楂橀潚鍘', '3703', 3);
+INSERT INTO `dic_city` VALUES ('370323', '370323', '娌傛簮鍘', '3703', 3);
+INSERT INTO `dic_city` VALUES ('3704', '3704', '鏋ｅ簞甯', '37', 2);
+INSERT INTO `dic_city` VALUES ('370402', '370402', '甯備腑鍖', '3704', 3);
+INSERT INTO `dic_city` VALUES ('370403', '370403', '钖涘煄鍖', '3704', 3);
+INSERT INTO `dic_city` VALUES ('370404', '370404', '宄勫煄鍖', '3704', 3);
+INSERT INTO `dic_city` VALUES ('370405', '370405', '鍙板効搴勫尯', '3704', 3);
+INSERT INTO `dic_city` VALUES ('370406', '370406', '灞变涵鍖', '3704', 3);
+INSERT INTO `dic_city` VALUES ('370481', '370481', '婊曞窞甯', '3704', 3);
+INSERT INTO `dic_city` VALUES ('3705', '3705', '涓滆惀甯', '37', 2);
+INSERT INTO `dic_city` VALUES ('370502', '370502', '涓滆惀鍖', '3705', 3);
+INSERT INTO `dic_city` VALUES ('370503', '370503', '娌冲彛鍖', '3705', 3);
+INSERT INTO `dic_city` VALUES ('370505', '370505', '鍨﹀埄鍖', '3705', 3);
+INSERT INTO `dic_city` VALUES ('370522', '370522', '鍒╂触鍘', '3705', 3);
+INSERT INTO `dic_city` VALUES ('370523', '370523', '骞块ザ鍘', '3705', 3);
+INSERT INTO `dic_city` VALUES ('370571', '370571', '涓滆惀缁忔祹鎶€鏈紑鍙戝尯', '3705', 3);
+INSERT INTO `dic_city` VALUES ('370572', '370572', '涓滆惀娓粡娴庡紑鍙戝尯', '3705', 3);
+INSERT INTO `dic_city` VALUES ('3706', '3706', '鐑熷彴甯', '37', 2);
+INSERT INTO `dic_city` VALUES ('370602', '370602', '鑺濈綐鍖', '3706', 3);
+INSERT INTO `dic_city` VALUES ('370611', '370611', '绂忓北鍖', '3706', 3);
+INSERT INTO `dic_city` VALUES ('370612', '370612', '鐗熷钩鍖', '3706', 3);
+INSERT INTO `dic_city` VALUES ('370613', '370613', '鑾卞北鍖', '3706', 3);
+INSERT INTO `dic_city` VALUES ('370614', '370614', '钃幈鍖', '3706', 3);
+INSERT INTO `dic_city` VALUES ('370671', '370671', '鐑熷彴楂樻柊鎶€鏈骇涓氬紑鍙戝尯', '3706', 3);
+INSERT INTO `dic_city` VALUES ('370672', '370672', '鐑熷彴缁忔祹鎶€鏈紑鍙戝尯', '3706', 3);
+INSERT INTO `dic_city` VALUES ('370681', '370681', '榫欏彛甯', '3706', 3);
+INSERT INTO `dic_city` VALUES ('370682', '370682', '鑾遍槼甯', '3706', 3);
+INSERT INTO `dic_city` VALUES ('370683', '370683', '鑾卞窞甯', '3706', 3);
+INSERT INTO `dic_city` VALUES ('370685', '370685', '鎷涜繙甯', '3706', 3);
+INSERT INTO `dic_city` VALUES ('370686', '370686', '鏍栭湠甯', '3706', 3);
+INSERT INTO `dic_city` VALUES ('370687', '370687', '娴烽槼甯', '3706', 3);
+INSERT INTO `dic_city` VALUES ('3707', '3707', '娼嶅潑甯', '37', 2);
+INSERT INTO `dic_city` VALUES ('370702', '370702', '娼嶅煄鍖', '3707', 3);
+INSERT INTO `dic_city` VALUES ('370703', '370703', '瀵掍涵鍖', '3707', 3);
+INSERT INTO `dic_city` VALUES ('370704', '370704', '鍧婂瓙鍖', '3707', 3);
+INSERT INTO `dic_city` VALUES ('370705', '370705', '濂庢枃鍖', '3707', 3);
+INSERT INTO `dic_city` VALUES ('370724', '370724', '涓存湊鍘', '3707', 3);
+INSERT INTO `dic_city` VALUES ('370725', '370725', '鏄屼箰鍘', '3707', 3);
+INSERT INTO `dic_city` VALUES ('370772', '370772', '娼嶅潑婊ㄦ捣缁忔祹鎶€鏈紑鍙戝尯', '3707', 3);
+INSERT INTO `dic_city` VALUES ('370781', '370781', '闈掑窞甯', '3707', 3);
+INSERT INTO `dic_city` VALUES ('370782', '370782', '璇稿煄甯', '3707', 3);
+INSERT INTO `dic_city` VALUES ('370783', '370783', '瀵垮厜甯', '3707', 3);
+INSERT INTO `dic_city` VALUES ('370784', '370784', '瀹変笜甯', '3707', 3);
+INSERT INTO `dic_city` VALUES ('370785', '370785', '楂樺瘑甯', '3707', 3);
+INSERT INTO `dic_city` VALUES ('370786', '370786', '鏄岄倯甯', '3707', 3);
+INSERT INTO `dic_city` VALUES ('3708', '3708', '娴庡畞甯', '37', 2);
+INSERT INTO `dic_city` VALUES ('370811', '370811', '浠诲煄鍖', '3708', 3);
+INSERT INTO `dic_city` VALUES ('370812', '370812', '鍏栧窞鍖', '3708', 3);
+INSERT INTO `dic_city` VALUES ('370826', '370826', '寰北鍘', '3708', 3);
+INSERT INTO `dic_city` VALUES ('370827', '370827', '楸煎彴鍘', '3708', 3);
+INSERT INTO `dic_city` VALUES ('370828', '370828', '閲戜埂鍘', '3708', 3);
+INSERT INTO `dic_city` VALUES ('370829', '370829', '鍢夌ゥ鍘', '3708', 3);
+INSERT INTO `dic_city` VALUES ('370830', '370830', '姹朵笂鍘', '3708', 3);
+INSERT INTO `dic_city` VALUES ('370831', '370831', '娉楁按鍘', '3708', 3);
+INSERT INTO `dic_city` VALUES ('370832', '370832', '姊佸北鍘', '3708', 3);
+INSERT INTO `dic_city` VALUES ('370871', '370871', '娴庡畞楂樻柊鎶€鏈骇涓氬紑鍙戝尯', '3708', 3);
+INSERT INTO `dic_city` VALUES ('370881', '370881', '鏇查槣甯', '3708', 3);
+INSERT INTO `dic_city` VALUES ('370883', '370883', '閭瑰煄甯', '3708', 3);
+INSERT INTO `dic_city` VALUES ('3709', '3709', '娉板畨甯', '37', 2);
+INSERT INTO `dic_city` VALUES ('370902', '370902', '娉板北鍖', '3709', 3);
+INSERT INTO `dic_city` VALUES ('370911', '370911', '宀卞渤鍖', '3709', 3);
+INSERT INTO `dic_city` VALUES ('370921', '370921', '瀹侀槼鍘', '3709', 3);
+INSERT INTO `dic_city` VALUES ('370923', '370923', '涓滃钩鍘', '3709', 3);
+INSERT INTO `dic_city` VALUES ('370982', '370982', '鏂版嘲甯', '3709', 3);
+INSERT INTO `dic_city` VALUES ('370983', '370983', '鑲ュ煄甯', '3709', 3);
+INSERT INTO `dic_city` VALUES ('3710', '3710', '濞佹捣甯', '37', 2);
+INSERT INTO `dic_city` VALUES ('371002', '371002', '鐜繝鍖', '3710', 3);
+INSERT INTO `dic_city` VALUES ('371003', '371003', '鏂囩櫥鍖', '3710', 3);
+INSERT INTO `dic_city` VALUES ('371071', '371071', '濞佹捣鐏偓楂樻妧鏈骇涓氬紑鍙戝尯', '3710', 3);
+INSERT INTO `dic_city` VALUES ('371072', '371072', '濞佹捣缁忔祹鎶€鏈紑鍙戝尯', '3710', 3);
+INSERT INTO `dic_city` VALUES ('371073', '371073', '濞佹捣涓存腐缁忔祹鎶€鏈紑鍙戝尯', '3710', 3);
+INSERT INTO `dic_city` VALUES ('371082', '371082', '鑽ｆ垚甯', '3710', 3);
+INSERT INTO `dic_city` VALUES ('371083', '371083', '涔冲北甯', '3710', 3);
+INSERT INTO `dic_city` VALUES ('3711', '3711', '鏃ョ収甯', '37', 2);
+INSERT INTO `dic_city` VALUES ('371102', '371102', '涓滄腐鍖', '3711', 3);
+INSERT INTO `dic_city` VALUES ('371103', '371103', '宀氬北鍖', '3711', 3);
+INSERT INTO `dic_city` VALUES ('371121', '371121', '浜旇幉鍘', '3711', 3);
+INSERT INTO `dic_city` VALUES ('371122', '371122', '鑾掑幙', '3711', 3);
+INSERT INTO `dic_city` VALUES ('371171', '371171', '鏃ョ収缁忔祹鎶€鏈紑鍙戝尯', '3711', 3);
+INSERT INTO `dic_city` VALUES ('3713', '3713', '涓存矀甯', '37', 2);
+INSERT INTO `dic_city` VALUES ('371302', '371302', '鍏板北鍖', '3713', 3);
+INSERT INTO `dic_city` VALUES ('371311', '371311', '缃楀簞鍖', '3713', 3);
+INSERT INTO `dic_city` VALUES ('371312', '371312', '娌充笢鍖', '3713', 3);
+INSERT INTO `dic_city` VALUES ('371321', '371321', '娌傚崡鍘', '3713', 3);
+INSERT INTO `dic_city` VALUES ('371322', '371322', '閮煄鍘', '3713', 3);
+INSERT INTO `dic_city` VALUES ('371323', '371323', '娌傛按鍘', '3713', 3);
+INSERT INTO `dic_city` VALUES ('371324', '371324', '鍏伴櫟鍘', '3713', 3);
+INSERT INTO `dic_city` VALUES ('371325', '371325', '璐瑰幙', '3713', 3);
+INSERT INTO `dic_city` VALUES ('371326', '371326', '骞抽倯鍘', '3713', 3);
+INSERT INTO `dic_city` VALUES ('371327', '371327', '鑾掑崡鍘', '3713', 3);
+INSERT INTO `dic_city` VALUES ('371328', '371328', '钂欓槾鍘', '3713', 3);
+INSERT INTO `dic_city` VALUES ('371329', '371329', '涓存箔鍘', '3713', 3);
+INSERT INTO `dic_city` VALUES ('371371', '371371', '涓存矀楂樻柊鎶€鏈骇涓氬紑鍙戝尯', '3713', 3);
+INSERT INTO `dic_city` VALUES ('3714', '3714', '寰峰窞甯', '37', 2);
+INSERT INTO `dic_city` VALUES ('371402', '371402', '寰峰煄鍖', '3714', 3);
+INSERT INTO `dic_city` VALUES ('371403', '371403', '闄靛煄鍖', '3714', 3);
+INSERT INTO `dic_city` VALUES ('371422', '371422', '瀹佹触鍘', '3714', 3);
+INSERT INTO `dic_city` VALUES ('371423', '371423', '搴嗕簯鍘', '3714', 3);
+INSERT INTO `dic_city` VALUES ('371424', '371424', '涓撮倯鍘', '3714', 3);
+INSERT INTO `dic_city` VALUES ('371425', '371425', '榻愭渤鍘', '3714', 3);
+INSERT INTO `dic_city` VALUES ('371426', '371426', '骞冲師鍘', '3714', 3);
+INSERT INTO `dic_city` VALUES ('371427', '371427', '澶忔触鍘', '3714', 3);
+INSERT INTO `dic_city` VALUES ('371428', '371428', '姝﹀煄鍘', '3714', 3);
+INSERT INTO `dic_city` VALUES ('371471', '371471', '寰峰窞缁忔祹鎶€鏈紑鍙戝尯', '3714', 3);
+INSERT INTO `dic_city` VALUES ('371472', '371472', '寰峰窞杩愭渤缁忔祹寮€鍙戝尯', '3714', 3);
+INSERT INTO `dic_city` VALUES ('371481', '371481', '涔愰櫟甯', '3714', 3);
+INSERT INTO `dic_city` VALUES ('371482', '371482', '绂瑰煄甯', '3714', 3);
+INSERT INTO `dic_city` VALUES ('3715', '3715', '鑱婂煄甯', '37', 2);
+INSERT INTO `dic_city` VALUES ('371502', '371502', '涓滄槍搴滃尯', '3715', 3);
+INSERT INTO `dic_city` VALUES ('371503', '371503', '鑼屽钩鍖', '3715', 3);
+INSERT INTO `dic_city` VALUES ('371521', '371521', '闃宠胺鍘', '3715', 3);
+INSERT INTO `dic_city` VALUES ('371522', '371522', '鑾樺幙', '3715', 3);
+INSERT INTO `dic_city` VALUES ('371524', '371524', '涓滈樋鍘', '3715', 3);
+INSERT INTO `dic_city` VALUES ('371525', '371525', '鍐犲幙', '3715', 3);
+INSERT INTO `dic_city` VALUES ('371526', '371526', '楂樺攼鍘', '3715', 3);
+INSERT INTO `dic_city` VALUES ('371581', '371581', '涓存竻甯', '3715', 3);
+INSERT INTO `dic_city` VALUES ('3716', '3716', '婊ㄥ窞甯', '37', 2);
+INSERT INTO `dic_city` VALUES ('371602', '371602', '婊ㄥ煄鍖', '3716', 3);
+INSERT INTO `dic_city` VALUES ('371603', '371603', '娌惧寲鍖', '3716', 3);
+INSERT INTO `dic_city` VALUES ('371621', '371621', '鎯犳皯鍘', '3716', 3);
+INSERT INTO `dic_city` VALUES ('371622', '371622', '闃充俊鍘', '3716', 3);
+INSERT INTO `dic_city` VALUES ('371623', '371623', '鏃犳＃鍘', '3716', 3);
+INSERT INTO `dic_city` VALUES ('371625', '371625', '鍗氬叴鍘', '3716', 3);
+INSERT INTO `dic_city` VALUES ('371681', '371681', '閭瑰钩甯', '3716', 3);
+INSERT INTO `dic_city` VALUES ('3717', '3717', '鑿忔辰甯', '37', 2);
+INSERT INTO `dic_city` VALUES ('371702', '371702', '鐗′腹鍖', '3717', 3);
+INSERT INTO `dic_city` VALUES ('371703', '371703', '瀹氶櫠鍖', '3717', 3);
+INSERT INTO `dic_city` VALUES ('371721', '371721', '鏇瑰幙', '3717', 3);
+INSERT INTO `dic_city` VALUES ('371722', '371722', '鍗曞幙', '3717', 3);
+INSERT INTO `dic_city` VALUES ('371723', '371723', '鎴愭鍘', '3717', 3);
+INSERT INTO `dic_city` VALUES ('371724', '371724', '宸ㄩ噹鍘', '3717', 3);
+INSERT INTO `dic_city` VALUES ('371725', '371725', '閮撳煄鍘', '3717', 3);
+INSERT INTO `dic_city` VALUES ('371726', '371726', '閯勫煄鍘', '3717', 3);
+INSERT INTO `dic_city` VALUES ('371728', '371728', '涓滄槑鍘', '3717', 3);
+INSERT INTO `dic_city` VALUES ('371771', '371771', '鑿忔辰缁忔祹鎶€鏈紑鍙戝尯', '3717', 3);
+INSERT INTO `dic_city` VALUES ('371772', '371772', '鑿忔辰楂樻柊鎶€鏈紑鍙戝尯', '3717', 3);
+INSERT INTO `dic_city` VALUES ('41', '41', '娌冲崡鐪', NULL, 1);
+INSERT INTO `dic_city` VALUES ('4101', '4101', '閮戝窞甯', '41', 2);
+INSERT INTO `dic_city` VALUES ('410102', '410102', '涓師鍖', '4101', 3);
+INSERT INTO `dic_city` VALUES ('410103', '410103', '浜屼竷鍖', '4101', 3);
+INSERT INTO `dic_city` VALUES ('410104', '410104', '绠″煄鍥炴棌鍖', '4101', 3);
+INSERT INTO `dic_city` VALUES ('410105', '410105', '閲戞按鍖', '4101', 3);
+INSERT INTO `dic_city` VALUES ('410106', '410106', '涓婅鍖', '4101', 3);
+INSERT INTO `dic_city` VALUES ('410108', '410108', '鎯犳祹鍖', '4101', 3);
+INSERT INTO `dic_city` VALUES ('410122', '410122', '涓墴鍘', '4101', 3);
+INSERT INTO `dic_city` VALUES ('410171', '410171', '閮戝窞缁忔祹鎶€鏈紑鍙戝尯', '4101', 3);
+INSERT INTO `dic_city` VALUES ('410172', '410172', '閮戝窞楂樻柊鎶€鏈骇涓氬紑鍙戝尯', '4101', 3);
+INSERT INTO `dic_city` VALUES ('410173', '410173', '閮戝窞鑸┖娓粡娴庣患鍚堝疄楠屽尯', '4101', 3);
+INSERT INTO `dic_city` VALUES ('410181', '410181', '宸╀箟甯', '4101', 3);
+INSERT INTO `dic_city` VALUES ('410182', '410182', '鑽ラ槼甯', '4101', 3);
+INSERT INTO `dic_city` VALUES ('410183', '410183', '鏂板瘑甯', '4101', 3);
+INSERT INTO `dic_city` VALUES ('410184', '410184', '鏂伴儜甯', '4101', 3);
+INSERT INTO `dic_city` VALUES ('410185', '410185', '鐧诲皝甯', '4101', 3);
+INSERT INTO `dic_city` VALUES ('4102', '4102', '寮€灏佸競', '41', 2);
+INSERT INTO `dic_city` VALUES ('410202', '410202', '榫欎涵鍖', '4102', 3);
+INSERT INTO `dic_city` VALUES ('410203', '410203', '椤烘渤鍥炴棌鍖', '4102', 3);
+INSERT INTO `dic_city` VALUES ('410204', '410204', '榧撴ゼ鍖', '4102', 3);
+INSERT INTO `dic_city` VALUES ('410205', '410205', '绂圭帇鍙板尯', '4102', 3);
+INSERT INTO `dic_city` VALUES ('410212', '410212', '绁ョ鍖', '4102', 3);
+INSERT INTO `dic_city` VALUES ('410221', '410221', '鏉炲幙', '4102', 3);
+INSERT INTO `dic_city` VALUES ('410222', '410222', '閫氳鍘', '4102', 3);
+INSERT INTO `dic_city` VALUES ('410223', '410223', '灏夋皬鍘', '4102', 3);
+INSERT INTO `dic_city` VALUES ('410225', '410225', '鍏拌€冨幙', '4102', 3);
+INSERT INTO `dic_city` VALUES ('4103', '4103', '娲涢槼甯', '41', 2);
+INSERT INTO `dic_city` VALUES ('410302', '410302', '鑰佸煄鍖', '4103', 3);
+INSERT INTO `dic_city` VALUES ('410303', '410303', '瑗垮伐鍖', '4103', 3);
+INSERT INTO `dic_city` VALUES ('410304', '410304', '鐎嶆渤鍥炴棌鍖', '4103', 3);
+INSERT INTO `dic_city` VALUES ('410305', '410305', '娑цタ鍖', '4103', 3);
+INSERT INTO `dic_city` VALUES ('410306', '410306', '鍚夊埄鍖', '4103', 3);
+INSERT INTO `dic_city` VALUES ('410311', '410311', '娲涢緳鍖', '4103', 3);
+INSERT INTO `dic_city` VALUES ('410322', '410322', '瀛熸触鍘', '4103', 3);
+INSERT INTO `dic_city` VALUES ('410323', '410323', '鏂板畨鍘', '4103', 3);
+INSERT INTO `dic_city` VALUES ('410324', '410324', '鏍惧窛鍘', '4103', 3);
+INSERT INTO `dic_city` VALUES ('410325', '410325', '宓╁幙', '4103', 3);
+INSERT INTO `dic_city` VALUES ('410326', '410326', '姹濋槼鍘', '4103', 3);
+INSERT INTO `dic_city` VALUES ('410327', '410327', '瀹滈槼鍘', '4103', 3);
+INSERT INTO `dic_city` VALUES ('410328', '410328', '娲涘畞鍘', '4103', 3);
+INSERT INTO `dic_city` VALUES ('410329', '410329', '浼婂窛鍘', '4103', 3);
+INSERT INTO `dic_city` VALUES ('410371', '410371', '娲涢槼楂樻柊鎶€鏈骇涓氬紑鍙戝尯', '4103', 3);
+INSERT INTO `dic_city` VALUES ('410381', '410381', '鍋冨笀甯', '4103', 3);
+INSERT INTO `dic_city` VALUES ('4104', '4104', '骞抽《灞卞競', '41', 2);
+INSERT INTO `dic_city` VALUES ('410402', '410402', '鏂板崕鍖', '4104', 3);
+INSERT INTO `dic_city` VALUES ('410403', '410403', '鍗笢鍖', '4104', 3);
+INSERT INTO `dic_city` VALUES ('410404', '410404', '鐭抽緳鍖', '4104', 3);
+INSERT INTO `dic_city` VALUES ('410411', '410411', '婀涙渤鍖', '4104', 3);
+INSERT INTO `dic_city` VALUES ('410421', '410421', '瀹濅赴鍘', '4104', 3);
+INSERT INTO `dic_city` VALUES ('410422', '410422', '鍙跺幙', '4104', 3);
+INSERT INTO `dic_city` VALUES ('410423', '410423', '椴佸北鍘', '4104', 3);
+INSERT INTO `dic_city` VALUES ('410425', '410425', '閮忓幙', '4104', 3);
+INSERT INTO `dic_city` VALUES ('410471', '410471', '骞抽《灞遍珮鏂版妧鏈骇涓氬紑鍙戝尯', '4104', 3);
+INSERT INTO `dic_city` VALUES ('410472', '410472', '骞抽《灞卞競鍩庝埂涓€浣撳寲绀鸿寖鍖', '4104', 3);
+INSERT INTO `dic_city` VALUES ('410481', '410481', '鑸為挗甯', '4104', 3);
+INSERT INTO `dic_city` VALUES ('410482', '410482', '姹濆窞甯', '4104', 3);
+INSERT INTO `dic_city` VALUES ('4105', '4105', '瀹夐槼甯', '41', 2);
+INSERT INTO `dic_city` VALUES ('410502', '410502', '鏂囧嘲鍖', '4105', 3);
+INSERT INTO `dic_city` VALUES ('410503', '410503', '鍖楀叧鍖', '4105', 3);
+INSERT INTO `dic_city` VALUES ('410505', '410505', '娈烽兘鍖', '4105', 3);
+INSERT INTO `dic_city` VALUES ('410506', '410506', '榫欏畨鍖', '4105', 3);
+INSERT INTO `dic_city` VALUES ('410522', '410522', '瀹夐槼鍘', '4105', 3);
+INSERT INTO `dic_city` VALUES ('410523', '410523', '姹ら槾鍘', '4105', 3);
+INSERT INTO `dic_city` VALUES ('410526', '410526', '婊戝幙', '4105', 3);
+INSERT INTO `dic_city` VALUES ('410527', '410527', '鍐呴粍鍘', '4105', 3);
+INSERT INTO `dic_city` VALUES ('410571', '410571', '瀹夐槼楂樻柊鎶€鏈骇涓氬紑鍙戝尯', '4105', 3);
+INSERT INTO `dic_city` VALUES ('410581', '410581', '鏋楀窞甯', '4105', 3);
+INSERT INTO `dic_city` VALUES ('4106', '4106', '楣ゅ甯', '41', 2);
+INSERT INTO `dic_city` VALUES ('410602', '410602', '楣ゅ北鍖', '4106', 3);
+INSERT INTO `dic_city` VALUES ('410603', '410603', '灞卞煄鍖', '4106', 3);
+INSERT INTO `dic_city` VALUES ('410611', '410611', '娣囨花鍖', '4106', 3);
+INSERT INTO `dic_city` VALUES ('410621', '410621', '娴氬幙', '4106', 3);
+INSERT INTO `dic_city` VALUES ('410622', '410622', '娣囧幙', '4106', 3);
+INSERT INTO `dic_city` VALUES ('410671', '410671', '楣ゅ缁忔祹鎶€鏈紑鍙戝尯', '4106', 3);
+INSERT INTO `dic_city` VALUES ('4107', '4107', '鏂颁埂甯', '41', 2);
+INSERT INTO `dic_city` VALUES ('410702', '410702', '绾㈡棗鍖', '4107', 3);
+INSERT INTO `dic_city` VALUES ('410703', '410703', '鍗花鍖', '4107', 3);
+INSERT INTO `dic_city` VALUES ('410704', '410704', '鍑ゆ硥鍖', '4107', 3);
+INSERT INTO `dic_city` VALUES ('410711', '410711', '鐗ч噹鍖', '4107', 3);
+INSERT INTO `dic_city` VALUES ('410721', '410721', '鏂颁埂鍘', '4107', 3);
+INSERT INTO `dic_city` VALUES ('410724', '410724', '鑾峰槈鍘', '4107', 3);
+INSERT INTO `dic_city` VALUES ('410725', '410725', '鍘熼槼鍘', '4107', 3);
+INSERT INTO `dic_city` VALUES ('410726', '410726', '寤舵触鍘', '4107', 3);
+INSERT INTO `dic_city` VALUES ('410727', '410727', '灏佷笜鍘', '4107', 3);
+INSERT INTO `dic_city` VALUES ('410771', '410771', '鏂颁埂楂樻柊鎶€鏈骇涓氬紑鍙戝尯', '4107', 3);
+INSERT INTO `dic_city` VALUES ('410772', '410772', '鏂颁埂缁忔祹鎶€鏈紑鍙戝尯', '4107', 3);
+INSERT INTO `dic_city` VALUES ('410773', '410773', '鏂颁埂甯傚钩鍘熷煄涔′竴浣撳寲绀鸿寖鍖', '4107', 3);
+INSERT INTO `dic_city` VALUES ('410781', '410781', '鍗緣甯', '4107', 3);
+INSERT INTO `dic_city` VALUES ('410782', '410782', '杈夊幙甯', '4107', 3);
+INSERT INTO `dic_city` VALUES ('410783', '410783', '闀垮灒甯', '4107', 3);
+INSERT INTO `dic_city` VALUES ('4108', '4108', '鐒︿綔甯', '41', 2);
+INSERT INTO `dic_city` VALUES ('410802', '410802', '瑙ｆ斁鍖', '4108', 3);
+INSERT INTO `dic_city` VALUES ('410803', '410803', '涓珯鍖', '4108', 3);
+INSERT INTO `dic_city` VALUES ('410804', '410804', '椹潙鍖', '4108', 3);
+INSERT INTO `dic_city` VALUES ('410811', '410811', '灞遍槼鍖', '4108', 3);
+INSERT INTO `dic_city` VALUES ('410821', '410821', '淇鍘', '4108', 3);
+INSERT INTO `dic_city` VALUES ('410822', '410822', '鍗氱埍鍘', '4108', 3);
+INSERT INTO `dic_city` VALUES ('410823', '410823', '姝﹂櫉鍘', '4108', 3);
+INSERT INTO `dic_city` VALUES ('410825', '410825', '娓╁幙', '4108', 3);
+INSERT INTO `dic_city` VALUES ('410871', '410871', '鐒︿綔鍩庝埂涓€浣撳寲绀鸿寖鍖', '4108', 3);
+INSERT INTO `dic_city` VALUES ('410882', '410882', '娌侀槼甯', '4108', 3);
+INSERT INTO `dic_city` VALUES ('410883', '410883', '瀛熷窞甯', '4108', 3);
+INSERT INTO `dic_city` VALUES ('4109', '4109', '婵槼甯', '41', 2);
+INSERT INTO `dic_city` VALUES ('410902', '410902', '鍗庨緳鍖', '4109', 3);
+INSERT INTO `dic_city` VALUES ('410922', '410922', '娓呬赴鍘', '4109', 3);
+INSERT INTO `dic_city` VALUES ('410923', '410923', '鍗椾箰鍘', '4109', 3);
+INSERT INTO `dic_city` VALUES ('410926', '410926', '鑼冨幙', '4109', 3);
+INSERT INTO `dic_city` VALUES ('410927', '410927', '鍙板墠鍘', '4109', 3);
+INSERT INTO `dic_city` VALUES ('410928', '410928', '婵槼鍘', '4109', 3);
+INSERT INTO `dic_city` VALUES ('410971', '410971', '娌冲崡婵槼宸ヤ笟鍥尯', '4109', 3);
+INSERT INTO `dic_city` VALUES ('410972', '410972', '婵槼缁忔祹鎶€鏈紑鍙戝尯', '4109', 3);
+INSERT INTO `dic_city` VALUES ('4110', '4110', '璁告槍甯', '41', 2);
+INSERT INTO `dic_city` VALUES ('411002', '411002', '榄忛兘鍖', '4110', 3);
+INSERT INTO `dic_city` VALUES ('411003', '411003', '寤哄畨鍖', '4110', 3);
+INSERT INTO `dic_city` VALUES ('411024', '411024', '閯㈤櫟鍘', '4110', 3);
+INSERT INTO `dic_city` VALUES ('411025', '411025', '瑗勫煄鍘', '4110', 3);
+INSERT INTO `dic_city` VALUES ('411071', '411071', '璁告槍缁忔祹鎶€鏈紑鍙戝尯', '4110', 3);
+INSERT INTO `dic_city` VALUES ('411081', '411081', '绂瑰窞甯', '4110', 3);
+INSERT INTO `dic_city` VALUES ('411082', '411082', '闀胯憶甯', '4110', 3);
+INSERT INTO `dic_city` VALUES ('4111', '4111', '婕渤甯', '41', 2);
+INSERT INTO `dic_city` VALUES ('411102', '411102', '婧愭眹鍖', '4111', 3);
+INSERT INTO `dic_city` VALUES ('411103', '411103', '閮惧煄鍖', '4111', 3);
+INSERT INTO `dic_city` VALUES ('411104', '411104', '鍙櫟鍖', '4111', 3);
+INSERT INTO `dic_city` VALUES ('411121', '411121', '鑸為槼鍘', '4111', 3);
+INSERT INTO `dic_city` VALUES ('411122', '411122', '涓撮鍘', '4111', 3);
+INSERT INTO `dic_city` VALUES ('411171', '411171', '婕渤缁忔祹鎶€鏈紑鍙戝尯', '4111', 3);
+INSERT INTO `dic_city` VALUES ('4112', '4112', '涓夐棬宄″競', '41', 2);
+INSERT INTO `dic_city` VALUES ('411202', '411202', '婀栨花鍖', '4112', 3);
+INSERT INTO `dic_city` VALUES ('411203', '411203', '闄曞窞鍖', '4112', 3);
+INSERT INTO `dic_city` VALUES ('411221', '411221', '娓戞睜鍘', '4112', 3);
+INSERT INTO `dic_city` VALUES ('411224', '411224', '鍗㈡皬鍘', '4112', 3);
+INSERT INTO `dic_city` VALUES ('411271', '411271', '娌冲崡涓夐棬宄＄粡娴庡紑鍙戝尯', '4112', 3);
+INSERT INTO `dic_city` VALUES ('411281', '411281', '涔夐┈甯', '4112', 3);
+INSERT INTO `dic_city` VALUES ('411282', '411282', '鐏靛疂甯', '4112', 3);
+INSERT INTO `dic_city` VALUES ('4113', '4113', '鍗楅槼甯', '41', 2);
+INSERT INTO `dic_city` VALUES ('411302', '411302', '瀹涘煄鍖', '4113', 3);
+INSERT INTO `dic_city` VALUES ('411303', '411303', '鍗ч緳鍖', '4113', 3);
+INSERT INTO `dic_city` VALUES ('411321', '411321', '鍗楀彫鍘', '4113', 3);
+INSERT INTO `dic_city` VALUES ('411322', '411322', '鏂瑰煄鍘', '4113', 3);
+INSERT INTO `dic_city` VALUES ('411323', '411323', '瑗垮场鍘', '4113', 3);
+INSERT INTO `dic_city` VALUES ('411324', '411324', '闀囧钩鍘', '4113', 3);
+INSERT INTO `dic_city` VALUES ('411325', '411325', '鍐呬埂鍘', '4113', 3);
+INSERT INTO `dic_city` VALUES ('411326', '411326', '娣呭窛鍘', '4113', 3);
+INSERT INTO `dic_city` VALUES ('411327', '411327', '绀炬棗鍘', '4113', 3);
+INSERT INTO `dic_city` VALUES ('411328', '411328', '鍞愭渤鍘', '4113', 3);
+INSERT INTO `dic_city` VALUES ('411329', '411329', '鏂伴噹鍘', '4113', 3);
+INSERT INTO `dic_city` VALUES ('411330', '411330', '妗愭煆鍘', '4113', 3);
+INSERT INTO `dic_city` VALUES ('411371', '411371', '鍗楅槼楂樻柊鎶€鏈骇涓氬紑鍙戝尯', '4113', 3);
+INSERT INTO `dic_city` VALUES ('411372', '411372', '鍗楅槼甯傚煄涔′竴浣撳寲绀鸿寖鍖', '4113', 3);
+INSERT INTO `dic_city` VALUES ('411381', '411381', '閭撳窞甯', '4113', 3);
+INSERT INTO `dic_city` VALUES ('4114', '4114', '鍟嗕笜甯', '41', 2);
+INSERT INTO `dic_city` VALUES ('411402', '411402', '姊佸洯鍖', '4114', 3);
+INSERT INTO `dic_city` VALUES ('411403', '411403', '鐫㈤槼鍖', '4114', 3);
+INSERT INTO `dic_city` VALUES ('411421', '411421', '姘戞潈鍘', '4114', 3);
+INSERT INTO `dic_city` VALUES ('411422', '411422', '鐫㈠幙', '4114', 3);
+INSERT INTO `dic_city` VALUES ('411423', '411423', '瀹侀櫟鍘', '4114', 3);
+INSERT INTO `dic_city` VALUES ('411424', '411424', '鏌樺煄鍘', '4114', 3);
+INSERT INTO `dic_city` VALUES ('411425', '411425', '铏炲煄鍘', '4114', 3);
+INSERT INTO `dic_city` VALUES ('411426', '411426', '澶忛倯鍘', '4114', 3);
+INSERT INTO `dic_city` VALUES ('411471', '411471', '璞笢缁煎悎鐗╂祦浜т笟鑱氶泦鍖', '4114', 3);
+INSERT INTO `dic_city` VALUES ('411472', '411472', '娌冲崡鍟嗕笜缁忔祹寮€鍙戝尯', '4114', 3);
+INSERT INTO `dic_city` VALUES ('411481', '411481', '姘稿煄甯', '4114', 3);
+INSERT INTO `dic_city` VALUES ('4115', '4115', '淇￠槼甯', '41', 2);
+INSERT INTO `dic_city` VALUES ('411502', '411502', '娴夋渤鍖', '4115', 3);
+INSERT INTO `dic_city` VALUES ('411503', '411503', '骞虫ˉ鍖', '4115', 3);
+INSERT INTO `dic_city` VALUES ('411521', '411521', '缃楀北鍘', '4115', 3);
+INSERT INTO `dic_city` VALUES ('411522', '411522', '鍏夊北鍘', '4115', 3);
+INSERT INTO `dic_city` VALUES ('411523', '411523', '鏂板幙', '4115', 3);
+INSERT INTO `dic_city` VALUES ('411524', '411524', '鍟嗗煄鍘', '4115', 3);
+INSERT INTO `dic_city` VALUES ('411525', '411525', '鍥哄鍘', '4115', 3);
+INSERT INTO `dic_city` VALUES ('411526', '411526', '娼㈠窛鍘', '4115', 3);
+INSERT INTO `dic_city` VALUES ('411527', '411527', '娣花鍘', '4115', 3);
+INSERT INTO `dic_city` VALUES ('411528', '411528', '鎭幙', '4115', 3);
+INSERT INTO `dic_city` VALUES ('411571', '411571', '淇￠槼楂樻柊鎶€鏈骇涓氬紑鍙戝尯', '4115', 3);
+INSERT INTO `dic_city` VALUES ('4116', '4116', '鍛ㄥ彛甯', '41', 2);
+INSERT INTO `dic_city` VALUES ('411602', '411602', '宸濇眹鍖', '4116', 3);
+INSERT INTO `dic_city` VALUES ('411603', '411603', '娣槼鍖', '4116', 3);
+INSERT INTO `dic_city` VALUES ('411621', '411621', '鎵舵矡鍘', '4116', 3);
+INSERT INTO `dic_city` VALUES ('411622', '411622', '瑗垮崕鍘', '4116', 3);
+INSERT INTO `dic_city` VALUES ('411623', '411623', '鍟嗘按鍘', '4116', 3);
+INSERT INTO `dic_city` VALUES ('411624', '411624', '娌堜笜鍘', '4116', 3);
+INSERT INTO `dic_city` VALUES ('411625', '411625', '閮稿煄鍘', '4116', 3);
+INSERT INTO `dic_city` VALUES ('411627', '411627', '澶悍鍘', '4116', 3);
+INSERT INTO `dic_city` VALUES ('411628', '411628', '楣块倯鍘', '4116', 3);
+INSERT INTO `dic_city` VALUES ('411671', '411671', '娌冲崡鍛ㄥ彛缁忔祹寮€鍙戝尯', '4116', 3);
+INSERT INTO `dic_city` VALUES ('411681', '411681', '椤瑰煄甯', '4116', 3);
+INSERT INTO `dic_city` VALUES ('4117', '4117', '椹婚┈搴楀競', '41', 2);
+INSERT INTO `dic_city` VALUES ('411702', '411702', '椹垮煄鍖', '4117', 3);
+INSERT INTO `dic_city` VALUES ('411721', '411721', '瑗垮钩鍘', '4117', 3);
+INSERT INTO `dic_city` VALUES ('411722', '411722', '涓婅敗鍘', '4117', 3);
+INSERT INTO `dic_city` VALUES ('411723', '411723', '骞宠垎鍘', '4117', 3);
+INSERT INTO `dic_city` VALUES ('411724', '411724', '姝ｉ槼鍘', '4117', 3);
+INSERT INTO `dic_city` VALUES ('411725', '411725', '纭北鍘', '4117', 3);
+INSERT INTO `dic_city` VALUES ('411726', '411726', '娉岄槼鍘', '4117', 3);
+INSERT INTO `dic_city` VALUES ('411727', '411727', '姹濆崡鍘', '4117', 3);
+INSERT INTO `dic_city` VALUES ('411728', '411728', '閬傚钩鍘', '4117', 3);
+INSERT INTO `dic_city` VALUES ('411729', '411729', '鏂拌敗鍘', '4117', 3);
+INSERT INTO `dic_city` VALUES ('411771', '411771', '娌冲崡椹婚┈搴楃粡娴庡紑鍙戝尯', '4117', 3);
+INSERT INTO `dic_city` VALUES ('4190', '4190', '鐪佺洿杈栧幙绾ц鏀垮尯鍒', '41', 2);
+INSERT INTO `dic_city` VALUES ('419001', '419001', '娴庢簮甯', '4190', 3);
+INSERT INTO `dic_city` VALUES ('42', '42', '婀栧寳鐪', NULL, 1);
+INSERT INTO `dic_city` VALUES ('4201', '4201', '姝︽眽甯', '42', 2);
+INSERT INTO `dic_city` VALUES ('420102', '420102', '姹熷哺鍖', '4201', 3);
+INSERT INTO `dic_city` VALUES ('420103', '420103', '姹熸眽鍖', '4201', 3);
+INSERT INTO `dic_city` VALUES ('420104', '420104', '纭氬彛鍖', '4201', 3);
+INSERT INTO `dic_city` VALUES ('420105', '420105', '姹夐槼鍖', '4201', 3);
+INSERT INTO `dic_city` VALUES ('420106', '420106', '姝︽槍鍖', '4201', 3);
+INSERT INTO `dic_city` VALUES ('420107', '420107', '闈掑北鍖', '4201', 3);
+INSERT INTO `dic_city` VALUES ('420111', '420111', '娲北鍖', '4201', 3);
+INSERT INTO `dic_city` VALUES ('420112', '420112', '涓滆タ婀栧尯', '4201', 3);
+INSERT INTO `dic_city` VALUES ('420113', '420113', '姹夊崡鍖', '4201', 3);
+INSERT INTO `dic_city` VALUES ('420114', '420114', '钄＄敻鍖', '4201', 3);
+INSERT INTO `dic_city` VALUES ('420115', '420115', '姹熷鍖', '4201', 3);
+INSERT INTO `dic_city` VALUES ('420116', '420116', '榛勯檪鍖', '4201', 3);
+INSERT INTO `dic_city` VALUES ('420117', '420117', '鏂版床鍖', '4201', 3);
+INSERT INTO `dic_city` VALUES ('4202', '4202', '榛勭煶甯', '42', 2);
+INSERT INTO `dic_city` VALUES ('420202', '420202', '榛勭煶娓尯', '4202', 3);
+INSERT INTO `dic_city` VALUES ('420203', '420203', '瑗垮灞卞尯', '4202', 3);
+INSERT INTO `dic_city` VALUES ('420204', '420204', '涓嬮檰鍖', '4202', 3);
+INSERT INTO `dic_city` VALUES ('420205', '420205', '閾佸北鍖', '4202', 3);
+INSERT INTO `dic_city` VALUES ('420222', '420222', '闃虫柊鍘', '4202', 3);
+INSERT INTO `dic_city` VALUES ('420281', '420281', '澶у喍甯', '4202', 3);
+INSERT INTO `dic_city` VALUES ('4203', '4203', '鍗佸牥甯', '42', 2);
+INSERT INTO `dic_city` VALUES ('420302', '420302', '鑼呯鍖', '4203', 3);
+INSERT INTO `dic_city` VALUES ('420303', '420303', '寮犳咕鍖', '4203', 3);
+INSERT INTO `dic_city` VALUES ('420304', '420304', '閮ч槼鍖', '4203', 3);
+INSERT INTO `dic_city` VALUES ('420322', '420322', '閮цタ鍘', '4203', 3);
+INSERT INTO `dic_city` VALUES ('420323', '420323', '绔瑰北鍘', '4203', 3);
+INSERT INTO `dic_city` VALUES ('420324', '420324', '绔规邯鍘', '4203', 3);
+INSERT INTO `dic_city` VALUES ('420325', '420325', '鎴垮幙', '4203', 3);
+INSERT INTO `dic_city` VALUES ('420381', '420381', '涓规睙鍙ｅ競', '4203', 3);
+INSERT INTO `dic_city` VALUES ('4205', '4205', '瀹滄槍甯', '42', 2);
+INSERT INTO `dic_city` VALUES ('420502', '420502', '瑗块櫟鍖', '4205', 3);
+INSERT INTO `dic_city` VALUES ('420503', '420503', '浼嶅宀楀尯', '4205', 3);
+INSERT INTO `dic_city` VALUES ('420504', '420504', '鐐瑰啗鍖', '4205', 3);
+INSERT INTO `dic_city` VALUES ('420505', '420505', '鐚囦涵鍖', '4205', 3);
+INSERT INTO `dic_city` VALUES ('420506', '420506', '澶烽櫟鍖', '4205', 3);
+INSERT INTO `dic_city` VALUES ('420525', '420525', '杩滃畨鍘', '4205', 3);
+INSERT INTO `dic_city` VALUES ('420526', '420526', '鍏村北鍘', '4205', 3);
+INSERT INTO `dic_city` VALUES ('420527', '420527', '绉綊鍘', '4205', 3);
+INSERT INTO `dic_city` VALUES ('420528', '420528', '闀块槼鍦熷鏃忚嚜娌诲幙', '4205', 3);
+INSERT INTO `dic_city` VALUES ('420529', '420529', '浜斿嘲鍦熷鏃忚嚜娌诲幙', '4205', 3);
+INSERT INTO `dic_city` VALUES ('420581', '420581', '瀹滈兘甯', '4205', 3);
+INSERT INTO `dic_city` VALUES ('420582', '420582', '褰撻槼甯', '4205', 3);
+INSERT INTO `dic_city` VALUES ('420583', '420583', '鏋濇睙甯', '4205', 3);
+INSERT INTO `dic_city` VALUES ('4206', '4206', '瑗勯槼甯', '42', 2);
+INSERT INTO `dic_city` VALUES ('420602', '420602', '瑗勫煄鍖', '4206', 3);
+INSERT INTO `dic_city` VALUES ('420606', '420606', '妯婂煄鍖', '4206', 3);
+INSERT INTO `dic_city` VALUES ('420607', '420607', '瑗勫窞鍖', '4206', 3);
+INSERT INTO `dic_city` VALUES ('420624', '420624', '鍗楁汲鍘', '4206', 3);
+INSERT INTO `dic_city` VALUES ('420625', '420625', '璋峰煄鍘', '4206', 3);
+INSERT INTO `dic_city` VALUES ('420626', '420626', '淇濆悍鍘', '4206', 3);
+INSERT INTO `dic_city` VALUES ('420682', '420682', '鑰佹渤鍙ｅ競', '4206', 3);
+INSERT INTO `dic_city` VALUES ('420683', '420683', '鏋ｉ槼甯', '4206', 3);
+INSERT INTO `dic_city` VALUES ('420684', '420684', '瀹滃煄甯', '4206', 3);
+INSERT INTO `dic_city` VALUES ('4207', '4207', '閯傚窞甯', '42', 2);
+INSERT INTO `dic_city` VALUES ('420702', '420702', '姊佸瓙婀栧尯', '4207', 3);
+INSERT INTO `dic_city` VALUES ('420703', '420703', '鍗庡鍖', '4207', 3);
+INSERT INTO `dic_city` VALUES ('420704', '420704', '閯傚煄鍖', '4207', 3);
+INSERT INTO `dic_city` VALUES ('4208', '4208', '鑽嗛棬甯', '42', 2);
+INSERT INTO `dic_city` VALUES ('420802', '420802', '涓滃疂鍖', '4208', 3);
+INSERT INTO `dic_city` VALUES ('420804', '420804', '鎺囧垁鍖', '4208', 3);
+INSERT INTO `dic_city` VALUES ('420822', '420822', '娌欐磱鍘', '4208', 3);
+INSERT INTO `dic_city` VALUES ('420881', '420881', '閽熺ゥ甯', '4208', 3);
+INSERT INTO `dic_city` VALUES ('420882', '420882', '浜北甯', '4208', 3);
+INSERT INTO `dic_city` VALUES ('4209', '4209', '瀛濇劅甯', '42', 2);
+INSERT INTO `dic_city` VALUES ('420902', '420902', '瀛濆崡鍖', '4209', 3);
+INSERT INTO `dic_city` VALUES ('420921', '420921', '瀛濇槍鍘', '4209', 3);
+INSERT INTO `dic_city` VALUES ('420922', '420922', '澶ф偀鍘', '4209', 3);
+INSERT INTO `dic_city` VALUES ('420923', '420923', '浜戞ⅵ鍘', '4209', 3);
+INSERT INTO `dic_city` VALUES ('420981', '420981', '搴斿煄甯', '4209', 3);
+INSERT INTO `dic_city` VALUES ('420982', '420982', '瀹夐檰甯', '4209', 3);
+INSERT INTO `dic_city` VALUES ('420984', '420984', '姹夊窛甯', '4209', 3);
+INSERT INTO `dic_city` VALUES ('4210', '4210', '鑽嗗窞甯', '42', 2);
+INSERT INTO `dic_city` VALUES ('421002', '421002', '娌欏競鍖', '4210', 3);
+INSERT INTO `dic_city` VALUES ('421003', '421003', '鑽嗗窞鍖', '4210', 3);
+INSERT INTO `dic_city` VALUES ('421022', '421022', '鍏畨鍘', '4210', 3);
+INSERT INTO `dic_city` VALUES ('421023', '421023', '鐩戝埄鍘', '4210', 3);
+INSERT INTO `dic_city` VALUES ('421024', '421024', '姹熼櫟鍘', '4210', 3);
+INSERT INTO `dic_city` VALUES ('421071', '421071', '鑽嗗窞缁忔祹鎶€鏈紑鍙戝尯', '4210', 3);
+INSERT INTO `dic_city` VALUES ('421081', '421081', '鐭抽甯', '4210', 3);
+INSERT INTO `dic_city` VALUES ('421083', '421083', '娲箹甯', '4210', 3);
+INSERT INTO `dic_city` VALUES ('421087', '421087', '鏉炬粙甯', '4210', 3);
+INSERT INTO `dic_city` VALUES ('4211', '4211', '榛勫唸甯', '42', 2);
+INSERT INTO `dic_city` VALUES ('421102', '421102', '榛勫窞鍖', '4211', 3);
+INSERT INTO `dic_city` VALUES ('421121', '421121', '鍥㈤鍘', '4211', 3);
+INSERT INTO `dic_city` VALUES ('421122', '421122', '绾㈠畨鍘', '4211', 3);
+INSERT INTO `dic_city` VALUES ('421123', '421123', '缃楃敯鍘', '4211', 3);
+INSERT INTO `dic_city` VALUES ('421124', '421124', '鑻卞北鍘', '4211', 3);
+INSERT INTO `dic_city` VALUES ('421125', '421125', '娴犳按鍘', '4211', 3);
+INSERT INTO `dic_city` VALUES ('421126', '421126', '钑叉槬鍘', '4211', 3);
+INSERT INTO `dic_city` VALUES ('421127', '421127', '榛勬鍘', '4211', 3);
+INSERT INTO `dic_city` VALUES ('421171', '421171', '榫欐劅婀栫鐞嗗尯', '4211', 3);
+INSERT INTO `dic_city` VALUES ('421181', '421181', '楹诲煄甯', '4211', 3);
+INSERT INTO `dic_city` VALUES ('421182', '421182', '姝︾┐甯', '4211', 3);
+INSERT INTO `dic_city` VALUES ('4212', '4212', '鍜稿畞甯', '42', 2);
+INSERT INTO `dic_city` VALUES ('421202', '421202', '鍜稿畨鍖', '4212', 3);
+INSERT INTO `dic_city` VALUES ('421221', '421221', '鍢夐奔鍘', '4212', 3);
+INSERT INTO `dic_city` VALUES ('421222', '421222', '閫氬煄鍘', '4212', 3);
+INSERT INTO `dic_city` VALUES ('421223', '421223', '宕囬槼鍘', '4212', 3);
+INSERT INTO `dic_city` VALUES ('421224', '421224', '閫氬北鍘', '4212', 3);
+INSERT INTO `dic_city` VALUES ('421281', '421281', '璧ゅ甯', '4212', 3);
+INSERT INTO `dic_city` VALUES ('4213', '4213', '闅忓窞甯', '42', 2);
+INSERT INTO `dic_city` VALUES ('421303', '421303', '鏇鹃兘鍖', '4213', 3);
+INSERT INTO `dic_city` VALUES ('421321', '421321', '闅忓幙', '4213', 3);
+INSERT INTO `dic_city` VALUES ('421381', '421381', '骞挎按甯', '4213', 3);
+INSERT INTO `dic_city` VALUES ('4228', '4228', '鎭╂柦鍦熷鏃忚嫍鏃忚嚜娌诲窞', '42', 2);
+INSERT INTO `dic_city` VALUES ('422801', '422801', '鎭╂柦甯', '4228', 3);
+INSERT INTO `dic_city` VALUES ('422802', '422802', '鍒╁窛甯', '4228', 3);
+INSERT INTO `dic_city` VALUES ('422822', '422822', '寤哄鍘', '4228', 3);
+INSERT INTO `dic_city` VALUES ('422823', '422823', '宸翠笢鍘', '4228', 3);
+INSERT INTO `dic_city` VALUES ('422825', '422825', '瀹ｆ仼鍘', '4228', 3);
+INSERT INTO `dic_city` VALUES ('422826', '422826', '鍜镐赴鍘', '4228', 3);
+INSERT INTO `dic_city` VALUES ('422827', '422827', '鏉ュ嚖鍘', '4228', 3);
+INSERT INTO `dic_city` VALUES ('422828', '422828', '楣ゅ嘲鍘', '4228', 3);
+INSERT INTO `dic_city` VALUES ('4290', '4290', '鐪佺洿杈栧幙绾ц鏀垮尯鍒', '42', 2);
+INSERT INTO `dic_city` VALUES ('429004', '429004', '浠欐甯', '4290', 3);
+INSERT INTO `dic_city` VALUES ('429005', '429005', '娼滄睙甯', '4290', 3);
+INSERT INTO `dic_city` VALUES ('429006', '429006', '澶╅棬甯', '4290', 3);
+INSERT INTO `dic_city` VALUES ('429021', '429021', '绁炲啘鏋舵灄鍖', '4290', 3);
+INSERT INTO `dic_city` VALUES ('43', '43', '婀栧崡鐪', NULL, 1);
+INSERT INTO `dic_city` VALUES ('4301', '4301', '闀挎矙甯', '43', 2);
+INSERT INTO `dic_city` VALUES ('430102', '430102', '鑺欒搲鍖', '4301', 3);
+INSERT INTO `dic_city` VALUES ('430103', '430103', '澶╁績鍖', '4301', 3);
+INSERT INTO `dic_city` VALUES ('430104', '430104', '宀抽簱鍖', '4301', 3);
+INSERT INTO `dic_city` VALUES ('430105', '430105', '寮€绂忓尯', '4301', 3);
+INSERT INTO `dic_city` VALUES ('430111', '430111', '闆ㄨ姳鍖', '4301', 3);
+INSERT INTO `dic_city` VALUES ('430112', '430112', '鏈涘煄鍖', '4301', 3);
+INSERT INTO `dic_city` VALUES ('430121', '430121', '闀挎矙鍘', '4301', 3);
+INSERT INTO `dic_city` VALUES ('430181', '430181', '娴忛槼甯', '4301', 3);
+INSERT INTO `dic_city` VALUES ('430182', '430182', '瀹佷埂甯', '4301', 3);
+INSERT INTO `dic_city` VALUES ('4302', '4302', '鏍床甯', '43', 2);
+INSERT INTO `dic_city` VALUES ('430202', '430202', '鑽峰鍖', '4302', 3);
+INSERT INTO `dic_city` VALUES ('430203', '430203', '鑺︽窞鍖', '4302', 3);
+INSERT INTO `dic_city` VALUES ('430204', '430204', '鐭冲嘲鍖', '4302', 3);
+INSERT INTO `dic_city` VALUES ('430211', '430211', '澶╁厓鍖', '4302', 3);
+INSERT INTO `dic_city` VALUES ('430212', '430212', '娓屽彛鍖', '4302', 3);
+INSERT INTO `dic_city` VALUES ('430223', '430223', '鏀稿幙', '4302', 3);
+INSERT INTO `dic_city` VALUES ('430224', '430224', '鑼堕櫟鍘', '4302', 3);
+INSERT INTO `dic_city` VALUES ('430225', '430225', '鐐庨櫟鍘', '4302', 3);
+INSERT INTO `dic_city` VALUES ('430271', '430271', '浜戦緳绀鸿寖鍖', '4302', 3);
+INSERT INTO `dic_city` VALUES ('430281', '430281', '閱撮櫟甯', '4302', 3);
+INSERT INTO `dic_city` VALUES ('4303', '4303', '婀樻江甯', '43', 2);
+INSERT INTO `dic_city` VALUES ('430302', '430302', '闆ㄦ箹鍖', '4303', 3);
+INSERT INTO `dic_city` VALUES ('430304', '430304', '宀冲鍖', '4303', 3);
+INSERT INTO `dic_city` VALUES ('430321', '430321', '婀樻江鍘', '4303', 3);
+INSERT INTO `dic_city` VALUES ('430371', '430371', '婀栧崡婀樻江楂樻柊鎶€鏈骇涓氬洯鍖', '4303', 3);
+INSERT INTO `dic_city` VALUES ('430372', '430372', '婀樻江鏄北绀鸿寖鍖', '4303', 3);
+INSERT INTO `dic_city` VALUES ('430373', '430373', '婀樻江涔濆崕绀鸿寖鍖', '4303', 3);
+INSERT INTO `dic_city` VALUES ('430381', '430381', '婀樹埂甯', '4303', 3);
+INSERT INTO `dic_city` VALUES ('430382', '430382', '闊跺北甯', '4303', 3);
+INSERT INTO `dic_city` VALUES ('4304', '4304', '琛￠槼甯', '43', 2);
+INSERT INTO `dic_city` VALUES ('430405', '430405', '鐝犳櫀鍖', '4304', 3);
+INSERT INTO `dic_city` VALUES ('430406', '430406', '闆佸嘲鍖', '4304', 3);
+INSERT INTO `dic_city` VALUES ('430407', '430407', '鐭抽紦鍖', '4304', 3);
+INSERT INTO `dic_city` VALUES ('430408', '430408', '钂告箻鍖', '4304', 3);
+INSERT INTO `dic_city` VALUES ('430412', '430412', '鍗楀渤鍖', '4304', 3);
+INSERT INTO `dic_city` VALUES ('430421', '430421', '琛￠槼鍘', '4304', 3);
+INSERT INTO `dic_city` VALUES ('430422', '430422', '琛″崡鍘', '4304', 3);
+INSERT INTO `dic_city` VALUES ('430423', '430423', '琛″北鍘', '4304', 3);
+INSERT INTO `dic_city` VALUES ('430424', '430424', '琛′笢鍘', '4304', 3);
+INSERT INTO `dic_city` VALUES ('430426', '430426', '绁佷笢鍘', '4304', 3);
+INSERT INTO `dic_city` VALUES ('430471', '430471', '琛￠槼缁煎悎淇濈◣鍖', '4304', 3);
+INSERT INTO `dic_city` VALUES ('430472', '430472', '婀栧崡琛￠槼楂樻柊鎶€鏈骇涓氬洯鍖', '4304', 3);
+INSERT INTO `dic_city` VALUES ('430473', '430473', '婀栧崡琛￠槼鏉炬湪缁忔祹寮€鍙戝尯', '4304', 3);
+INSERT INTO `dic_city` VALUES ('430481', '430481', '鑰掗槼甯', '4304', 3);
+INSERT INTO `dic_city` VALUES ('430482', '430482', '甯稿畞甯', '4304', 3);
+INSERT INTO `dic_city` VALUES ('4305', '4305', '閭甸槼甯', '43', 2);
+INSERT INTO `dic_city` VALUES ('430502', '430502', '鍙屾竻鍖', '4305', 3);
+INSERT INTO `dic_city` VALUES ('430503', '430503', '澶хゥ鍖', '4305', 3);
+INSERT INTO `dic_city` VALUES ('430511', '430511', '鍖楀鍖', '4305', 3);
+INSERT INTO `dic_city` VALUES ('430522', '430522', '鏂伴偟鍘', '4305', 3);
+INSERT INTO `dic_city` VALUES ('430523', '430523', '閭甸槼鍘', '4305', 3);
+INSERT INTO `dic_city` VALUES ('430524', '430524', '闅嗗洖鍘', '4305', 3);
+INSERT INTO `dic_city` VALUES ('430525', '430525', '娲炲彛鍘', '4305', 3);
+INSERT INTO `dic_city` VALUES ('430527', '430527', '缁ュ畞鍘', '4305', 3);
+INSERT INTO `dic_city` VALUES ('430528', '430528', '鏂板畞鍘', '4305', 3);
+INSERT INTO `dic_city` VALUES ('430529', '430529', '鍩庢鑻楁棌鑷不鍘', '4305', 3);
+INSERT INTO `dic_city` VALUES ('430581', '430581', '姝﹀唸甯', '4305', 3);
+INSERT INTO `dic_city` VALUES ('430582', '430582', '閭典笢甯', '4305', 3);
+INSERT INTO `dic_city` VALUES ('4306', '4306', '宀抽槼甯', '43', 2);
+INSERT INTO `dic_city` VALUES ('430602', '430602', '宀抽槼妤煎尯', '4306', 3);
+INSERT INTO `dic_city` VALUES ('430603', '430603', '浜戞邯鍖', '4306', 3);
+INSERT INTO `dic_city` VALUES ('430611', '430611', '鍚涘北鍖', '4306', 3);
+INSERT INTO `dic_city` VALUES ('430621', '430621', '宀抽槼鍘', '4306', 3);
+INSERT INTO `dic_city` VALUES ('430623', '430623', '鍗庡鍘', '4306', 3);
+INSERT INTO `dic_city` VALUES ('430624', '430624', '婀橀槾鍘', '4306', 3);
+INSERT INTO `dic_city` VALUES ('430626', '430626', '骞虫睙鍘', '4306', 3);
+INSERT INTO `dic_city` VALUES ('430671', '430671', '宀抽槼甯傚眻鍘熺鐞嗗尯', '4306', 3);
+INSERT INTO `dic_city` VALUES ('430681', '430681', '姹ㄧ綏甯', '4306', 3);
+INSERT INTO `dic_city` VALUES ('430682', '430682', '涓存箻甯', '4306', 3);
+INSERT INTO `dic_city` VALUES ('4307', '4307', '甯稿痉甯', '43', 2);
+INSERT INTO `dic_city` VALUES ('430702', '430702', '姝﹂櫟鍖', '4307', 3);
+INSERT INTO `dic_city` VALUES ('430703', '430703', '榧庡煄鍖', '4307', 3);
+INSERT INTO `dic_city` VALUES ('430721', '430721', '瀹変埂鍘', '4307', 3);
+INSERT INTO `dic_city` VALUES ('430722', '430722', '姹夊鍘', '4307', 3);
+INSERT INTO `dic_city` VALUES ('430723', '430723', '婢у幙', '4307', 3);
+INSERT INTO `dic_city` VALUES ('430724', '430724', '涓存晶鍘', '4307', 3);
+INSERT INTO `dic_city` VALUES ('430725', '430725', '妗冩簮鍘', '4307', 3);
+INSERT INTO `dic_city` VALUES ('430726', '430726', '鐭抽棬鍘', '4307', 3);
+INSERT INTO `dic_city` VALUES ('430771', '430771', '甯稿痉甯傝タ娲炲涵绠＄悊鍖', '4307', 3);
+INSERT INTO `dic_city` VALUES ('430781', '430781', '娲ュ競甯', '4307', 3);
+INSERT INTO `dic_city` VALUES ('4308', '4308', '寮犲鐣屽競', '43', 2);
+INSERT INTO `dic_city` VALUES ('430802', '430802', '姘稿畾鍖', '4308', 3);
+INSERT INTO `dic_city` VALUES ('430811', '430811', '姝﹂櫟婧愬尯', '4308', 3);
+INSERT INTO `dic_city` VALUES ('430821', '430821', '鎱堝埄鍘', '4308', 3);
+INSERT INTO `dic_city` VALUES ('430822', '430822', '妗戞鍘', '4308', 3);
+INSERT INTO `dic_city` VALUES ('4309', '4309', '鐩婇槼甯', '43', 2);
+INSERT INTO `dic_city` VALUES ('430902', '430902', '璧勯槼鍖', '4309', 3);
+INSERT INTO `dic_city` VALUES ('430903', '430903', '璧北鍖', '4309', 3);
+INSERT INTO `dic_city` VALUES ('430921', '430921', '鍗楀幙', '4309', 3);
+INSERT INTO `dic_city` VALUES ('430922', '430922', '妗冩睙鍘', '4309', 3);
+INSERT INTO `dic_city` VALUES ('430923', '430923', '瀹夊寲鍘', '4309', 3);
+INSERT INTO `dic_city` VALUES ('430971', '430971', '鐩婇槼甯傚ぇ閫氭箹绠＄悊鍖', '4309', 3);
+INSERT INTO `dic_city` VALUES ('430972', '430972', '婀栧崡鐩婇槼楂樻柊鎶€鏈骇涓氬洯鍖', '4309', 3);
+INSERT INTO `dic_city` VALUES ('430981', '430981', '娌呮睙甯', '4309', 3);
+INSERT INTO `dic_city` VALUES ('4310', '4310', '閮村窞甯', '43', 2);
+INSERT INTO `dic_city` VALUES ('431002', '431002', '鍖楁箹鍖', '4310', 3);
+INSERT INTO `dic_city` VALUES ('431003', '431003', '鑻忎粰鍖', '4310', 3);
+INSERT INTO `dic_city` VALUES ('431021', '431021', '妗傞槼鍘', '4310', 3);
+INSERT INTO `dic_city` VALUES ('431022', '431022', '瀹滅珷鍘', '4310', 3);
+INSERT INTO `dic_city` VALUES ('431023', '431023', '姘稿叴鍘', '4310', 3);
+INSERT INTO `dic_city` VALUES ('431024', '431024', '鍢夌鍘', '4310', 3);
+INSERT INTO `dic_city` VALUES ('431025', '431025', '涓存鍘', '4310', 3);
+INSERT INTO `dic_city` VALUES ('431026', '431026', '姹濆煄鍘', '4310', 3);
+INSERT INTO `dic_city` VALUES ('431027', '431027', '妗備笢鍘', '4310', 3);
+INSERT INTO `dic_city` VALUES ('431028', '431028', '瀹変粊鍘', '4310', 3);
+INSERT INTO `dic_city` VALUES ('431081', '431081', '璧勫叴甯', '4310', 3);
+INSERT INTO `dic_city` VALUES ('4311', '4311', '姘稿窞甯', '43', 2);
+INSERT INTO `dic_city` VALUES ('431102', '431102', '闆堕櫟鍖', '4311', 3);
+INSERT INTO `dic_city` VALUES ('431103', '431103', '鍐锋按婊╁尯', '4311', 3);
+INSERT INTO `dic_city` VALUES ('431121', '431121', '绁侀槼鍘', '4311', 3);
+INSERT INTO `dic_city` VALUES ('431122', '431122', '涓滃畨鍘', '4311', 3);
+INSERT INTO `dic_city` VALUES ('431123', '431123', '鍙岀墝鍘', '4311', 3);
+INSERT INTO `dic_city` VALUES ('431124', '431124', '閬撳幙', '4311', 3);
+INSERT INTO `dic_city` VALUES ('431125', '431125', '姹熸案鍘', '4311', 3);
+INSERT INTO `dic_city` VALUES ('431126', '431126', '瀹佽繙鍘', '4311', 3);
+INSERT INTO `dic_city` VALUES ('431127', '431127', '钃濆北鍘', '4311', 3);
+INSERT INTO `dic_city` VALUES ('431128', '431128', '鏂扮敯鍘', '4311', 3);
+INSERT INTO `dic_city` VALUES ('431129', '431129', '姹熷崕鐟舵棌鑷不鍘', '4311', 3);
+INSERT INTO `dic_city` VALUES ('431171', '431171', '姘稿窞缁忔祹鎶€鏈紑鍙戝尯', '4311', 3);
+INSERT INTO `dic_city` VALUES ('431172', '431172', '姘稿窞甯傞噾娲炵鐞嗗尯', '4311', 3);
+INSERT INTO `dic_city` VALUES ('431173', '431173', '姘稿窞甯傚洖榫欏湬绠＄悊鍖', '4311', 3);
+INSERT INTO `dic_city` VALUES ('4312', '4312', '鎬€鍖栧競', '43', 2);
+INSERT INTO `dic_city` VALUES ('431202', '431202', '楣ゅ煄鍖', '4312', 3);
+INSERT INTO `dic_city` VALUES ('431221', '431221', '涓柟鍘', '4312', 3);
+INSERT INTO `dic_city` VALUES ('431222', '431222', '娌呴櫟鍘', '4312', 3);
+INSERT INTO `dic_city` VALUES ('431223', '431223', '杈版邯鍘', '4312', 3);
+INSERT INTO `dic_city` VALUES ('431224', '431224', '婧嗘郸鍘', '4312', 3);
+INSERT INTO `dic_city` VALUES ('431225', '431225', '浼氬悓鍘', '4312', 3);
+INSERT INTO `dic_city` VALUES ('431226', '431226', '楹婚槼鑻楁棌鑷不鍘', '4312', 3);
+INSERT INTO `dic_city` VALUES ('431227', '431227', '鏂版檭渚楁棌鑷不鍘', '4312', 3);
+INSERT INTO `dic_city` VALUES ('431228', '431228', '鑺锋睙渚楁棌鑷不鍘', '4312', 3);
+INSERT INTO `dic_city` VALUES ('431229', '431229', '闈栧窞鑻楁棌渚楁棌鑷不鍘', '4312', 3);
+INSERT INTO `dic_city` VALUES ('431230', '431230', '閫氶亾渚楁棌鑷不鍘', '4312', 3);
+INSERT INTO `dic_city` VALUES ('431271', '431271', '鎬€鍖栧競娲睙绠＄悊鍖', '4312', 3);
+INSERT INTO `dic_city` VALUES ('431281', '431281', '娲睙甯', '4312', 3);
+INSERT INTO `dic_city` VALUES ('4313', '4313', '濞勫簳甯', '43', 2);
+INSERT INTO `dic_city` VALUES ('431302', '431302', '濞勬槦鍖', '4313', 3);
+INSERT INTO `dic_city` VALUES ('431321', '431321', '鍙屽嘲鍘', '4313', 3);
+INSERT INTO `dic_city` VALUES ('431322', '431322', '鏂板寲鍘', '4313', 3);
+INSERT INTO `dic_city` VALUES ('431381', '431381', '鍐锋按姹熷競', '4313', 3);
+INSERT INTO `dic_city` VALUES ('431382', '431382', '娑熸簮甯', '4313', 3);
+INSERT INTO `dic_city` VALUES ('4331', '4331', '婀樿タ鍦熷鏃忚嫍鏃忚嚜娌诲窞', '43', 2);
+INSERT INTO `dic_city` VALUES ('433101', '433101', '鍚夐甯', '4331', 3);
+INSERT INTO `dic_city` VALUES ('433122', '433122', '娉告邯鍘', '4331', 3);
+INSERT INTO `dic_city` VALUES ('433123', '433123', '鍑ゅ嚢鍘', '4331', 3);
+INSERT INTO `dic_city` VALUES ('433124', '433124', '鑺卞灒鍘', '4331', 3);
+INSERT INTO `dic_city` VALUES ('433125', '433125', '淇濋潠鍘', '4331', 3);
+INSERT INTO `dic_city` VALUES ('433126', '433126', '鍙や笀鍘', '4331', 3);
+INSERT INTO `dic_city` VALUES ('433127', '433127', '姘搁『鍘', '4331', 3);
+INSERT INTO `dic_city` VALUES ('433130', '433130', '榫欏北鍘', '4331', 3);
+INSERT INTO `dic_city` VALUES ('44', '44', '骞夸笢鐪', NULL, 1);
+INSERT INTO `dic_city` VALUES ('4401', '4401', '骞垮窞甯', '44', 2);
+INSERT INTO `dic_city` VALUES ('440103', '440103', '鑽旀咕鍖', '4401', 3);
+INSERT INTO `dic_city` VALUES ('440104', '440104', '瓒婄鍖', '4401', 3);
+INSERT INTO `dic_city` VALUES ('440105', '440105', '娴风彔鍖', '4401', 3);
+INSERT INTO `dic_city` VALUES ('440106', '440106', '澶╂渤鍖', '4401', 3);
+INSERT INTO `dic_city` VALUES ('440111', '440111', '鐧戒簯鍖', '4401', 3);
+INSERT INTO `dic_city` VALUES ('440112', '440112', '榛勫煍鍖', '4401', 3);
+INSERT INTO `dic_city` VALUES ('440113', '440113', '鐣鍖', '4401', 3);
+INSERT INTO `dic_city` VALUES ('440114', '440114', '鑺遍兘鍖', '4401', 3);
+INSERT INTO `dic_city` VALUES ('440115', '440115', '鍗楁矙鍖', '4401', 3);
+INSERT INTO `dic_city` VALUES ('440117', '440117', '浠庡寲鍖', '4401', 3);
+INSERT INTO `dic_city` VALUES ('440118', '440118', '澧炲煄鍖', '4401', 3);
+INSERT INTO `dic_city` VALUES ('4402', '4402', '闊跺叧甯', '44', 2);
+INSERT INTO `dic_city` VALUES ('440203', '440203', '姝︽睙鍖', '4402', 3);
+INSERT INTO `dic_city` VALUES ('440204', '440204', '娴堟睙鍖', '4402', 3);
+INSERT INTO `dic_city` VALUES ('440205', '440205', '鏇叉睙鍖', '4402', 3);
+INSERT INTO `dic_city` VALUES ('440222', '440222', '濮嬪叴鍘', '4402', 3);
+INSERT INTO `dic_city` VALUES ('440224', '440224', '浠佸寲鍘', '4402', 3);
+INSERT INTO `dic_city` VALUES ('440229', '440229', '缈佹簮鍘', '4402', 3);
+INSERT INTO `dic_city` VALUES ('440232', '440232', '涔虫簮鐟舵棌鑷不鍘', '4402', 3);
+INSERT INTO `dic_city` VALUES ('440233', '440233', '鏂颁赴鍘', '4402', 3);
+INSERT INTO `dic_city` VALUES ('440281', '440281', '涔愭槍甯', '4402', 3);
+INSERT INTO `dic_city` VALUES ('440282', '440282', '鍗楅泟甯', '4402', 3);
+INSERT INTO `dic_city` VALUES ('4403', '4403', '娣卞湷甯', '44', 2);
+INSERT INTO `dic_city` VALUES ('440303', '440303', '缃楁箹鍖', '4403', 3);
+INSERT INTO `dic_city` VALUES ('440304', '440304', '绂忕敯鍖', '4403', 3);
+INSERT INTO `dic_city` VALUES ('440305', '440305', '鍗楀北鍖', '4403', 3);
+INSERT INTO `dic_city` VALUES ('440306', '440306', '瀹濆畨鍖', '4403', 3);
+INSERT INTO `dic_city` VALUES ('440307', '440307', '榫欏矖鍖', '4403', 3);
+INSERT INTO `dic_city` VALUES ('440308', '440308', '鐩愮敯鍖', '4403', 3);
+INSERT INTO `dic_city` VALUES ('440309', '440309', '榫欏崕鍖', '4403', 3);
+INSERT INTO `dic_city` VALUES ('440310', '440310', '鍧北鍖', '4403', 3);
+INSERT INTO `dic_city` VALUES ('440311', '440311', '鍏夋槑鍖', '4403', 3);
+INSERT INTO `dic_city` VALUES ('4404', '4404', '鐝犳捣甯', '44', 2);
+INSERT INTO `dic_city` VALUES ('440402', '440402', '棣欐床鍖', '4404', 3);
+INSERT INTO `dic_city` VALUES ('440403', '440403', '鏂楅棬鍖', '4404', 3);
+INSERT INTO `dic_city` VALUES ('440404', '440404', '閲戞咕鍖', '4404', 3);
+INSERT INTO `dic_city` VALUES ('4405', '4405', '姹曞ご甯', '44', 2);
+INSERT INTO `dic_city` VALUES ('440507', '440507', '榫欐箹鍖', '4405', 3);
+INSERT INTO `dic_city` VALUES ('440511', '440511', '閲戝钩鍖', '4405', 3);
+INSERT INTO `dic_city` VALUES ('440512', '440512', '婵犳睙鍖', '4405', 3);
+INSERT INTO `dic_city` VALUES ('440513', '440513', '娼槼鍖', '4405', 3);
+INSERT INTO `dic_city` VALUES ('440514', '440514', '娼崡鍖', '4405', 3);
+INSERT INTO `dic_city` VALUES ('440515', '440515', '婢勬捣鍖', '4405', 3);
+INSERT INTO `dic_city` VALUES ('440523', '440523', '鍗楁境鍘', '4405', 3);
+INSERT INTO `dic_city` VALUES ('4406', '4406', '浣涘北甯', '44', 2);
+INSERT INTO `dic_city` VALUES ('440604', '440604', '绂呭煄鍖', '4406', 3);
+INSERT INTO `dic_city` VALUES ('440605', '440605', '鍗楁捣鍖', '4406', 3);
+INSERT INTO `dic_city` VALUES ('440606', '440606', '椤哄痉鍖', '4406', 3);
+INSERT INTO `dic_city` VALUES ('440607', '440607', '涓夋按鍖', '4406', 3);
+INSERT INTO `dic_city` VALUES ('440608', '440608', '楂樻槑鍖', '4406', 3);
+INSERT INTO `dic_city` VALUES ('4407', '4407', '姹熼棬甯', '44', 2);
+INSERT INTO `dic_city` VALUES ('440703', '440703', '钃睙鍖', '4407', 3);
+INSERT INTO `dic_city` VALUES ('440704', '440704', '姹熸捣鍖', '4407', 3);
+INSERT INTO `dic_city` VALUES ('440705', '440705', '鏂颁細鍖', '4407', 3);
+INSERT INTO `dic_city` VALUES ('440781', '440781', '鍙板北甯', '4407', 3);
+INSERT INTO `dic_city` VALUES ('440783', '440783', '寮€骞冲競', '4407', 3);
+INSERT INTO `dic_city` VALUES ('440784', '440784', '楣ゅ北甯', '4407', 3);
+INSERT INTO `dic_city` VALUES ('440785', '440785', '鎭╁钩甯', '4407', 3);
+INSERT INTO `dic_city` VALUES ('4408', '4408', '婀涙睙甯', '44', 2);
+INSERT INTO `dic_city` VALUES ('440802', '440802', '璧ゅ潕鍖', '4408', 3);
+INSERT INTO `dic_city` VALUES ('440803', '440803', '闇炲北鍖', '4408', 3);
+INSERT INTO `dic_city` VALUES ('440804', '440804', '鍧″ご鍖', '4408', 3);
+INSERT INTO `dic_city` VALUES ('440811', '440811', '楹荤珷鍖', '4408', 3);
+INSERT INTO `dic_city` VALUES ('440823', '440823', '閬傛邯鍘', '4408', 3);
+INSERT INTO `dic_city` VALUES ('440825', '440825', '寰愰椈鍘', '4408', 3);
+INSERT INTO `dic_city` VALUES ('440881', '440881', '寤夋睙甯', '4408', 3);
+INSERT INTO `dic_city` VALUES ('440882', '440882', '闆峰窞甯', '4408', 3);
+INSERT INTO `dic_city` VALUES ('440883', '440883', '鍚村窛甯', '4408', 3);
+INSERT INTO `dic_city` VALUES ('4409', '4409', '鑼傚悕甯', '44', 2);
+INSERT INTO `dic_city` VALUES ('440902', '440902', '鑼傚崡鍖', '4409', 3);
+INSERT INTO `dic_city` VALUES ('440904', '440904', '鐢电櫧鍖', '4409', 3);
+INSERT INTO `dic_city` VALUES ('440981', '440981', '楂樺窞甯', '4409', 3);
+INSERT INTO `dic_city` VALUES ('440982', '440982', '鍖栧窞甯', '4409', 3);
+INSERT INTO `dic_city` VALUES ('440983', '440983', '淇″疁甯', '4409', 3);
+INSERT INTO `dic_city` VALUES ('4412', '4412', '鑲囧簡甯', '44', 2);
+INSERT INTO `dic_city` VALUES ('441202', '441202', '绔窞鍖', '4412', 3);
+INSERT INTO `dic_city` VALUES ('441203', '441203', '榧庢箹鍖', '4412', 3);
+INSERT INTO `dic_city` VALUES ('441204', '441204', '楂樿鍖', '4412', 3);
+INSERT INTO `dic_city` VALUES ('441223', '441223', '骞垮畞鍘', '4412', 3);
+INSERT INTO `dic_city` VALUES ('441224', '441224', '鎬€闆嗗幙', '4412', 3);
+INSERT INTO `dic_city` VALUES ('441225', '441225', '灏佸紑鍘', '4412', 3);
+INSERT INTO `dic_city` VALUES ('441226', '441226', '寰峰簡鍘', '4412', 3);
+INSERT INTO `dic_city` VALUES ('441284', '441284', '鍥涗細甯', '4412', 3);
+INSERT INTO `dic_city` VALUES ('4413', '4413', '鎯犲窞甯', '44', 2);
+INSERT INTO `dic_city` VALUES ('441302', '441302', '鎯犲煄鍖', '4413', 3);
+INSERT INTO `dic_city` VALUES ('441303', '441303', '鎯犻槼鍖', '4413', 3);
+INSERT INTO `dic_city` VALUES ('441322', '441322', '鍗氱綏鍘', '4413', 3);
+INSERT INTO `dic_city` VALUES ('441323', '441323', '鎯犱笢鍘', '4413', 3);
+INSERT INTO `dic_city` VALUES ('441324', '441324', '榫欓棬鍘', '4413', 3);
+INSERT INTO `dic_city` VALUES ('4414', '4414', '姊呭窞甯', '44', 2);
+INSERT INTO `dic_city` VALUES ('441402', '441402', '姊呮睙鍖', '4414', 3);
+INSERT INTO `dic_city` VALUES ('441403', '441403', '姊呭幙鍖', '4414', 3);
+INSERT INTO `dic_city` VALUES ('441422', '441422', '澶у煍鍘', '4414', 3);
+INSERT INTO `dic_city` VALUES ('441423', '441423', '涓伴『鍘', '4414', 3);
+INSERT INTO `dic_city` VALUES ('441424', '441424', '浜斿崕鍘', '4414', 3);
+INSERT INTO `dic_city` VALUES ('441426', '441426', '骞宠繙鍘', '4414', 3);
+INSERT INTO `dic_city` VALUES ('441427', '441427', '钑夊箔鍘', '4414', 3);
+INSERT INTO `dic_city` VALUES ('441481', '441481', '鍏村畞甯', '4414', 3);
+INSERT INTO `dic_city` VALUES ('4415', '4415', '姹曞熬甯', '44', 2);
+INSERT INTO `dic_city` VALUES ('441502', '441502', '鍩庡尯', '4415', 3);
+INSERT INTO `dic_city` VALUES ('441521', '441521', '娴蜂赴鍘', '4415', 3);
+INSERT INTO `dic_city` VALUES ('441523', '441523', '闄嗘渤鍘', '4415', 3);
+INSERT INTO `dic_city` VALUES ('441581', '441581', '闄嗕赴甯', '4415', 3);
+INSERT INTO `dic_city` VALUES ('4416', '4416', '娌虫簮甯', '44', 2);
+INSERT INTO `dic_city` VALUES ('441602', '441602', '婧愬煄鍖', '4416', 3);
+INSERT INTO `dic_city` VALUES ('441621', '441621', '绱噾鍘', '4416', 3);
+INSERT INTO `dic_city` VALUES ('441622', '441622', '榫欏窛鍘', '4416', 3);
+INSERT INTO `dic_city` VALUES ('441623', '441623', '杩炲钩鍘', '4416', 3);
+INSERT INTO `dic_city` VALUES ('441624', '441624', '鍜屽钩鍘', '4416', 3);
+INSERT INTO `dic_city` VALUES ('441625', '441625', '涓滄簮鍘', '4416', 3);
+INSERT INTO `dic_city` VALUES ('4417', '4417', '闃虫睙甯', '44', 2);
+INSERT INTO `dic_city` VALUES ('441702', '441702', '姹熷煄鍖', '4417', 3);
+INSERT INTO `dic_city` VALUES ('441704', '441704', '闃充笢鍖', '4417', 3);
+INSERT INTO `dic_city` VALUES ('441721', '441721', '闃宠タ鍘', '4417', 3);
+INSERT INTO `dic_city` VALUES ('441781', '441781', '闃虫槬甯', '4417', 3);
+INSERT INTO `dic_city` VALUES ('4418', '4418', '娓呰繙甯', '44', 2);
+INSERT INTO `dic_city` VALUES ('441802', '441802', '娓呭煄鍖', '4418', 3);
+INSERT INTO `dic_city` VALUES ('441803', '441803', '娓呮柊鍖', '4418', 3);
+INSERT INTO `dic_city` VALUES ('441821', '441821', '浣涘唸鍘', '4418', 3);
+INSERT INTO `dic_city` VALUES ('441823', '441823', '闃冲北鍘', '4418', 3);
+INSERT INTO `dic_city` VALUES ('441825', '441825', '杩炲北澹棌鐟舵棌鑷不鍘', '4418', 3);
+INSERT INTO `dic_city` VALUES ('441826', '441826', '杩炲崡鐟舵棌鑷不鍘', '4418', 3);
+INSERT INTO `dic_city` VALUES ('441881', '441881', '鑻卞痉甯', '4418', 3);
+INSERT INTO `dic_city` VALUES ('441882', '441882', '杩炲窞甯', '4418', 3);
+INSERT INTO `dic_city` VALUES ('4419', '4419', '涓滆帪甯', '44', 2);
+INSERT INTO `dic_city` VALUES ('441900003', '441900003', '涓滃煄琛楅亾', '4419', 3);
+INSERT INTO `dic_city` VALUES ('441900004', '441900004', '鍗楀煄琛楅亾', '4419', 3);
+INSERT INTO `dic_city` VALUES ('441900005', '441900005', '涓囨睙琛楅亾', '4419', 3);
+INSERT INTO `dic_city` VALUES ('441900006', '441900006', '鑾炲煄琛楅亾', '4419', 3);
+INSERT INTO `dic_city` VALUES ('441900101', '441900101', '鐭崇ⅲ闀', '4419', 3);
+INSERT INTO `dic_city` VALUES ('441900102', '441900102', '鐭抽緳闀', '4419', 3);
+INSERT INTO `dic_city` VALUES ('441900103', '441900103', '鑼跺北闀', '4419', 3);
+INSERT INTO `dic_city` VALUES ('441900104', '441900104', '鐭虫帓闀', '4419', 3);
+INSERT INTO `dic_city` VALUES ('441900105', '441900105', '浼佺煶闀', '4419', 3);
+INSERT INTO `dic_city` VALUES ('441900106', '441900106', '妯播闀', '4419', 3);
+INSERT INTO `dic_city` VALUES ('441900107', '441900107', '妗ュご闀', '4419', 3);
+INSERT INTO `dic_city` VALUES ('441900108', '441900108', '璋㈠矖闀', '4419', 3);
+INSERT INTO `dic_city` VALUES ('441900109', '441900109', '涓滃潙闀', '4419', 3);
+INSERT INTO `dic_city` VALUES ('441900110', '441900110', '甯稿钩闀', '4419', 3);
+INSERT INTO `dic_city` VALUES ('441900111', '441900111', '瀵闀', '4419', 3);
+INSERT INTO `dic_city` VALUES ('441900112', '441900112', '妯熸湪澶撮晣', '4419', 3);
+INSERT INTO `dic_city` VALUES ('441900113', '441900113', '澶ф湕闀', '4419', 3);
+INSERT INTO `dic_city` VALUES ('441900114', '441900114', '榛勬睙闀', '4419', 3);
+INSERT INTO `dic_city` VALUES ('441900115', '441900115', '娓呮邯闀', '4419', 3);
+INSERT INTO `dic_city` VALUES ('441900116', '441900116', '濉樺帵闀', '4419', 3);
+INSERT INTO `dic_city` VALUES ('441900117', '441900117', '鍑ゅ矖闀', '4419', 3);
+INSERT INTO `dic_city` VALUES ('441900118', '441900118', '澶у箔灞遍晣', '4419', 3);
+INSERT INTO `dic_city` VALUES ('441900119', '441900119', '闀垮畨闀', '4419', 3);
+INSERT INTO `dic_city` VALUES ('441900121', '441900121', '铏庨棬闀', '4419', 3);
+INSERT INTO `dic_city` VALUES ('441900122', '441900122', '鍘氳闀', '4419', 3);
+INSERT INTO `dic_city` VALUES ('441900123', '441900123', '娌欑敯闀', '4419', 3);
+INSERT INTO `dic_city` VALUES ('441900124', '441900124', '閬撴粯闀', '4419', 3);
+INSERT INTO `dic_city` VALUES ('441900125', '441900125', '娲闀', '4419', 3);
+INSERT INTO `dic_city` VALUES ('441900126', '441900126', '楹绘秾闀', '4419', 3);
+INSERT INTO `dic_city` VALUES ('441900127', '441900127', '鏈涚墰澧╅晣', '4419', 3);
+INSERT INTO `dic_city` VALUES ('441900128', '441900128', '涓爞闀', '4419', 3);
+INSERT INTO `dic_city` VALUES ('441900129', '441900129', '楂樺煑闀', '4419', 3);
+INSERT INTO `dic_city` VALUES ('441900401', '441900401', '鏉惧北婀', '4419', 3);
+INSERT INTO `dic_city` VALUES ('441900402', '441900402', '涓滆帪娓', '4419', 3);
+INSERT INTO `dic_city` VALUES ('441900403', '441900403', '涓滆帪鐢熸€佸洯', '4419', 3);
+INSERT INTO `dic_city` VALUES ('4420', '4420', '涓北甯', '44', 2);
+INSERT INTO `dic_city` VALUES ('442000001', '442000001', '鐭冲矏琛楅亾', '4420', 3);
+INSERT INTO `dic_city` VALUES ('442000002', '442000002', '涓滃尯琛楅亾', '4420', 3);
+INSERT INTO `dic_city` VALUES ('442000003', '442000003', '涓北娓閬', '4420', 3);
+INSERT INTO `dic_city` VALUES ('442000004', '442000004', '瑗垮尯琛楅亾', '4420', 3);
+INSERT INTO `dic_city` VALUES ('442000005', '442000005', '鍗楀尯琛楅亾', '4420', 3);
+INSERT INTO `dic_city` VALUES ('442000006', '442000006', '浜旀灞辫閬', '4420', 3);
+INSERT INTO `dic_city` VALUES ('442000100', '442000100', '灏忔闀', '4420', 3);
+INSERT INTO `dic_city` VALUES ('442000101', '442000101', '榛勫渻闀', '4420', 3);
+INSERT INTO `dic_city` VALUES ('442000102', '442000102', '姘戜紬闀', '4420', 3);
+INSERT INTO `dic_city` VALUES ('442000103', '442000103', '涓滃嚖闀', '4420', 3);
+INSERT INTO `dic_city` VALUES ('442000104', '442000104', '涓滃崌闀', '4420', 3);
+INSERT INTO `dic_city` VALUES ('442000105', '442000105', '鍙ら晣闀', '4420', 3);
+INSERT INTO `dic_city` VALUES ('442000106', '442000106', '娌欐邯闀', '4420', 3);
+INSERT INTO `dic_city` VALUES ('442000107', '442000107', '鍧︽床闀', '4420', 3);
+INSERT INTO `dic_city` VALUES ('442000108', '442000108', '娓彛闀', '4420', 3);
+INSERT INTO `dic_city` VALUES ('442000109', '442000109', '涓夎闀', '4420', 3);
+INSERT INTO `dic_city` VALUES ('442000110', '442000110', '妯爮闀', '4420', 3);
+INSERT INTO `dic_city` VALUES ('442000111', '442000111', '鍗楀ご闀', '4420', 3);
+INSERT INTO `dic_city` VALUES ('442000112', '442000112', '闃滄矙闀', '4420', 3);
+INSERT INTO `dic_city` VALUES ('442000113', '442000113', '鍗楁湕闀', '4420', 3);
+INSERT INTO `dic_city` VALUES ('442000114', '442000114', '涓変埂闀', '4420', 3);
+INSERT INTO `dic_city` VALUES ('442000115', '442000115', '鏉胯姍闀', '4420', 3);
+INSERT INTO `dic_city` VALUES ('442000116', '442000116', '澶ф秾闀', '4420', 3);
+INSERT INTO `dic_city` VALUES ('442000117', '442000117', '绁炴咕闀', '4420', 3);
+INSERT INTO `dic_city` VALUES ('4451', '4451', '娼窞甯', '44', 2);
+INSERT INTO `dic_city` VALUES ('445102', '445102', '婀樻ˉ鍖', '4451', 3);
+INSERT INTO `dic_city` VALUES ('445103', '445103', '娼畨鍖', '4451', 3);
+INSERT INTO `dic_city` VALUES ('445122', '445122', '楗跺钩鍘', '4451', 3);
+INSERT INTO `dic_city` VALUES ('4452', '4452', '鎻槼甯', '44', 2);
+INSERT INTO `dic_city` VALUES ('445202', '445202', '姒曞煄鍖', '4452', 3);
+INSERT INTO `dic_city` VALUES ('445203', '445203', '鎻笢鍖', '4452', 3);
+INSERT INTO `dic_city` VALUES ('445222', '445222', '鎻タ鍘', '4452', 3);
+INSERT INTO `dic_city` VALUES ('445224', '445224', '鎯犳潵鍘', '4452', 3);
+INSERT INTO `dic_city` VALUES ('445281', '445281', '鏅畞甯', '4452', 3);
+INSERT INTO `dic_city` VALUES ('4453', '4453', '浜戞诞甯', '44', 2);
+INSERT INTO `dic_city` VALUES ('445302', '445302', '浜戝煄鍖', '4453', 3);
+INSERT INTO `dic_city` VALUES ('445303', '445303', '浜戝畨鍖', '4453', 3);
+INSERT INTO `dic_city` VALUES ('445321', '445321', '鏂板叴鍘', '4453', 3);
+INSERT INTO `dic_city` VALUES ('445322', '445322', '閮佸崡鍘', '4453', 3);
+INSERT INTO `dic_city` VALUES ('445381', '445381', '缃楀畾甯', '4453', 3);
+INSERT INTO `dic_city` VALUES ('45', '45', '骞胯タ澹棌鑷不鍖', NULL, 1);
+INSERT INTO `dic_city` VALUES ('4501', '4501', '鍗楀畞甯', '45', 2);
+INSERT INTO `dic_city` VALUES ('450102', '450102', '鍏村畞鍖', '4501', 3);
+INSERT INTO `dic_city` VALUES ('450103', '450103', '闈掔鍖', '4501', 3);
+INSERT INTO `dic_city` VALUES ('450105', '450105', '姹熷崡鍖', '4501', 3);
+INSERT INTO `dic_city` VALUES ('450107', '450107', '瑗夸埂濉樺尯', '4501', 3);
+INSERT INTO `dic_city` VALUES ('450108', '450108', '鑹簡鍖', '4501', 3);
+INSERT INTO `dic_city` VALUES ('450109', '450109', '閭曞畞鍖', '4501', 3);
+INSERT INTO `dic_city` VALUES ('450110', '450110', '姝﹂福鍖', '4501', 3);
+INSERT INTO `dic_city` VALUES ('450123', '450123', '闅嗗畨鍘', '4501', 3);
+INSERT INTO `dic_city` VALUES ('450124', '450124', '椹北鍘', '4501', 3);
+INSERT INTO `dic_city` VALUES ('450125', '450125', '涓婃灄鍘', '4501', 3);
+INSERT INTO `dic_city` VALUES ('450126', '450126', '瀹鹃槼鍘', '4501', 3);
+INSERT INTO `dic_city` VALUES ('450127', '450127', '妯幙', '4501', 3);
+INSERT INTO `dic_city` VALUES ('4502', '4502', '鏌冲窞甯', '45', 2);
+INSERT INTO `dic_city` VALUES ('450202', '450202', '鍩庝腑鍖', '4502', 3);
+INSERT INTO `dic_city` VALUES ('450203', '450203', '楸煎嘲鍖', '4502', 3);
+INSERT INTO `dic_city` VALUES ('450204', '450204', '鏌冲崡鍖', '4502', 3);
+INSERT INTO `dic_city` VALUES ('450205', '450205', '鏌冲寳鍖', '4502', 3);
+INSERT INTO `dic_city` VALUES ('450206', '450206', '鏌虫睙鍖', '4502', 3);
+INSERT INTO `dic_city` VALUES ('450222', '450222', '鏌冲煄鍘', '4502', 3);
+INSERT INTO `dic_city` VALUES ('450223', '450223', '楣垮鍘', '4502', 3);
+INSERT INTO `dic_city` VALUES ('450224', '450224', '铻嶅畨鍘', '4502', 3);
+INSERT INTO `dic_city` VALUES ('450225', '450225', '铻嶆按鑻楁棌鑷不鍘', '4502', 3);
+INSERT INTO `dic_city` VALUES ('450226', '450226', '涓夋睙渚楁棌鑷不鍘', '4502', 3);
+INSERT INTO `dic_city` VALUES ('4503', '4503', '妗傛灄甯', '45', 2);
+INSERT INTO `dic_city` VALUES ('450302', '450302', '绉€宄板尯', '4503', 3);
+INSERT INTO `dic_city` VALUES ('450303', '450303', '鍙犲僵鍖', '4503', 3);
+INSERT INTO `dic_city` VALUES ('450304', '450304', '璞″北鍖', '4503', 3);
+INSERT INTO `dic_city` VALUES ('450305', '450305', '涓冩槦鍖', '4503', 3);
+INSERT INTO `dic_city` VALUES ('450311', '450311', '闆佸北鍖', '4503', 3);
+INSERT INTO `dic_city` VALUES ('450312', '450312', '涓存鍖', '4503', 3);
+INSERT INTO `dic_city` VALUES ('450321', '450321', '闃虫湐鍘', '4503', 3);
+INSERT INTO `dic_city` VALUES ('450323', '450323', '鐏靛窛鍘', '4503', 3);
+INSERT INTO `dic_city` VALUES ('450324', '450324', '鍏ㄥ窞鍘', '4503', 3);
+INSERT INTO `dic_city` VALUES ('450325', '450325', '鍏村畨鍘', '4503', 3);
+INSERT INTO `dic_city` VALUES ('450326', '450326', '姘哥鍘', '4503', 3);
+INSERT INTO `dic_city` VALUES ('450327', '450327', '鐏岄槼鍘', '4503', 3);
+INSERT INTO `dic_city` VALUES ('450328', '450328', '榫欒儨鍚勬棌鑷不鍘', '4503', 3);
+INSERT INTO `dic_city` VALUES ('450329', '450329', '璧勬簮鍘', '4503', 3);
+INSERT INTO `dic_city` VALUES ('450330', '450330', '骞充箰鍘', '4503', 3);
+INSERT INTO `dic_city` VALUES ('450332', '450332', '鎭煄鐟舵棌鑷不鍘', '4503', 3);
+INSERT INTO `dic_city` VALUES ('450381', '450381', '鑽旀郸甯', '4503', 3);
+INSERT INTO `dic_city` VALUES ('4504', '4504', '姊у窞甯', '45', 2);
+INSERT INTO `dic_city` VALUES ('450403', '450403', '涓囩鍖', '4504', 3);
+INSERT INTO `dic_city` VALUES ('450405', '450405', '闀挎床鍖', '4504', 3);
+INSERT INTO `dic_city` VALUES ('450406', '450406', '榫欏湬鍖', '4504', 3);
+INSERT INTO `dic_city` VALUES ('450421', '450421', '鑻嶆ⅶ鍘', '4504', 3);
+INSERT INTO `dic_city` VALUES ('450422', '450422', '钘ゅ幙', '4504', 3);
+INSERT INTO `dic_city` VALUES ('450423', '450423', '钂欏北鍘', '4504', 3);
+INSERT INTO `dic_city` VALUES ('450481', '450481', '宀戞邯甯', '4504', 3);
+INSERT INTO `dic_city` VALUES ('4505', '4505', '鍖楁捣甯', '45', 2);
+INSERT INTO `dic_city` VALUES ('450502', '450502', '娴峰煄鍖', '4505', 3);
+INSERT INTO `dic_city` VALUES ('450503', '450503', '閾舵捣鍖', '4505', 3);
+INSERT INTO `dic_city` VALUES ('450512', '450512', '閾佸北娓尯', '4505', 3);
+INSERT INTO `dic_city` VALUES ('450521', '450521', '鍚堟郸鍘', '4505', 3);
+INSERT INTO `dic_city` VALUES ('4506', '4506', '闃插煄娓競', '45', 2);
+INSERT INTO `dic_city` VALUES ('450602', '450602', '娓彛鍖', '4506', 3);
+INSERT INTO `dic_city` VALUES ('450603', '450603', '闃插煄鍖', '4506', 3);
+INSERT INTO `dic_city` VALUES ('450621', '450621', '涓婃€濆幙', '4506', 3);
+INSERT INTO `dic_city` VALUES ('450681', '450681', '涓滃叴甯', '4506', 3);
+INSERT INTO `dic_city` VALUES ('4507', '4507', '閽﹀窞甯', '45', 2);
+INSERT INTO `dic_city` VALUES ('450702', '450702', '閽﹀崡鍖', '4507', 3);
+INSERT INTO `dic_city` VALUES ('450703', '450703', '閽﹀寳鍖', '4507', 3);
+INSERT INTO `dic_city` VALUES ('450721', '450721', '鐏靛北鍘', '4507', 3);
+INSERT INTO `dic_city` VALUES ('450722', '450722', '娴﹀寳鍘', '4507', 3);
+INSERT INTO `dic_city` VALUES ('4508', '4508', '璐垫腐甯', '45', 2);
+INSERT INTO `dic_city` VALUES ('450802', '450802', '娓寳鍖', '4508', 3);
+INSERT INTO `dic_city` VALUES ('450803', '450803', '娓崡鍖', '4508', 3);
+INSERT INTO `dic_city` VALUES ('450804', '450804', '瑕冨鍖', '4508', 3);
+INSERT INTO `dic_city` VALUES ('450821', '450821', '骞冲崡鍘', '4508', 3);
+INSERT INTO `dic_city` VALUES ('450881', '450881', '妗傚钩甯', '4508', 3);
+INSERT INTO `dic_city` VALUES ('4509', '4509', '鐜夋灄甯', '45', 2);
+INSERT INTO `dic_city` VALUES ('450902', '450902', '鐜夊窞鍖', '4509', 3);
+INSERT INTO `dic_city` VALUES ('450903', '450903', '绂忕坏鍖', '4509', 3);
+INSERT INTO `dic_city` VALUES ('450921', '450921', '瀹瑰幙', '4509', 3);
+INSERT INTO `dic_city` VALUES ('450922', '450922', '闄嗗窛鍘', '4509', 3);
+INSERT INTO `dic_city` VALUES ('450923', '450923', '鍗氱櫧鍘', '4509', 3);
+INSERT INTO `dic_city` VALUES ('450924', '450924', '鍏翠笟鍘', '4509', 3);
+INSERT INTO `dic_city` VALUES ('450981', '450981', '鍖楁祦甯', '4509', 3);
+INSERT INTO `dic_city` VALUES ('4510', '4510', '鐧捐壊甯', '45', 2);
+INSERT INTO `dic_city` VALUES ('451002', '451002', '鍙虫睙鍖', '4510', 3);
+INSERT INTO `dic_city` VALUES ('451003', '451003', '鐢伴槼鍖', '4510', 3);
+INSERT INTO `dic_city` VALUES ('451022', '451022', '鐢颁笢鍘', '4510', 3);
+INSERT INTO `dic_city` VALUES ('451024', '451024', '寰蜂繚鍘', '4510', 3);
+INSERT INTO `dic_city` VALUES ('451026', '451026', '閭ｅ潯鍘', '4510', 3);
+INSERT INTO `dic_city` VALUES ('451027', '451027', '鍑屼簯鍘', '4510', 3);
+INSERT INTO `dic_city` VALUES ('451028', '451028', '涔愪笟鍘', '4510', 3);
+INSERT INTO `dic_city` VALUES ('451029', '451029', '鐢版灄鍘', '4510', 3);
+INSERT INTO `dic_city` VALUES ('451030', '451030', '瑗挎灄鍘', '4510', 3);
+INSERT INTO `dic_city` VALUES ('451031', '451031', '闅嗘灄鍚勬棌鑷不鍘', '4510', 3);
+INSERT INTO `dic_city` VALUES ('451081', '451081', '闈栬タ甯', '4510', 3);
+INSERT INTO `dic_city` VALUES ('451082', '451082', '骞虫灉甯', '4510', 3);
+INSERT INTO `dic_city` VALUES ('4511', '4511', '璐哄窞甯', '45', 2);
+INSERT INTO `dic_city` VALUES ('451102', '451102', '鍏鍖', '4511', 3);
+INSERT INTO `dic_city` VALUES ('451103', '451103', '骞虫鍖', '4511', 3);
+INSERT INTO `dic_city` VALUES ('451121', '451121', '鏄钩鍘', '4511', 3);
+INSERT INTO `dic_city` VALUES ('451122', '451122', '閽熷北鍘', '4511', 3);
+INSERT INTO `dic_city` VALUES ('451123', '451123', '瀵屽窛鐟舵棌鑷不鍘', '4511', 3);
+INSERT INTO `dic_city` VALUES ('4512', '4512', '娌虫睜甯', '45', 2);
+INSERT INTO `dic_city` VALUES ('451202', '451202', '閲戝煄姹熷尯', '4512', 3);
+INSERT INTO `dic_city` VALUES ('451203', '451203', '瀹滃窞鍖', '4512', 3);
+INSERT INTO `dic_city` VALUES ('451221', '451221', '鍗椾腹鍘', '4512', 3);
+INSERT INTO `dic_city` VALUES ('451222', '451222', '澶╁敞鍘', '4512', 3);
+INSERT INTO `dic_city` VALUES ('451223', '451223', '鍑ゅ北鍘', '4512', 3);
+INSERT INTO `dic_city` VALUES ('451224', '451224', '涓滃叞鍘', '4512', 3);
+INSERT INTO `dic_city` VALUES ('451225', '451225', '缃楀煄浠浆鏃忚嚜娌诲幙', '4512', 3);
+INSERT INTO `dic_city` VALUES ('451226', '451226', '鐜睙姣涘崡鏃忚嚜娌诲幙', '4512', 3);
+INSERT INTO `dic_city` VALUES ('451227', '451227', '宸撮┈鐟舵棌鑷不鍘', '4512', 3);
+INSERT INTO `dic_city` VALUES ('451228', '451228', '閮藉畨鐟舵棌鑷不鍘', '4512', 3);
+INSERT INTO `dic_city` VALUES ('451229', '451229', '澶у寲鐟舵棌鑷不鍘', '4512', 3);
+INSERT INTO `dic_city` VALUES ('4513', '4513', '鏉ュ甯', '45', 2);
+INSERT INTO `dic_city` VALUES ('451302', '451302', '鍏村鍖', '4513', 3);
+INSERT INTO `dic_city` VALUES ('451321', '451321', '蹇诲煄鍘', '4513', 3);
+INSERT INTO `dic_city` VALUES ('451322', '451322', '璞″窞鍘', '4513', 3);
+INSERT INTO `dic_city` VALUES ('451323', '451323', '姝﹀鍘', '4513', 3);
+INSERT INTO `dic_city` VALUES ('451324', '451324', '閲戠鐟舵棌鑷不鍘', '4513', 3);
+INSERT INTO `dic_city` VALUES ('451381', '451381', '鍚堝北甯', '4513', 3);
+INSERT INTO `dic_city` VALUES ('4514', '4514', '宕囧乏甯', '45', 2);
+INSERT INTO `dic_city` VALUES ('451402', '451402', '姹熷窞鍖', '4514', 3);
+INSERT INTO `dic_city` VALUES ('451421', '451421', '鎵剁互鍘', '4514', 3);
+INSERT INTO `dic_city` VALUES ('451422', '451422', '瀹佹槑鍘', '4514', 3);
+INSERT INTO `dic_city` VALUES ('451423', '451423', '榫欏窞鍘', '4514', 3);
+INSERT INTO `dic_city` VALUES ('451424', '451424', '澶ф柊鍘', '4514', 3);
+INSERT INTO `dic_city` VALUES ('451425', '451425', '澶╃瓑鍘', '4514', 3);
+INSERT INTO `dic_city` VALUES ('451481', '451481', '鍑ゥ甯', '4514', 3);
+INSERT INTO `dic_city` VALUES ('46', '46', '娴峰崡鐪', NULL, 1);
+INSERT INTO `dic_city` VALUES ('4601', '4601', '娴峰彛甯', '46', 2);
+INSERT INTO `dic_city` VALUES ('460105', '460105', '绉€鑻卞尯', '4601', 3);
+INSERT INTO `dic_city` VALUES ('460106', '460106', '榫欏崕鍖', '4601', 3);
+INSERT INTO `dic_city` VALUES ('460107', '460107', '鐞煎北鍖', '4601', 3);
+INSERT INTO `dic_city` VALUES ('460108', '460108', '缇庡叞鍖', '4601', 3);
+INSERT INTO `dic_city` VALUES ('4602', '4602', '涓変簹甯', '46', 2);
+INSERT INTO `dic_city` VALUES ('460202', '460202', '娴锋鍖', '4602', 3);
+INSERT INTO `dic_city` VALUES ('460203', '460203', '鍚夐槼鍖', '4602', 3);
+INSERT INTO `dic_city` VALUES ('460204', '460204', '澶╂动鍖', '4602', 3);
+INSERT INTO `dic_city` VALUES ('460205', '460205', '宕栧窞鍖', '4602', 3);
+INSERT INTO `dic_city` VALUES ('4603', '4603', '涓夋矙甯', '46', 2);
+INSERT INTO `dic_city` VALUES ('460321', '460321', '瑗挎矙缇ゅ矝', '4603', 3);
+INSERT INTO `dic_city` VALUES ('460322', '460322', '鍗楁矙缇ゅ矝', '4603', 3);
+INSERT INTO `dic_city` VALUES ('460323', '460323', '涓矙缇ゅ矝鐨勫矝绀佸強鍏舵捣鍩', '4603', 3);
+INSERT INTO `dic_city` VALUES ('4604', '4604', '鍎嬪窞甯', '46', 2);
+INSERT INTO `dic_city` VALUES ('460400100', '460400100', '閭ｅぇ闀', '4604', 3);
+INSERT INTO `dic_city` VALUES ('460400101', '460400101', '鍜屽簡闀', '4604', 3);
+INSERT INTO `dic_city` VALUES ('460400102', '460400102', '鍗椾赴闀', '4604', 3);
+INSERT INTO `dic_city` VALUES ('460400103', '460400103', '澶ф垚闀', '4604', 3);
+INSERT INTO `dic_city` VALUES ('460400104', '460400104', '闆呮槦闀', '4604', 3);
+INSERT INTO `dic_city` VALUES ('460400105', '460400105', '鍏版磱闀', '4604', 3);
+INSERT INTO `dic_city` VALUES ('460400106', '460400106', '鍏夋潙闀', '4604', 3);
+INSERT INTO `dic_city` VALUES ('460400107', '460400107', '鏈ㄦ闀', '4604', 3);
+INSERT INTO `dic_city` VALUES ('460400108', '460400108', '娴峰ご闀', '4604', 3);
+INSERT INTO `dic_city` VALUES ('460400109', '460400109', '宄ㄨ敁闀', '4604', 3);
+INSERT INTO `dic_city` VALUES ('460400111', '460400111', '鐜嬩簲闀', '4604', 3);
+INSERT INTO `dic_city` VALUES ('460400112', '460400112', '鐧介┈浜曢晣', '4604', 3);
+INSERT INTO `dic_city` VALUES ('460400113', '460400113', '涓拰闀', '4604', 3);
+INSERT INTO `dic_city` VALUES ('460400114', '460400114', '鎺掓郸闀', '4604', 3);
+INSERT INTO `dic_city` VALUES ('460400115', '460400115', '涓滄垚闀', '4604', 3);
+INSERT INTO `dic_city` VALUES ('460400116', '460400116', '鏂板窞闀', '4604', 3);
+INSERT INTO `dic_city` VALUES ('460400499', '460400499', '娲嬫郸缁忔祹寮€鍙戝尯', '4604', 3);
+INSERT INTO `dic_city` VALUES ('460400500', '460400500', '鍗庡崡鐑綔瀛﹂櫌', '4604', 3);
+INSERT INTO `dic_city` VALUES ('4690', '4690', '鐪佺洿杈栧幙绾ц鏀垮尯鍒', '46', 2);
+INSERT INTO `dic_city` VALUES ('469001', '469001', '浜旀寚灞卞競', '4690', 3);
+INSERT INTO `dic_city` VALUES ('469002', '469002', '鐞兼捣甯', '4690', 3);
+INSERT INTO `dic_city` VALUES ('469005', '469005', '鏂囨槍甯', '4690', 3);
+INSERT INTO `dic_city` VALUES ('469006', '469006', '涓囧畞甯', '4690', 3);
+INSERT INTO `dic_city` VALUES ('469007', '469007', '涓滄柟甯', '4690', 3);
+INSERT INTO `dic_city` VALUES ('469021', '469021', '瀹氬畨鍘', '4690', 3);
+INSERT INTO `dic_city` VALUES ('469022', '469022', '灞槍鍘', '4690', 3);
+INSERT INTO `dic_city` VALUES ('469023', '469023', '婢勮繄鍘', '4690', 3);
+INSERT INTO `dic_city` VALUES ('469024', '469024', '涓撮珮鍘', '4690', 3);
+INSERT INTO `dic_city` VALUES ('469025', '469025', '鐧芥矙榛庢棌鑷不鍘', '4690', 3);
+INSERT INTO `dic_city` VALUES ('469026', '469026', '鏄屾睙榛庢棌鑷不鍘', '4690', 3);
+INSERT INTO `dic_city` VALUES ('469027', '469027', '涔愪笢榛庢棌鑷不鍘', '4690', 3);
+INSERT INTO `dic_city` VALUES ('469028', '469028', '闄垫按榛庢棌鑷不鍘', '4690', 3);
+INSERT INTO `dic_city` VALUES ('469029', '469029', '淇濅涵榛庢棌鑻楁棌鑷不鍘', '4690', 3);
+INSERT INTO `dic_city` VALUES ('469030', '469030', '鐞间腑榛庢棌鑻楁棌鑷不鍘', '4690', 3);
+INSERT INTO `dic_city` VALUES ('50', '50', '閲嶅簡甯', NULL, 1);
+INSERT INTO `dic_city` VALUES ('5001', '5001', '甯傝緰鍖', '50', 2);
+INSERT INTO `dic_city` VALUES ('500101', '500101', '涓囧窞鍖', '5001', 3);
+INSERT INTO `dic_city` VALUES ('500102', '500102', '娑櫟鍖', '5001', 3);
+INSERT INTO `dic_city` VALUES ('500103', '500103', '娓濅腑鍖', '5001', 3);
+INSERT INTO `dic_city` VALUES ('500104', '500104', '澶ф浮鍙ｅ尯', '5001', 3);
+INSERT INTO `dic_city` VALUES ('500105', '500105', '姹熷寳鍖', '5001', 3);
+INSERT INTO `dic_city` VALUES ('500106', '500106', '娌欏潽鍧濆尯', '5001', 3);
+INSERT INTO `dic_city` VALUES ('500107', '500107', '涔濋緳鍧″尯', '5001', 3);
+INSERT INTO `dic_city` VALUES ('500108', '500108', '鍗楀哺鍖', '5001', 3);
+INSERT INTO `dic_city` VALUES ('500109', '500109', '鍖楃鍖', '5001', 3);
+INSERT INTO `dic_city` VALUES ('500110', '500110', '缍︽睙鍖', '5001', 3);
+INSERT INTO `dic_city` VALUES ('500111', '500111', '澶ц冻鍖', '5001', 3);
+INSERT INTO `dic_city` VALUES ('500112', '500112', '娓濆寳鍖', '5001', 3);
+INSERT INTO `dic_city` VALUES ('500113', '500113', '宸村崡鍖', '5001', 3);
+INSERT INTO `dic_city` VALUES ('500114', '500114', '榛旀睙鍖', '5001', 3);
+INSERT INTO `dic_city` VALUES ('500115', '500115', '闀垮鍖', '5001', 3);
+INSERT INTO `dic_city` VALUES ('500116', '500116', '姹熸触鍖', '5001', 3);
+INSERT INTO `dic_city` VALUES ('500117', '500117', '鍚堝窛鍖', '5001', 3);
+INSERT INTO `dic_city` VALUES ('500118', '500118', '姘稿窛鍖', '5001', 3);
+INSERT INTO `dic_city` VALUES ('500119', '500119', '鍗楀窛鍖', '5001', 3);
+INSERT INTO `dic_city` VALUES ('500120', '500120', '鐠у北鍖', '5001', 3);
+INSERT INTO `dic_city` VALUES ('500151', '500151', '閾滄鍖', '5001', 3);
+INSERT INTO `dic_city` VALUES ('500152', '500152', '娼煎崡鍖', '5001', 3);
+INSERT INTO `dic_city` VALUES ('500153', '500153', '鑽ｆ槍鍖', '5001', 3);
+INSERT INTO `dic_city` VALUES ('500154', '500154', '寮€宸炲尯', '5001', 3);
+INSERT INTO `dic_city` VALUES ('500155', '500155', '姊佸钩鍖', '5001', 3);
+INSERT INTO `dic_city` VALUES ('500156', '500156', '姝﹂殕鍖', '5001', 3);
+INSERT INTO `dic_city` VALUES ('5002', '5002', '鍘', '50', 2);
+INSERT INTO `dic_city` VALUES ('500229', '500229', '鍩庡彛鍘', '5002', 3);
+INSERT INTO `dic_city` VALUES ('500230', '500230', '涓伴兘鍘', '5002', 3);
+INSERT INTO `dic_city` VALUES ('500231', '500231', '鍨睙鍘', '5002', 3);
+INSERT INTO `dic_city` VALUES ('500233', '500233', '蹇犲幙', '5002', 3);
+INSERT INTO `dic_city` VALUES ('500235', '500235', '浜戦槼鍘', '5002', 3);
+INSERT INTO `dic_city` VALUES ('500236', '500236', '濂夎妭鍘', '5002', 3);
+INSERT INTO `dic_city` VALUES ('500237', '500237', '宸北鍘', '5002', 3);
+INSERT INTO `dic_city` VALUES ('500238', '500238', '宸邯鍘', '5002', 3);
+INSERT INTO `dic_city` VALUES ('500240', '500240', '鐭虫煴鍦熷鏃忚嚜娌诲幙', '5002', 3);
+INSERT INTO `dic_city` VALUES ('500241', '500241', '绉€灞卞湡瀹舵棌鑻楁棌鑷不鍘', '5002', 3);
+INSERT INTO `dic_city` VALUES ('500242', '500242', '閰夐槼鍦熷鏃忚嫍鏃忚嚜娌诲幙', '5002', 3);
+INSERT INTO `dic_city` VALUES ('500243', '500243', '褰按鑻楁棌鍦熷鏃忚嚜娌诲幙', '5002', 3);
+INSERT INTO `dic_city` VALUES ('51', '51', '鍥涘窛鐪', NULL, 1);
+INSERT INTO `dic_city` VALUES ('5101', '5101', '鎴愰兘甯', '51', 2);
+INSERT INTO `dic_city` VALUES ('510104', '510104', '閿︽睙鍖', '5101', 3);
+INSERT INTO `dic_city` VALUES ('510105', '510105', '闈掔緤鍖', '5101', 3);
+INSERT INTO `dic_city` VALUES ('510106', '510106', '閲戠墰鍖', '5101', 3);
+INSERT INTO `dic_city` VALUES ('510107', '510107', '姝︿警鍖', '5101', 3);
+INSERT INTO `dic_city` VALUES ('510108', '510108', '鎴愬崕鍖', '5101', 3);
+INSERT INTO `dic_city` VALUES ('510112', '510112', '榫欐硥椹垮尯', '5101', 3);
+INSERT INTO `dic_city` VALUES ('510113', '510113', '闈掔櫧姹熷尯', '5101', 3);
+INSERT INTO `dic_city` VALUES ('510114', '510114', '鏂伴兘鍖', '5101', 3);
+INSERT INTO `dic_city` VALUES ('510115', '510115', '娓╂睙鍖', '5101', 3);
+INSERT INTO `dic_city` VALUES ('510116', '510116', '鍙屾祦鍖', '5101', 3);
+INSERT INTO `dic_city` VALUES ('510117', '510117', '閮兘鍖', '5101', 3);
+INSERT INTO `dic_city` VALUES ('510118', '510118', '鏂版触鍖', '5101', 3);
+INSERT INTO `dic_city` VALUES ('510121', '510121', '閲戝爞鍘', '5101', 3);
+INSERT INTO `dic_city` VALUES ('510129', '510129', '澶ч倯鍘', '5101', 3);
+INSERT INTO `dic_city` VALUES ('510131', '510131', '钂叉睙鍘', '5101', 3);
+INSERT INTO `dic_city` VALUES ('510181', '510181', '閮芥睙鍫板競', '5101', 3);
+INSERT INTO `dic_city` VALUES ('510182', '510182', '褰窞甯', '5101', 3);
+INSERT INTO `dic_city` VALUES ('510183', '510183', '閭涘磧甯', '5101', 3);
+INSERT INTO `dic_city` VALUES ('510184', '510184', '宕囧窞甯', '5101', 3);
+INSERT INTO `dic_city` VALUES ('510185', '510185', '绠€闃冲競', '5101', 3);
+INSERT INTO `dic_city` VALUES ('5103', '5103', '鑷础甯', '51', 2);
+INSERT INTO `dic_city` VALUES ('510302', '510302', '鑷祦浜曞尯', '5103', 3);
+INSERT INTO `dic_city` VALUES ('510303', '510303', '璐′簳鍖', '5103', 3);
+INSERT INTO `dic_city` VALUES ('510304', '510304', '澶у畨鍖', '5103', 3);
+INSERT INTO `dic_city` VALUES ('510311', '510311', '娌挎哗鍖', '5103', 3);
+INSERT INTO `dic_city` VALUES ('510321', '510321', '鑽ｅ幙', '5103', 3);
+INSERT INTO `dic_city` VALUES ('510322', '510322', '瀵岄『鍘', '5103', 3);
+INSERT INTO `dic_city` VALUES ('5104', '5104', '鏀€鏋濊姳甯', '51', 2);
+INSERT INTO `dic_city` VALUES ('510402', '510402', '涓滃尯', '5104', 3);
+INSERT INTO `dic_city` VALUES ('510403', '510403', '瑗垮尯', '5104', 3);
+INSERT INTO `dic_city` VALUES ('510411', '510411', '浠佸拰鍖', '5104', 3);
+INSERT INTO `dic_city` VALUES ('510421', '510421', '绫虫槗鍘', '5104', 3);
+INSERT INTO `dic_city` VALUES ('510422', '510422', '鐩愯竟鍘', '5104', 3);
+INSERT INTO `dic_city` VALUES ('5105', '5105', '娉稿窞甯', '51', 2);
+INSERT INTO `dic_city` VALUES ('510502', '510502', '姹熼槼鍖', '5105', 3);
+INSERT INTO `dic_city` VALUES ('510503', '510503', '绾虫邯鍖', '5105', 3);
+INSERT INTO `dic_city` VALUES ('510504', '510504', '榫欓┈娼尯', '5105', 3);
+INSERT INTO `dic_city` VALUES ('510521', '510521', '娉稿幙', '5105', 3);
+INSERT INTO `dic_city` VALUES ('510522', '510522', '鍚堟睙鍘', '5105', 3);
+INSERT INTO `dic_city` VALUES ('510524', '510524', '鍙欐案鍘', '5105', 3);
+INSERT INTO `dic_city` VALUES ('510525', '510525', '鍙よ敽鍘', '5105', 3);
+INSERT INTO `dic_city` VALUES ('5106', '5106', '寰烽槼甯', '51', 2);
+INSERT INTO `dic_city` VALUES ('510603', '510603', '鏃岄槼鍖', '5106', 3);
+INSERT INTO `dic_city` VALUES ('510604', '510604', '缃楁睙鍖', '5106', 3);
+INSERT INTO `dic_city` VALUES ('510623', '510623', '涓睙鍘', '5106', 3);
+INSERT INTO `dic_city` VALUES ('510681', '510681', '骞挎眽甯', '5106', 3);
+INSERT INTO `dic_city` VALUES ('510682', '510682', '浠€閭″競', '5106', 3);
+INSERT INTO `dic_city` VALUES ('510683', '510683', '缁电甯', '5106', 3);
+INSERT INTO `dic_city` VALUES ('5107', '5107', '缁甸槼甯', '51', 2);
+INSERT INTO `dic_city` VALUES ('510703', '510703', '娑煄鍖', '5107', 3);
+INSERT INTO `dic_city` VALUES ('510704', '510704', '娓镐粰鍖', '5107', 3);
+INSERT INTO `dic_city` VALUES ('510705', '510705', '瀹夊窞鍖', '5107', 3);
+INSERT INTO `dic_city` VALUES ('510722', '510722', '涓夊彴鍘', '5107', 3);
+INSERT INTO `dic_city` VALUES ('510723', '510723', '鐩愪涵鍘', '5107', 3);
+INSERT INTO `dic_city` VALUES ('510725', '510725', '姊撴郊鍘', '5107', 3);
+INSERT INTO `dic_city` VALUES ('510726', '510726', '鍖楀窛缇屾棌鑷不鍘', '5107', 3);
+INSERT INTO `dic_city` VALUES ('510727', '510727', '骞虫鍘', '5107', 3);
+INSERT INTO `dic_city` VALUES ('510781', '510781', '姹熸补甯', '5107', 3);
+INSERT INTO `dic_city` VALUES ('5108', '5108', '骞垮厓甯', '51', 2);
+INSERT INTO `dic_city` VALUES ('510802', '510802', '鍒╁窞鍖', '5108', 3);
+INSERT INTO `dic_city` VALUES ('510811', '510811', '鏄寲鍖', '5108', 3);
+INSERT INTO `dic_city` VALUES ('510812', '510812', '鏈濆ぉ鍖', '5108', 3);
+INSERT INTO `dic_city` VALUES ('510821', '510821', '鏃鸿媿鍘', '5108', 3);
+INSERT INTO `dic_city` VALUES ('510822', '510822', '闈掑窛鍘', '5108', 3);
+INSERT INTO `dic_city` VALUES ('510823', '510823', '鍓戦榿鍘', '5108', 3);
+INSERT INTO `dic_city` VALUES ('510824', '510824', '鑻嶆邯鍘', '5108', 3);
+INSERT INTO `dic_city` VALUES ('5109', '5109', '閬傚畞甯', '51', 2);
+INSERT INTO `dic_city` VALUES ('510903', '510903', '鑸瑰北鍖', '5109', 3);
+INSERT INTO `dic_city` VALUES ('510904', '510904', '瀹夊眳鍖', '5109', 3);
+INSERT INTO `dic_city` VALUES ('510921', '510921', '钃邯鍘', '5109', 3);
+INSERT INTO `dic_city` VALUES ('510923', '510923', '澶ц嫳鍘', '5109', 3);
+INSERT INTO `dic_city` VALUES ('510981', '510981', '灏勬椽甯', '5109', 3);
+INSERT INTO `dic_city` VALUES ('5110', '5110', '鍐呮睙甯', '51', 2);
+INSERT INTO `dic_city` VALUES ('511002', '511002', '甯備腑鍖', '5110', 3);
+INSERT INTO `dic_city` VALUES ('511011', '511011', '涓滃叴鍖', '5110', 3);
+INSERT INTO `dic_city` VALUES ('511024', '511024', '濞佽繙鍘', '5110', 3);
+INSERT INTO `dic_city` VALUES ('511025', '511025', '璧勪腑鍘', '5110', 3);
+INSERT INTO `dic_city` VALUES ('511071', '511071', '鍐呮睙缁忔祹寮€鍙戝尯', '5110', 3);
+INSERT INTO `dic_city` VALUES ('511083', '511083', '闅嗘槍甯', '5110', 3);
+INSERT INTO `dic_city` VALUES ('5111', '5111', '涔愬北甯', '51', 2);
+INSERT INTO `dic_city` VALUES ('511102', '511102', '甯備腑鍖', '5111', 3);
+INSERT INTO `dic_city` VALUES ('511111', '511111', '娌欐咕鍖', '5111', 3);
+INSERT INTO `dic_city` VALUES ('511112', '511112', '浜旈€氭ˉ鍖', '5111', 3);
+INSERT INTO `dic_city` VALUES ('511113', '511113', '閲戝彛娌冲尯', '5111', 3);
+INSERT INTO `dic_city` VALUES ('511123', '511123', '鐘嶄负鍘', '5111', 3);
+INSERT INTO `dic_city` VALUES ('511124', '511124', '浜曠爺鍘', '5111', 3);
+INSERT INTO `dic_city` VALUES ('511126', '511126', '澶规睙鍘', '5111', 3);
+INSERT INTO `dic_city` VALUES ('511129', '511129', '娌愬窛鍘', '5111', 3);
+INSERT INTO `dic_city` VALUES ('511132', '511132', '宄ㄨ竟褰濇棌鑷不鍘', '5111', 3);
+INSERT INTO `dic_city` VALUES ('511133', '511133', '椹竟褰濇棌鑷不鍘', '5111', 3);
+INSERT INTO `dic_city` VALUES ('511181', '511181', '宄ㄧ湁灞卞競', '5111', 3);
+INSERT INTO `dic_city` VALUES ('5113', '5113', '鍗楀厖甯', '51', 2);
+INSERT INTO `dic_city` VALUES ('511302', '511302', '椤哄簡鍖', '5113', 3);
+INSERT INTO `dic_city` VALUES ('511303', '511303', '楂樺潽鍖', '5113', 3);
+INSERT INTO `dic_city` VALUES ('511304', '511304', '鍢夐櫟鍖', '5113', 3);
+INSERT INTO `dic_city` VALUES ('511321', '511321', '鍗楅儴鍘', '5113', 3);
+INSERT INTO `dic_city` VALUES ('511322', '511322', '钀ュ北鍘', '5113', 3);
+INSERT INTO `dic_city` VALUES ('511323', '511323', '钃畨鍘', '5113', 3);
+INSERT INTO `dic_city` VALUES ('511324', '511324', '浠檱鍘', '5113', 3);
+INSERT INTO `dic_city` VALUES ('511325', '511325', '瑗垮厖鍘', '5113', 3);
+INSERT INTO `dic_city` VALUES ('511381', '511381', '闃嗕腑甯', '5113', 3);
+INSERT INTO `dic_city` VALUES ('5114', '5114', '鐪夊北甯', '51', 2);
+INSERT INTO `dic_city` VALUES ('511402', '511402', '涓滃潯鍖', '5114', 3);
+INSERT INTO `dic_city` VALUES ('511403', '511403', '褰北鍖', '5114', 3);
+INSERT INTO `dic_city` VALUES ('511421', '511421', '浠佸鍘', '5114', 3);
+INSERT INTO `dic_city` VALUES ('511423', '511423', '娲泤鍘', '5114', 3);
+INSERT INTO `dic_city` VALUES ('511424', '511424', '涓规１鍘', '5114', 3);
+INSERT INTO `dic_city` VALUES ('511425', '511425', '闈掔鍘', '5114', 3);
+INSERT INTO `dic_city` VALUES ('5115', '5115', '瀹滃甯', '51', 2);
+INSERT INTO `dic_city` VALUES ('511502', '511502', '缈犲睆鍖', '5115', 3);
+INSERT INTO `dic_city` VALUES ('511503', '511503', '鍗楁邯鍖', '5115', 3);
+INSERT INTO `dic_city` VALUES ('511504', '511504', '鍙欏窞鍖', '5115', 3);
+INSERT INTO `dic_city` VALUES ('511523', '511523', '姹熷畨鍘', '5115', 3);
+INSERT INTO `dic_city` VALUES ('511524', '511524', '闀垮畞鍘', '5115', 3);
+INSERT INTO `dic_city` VALUES ('511525', '511525', '楂樺幙', '5115', 3);
+INSERT INTO `dic_city` VALUES ('511526', '511526', '鐝欏幙', '5115', 3);
+INSERT INTO `dic_city` VALUES ('511527', '511527', '绛犺繛鍘', '5115', 3);
+INSERT INTO `dic_city` VALUES ('511528', '511528', '鍏存枃鍘', '5115', 3);
+INSERT INTO `dic_city` VALUES ('511529', '511529', '灞忓北鍘', '5115', 3);
+INSERT INTO `dic_city` VALUES ('5116', '5116', '骞垮畨甯', '51', 2);
+INSERT INTO `dic_city` VALUES ('511602', '511602', '骞垮畨鍖', '5116', 3);
+INSERT INTO `dic_city` VALUES ('511603', '511603', '鍓嶉攱鍖', '5116', 3);
+INSERT INTO `dic_city` VALUES ('511621', '511621', '宀虫睜鍘', '5116', 3);
+INSERT INTO `dic_city` VALUES ('511622', '511622', '姝﹁儨鍘', '5116', 3);
+INSERT INTO `dic_city` VALUES ('511623', '511623', '閭绘按鍘', '5116', 3);
+INSERT INTO `dic_city` VALUES ('511681', '511681', '鍗庤摜甯', '5116', 3);
+INSERT INTO `dic_city` VALUES ('5117', '5117', '杈惧窞甯', '51', 2);
+INSERT INTO `dic_city` VALUES ('511702', '511702', '閫氬窛鍖', '5117', 3);
+INSERT INTO `dic_city` VALUES ('511703', '511703', '杈惧窛鍖', '5117', 3);
+INSERT INTO `dic_city` VALUES ('511722', '511722', '瀹ｆ眽鍘', '5117', 3);
+INSERT INTO `dic_city` VALUES ('511723', '511723', '寮€姹熷幙', '5117', 3);
+INSERT INTO `dic_city` VALUES ('511724', '511724', '澶х鍘', '5117', 3);
+INSERT INTO `dic_city` VALUES ('511725', '511725', '娓犲幙', '5117', 3);
+INSERT INTO `dic_city` VALUES ('511771', '511771', '杈惧窞缁忔祹寮€鍙戝尯', '5117', 3);
+INSERT INTO `dic_city` VALUES ('511781', '511781', '涓囨簮甯', '5117', 3);
+INSERT INTO `dic_city` VALUES ('5118', '5118', '闆呭畨甯', '51', 2);
+INSERT INTO `dic_city` VALUES ('511802', '511802', '闆ㄥ煄鍖', '5118', 3);
+INSERT INTO `dic_city` VALUES ('511803', '511803', '鍚嶅北鍖', '5118', 3);
+INSERT INTO `dic_city` VALUES ('511822', '511822', '鑽ョ粡鍘', '5118', 3);
+INSERT INTO `dic_city` VALUES ('511823', '511823', '姹夋簮鍘', '5118', 3);
+INSERT INTO `dic_city` VALUES ('511824', '511824', '鐭虫鍘', '5118', 3);
+INSERT INTO `dic_city` VALUES ('511825', '511825', '澶╁叏鍘', '5118', 3);
+INSERT INTO `dic_city` VALUES ('511826', '511826', '鑺﹀北鍘', '5118', 3);
+INSERT INTO `dic_city` VALUES ('511827', '511827', '瀹濆叴鍘', '5118', 3);
+INSERT INTO `dic_city` VALUES ('5119', '5119', '宸翠腑甯', '51', 2);
+INSERT INTO `dic_city` VALUES ('511902', '511902', '宸村窞鍖', '5119', 3);
+INSERT INTO `dic_city` VALUES ('511903', '511903', '鎭╅槼鍖', '5119', 3);
+INSERT INTO `dic_city` VALUES ('511921', '511921', '閫氭睙鍘', '5119', 3);
+INSERT INTO `dic_city` VALUES ('511922', '511922', '鍗楁睙鍘', '5119', 3);
+INSERT INTO `dic_city` VALUES ('511923', '511923', '骞虫槍鍘', '5119', 3);
+INSERT INTO `dic_city` VALUES ('511971', '511971', '宸翠腑缁忔祹寮€鍙戝尯', '5119', 3);
+INSERT INTO `dic_city` VALUES ('5120', '5120', '璧勯槼甯', '51', 2);
+INSERT INTO `dic_city` VALUES ('512002', '512002', '闆佹睙鍖', '5120', 3);
+INSERT INTO `dic_city` VALUES ('512021', '512021', '瀹夊渤鍘', '5120', 3);
+INSERT INTO `dic_city` VALUES ('512022', '512022', '涔愯嚦鍘', '5120', 3);
+INSERT INTO `dic_city` VALUES ('5132', '5132', '闃垮潩钘忔棌缇屾棌鑷不宸', '51', 2);
+INSERT INTO `dic_city` VALUES ('513201', '513201', '椹皵搴峰競', '5132', 3);
+INSERT INTO `dic_city` VALUES ('513221', '513221', '姹跺窛鍘', '5132', 3);
+INSERT INTO `dic_city` VALUES ('513222', '513222', '鐞嗗幙', '5132', 3);
+INSERT INTO `dic_city` VALUES ('513223', '513223', '鑼傚幙', '5132', 3);
+INSERT INTO `dic_city` VALUES ('513224', '513224', '鏉炬綐鍘', '5132', 3);
+INSERT INTO `dic_city` VALUES ('513225', '513225', '涔濆娌熷幙', '5132', 3);
+INSERT INTO `dic_city` VALUES ('513226', '513226', '閲戝窛鍘', '5132', 3);
+INSERT INTO `dic_city` VALUES ('513227', '513227', '灏忛噾鍘', '5132', 3);
+INSERT INTO `dic_city` VALUES ('513228', '513228', '榛戞按鍘', '5132', 3);
+INSERT INTO `dic_city` VALUES ('513230', '513230', '澹ゅ鍘', '5132', 3);
+INSERT INTO `dic_city` VALUES ('513231', '513231', '闃垮潩鍘', '5132', 3);
+INSERT INTO `dic_city` VALUES ('513232', '513232', '鑻ュ皵鐩栧幙', '5132', 3);
+INSERT INTO `dic_city` VALUES ('513233', '513233', '绾㈠師鍘', '5132', 3);
+INSERT INTO `dic_city` VALUES ('5133', '5133', '鐢樺瓬钘忔棌鑷不宸', '51', 2);
+INSERT INTO `dic_city` VALUES ('513301', '513301', '搴峰畾甯', '5133', 3);
+INSERT INTO `dic_city` VALUES ('513322', '513322', '娉稿畾鍘', '5133', 3);
+INSERT INTO `dic_city` VALUES ('513323', '513323', '涓瑰反鍘', '5133', 3);
+INSERT INTO `dic_city` VALUES ('513324', '513324', '涔濋緳鍘', '5133', 3);
+INSERT INTO `dic_city` VALUES ('513325', '513325', '闆呮睙鍘', '5133', 3);
+INSERT INTO `dic_city` VALUES ('513326', '513326', '閬撳瓪鍘', '5133', 3);
+INSERT INTO `dic_city` VALUES ('513327', '513327', '鐐夐湇鍘', '5133', 3);
+INSERT INTO `dic_city` VALUES ('513328', '513328', '鐢樺瓬鍘', '5133', 3);
+INSERT INTO `dic_city` VALUES ('513329', '513329', '鏂伴緳鍘', '5133', 3);
+INSERT INTO `dic_city` VALUES ('513330', '513330', '寰锋牸鍘', '5133', 3);
+INSERT INTO `dic_city` VALUES ('513331', '513331', '鐧界帀鍘', '5133', 3);
+INSERT INTO `dic_city` VALUES ('513332', '513332', '鐭虫笭鍘', '5133', 3);
+INSERT INTO `dic_city` VALUES ('513333', '513333', '鑹茶揪鍘', '5133', 3);
+INSERT INTO `dic_city` VALUES ('513334', '513334', '鐞嗗鍘', '5133', 3);
+INSERT INTO `dic_city` VALUES ('513335', '513335', '宸村鍘', '5133', 3);
+INSERT INTO `dic_city` VALUES ('513336', '513336', '涔″煄鍘', '5133', 3);
+INSERT INTO `dic_city` VALUES ('513337', '513337', '绋诲煄鍘', '5133', 3);
+INSERT INTO `dic_city` VALUES ('513338', '513338', '寰楄崳鍘', '5133', 3);
+INSERT INTO `dic_city` VALUES ('5134', '5134', '鍑夊北褰濇棌鑷不宸', '51', 2);
+INSERT INTO `dic_city` VALUES ('513401', '513401', '瑗挎槍甯', '5134', 3);
+INSERT INTO `dic_city` VALUES ('513422', '513422', '鏈ㄩ噷钘忔棌鑷不鍘', '5134', 3);
+INSERT INTO `dic_city` VALUES ('513423', '513423', '鐩愭簮鍘', '5134', 3);
+INSERT INTO `dic_city` VALUES ('513424', '513424', '寰锋槍鍘', '5134', 3);
+INSERT INTO `dic_city` VALUES ('513425', '513425', '浼氱悊鍘', '5134', 3);
+INSERT INTO `dic_city` VALUES ('513426', '513426', '浼氫笢鍘', '5134', 3);
+INSERT INTO `dic_city` VALUES ('513427', '513427', '瀹佸崡鍘', '5134', 3);
+INSERT INTO `dic_city` VALUES ('513428', '513428', '鏅牸鍘', '5134', 3);
+INSERT INTO `dic_city` VALUES ('513429', '513429', '甯冩嫋鍘', '5134', 3);
+INSERT INTO `dic_city` VALUES ('513430', '513430', '閲戦槼鍘', '5134', 3);
+INSERT INTO `dic_city` VALUES ('513431', '513431', '鏄鍘', '5134', 3);
+INSERT INTO `dic_city` VALUES ('513432', '513432', '鍠滃痉鍘', '5134', 3);
+INSERT INTO `dic_city` VALUES ('513433', '513433', '鍐曞畞鍘', '5134', 3);
+INSERT INTO `dic_city` VALUES ('513434', '513434', '瓒婅タ鍘', '5134', 3);
+INSERT INTO `dic_city` VALUES ('513435', '513435', '鐢樻礇鍘', '5134', 3);
+INSERT INTO `dic_city` VALUES ('513436', '513436', '缇庡鍘', '5134', 3);
+INSERT INTO `dic_city` VALUES ('513437', '513437', '闆锋尝鍘', '5134', 3);
+INSERT INTO `dic_city` VALUES ('52', '52', '璐靛窞鐪', NULL, 1);
+INSERT INTO `dic_city` VALUES ('5201', '5201', '璐甸槼甯', '52', 2);
+INSERT INTO `dic_city` VALUES ('520102', '520102', '鍗楁槑鍖', '5201', 3);
+INSERT INTO `dic_city` VALUES ('520103', '520103', '浜戝博鍖', '5201', 3);
+INSERT INTO `dic_city` VALUES ('520111', '520111', '鑺辨邯鍖', '5201', 3);
+INSERT INTO `dic_city` VALUES ('520112', '520112', '涔屽綋鍖', '5201', 3);
+INSERT INTO `dic_city` VALUES ('520113', '520113', '鐧戒簯鍖', '5201', 3);
+INSERT INTO `dic_city` VALUES ('520115', '520115', '瑙傚北婀栧尯', '5201', 3);
+INSERT INTO `dic_city` VALUES ('520121', '520121', '寮€闃冲幙', '5201', 3);
+INSERT INTO `dic_city` VALUES ('520122', '520122', '鎭兘鍘', '5201', 3);
+INSERT INTO `dic_city` VALUES ('520123', '520123', '淇枃鍘', '5201', 3);
+INSERT INTO `dic_city` VALUES ('520181', '520181', '娓呴晣甯', '5201', 3);
+INSERT INTO `dic_city` VALUES ('5202', '5202', '鍏洏姘村競', '52', 2);
+INSERT INTO `dic_city` VALUES ('520201', '520201', '閽熷北鍖', '5202', 3);
+INSERT INTO `dic_city` VALUES ('520203', '520203', '鍏灊鐗瑰尯', '5202', 3);
+INSERT INTO `dic_city` VALUES ('520221', '520221', '姘村煄鍘', '5202', 3);
+INSERT INTO `dic_city` VALUES ('520281', '520281', '鐩樺窞甯', '5202', 3);
+INSERT INTO `dic_city` VALUES ('5203', '5203', '閬典箟甯', '52', 2);
+INSERT INTO `dic_city` VALUES ('520302', '520302', '绾㈣姳宀楀尯', '5203', 3);
+INSERT INTO `dic_city` VALUES ('520303', '520303', '姹囧窛鍖', '5203', 3);
+INSERT INTO `dic_city` VALUES ('520304', '520304', '鎾窞鍖', '5203', 3);
+INSERT INTO `dic_city` VALUES ('520322', '520322', '妗愭鍘', '5203', 3);
+INSERT INTO `dic_city` VALUES ('520323', '520323', '缁ラ槼鍘', '5203', 3);
+INSERT INTO `dic_city` VALUES ('520324', '520324', '姝ｅ畨鍘', '5203', 3);
+INSERT INTO `dic_city` VALUES ('520325', '520325', '閬撶湡浠′浆鏃忚嫍鏃忚嚜娌诲幙', '5203', 3);
+INSERT INTO `dic_city` VALUES ('520326', '520326', '鍔″窛浠′浆鏃忚嫍鏃忚嚜娌诲幙', '5203', 3);
+INSERT INTO `dic_city` VALUES ('520327', '520327', '鍑ゅ唸鍘', '5203', 3);
+INSERT INTO `dic_city` VALUES ('520328', '520328', '婀勬江鍘', '5203', 3);
+INSERT INTO `dic_city` VALUES ('520329', '520329', '浣欏簡鍘', '5203', 3);
+INSERT INTO `dic_city` VALUES ('520330', '520330', '涔犳按鍘', '5203', 3);
+INSERT INTO `dic_city` VALUES ('520381', '520381', '璧ゆ按甯', '5203', 3);
+INSERT INTO `dic_city` VALUES ('520382', '520382', '浠佹€€甯', '5203', 3);
+INSERT INTO `dic_city` VALUES ('5204', '5204', '瀹夐『甯', '52', 2);
+INSERT INTO `dic_city` VALUES ('520402', '520402', '瑗跨鍖', '5204', 3);
+INSERT INTO `dic_city` VALUES ('520403', '520403', '骞冲潩鍖', '5204', 3);
+INSERT INTO `dic_city` VALUES ('520422', '520422', '鏅畾鍘', '5204', 3);
+INSERT INTO `dic_city` VALUES ('520423', '520423', '闀囧畞甯冧緷鏃忚嫍鏃忚嚜娌诲幙', '5204', 3);
+INSERT INTO `dic_city` VALUES ('520424', '520424', '鍏冲箔甯冧緷鏃忚嫍鏃忚嚜娌诲幙', '5204', 3);
+INSERT INTO `dic_city` VALUES ('520425', '520425', '绱簯鑻楁棌甯冧緷鏃忚嚜娌诲幙', '5204', 3);
+INSERT INTO `dic_city` VALUES ('5205', '5205', '姣曡妭甯', '52', 2);
+INSERT INTO `dic_city` VALUES ('520502', '520502', '涓冩槦鍏冲尯', '5205', 3);
+INSERT INTO `dic_city` VALUES ('520521', '520521', '澶ф柟鍘', '5205', 3);
+INSERT INTO `dic_city` VALUES ('520522', '520522', '榛旇タ鍘', '5205', 3);
+INSERT INTO `dic_city` VALUES ('520523', '520523', '閲戞矙鍘', '5205', 3);
+INSERT INTO `dic_city` VALUES ('520524', '520524', '缁囬噾鍘', '5205', 3);
+INSERT INTO `dic_city` VALUES ('520525', '520525', '绾抽泹鍘', '5205', 3);
+INSERT INTO `dic_city` VALUES ('520526', '520526', '濞佸畞褰濇棌鍥炴棌鑻楁棌鑷不鍘', '5205', 3);
+INSERT INTO `dic_city` VALUES ('520527', '520527', '璧珷鍘', '5205', 3);
+INSERT INTO `dic_city` VALUES ('5206', '5206', '閾滀粊甯', '52', 2);
+INSERT INTO `dic_city` VALUES ('520602', '520602', '纰ф睙鍖', '5206', 3);
+INSERT INTO `dic_city` VALUES ('520603', '520603', '涓囧北鍖', '5206', 3);
+INSERT INTO `dic_city` VALUES ('520621', '520621', '姹熷彛鍘', '5206', 3);
+INSERT INTO `dic_city` VALUES ('520622', '520622', '鐜夊睆渚楁棌鑷不鍘', '5206', 3);
+INSERT INTO `dic_city` VALUES ('520623', '520623', '鐭抽槨鍘', '5206', 3);
+INSERT INTO `dic_city` VALUES ('520624', '520624', '鎬濆崡鍘', '5206', 3);
+INSERT INTO `dic_city` VALUES ('520625', '520625', '鍗版睙鍦熷鏃忚嫍鏃忚嚜娌诲幙', '5206', 3);
+INSERT INTO `dic_city` VALUES ('520626', '520626', '寰锋睙鍘', '5206', 3);
+INSERT INTO `dic_city` VALUES ('520627', '520627', '娌挎渤鍦熷鏃忚嚜娌诲幙', '5206', 3);
+INSERT INTO `dic_city` VALUES ('520628', '520628', '鏉炬鑻楁棌鑷不鍘', '5206', 3);
+INSERT INTO `dic_city` VALUES ('5223', '5223', '榛旇タ鍗楀竷渚濇棌鑻楁棌鑷不宸', '52', 2);
+INSERT INTO `dic_city` VALUES ('522301', '522301', '鍏翠箟甯', '5223', 3);
+INSERT INTO `dic_city` VALUES ('522302', '522302', '鍏翠粊甯', '5223', 3);
+INSERT INTO `dic_city` VALUES ('522323', '522323', '鏅畨鍘', '5223', 3);
+INSERT INTO `dic_city` VALUES ('522324', '522324', '鏅撮殕鍘', '5223', 3);
+INSERT INTO `dic_city` VALUES ('522325', '522325', '璐炰赴鍘', '5223', 3);
+INSERT INTO `dic_city` VALUES ('522326', '522326', '鏈涜盁鍘', '5223', 3);
+INSERT INTO `dic_city` VALUES ('522327', '522327', '鍐屼酣鍘', '5223', 3);
+INSERT INTO `dic_city` VALUES ('522328', '522328', '瀹夐緳鍘', '5223', 3);
+INSERT INTO `dic_city` VALUES ('5226', '5226', '榛斾笢鍗楄嫍鏃忎緱鏃忚嚜娌诲窞', '52', 2);
+INSERT INTO `dic_city` VALUES ('522601', '522601', '鍑噷甯', '5226', 3);
+INSERT INTO `dic_city` VALUES ('522622', '522622', '榛勫钩鍘', '5226', 3);
+INSERT INTO `dic_city` VALUES ('522623', '522623', '鏂界鍘', '5226', 3);
+INSERT INTO `dic_city` VALUES ('522624', '522624', '涓夌鍘', '5226', 3);
+INSERT INTO `dic_city` VALUES ('522625', '522625', '闀囪繙鍘', '5226', 3);
+INSERT INTO `dic_city` VALUES ('522626', '522626', '宀戝珐鍘', '5226', 3);
+INSERT INTO `dic_city` VALUES ('522627', '522627', '澶╂煴鍘', '5226', 3);
+INSERT INTO `dic_city` VALUES ('522628', '522628', '閿﹀睆鍘', '5226', 3);
+INSERT INTO `dic_city` VALUES ('522629', '522629', '鍓戞渤鍘', '5226', 3);
+INSERT INTO `dic_city` VALUES ('522630', '522630', '鍙版睙鍘', '5226', 3);
+INSERT INTO `dic_city` VALUES ('522631', '522631', '榛庡钩鍘', '5226', 3);
+INSERT INTO `dic_city` VALUES ('522632', '522632', '姒曟睙鍘', '5226', 3);
+INSERT INTO `dic_city` VALUES ('522633', '522633', '浠庢睙鍘', '5226', 3);
+INSERT INTO `dic_city` VALUES ('522634', '522634', '闆峰北鍘', '5226', 3);
+INSERT INTO `dic_city` VALUES ('522635', '522635', '楹绘睙鍘', '5226', 3);
+INSERT INTO `dic_city` VALUES ('522636', '522636', '涓瑰鍘', '5226', 3);
+INSERT INTO `dic_city` VALUES ('5227', '5227', '榛斿崡甯冧緷鏃忚嫍鏃忚嚜娌诲窞', '52', 2);
+INSERT INTO `dic_city` VALUES ('522701', '522701', '閮藉寑甯', '5227', 3);
+INSERT INTO `dic_city` VALUES ('522702', '522702', '绂忔硥甯', '5227', 3);
+INSERT INTO `dic_city` VALUES ('522722', '522722', '鑽旀尝鍘', '5227', 3);
+INSERT INTO `dic_city` VALUES ('522723', '522723', '璐靛畾鍘', '5227', 3);
+INSERT INTO `dic_city` VALUES ('522725', '522725', '鐡畨鍘', '5227', 3);
+INSERT INTO `dic_city` VALUES ('522726', '522726', '鐙北鍘', '5227', 3);
+INSERT INTO `dic_city` VALUES ('522727', '522727', '骞冲鍘', '5227', 3);
+INSERT INTO `dic_city` VALUES ('522728', '522728', '缃楃敻鍘', '5227', 3);
+INSERT INTO `dic_city` VALUES ('522729', '522729', '闀块『鍘', '5227', 3);
+INSERT INTO `dic_city` VALUES ('522730', '522730', '榫欓噷鍘', '5227', 3);
+INSERT INTO `dic_city` VALUES ('522731', '522731', '鎯犳按鍘', '5227', 3);
+INSERT INTO `dic_city` VALUES ('522732', '522732', '涓夐兘姘存棌鑷不鍘', '5227', 3);
+INSERT INTO `dic_city` VALUES ('53', '53', '浜戝崡鐪', NULL, 1);
+INSERT INTO `dic_city` VALUES ('5301', '5301', '鏄嗘槑甯', '53', 2);
+INSERT INTO `dic_city` VALUES ('530102', '530102', '浜斿崕鍖', '5301', 3);
+INSERT INTO `dic_city` VALUES ('530103', '530103', '鐩橀緳鍖', '5301', 3);
+INSERT INTO `dic_city` VALUES ('530111', '530111', '瀹樻浮鍖', '5301', 3);
+INSERT INTO `dic_city` VALUES ('530112', '530112', '瑗垮北鍖', '5301', 3);
+INSERT INTO `dic_city` VALUES ('530113', '530113', '涓滃窛鍖', '5301', 3);
+INSERT INTO `dic_city` VALUES ('530114', '530114', '鍛堣础鍖', '5301', 3);
+INSERT INTO `dic_city` VALUES ('530115', '530115', '鏅嬪畞鍖', '5301', 3);
+INSERT INTO `dic_city` VALUES ('530124', '530124', '瀵屾皯鍘', '5301', 3);
+INSERT INTO `dic_city` VALUES ('530125', '530125', '瀹滆壇鍘', '5301', 3);
+INSERT INTO `dic_city` VALUES ('530126', '530126', '鐭虫灄褰濇棌鑷不鍘', '5301', 3);
+INSERT INTO `dic_city` VALUES ('530127', '530127', '宓╂槑鍘', '5301', 3);
+INSERT INTO `dic_city` VALUES ('530128', '530128', '绂勫姖褰濇棌鑻楁棌鑷不鍘', '5301', 3);
+INSERT INTO `dic_city` VALUES ('530129', '530129', '瀵荤敻鍥炴棌褰濇棌鑷不鍘', '5301', 3);
+INSERT INTO `dic_city` VALUES ('530181', '530181', '瀹夊畞甯', '5301', 3);
+INSERT INTO `dic_city` VALUES ('5303', '5303', '鏇查潠甯', '53', 2);
+INSERT INTO `dic_city` VALUES ('530302', '530302', '楹掗簾鍖', '5303', 3);
+INSERT INTO `dic_city` VALUES ('530303', '530303', '娌剧泭鍖', '5303', 3);
+INSERT INTO `dic_city` VALUES ('530304', '530304', '椹緳鍖', '5303', 3);
+INSERT INTO `dic_city` VALUES ('530322', '530322', '闄嗚壇鍘', '5303', 3);
+INSERT INTO `dic_city` VALUES ('530323', '530323', '甯堝畻鍘', '5303', 3);
+INSERT INTO `dic_city` VALUES ('530324', '530324', '缃楀钩鍘', '5303', 3);
+INSERT INTO `dic_city` VALUES ('530325', '530325', '瀵屾簮鍘', '5303', 3);
+INSERT INTO `dic_city` VALUES ('530326', '530326', '浼氭辰鍘', '5303', 3);
+INSERT INTO `dic_city` VALUES ('530381', '530381', '瀹ｅ▉甯', '5303', 3);
+INSERT INTO `dic_city` VALUES ('5304', '5304', '鐜夋邯甯', '53', 2);
+INSERT INTO `dic_city` VALUES ('530402', '530402', '绾㈠鍖', '5304', 3);
+INSERT INTO `dic_city` VALUES ('530403', '530403', '姹熷窛鍖', '5304', 3);
+INSERT INTO `dic_city` VALUES ('530423', '530423', '閫氭捣鍘', '5304', 3);
+INSERT INTO `dic_city` VALUES ('530424', '530424', '鍗庡畞鍘', '5304', 3);
+INSERT INTO `dic_city` VALUES ('530425', '530425', '鏄撻棬鍘', '5304', 3);
+INSERT INTO `dic_city` VALUES ('530426', '530426', '宄ㄥ北褰濇棌鑷不鍘', '5304', 3);
+INSERT INTO `dic_city` VALUES ('530427', '530427', '鏂板钩褰濇棌鍌ｆ棌鑷不鍘', '5304', 3);
+INSERT INTO `dic_city` VALUES ('530428', '530428', '鍏冩睙鍝堝凹鏃忓綕鏃忓偅鏃忚嚜娌诲幙', '5304', 3);
+INSERT INTO `dic_city` VALUES ('530481', '530481', '婢勬睙甯', '5304', 3);
+INSERT INTO `dic_city` VALUES ('5305', '5305', '淇濆北甯', '53', 2);
+INSERT INTO `dic_city` VALUES ('530502', '530502', '闅嗛槼鍖', '5305', 3);
+INSERT INTO `dic_city` VALUES ('530521', '530521', '鏂界敻鍘', '5305', 3);
+INSERT INTO `dic_city` VALUES ('530523', '530523', '榫欓櫟鍘', '5305', 3);
+INSERT INTO `dic_city` VALUES ('530524', '530524', '鏄屽畞鍘', '5305', 3);
+INSERT INTO `dic_city` VALUES ('530581', '530581', '鑵惧啿甯', '5305', 3);
+INSERT INTO `dic_city` VALUES ('5306', '5306', '鏄€氬競', '53', 2);
+INSERT INTO `dic_city` VALUES ('530602', '530602', '鏄槼鍖', '5306', 3);
+INSERT INTO `dic_city` VALUES ('530621', '530621', '椴佺敻鍘', '5306', 3);
+INSERT INTO `dic_city` VALUES ('530622', '530622', '宸у鍘', '5306', 3);
+INSERT INTO `dic_city` VALUES ('530623', '530623', '鐩愭触鍘', '5306', 3);
+INSERT INTO `dic_city` VALUES ('530624', '530624', '澶у叧鍘', '5306', 3);
+INSERT INTO `dic_city` VALUES ('530625', '530625', '姘稿杽鍘', '5306', 3);
+INSERT INTO `dic_city` VALUES ('530626', '530626', '缁ユ睙鍘', '5306', 3);
+INSERT INTO `dic_city` VALUES ('530627', '530627', '闀囬泟鍘', '5306', 3);
+INSERT INTO `dic_city` VALUES ('530628', '530628', '褰濊壇鍘', '5306', 3);
+INSERT INTO `dic_city` VALUES ('530629', '530629', '濞佷俊鍘', '5306', 3);
+INSERT INTO `dic_city` VALUES ('530681', '530681', '姘村瘜甯', '5306', 3);
+INSERT INTO `dic_city` VALUES ('5307', '5307', '涓芥睙甯', '53', 2);
+INSERT INTO `dic_city` VALUES ('530702', '530702', '鍙ゅ煄鍖', '5307', 3);
+INSERT INTO `dic_city` VALUES ('530721', '530721', '鐜夐緳绾宠タ鏃忚嚜娌诲幙', '5307', 3);
+INSERT INTO `dic_city` VALUES ('530722', '530722', '姘歌儨鍘', '5307', 3);
+INSERT INTO `dic_city` VALUES ('530723', '530723', '鍗庡潽鍘', '5307', 3);
+INSERT INTO `dic_city` VALUES ('530724', '530724', '瀹佽挆褰濇棌鑷不鍘', '5307', 3);
+INSERT INTO `dic_city` VALUES ('5308', '5308', '鏅幢甯', '53', 2);
+INSERT INTO `dic_city` VALUES ('530802', '530802', '鎬濊寘鍖', '5308', 3);
+INSERT INTO `dic_city` VALUES ('530821', '530821', '瀹佹幢鍝堝凹鏃忓綕鏃忚嚜娌诲幙', '5308', 3);
+INSERT INTO `dic_city` VALUES ('530822', '530822', '澧ㄦ睙鍝堝凹鏃忚嚜娌诲幙', '5308', 3);
+INSERT INTO `dic_city` VALUES ('530823', '530823', '鏅笢褰濇棌鑷不鍘', '5308', 3);
+INSERT INTO `dic_city` VALUES ('530824', '530824', '鏅胺鍌ｆ棌褰濇棌鑷不鍘', '5308', 3);
+INSERT INTO `dic_city` VALUES ('530825', '530825', '闀囨矃褰濇棌鍝堝凹鏃忔媺绁滄棌鑷不鍘', '5308', 3);
+INSERT INTO `dic_city` VALUES ('530826', '530826', '姹熷煄鍝堝凹鏃忓綕鏃忚嚜娌诲幙', '5308', 3);
+INSERT INTO `dic_city` VALUES ('530827', '530827', '瀛熻繛鍌ｆ棌鎷夌鏃忎饯鏃忚嚜娌诲幙', '5308', 3);
+INSERT INTO `dic_city` VALUES ('530828', '530828', '婢滄钵鎷夌鏃忚嚜娌诲幙', '5308', 3);
+INSERT INTO `dic_city` VALUES ('530829', '530829', '瑗跨洘浣ゆ棌鑷不鍘', '5308', 3);
+INSERT INTO `dic_city` VALUES ('5309', '5309', '涓存钵甯', '53', 2);
+INSERT INTO `dic_city` VALUES ('530902', '530902', '涓寸繑鍖', '5309', 3);
+INSERT INTO `dic_city` VALUES ('530921', '530921', '鍑ゅ簡鍘', '5309', 3);
+INSERT INTO `dic_city` VALUES ('530922', '530922', '浜戝幙', '5309', 3);
+INSERT INTO `dic_city` VALUES ('530923', '530923', '姘稿痉鍘', '5309', 3);
+INSERT INTO `dic_city` VALUES ('530924', '530924', '闀囧悍鍘', '5309', 3);
+INSERT INTO `dic_city` VALUES ('530925', '530925', '鍙屾睙鎷夌鏃忎饯鏃忓竷鏈楁棌鍌ｆ棌鑷不鍘', '5309', 3);
+INSERT INTO `dic_city` VALUES ('530926', '530926', '鑰块┈鍌ｆ棌浣ゆ棌鑷不鍘', '5309', 3);
+INSERT INTO `dic_city` VALUES ('530927', '530927', '娌ф簮浣ゆ棌鑷不鍘', '5309', 3);
+INSERT INTO `dic_city` VALUES ('5323', '5323', '妤氶泟褰濇棌鑷不宸', '53', 2);
+INSERT INTO `dic_city` VALUES ('532301', '532301', '妤氶泟甯', '5323', 3);
+INSERT INTO `dic_city` VALUES ('532322', '532322', '鍙屾煆鍘', '5323', 3);
+INSERT INTO `dic_city` VALUES ('532323', '532323', '鐗熷畾鍘', '5323', 3);
+INSERT INTO `dic_city` VALUES ('532324', '532324', '鍗楀崕鍘', '5323', 3);
+INSERT INTO `dic_city` VALUES ('532325', '532325', '濮氬畨鍘', '5323', 3);
+INSERT INTO `dic_city` VALUES ('532326', '532326', '澶у鍘', '5323', 3);
+INSERT INTO `dic_city` VALUES ('532327', '532327', '姘镐粊鍘', '5323', 3);
+INSERT INTO `dic_city` VALUES ('532328', '532328', '鍏冭皨鍘', '5323', 3);
+INSERT INTO `dic_city` VALUES ('532329', '532329', '姝﹀畾鍘', '5323', 3);
+INSERT INTO `dic_city` VALUES ('532331', '532331', '绂勪赴鍘', '5323', 3);
+INSERT INTO `dic_city` VALUES ('5325', '5325', '绾㈡渤鍝堝凹鏃忓綕鏃忚嚜娌诲窞', '53', 2);
+INSERT INTO `dic_city` VALUES ('532501', '532501', '涓棫甯', '5325', 3);
+INSERT INTO `dic_city` VALUES ('532502', '532502', '寮€杩滃競', '5325', 3);
+INSERT INTO `dic_city` VALUES ('532503', '532503', '钂欒嚜甯', '5325', 3);
+INSERT INTO `dic_city` VALUES ('532504', '532504', '寮ュ嫆甯', '5325', 3);
+INSERT INTO `dic_city` VALUES ('532523', '532523', '灞忚竟鑻楁棌鑷不鍘', '5325', 3);
+INSERT INTO `dic_city` VALUES ('532524', '532524', '寤烘按鍘', '5325', 3);
+INSERT INTO `dic_city` VALUES ('532525', '532525', '鐭冲睆鍘', '5325', 3);
+INSERT INTO `dic_city` VALUES ('532527', '532527', '娉歌タ鍘', '5325', 3);
+INSERT INTO `dic_city` VALUES ('532528', '532528', '鍏冮槼鍘', '5325', 3);
+INSERT INTO `dic_city` VALUES ('532529', '532529', '绾㈡渤鍘', '5325', 3);
+INSERT INTO `dic_city` VALUES ('532530', '532530', '閲戝钩鑻楁棌鐟舵棌鍌ｆ棌鑷不鍘', '5325', 3);
+INSERT INTO `dic_city` VALUES ('532531', '532531', '缁挎槬鍘', '5325', 3);
+INSERT INTO `dic_city` VALUES ('532532', '532532', '娌冲彛鐟舵棌鑷不鍘', '5325', 3);
+INSERT INTO `dic_city` VALUES ('5326', '5326', '鏂囧北澹棌鑻楁棌鑷不宸', '53', 2);
+INSERT INTO `dic_city` VALUES ('532601', '532601', '鏂囧北甯', '5326', 3);
+INSERT INTO `dic_city` VALUES ('532622', '532622', '鐮氬北鍘', '5326', 3);
+INSERT INTO `dic_city` VALUES ('532623', '532623', '瑗跨暣鍘', '5326', 3);
+INSERT INTO `dic_city` VALUES ('532624', '532624', '楹绘牀鍧″幙', '5326', 3);
+INSERT INTO `dic_city` VALUES ('532625', '532625', '椹叧鍘', '5326', 3);
+INSERT INTO `dic_city` VALUES ('532626', '532626', '涓樺寳鍘', '5326', 3);
+INSERT INTO `dic_city` VALUES ('532627', '532627', '骞垮崡鍘', '5326', 3);
+INSERT INTO `dic_city` VALUES ('532628', '532628', '瀵屽畞鍘', '5326', 3);
+INSERT INTO `dic_city` VALUES ('5328', '5328', '瑗垮弻鐗堢撼鍌ｆ棌鑷不宸', '53', 2);
+INSERT INTO `dic_city` VALUES ('532801', '532801', '鏅椽甯', '5328', 3);
+INSERT INTO `dic_city` VALUES ('532822', '532822', '鍕愭捣鍘', '5328', 3);
+INSERT INTO `dic_city` VALUES ('532823', '532823', '鍕愯厞鍘', '5328', 3);
+INSERT INTO `dic_city` VALUES ('5329', '5329', '澶х悊鐧芥棌鑷不宸', '53', 2);
+INSERT INTO `dic_city` VALUES ('532901', '532901', '澶х悊甯', '5329', 3);
+INSERT INTO `dic_city` VALUES ('532922', '532922', '婕炬繛褰濇棌鑷不鍘', '5329', 3);
+INSERT INTO `dic_city` VALUES ('532923', '532923', '绁ヤ簯鍘', '5329', 3);
+INSERT INTO `dic_city` VALUES ('532924', '532924', '瀹惧窛鍘', '5329', 3);
+INSERT INTO `dic_city` VALUES ('532925', '532925', '寮ユ浮鍘', '5329', 3);
+INSERT INTO `dic_city` VALUES ('532926', '532926', '鍗楁锭褰濇棌鑷不鍘', '5329', 3);
+INSERT INTO `dic_city` VALUES ('532927', '532927', '宸嶅北褰濇棌鍥炴棌鑷不鍘', '5329', 3);
+INSERT INTO `dic_city` VALUES ('532928', '532928', '姘稿钩鍘', '5329', 3);
+INSERT INTO `dic_city` VALUES ('532929', '532929', '浜戦緳鍘', '5329', 3);
+INSERT INTO `dic_city` VALUES ('532930', '532930', '娲辨簮鍘', '5329', 3);
+INSERT INTO `dic_city` VALUES ('532931', '532931', '鍓戝窛鍘', '5329', 3);
+INSERT INTO `dic_city` VALUES ('532932', '532932', '楣ゅ簡鍘', '5329', 3);
+INSERT INTO `dic_city` VALUES ('5331', '5331', '寰峰畯鍌ｆ棌鏅鏃忚嚜娌诲窞', '53', 2);
+INSERT INTO `dic_city` VALUES ('533102', '533102', '鐟炰附甯', '5331', 3);
+INSERT INTO `dic_city` VALUES ('533103', '533103', '鑺掑競', '5331', 3);
+INSERT INTO `dic_city` VALUES ('533122', '533122', '姊佹渤鍘', '5331', 3);
+INSERT INTO `dic_city` VALUES ('533123', '533123', '鐩堟睙鍘', '5331', 3);
+INSERT INTO `dic_city` VALUES ('533124', '533124', '闄囧窛鍘', '5331', 3);
+INSERT INTO `dic_city` VALUES ('5333', '5333', '鎬掓睙鍌堝兂鏃忚嚜娌诲窞', '53', 2);
+INSERT INTO `dic_city` VALUES ('533301', '533301', '娉告按甯', '5333', 3);
+INSERT INTO `dic_city` VALUES ('533323', '533323', '绂忚础鍘', '5333', 3);
+INSERT INTO `dic_city` VALUES ('533324', '533324', '璐″北鐙緳鏃忔€掓棌鑷不鍘', '5333', 3);
+INSERT INTO `dic_city` VALUES ('533325', '533325', '鍏板潽鐧芥棌鏅背鏃忚嚜娌诲幙', '5333', 3);
+INSERT INTO `dic_city` VALUES ('5334', '5334', '杩簡钘忔棌鑷不宸', '53', 2);
+INSERT INTO `dic_city` VALUES ('533401', '533401', '棣欐牸閲屾媺甯', '5334', 3);
+INSERT INTO `dic_city` VALUES ('533422', '533422', '寰烽挦鍘', '5334', 3);
+INSERT INTO `dic_city` VALUES ('533423', '533423', '缁磋タ鍌堝兂鏃忚嚜娌诲幙', '5334', 3);
+INSERT INTO `dic_city` VALUES ('54', '54', '瑗胯棌鑷不鍖', NULL, 1);
+INSERT INTO `dic_city` VALUES ('5401', '5401', '鎷夎惃甯', '54', 2);
+INSERT INTO `dic_city` VALUES ('540102', '540102', '鍩庡叧鍖', '5401', 3);
+INSERT INTO `dic_city` VALUES ('540103', '540103', '鍫嗛緳寰峰簡鍖', '5401', 3);
+INSERT INTO `dic_city` VALUES ('540104', '540104', '杈惧瓬鍖', '5401', 3);
+INSERT INTO `dic_city` VALUES ('540121', '540121', '鏋楀懆鍘', '5401', 3);
+INSERT INTO `dic_city` VALUES ('540122', '540122', '褰撻泟鍘', '5401', 3);
+INSERT INTO `dic_city` VALUES ('540123', '540123', '灏兼湪鍘', '5401', 3);
+INSERT INTO `dic_city` VALUES ('540124', '540124', '鏇叉按鍘', '5401', 3);
+INSERT INTO `dic_city` VALUES ('540127', '540127', '澧ㄧ宸ュ崱鍘', '5401', 3);
+INSERT INTO `dic_city` VALUES ('540171', '540171', '鏍煎皵鏈ㄨ棌闈掑伐涓氬洯鍖', '5401', 3);
+INSERT INTO `dic_city` VALUES ('540172', '540172', '鎷夎惃缁忔祹鎶€鏈紑鍙戝尯', '5401', 3);
+INSERT INTO `dic_city` VALUES ('540173', '540173', '瑗胯棌鏂囧寲鏃呮父鍒涙剰鍥尯', '5401', 3);
+INSERT INTO `dic_city` VALUES ('540174', '540174', '杈惧瓬宸ヤ笟鍥尯', '5401', 3);
+INSERT INTO `dic_city` VALUES ('5402', '5402', '鏃ュ杸鍒欏競', '54', 2);
+INSERT INTO `dic_city` VALUES ('540202', '540202', '妗戠彔瀛滃尯', '5402', 3);
+INSERT INTO `dic_city` VALUES ('540221', '540221', '鍗楁湪鏋楀幙', '5402', 3);
+INSERT INTO `dic_city` VALUES ('540222', '540222', '姹熷瓬鍘', '5402', 3);
+INSERT INTO `dic_city` VALUES ('540223', '540223', '瀹氭棩鍘', '5402', 3);
+INSERT INTO `dic_city` VALUES ('540224', '540224', '钀ㄨ喀鍘', '5402', 3);
+INSERT INTO `dic_city` VALUES ('540225', '540225', '鎷夊瓬鍘', '5402', 3);
+INSERT INTO `dic_city` VALUES ('540226', '540226', '鏄備粊鍘', '5402', 3);
+INSERT INTO `dic_city` VALUES ('540227', '540227', '璋㈤€氶棬鍘', '5402', 3);
+INSERT INTO `dic_city` VALUES ('540228', '540228', '鐧芥湕鍘', '5402', 3);
+INSERT INTO `dic_city` VALUES ('540229', '540229', '浠佸竷鍘', '5402', 3);
+INSERT INTO `dic_city` VALUES ('540230', '540230', '搴烽┈鍘', '5402', 3);
+INSERT INTO `dic_city` VALUES ('540231', '540231', '瀹氱粨鍘', '5402', 3);
+INSERT INTO `dic_city` VALUES ('540232', '540232', '浠插反鍘', '5402', 3);
+INSERT INTO `dic_city` VALUES ('540233', '540233', '浜氫笢鍘', '5402', 3);
+INSERT INTO `dic_city` VALUES ('540234', '540234', '鍚夐殕鍘', '5402', 3);
+INSERT INTO `dic_city` VALUES ('540235', '540235', '鑱傛媺鏈ㄥ幙', '5402', 3);
+INSERT INTO `dic_city` VALUES ('540236', '540236', '钀ㄥ槑鍘', '5402', 3);
+INSERT INTO `dic_city` VALUES ('540237', '540237', '宀楀反鍘', '5402', 3);
+INSERT INTO `dic_city` VALUES ('5403', '5403', '鏄岄兘甯', '54', 2);
+INSERT INTO `dic_city` VALUES ('540302', '540302', '鍗¤嫢鍖', '5403', 3);
+INSERT INTO `dic_city` VALUES ('540321', '540321', '姹熻揪鍘', '5403', 3);
+INSERT INTO `dic_city` VALUES ('540322', '540322', '璐¤鍘', '5403', 3);
+INSERT INTO `dic_city` VALUES ('540323', '540323', '绫讳箤榻愬幙', '5403', 3);
+INSERT INTO `dic_city` VALUES ('540324', '540324', '涓侀潚鍘', '5403', 3);
+INSERT INTO `dic_city` VALUES ('540325', '540325', '瀵熼泤鍘', '5403', 3);
+INSERT INTO `dic_city` VALUES ('540326', '540326', '鍏鍘', '5403', 3);
+INSERT INTO `dic_city` VALUES ('540327', '540327', '宸﹁础鍘', '5403', 3);
+INSERT INTO `dic_city` VALUES ('540328', '540328', '鑺掑悍鍘', '5403', 3);
+INSERT INTO `dic_city` VALUES ('540329', '540329', '娲涢殕鍘', '5403', 3);
+INSERT INTO `dic_city` VALUES ('540330', '540330', '杈瑰潩鍘', '5403', 3);
+INSERT INTO `dic_city` VALUES ('5404', '5404', '鏋楄姖甯', '54', 2);
+INSERT INTO `dic_city` VALUES ('540402', '540402', '宸村疁鍖', '5404', 3);
+INSERT INTO `dic_city` VALUES ('540421', '540421', '宸ュ竷姹熻揪鍘', '5404', 3);
+INSERT INTO `dic_city` VALUES ('540422', '540422', '绫虫灄鍘', '5404', 3);
+INSERT INTO `dic_city` VALUES ('540423', '540423', '澧ㄨ劚鍘', '5404', 3);
+INSERT INTO `dic_city` VALUES ('540424', '540424', '娉㈠瘑鍘', '5404', 3);
+INSERT INTO `dic_city` VALUES ('540425', '540425', '瀵熼殔鍘', '5404', 3);
+INSERT INTO `dic_city` VALUES ('540426', '540426', '鏈楀幙', '5404', 3);
+INSERT INTO `dic_city` VALUES ('5405', '5405', '灞卞崡甯', '54', 2);
+INSERT INTO `dic_city` VALUES ('540502', '540502', '涔冧笢鍖', '5405', 3);
+INSERT INTO `dic_city` VALUES ('540521', '540521', '鎵庡泭鍘', '5405', 3);
+INSERT INTO `dic_city` VALUES ('540522', '540522', '璐″槑鍘', '5405', 3);
+INSERT INTO `dic_city` VALUES ('540523', '540523', '妗戞棩鍘', '5405', 3);
+INSERT INTO `dic_city` VALUES ('540524', '540524', '鐞肩粨鍘', '5405', 3);
+INSERT INTO `dic_city` VALUES ('540525', '540525', '鏇叉澗鍘', '5405', 3);
+INSERT INTO `dic_city` VALUES ('540526', '540526', '鎺編鍘', '5405', 3);
+INSERT INTO `dic_city` VALUES ('540527', '540527', '娲涙墡鍘', '5405', 3);
+INSERT INTO `dic_city` VALUES ('540528', '540528', '鍔犳煡鍘', '5405', 3);
+INSERT INTO `dic_city` VALUES ('540529', '540529', '闅嗗瓙鍘', '5405', 3);
+INSERT INTO `dic_city` VALUES ('540530', '540530', '閿欓偅鍘', '5405', 3);
+INSERT INTO `dic_city` VALUES ('540531', '540531', '娴崱瀛愬幙', '5405', 3);
+INSERT INTO `dic_city` VALUES ('5406', '5406', '閭ｆ洸甯', '54', 2);
+INSERT INTO `dic_city` VALUES ('540602', '540602', '鑹插凹鍖', '5406', 3);
+INSERT INTO `dic_city` VALUES ('540621', '540621', '鍢夐粠鍘', '5406', 3);
+INSERT INTO `dic_city` VALUES ('540622', '540622', '姣斿鍘', '5406', 3);
+INSERT INTO `dic_city` VALUES ('540623', '540623', '鑱傝崳鍘', '5406', 3);
+INSERT INTO `dic_city` VALUES ('540624', '540624', '瀹夊鍘', '5406', 3);
+INSERT INTO `dic_city` VALUES ('540625', '540625', '鐢虫墡鍘', '5406', 3);
+INSERT INTO `dic_city` VALUES ('540626', '540626', '绱㈠幙', '5406', 3);
+INSERT INTO `dic_city` VALUES ('540627', '540627', '鐝垐鍘', '5406', 3);
+INSERT INTO `dic_city` VALUES ('540628', '540628', '宸撮潚鍘', '5406', 3);
+INSERT INTO `dic_city` VALUES ('540629', '540629', '灏肩帥鍘', '5406', 3);
+INSERT INTO `dic_city` VALUES ('540630', '540630', '鍙屾箹鍘', '5406', 3);
+INSERT INTO `dic_city` VALUES ('5425', '5425', '闃块噷鍦板尯', '54', 2);
+INSERT INTO `dic_city` VALUES ('542521', '542521', '鏅叞鍘', '5425', 3);
+INSERT INTO `dic_city` VALUES ('542522', '542522', '鏈揪鍘', '5425', 3);
+INSERT INTO `dic_city` VALUES ('542523', '542523', '鍣跺皵鍘', '5425', 3);
+INSERT INTO `dic_city` VALUES ('542524', '542524', '鏃ュ湡鍘', '5425', 3);
+INSERT INTO `dic_city` VALUES ('542525', '542525', '闈╁悏鍘', '5425', 3);
+INSERT INTO `dic_city` VALUES ('542526', '542526', '鏀瑰垯鍘', '5425', 3);
+INSERT INTO `dic_city` VALUES ('542527', '542527', '鎺嫟鍘', '5425', 3);
+INSERT INTO `dic_city` VALUES ('61', '61', '闄曡タ鐪', NULL, 1);
+INSERT INTO `dic_city` VALUES ('6101', '6101', '瑗垮畨甯', '61', 2);
+INSERT INTO `dic_city` VALUES ('610102', '610102', '鏂板煄鍖', '6101', 3);
+INSERT INTO `dic_city` VALUES ('610103', '610103', '纰戞灄鍖', '6101', 3);
+INSERT INTO `dic_city` VALUES ('610104', '610104', '鑾叉箹鍖', '6101', 3);
+INSERT INTO `dic_city` VALUES ('610111', '610111', '鐏炴ˉ鍖', '6101', 3);
+INSERT INTO `dic_city` VALUES ('610112', '610112', '鏈ぎ鍖', '6101', 3);
+INSERT INTO `dic_city` VALUES ('610113', '610113', '闆佸鍖', '6101', 3);
+INSERT INTO `dic_city` VALUES ('610114', '610114', '闃庤壇鍖', '6101', 3);
+INSERT INTO `dic_city` VALUES ('610115', '610115', '涓存郊鍖', '6101', 3);
+INSERT INTO `dic_city` VALUES ('610116', '610116', '闀垮畨鍖', '6101', 3);
+INSERT INTO `dic_city` VALUES ('610117', '610117', '楂橀櫟鍖', '6101', 3);
+INSERT INTO `dic_city` VALUES ('610118', '610118', '閯犻倯鍖', '6101', 3);
+INSERT INTO `dic_city` VALUES ('610122', '610122', '钃濈敯鍘', '6101', 3);
+INSERT INTO `dic_city` VALUES ('610124', '610124', '鍛ㄨ嚦鍘', '6101', 3);
+INSERT INTO `dic_city` VALUES ('6102', '6102', '閾滃窛甯', '61', 2);
+INSERT INTO `dic_city` VALUES ('610202', '610202', '鐜嬬泭鍖', '6102', 3);
+INSERT INTO `dic_city` VALUES ('610203', '610203', '鍗板彴鍖', '6102', 3);
+INSERT INTO `dic_city` VALUES ('610204', '610204', '鑰€宸炲尯', '6102', 3);
+INSERT INTO `dic_city` VALUES ('610222', '610222', '瀹滃悰鍘', '6102', 3);
+INSERT INTO `dic_city` VALUES ('6103', '6103', '瀹濋浮甯', '61', 2);
+INSERT INTO `dic_city` VALUES ('610302', '610302', '娓花鍖', '6103', 3);
+INSERT INTO `dic_city` VALUES ('610303', '610303', '閲戝彴鍖', '6103', 3);
+INSERT INTO `dic_city` VALUES ('610304', '610304', '闄堜粨鍖', '6103', 3);
+INSERT INTO `dic_city` VALUES ('610322', '610322', '鍑ょ繑鍘', '6103', 3);
+INSERT INTO `dic_city` VALUES ('610323', '610323', '宀愬北鍘', '6103', 3);
+INSERT INTO `dic_city` VALUES ('610324', '610324', '鎵堕鍘', '6103', 3);
+INSERT INTO `dic_city` VALUES ('610326', '610326', '鐪夊幙', '6103', 3);
+INSERT INTO `dic_city` VALUES ('610327', '610327', '闄囧幙', '6103', 3);
+INSERT INTO `dic_city` VALUES ('610328', '610328', '鍗冮槼鍘', '6103', 3);
+INSERT INTO `dic_city` VALUES ('610329', '610329', '楹熸父鍘', '6103', 3);
+INSERT INTO `dic_city` VALUES ('610330', '610330', '鍑ゅ幙', '6103', 3);
+INSERT INTO `dic_city` VALUES ('610331', '610331', '澶櫧鍘', '6103', 3);
+INSERT INTO `dic_city` VALUES ('6104', '6104', '鍜搁槼甯', '61', 2);
+INSERT INTO `dic_city` VALUES ('610402', '610402', '绉﹂兘鍖', '6104', 3);
+INSERT INTO `dic_city` VALUES ('610403', '610403', '鏉ㄩ櫟鍖', '6104', 3);
+INSERT INTO `dic_city` VALUES ('610404', '610404', '娓煄鍖', '6104', 3);
+INSERT INTO `dic_city` VALUES ('610422', '610422', '涓夊師鍘', '6104', 3);
+INSERT INTO `dic_city` VALUES ('610423', '610423', '娉鹃槼鍘', '6104', 3);
+INSERT INTO `dic_city` VALUES ('610424', '610424', '涔惧幙', '6104', 3);
+INSERT INTO `dic_city` VALUES ('610425', '610425', '绀兼硥鍘', '6104', 3);
+INSERT INTO `dic_city` VALUES ('610426', '610426', '姘稿鍘', '6104', 3);
+INSERT INTO `dic_city` VALUES ('610428', '610428', '闀挎鍘', '6104', 3);
+INSERT INTO `dic_city` VALUES ('610429', '610429', '鏃倯鍘', '6104', 3);
+INSERT INTO `dic_city` VALUES ('610430', '610430', '娣冲寲鍘', '6104', 3);
+INSERT INTO `dic_city` VALUES ('610431', '610431', '姝﹀姛鍘', '6104', 3);
+INSERT INTO `dic_city` VALUES ('610481', '610481', '鍏村钩甯', '6104', 3);
+INSERT INTO `dic_city` VALUES ('610482', '610482', '褰窞甯', '6104', 3);
+INSERT INTO `dic_city` VALUES ('6105', '6105', '娓崡甯', '61', 2);
+INSERT INTO `dic_city` VALUES ('610502', '610502', '涓存腑鍖', '6105', 3);
+INSERT INTO `dic_city` VALUES ('610503', '610503', '鍗庡窞鍖', '6105', 3);
+INSERT INTO `dic_city` VALUES ('610522', '610522', '娼煎叧鍘', '6105', 3);
+INSERT INTO `dic_city` VALUES ('610523', '610523', '澶ц崝鍘', '6105', 3);
+INSERT INTO `dic_city` VALUES ('610524', '610524', '鍚堥槼鍘', '6105', 3);
+INSERT INTO `dic_city` VALUES ('610525', '610525', '婢勫煄鍘', '6105', 3);
+INSERT INTO `dic_city` VALUES ('610526', '610526', '钂插煄鍘', '6105', 3);
+INSERT INTO `dic_city` VALUES ('610527', '610527', '鐧芥按鍘', '6105', 3);
+INSERT INTO `dic_city` VALUES ('610528', '610528', '瀵屽钩鍘', '6105', 3);
+INSERT INTO `dic_city` VALUES ('610581', '610581', '闊╁煄甯', '6105', 3);
+INSERT INTO `dic_city` VALUES ('610582', '610582', '鍗庨槾甯', '6105', 3);
+INSERT INTO `dic_city` VALUES ('6106', '6106', '寤跺畨甯', '61', 2);
+INSERT INTO `dic_city` VALUES ('610602', '610602', '瀹濆鍖', '6106', 3);
+INSERT INTO `dic_city` VALUES ('610603', '610603', '瀹夊鍖', '6106', 3);
+INSERT INTO `dic_city` VALUES ('610621', '610621', '寤堕暱鍘', '6106', 3);
+INSERT INTO `dic_city` VALUES ('610622', '610622', '寤跺窛鍘', '6106', 3);
+INSERT INTO `dic_city` VALUES ('610625', '610625', '蹇椾腹鍘', '6106', 3);
+INSERT INTO `dic_city` VALUES ('610626', '610626', '鍚磋捣鍘', '6106', 3);
+INSERT INTO `dic_city` VALUES ('610627', '610627', '鐢樻硥鍘', '6106', 3);
+INSERT INTO `dic_city` VALUES ('610628', '610628', '瀵屽幙', '6106', 3);
+INSERT INTO `dic_city` VALUES ('610629', '610629', '娲涘窛鍘', '6106', 3);
+INSERT INTO `dic_city` VALUES ('610630', '610630', '瀹滃窛鍘', '6106', 3);
+INSERT INTO `dic_city` VALUES ('610631', '610631', '榛勯緳鍘', '6106', 3);
+INSERT INTO `dic_city` VALUES ('610632', '610632', '榛勯櫟鍘', '6106', 3);
+INSERT INTO `dic_city` VALUES ('610681', '610681', '瀛愰暱甯', '6106', 3);
+INSERT INTO `dic_city` VALUES ('6107', '6107', '姹変腑甯', '61', 2);
+INSERT INTO `dic_city` VALUES ('610702', '610702', '姹夊彴鍖', '6107', 3);
+INSERT INTO `dic_city` VALUES ('610703', '610703', '鍗楅儜鍖', '6107', 3);
+INSERT INTO `dic_city` VALUES ('610722', '610722', '鍩庡浐鍘', '6107', 3);
+INSERT INTO `dic_city` VALUES ('610723', '610723', '娲嬪幙', '6107', 3);
+INSERT INTO `dic_city` VALUES ('610724', '610724', '瑗夸埂鍘', '6107', 3);
+INSERT INTO `dic_city` VALUES ('610725', '610725', '鍕夊幙', '6107', 3);
+INSERT INTO `dic_city` VALUES ('610726', '610726', '瀹佸己鍘', '6107', 3);
+INSERT INTO `dic_city` VALUES ('610727', '610727', '鐣ラ槼鍘', '6107', 3);
+INSERT INTO `dic_city` VALUES ('610728', '610728', '闀囧反鍘', '6107', 3);
+INSERT INTO `dic_city` VALUES ('610729', '610729', '鐣欏潩鍘', '6107', 3);
+INSERT INTO `dic_city` VALUES ('610730', '610730', '浣涘潽鍘', '6107', 3);
+INSERT INTO `dic_city` VALUES ('6108', '6108', '姒嗘灄甯', '61', 2);
+INSERT INTO `dic_city` VALUES ('610802', '610802', '姒嗛槼鍖', '6108', 3);
+INSERT INTO `dic_city` VALUES ('610803', '610803', '妯北鍖', '6108', 3);
+INSERT INTO `dic_city` VALUES ('610822', '610822', '搴滆胺鍘', '6108', 3);
+INSERT INTO `dic_city` VALUES ('610824', '610824', '闈栬竟鍘', '6108', 3);
+INSERT INTO `dic_city` VALUES ('610825', '610825', '瀹氳竟鍘', '6108', 3);
+INSERT INTO `dic_city` VALUES ('610826', '610826', '缁ュ痉鍘', '6108', 3);
+INSERT INTO `dic_city` VALUES ('610827', '610827', '绫宠剛鍘', '6108', 3);
+INSERT INTO `dic_city` VALUES ('610828', '610828', '浣冲幙', '6108', 3);
+INSERT INTO `dic_city` VALUES ('610829', '610829', '鍚村牎鍘', '6108', 3);
+INSERT INTO `dic_city` VALUES ('610830', '610830', '娓呮锭鍘', '6108', 3);
+INSERT INTO `dic_city` VALUES ('610831', '610831', '瀛愭床鍘', '6108', 3);
+INSERT INTO `dic_city` VALUES ('610881', '610881', '绁炴湪甯', '6108', 3);
+INSERT INTO `dic_city` VALUES ('6109', '6109', '瀹夊悍甯', '61', 2);
+INSERT INTO `dic_city` VALUES ('610902', '610902', '姹夋花鍖', '6109', 3);
+INSERT INTO `dic_city` VALUES ('610921', '610921', '姹夐槾鍘', '6109', 3);
+INSERT INTO `dic_city` VALUES ('610922', '610922', '鐭虫硥鍘', '6109', 3);
+INSERT INTO `dic_city` VALUES ('610923', '610923', '瀹侀檿鍘', '6109', 3);
+INSERT INTO `dic_city` VALUES ('610924', '610924', '绱槼鍘', '6109', 3);
+INSERT INTO `dic_city` VALUES ('610925', '610925', '宀氱殝鍘', '6109', 3);
+INSERT INTO `dic_city` VALUES ('610926', '610926', '骞冲埄鍘', '6109', 3);
+INSERT INTO `dic_city` VALUES ('610927', '610927', '闀囧潽鍘', '6109', 3);
+INSERT INTO `dic_city` VALUES ('610928', '610928', '鏃槼鍘', '6109', 3);
+INSERT INTO `dic_city` VALUES ('610929', '610929', '鐧芥渤鍘', '6109', 3);
+INSERT INTO `dic_city` VALUES ('6110', '6110', '鍟嗘礇甯', '61', 2);
+INSERT INTO `dic_city` VALUES ('611002', '611002', '鍟嗗窞鍖', '6110', 3);
+INSERT INTO `dic_city` VALUES ('611021', '611021', '娲涘崡鍘', '6110', 3);
+INSERT INTO `dic_city` VALUES ('611022', '611022', '涓瑰嚖鍘', '6110', 3);
+INSERT INTO `dic_city` VALUES ('611023', '611023', '鍟嗗崡鍘', '6110', 3);
+INSERT INTO `dic_city` VALUES ('611024', '611024', '灞遍槼鍘', '6110', 3);
+INSERT INTO `dic_city` VALUES ('611025', '611025', '闀囧畨鍘', '6110', 3);
+INSERT INTO `dic_city` VALUES ('611026', '611026', '鏌炴按鍘', '6110', 3);
+INSERT INTO `dic_city` VALUES ('62', '62', '鐢樿們鐪', NULL, 1);
+INSERT INTO `dic_city` VALUES ('6201', '6201', '鍏板窞甯', '62', 2);
+INSERT INTO `dic_city` VALUES ('620102', '620102', '鍩庡叧鍖', '6201', 3);
+INSERT INTO `dic_city` VALUES ('620103', '620103', '涓冮噷娌冲尯', '6201', 3);
+INSERT INTO `dic_city` VALUES ('620104', '620104', '瑗垮浐鍖', '6201', 3);
+INSERT INTO `dic_city` VALUES ('620105', '620105', '瀹夊畞鍖', '6201', 3);
+INSERT INTO `dic_city` VALUES ('620111', '620111', '绾㈠彜鍖', '6201', 3);
+INSERT INTO `dic_city` VALUES ('620121', '620121', '姘哥櫥鍘', '6201', 3);
+INSERT INTO `dic_city` VALUES ('620122', '620122', '鐨嬪叞鍘', '6201', 3);
+INSERT INTO `dic_city` VALUES ('620123', '620123', '姒嗕腑鍘', '6201', 3);
+INSERT INTO `dic_city` VALUES ('620171', '620171', '鍏板窞鏂板尯', '6201', 3);
+INSERT INTO `dic_city` VALUES ('6202', '6202', '鍢夊唱鍏冲競', '62', 2);
+INSERT INTO `dic_city` VALUES ('620201001', '620201001', '闆勫叧琛楅亾', '6202', 3);
+INSERT INTO `dic_city` VALUES ('620201002', '620201002', '閽㈠煄琛楅亾', '6202', 3);
+INSERT INTO `dic_city` VALUES ('620201100', '620201100', '鏂板煄闀', '6202', 3);
+INSERT INTO `dic_city` VALUES ('620201101', '620201101', '宄硥闀', '6202', 3);
+INSERT INTO `dic_city` VALUES ('620201102', '620201102', '鏂囨畩闀', '6202', 3);
+INSERT INTO `dic_city` VALUES ('6203', '6203', '閲戞槍甯', '62', 2);
+INSERT INTO `dic_city` VALUES ('620302', '620302', '閲戝窛鍖', '6203', 3);
+INSERT INTO `dic_city` VALUES ('620321', '620321', '姘告槍鍘', '6203', 3);
+INSERT INTO `dic_city` VALUES ('6204', '6204', '鐧介摱甯', '62', 2);
+INSERT INTO `dic_city` VALUES ('620402', '620402', '鐧介摱鍖', '6204', 3);
+INSERT INTO `dic_city` VALUES ('620403', '620403', '骞冲窛鍖', '6204', 3);
+INSERT INTO `dic_city` VALUES ('620421', '620421', '闈栬繙鍘', '6204', 3);
+INSERT INTO `dic_city` VALUES ('620422', '620422', '浼氬畞鍘', '6204', 3);
+INSERT INTO `dic_city` VALUES ('620423', '620423', '鏅嘲鍘', '6204', 3);
+INSERT INTO `dic_city` VALUES ('6205', '6205', '澶╂按甯', '62', 2);
+INSERT INTO `dic_city` VALUES ('620502', '620502', '绉﹀窞鍖', '6205', 3);
+INSERT INTO `dic_city` VALUES ('620503', '620503', '楹︾Н鍖', '6205', 3);
+INSERT INTO `dic_city` VALUES ('620521', '620521', '娓呮按鍘', '6205', 3);
+INSERT INTO `dic_city` VALUES ('620522', '620522', '绉﹀畨鍘', '6205', 3);
+INSERT INTO `dic_city` VALUES ('620523', '620523', '鐢樿胺鍘', '6205', 3);
+INSERT INTO `dic_city` VALUES ('620524', '620524', '姝﹀北鍘', '6205', 3);
+INSERT INTO `dic_city` VALUES ('620525', '620525', '寮犲宸濆洖鏃忚嚜娌诲幙', '6205', 3);
+INSERT INTO `dic_city` VALUES ('6206', '6206', '姝﹀▉甯', '62', 2);
+INSERT INTO `dic_city` VALUES ('620602', '620602', '鍑夊窞鍖', '6206', 3);
+INSERT INTO `dic_city` VALUES ('620621', '620621', '姘戝嫟鍘', '6206', 3);
+INSERT INTO `dic_city` VALUES ('620622', '620622', '鍙ゆ氮鍘', '6206', 3);
+INSERT INTO `dic_city` VALUES ('620623', '620623', '澶╃钘忔棌鑷不鍘', '6206', 3);
+INSERT INTO `dic_city` VALUES ('6207', '6207', '寮犳帠甯', '62', 2);
+INSERT INTO `dic_city` VALUES ('620702', '620702', '鐢樺窞鍖', '6207', 3);
+INSERT INTO `dic_city` VALUES ('620721', '620721', '鑲冨崡瑁曞浐鏃忚嚜娌诲幙', '6207', 3);
+INSERT INTO `dic_city` VALUES ('620722', '620722', '姘戜箰鍘', '6207', 3);
+INSERT INTO `dic_city` VALUES ('620723', '620723', '涓存辰鍘', '6207', 3);
+INSERT INTO `dic_city` VALUES ('620724', '620724', '楂樺彴鍘', '6207', 3);
+INSERT INTO `dic_city` VALUES ('620725', '620725', '灞变腹鍘', '6207', 3);
+INSERT INTO `dic_city` VALUES ('6208', '6208', '骞冲噳甯', '62', 2);
+INSERT INTO `dic_city` VALUES ('620802', '620802', '宕嗗硳鍖', '6208', 3);
+INSERT INTO `dic_city` VALUES ('620821', '620821', '娉惧窛鍘', '6208', 3);
+INSERT INTO `dic_city` VALUES ('620822', '620822', '鐏靛彴鍘', '6208', 3);
+INSERT INTO `dic_city` VALUES ('620823', '620823', '宕囦俊鍘', '6208', 3);
+INSERT INTO `dic_city` VALUES ('620825', '620825', '搴勬氮鍘', '6208', 3);
+INSERT INTO `dic_city` VALUES ('620826', '620826', '闈欏畞鍘', '6208', 3);
+INSERT INTO `dic_city` VALUES ('620881', '620881', '鍗庝涵甯', '6208', 3);
+INSERT INTO `dic_city` VALUES ('6209', '6209', '閰掓硥甯', '62', 2);
+INSERT INTO `dic_city` VALUES ('620902', '620902', '鑲冨窞鍖', '6209', 3);
+INSERT INTO `dic_city` VALUES ('620921', '620921', '閲戝鍘', '6209', 3);
+INSERT INTO `dic_city` VALUES ('620922', '620922', '鐡滃窞鍘', '6209', 3);
+INSERT INTO `dic_city` VALUES ('620923', '620923', '鑲冨寳钂欏彜鏃忚嚜娌诲幙', '6209', 3);
+INSERT INTO `dic_city` VALUES ('620924', '620924', '闃垮厠濉炲搱钀ㄥ厠鏃忚嚜娌诲幙', '6209', 3);
+INSERT INTO `dic_city` VALUES ('620981', '620981', '鐜夐棬甯', '6209', 3);
+INSERT INTO `dic_city` VALUES ('620982', '620982', '鏁︾厡甯', '6209', 3);
+INSERT INTO `dic_city` VALUES ('6210', '6210', '搴嗛槼甯', '62', 2);
+INSERT INTO `dic_city` VALUES ('621002', '621002', '瑗垮嘲鍖', '6210', 3);
+INSERT INTO `dic_city` VALUES ('621021', '621021', '搴嗗煄鍘', '6210', 3);
+INSERT INTO `dic_city` VALUES ('621022', '621022', '鐜幙', '6210', 3);
+INSERT INTO `dic_city` VALUES ('621023', '621023', '鍗庢睜鍘', '6210', 3);
+INSERT INTO `dic_city` VALUES ('621024', '621024', '鍚堟按鍘', '6210', 3);
+INSERT INTO `dic_city` VALUES ('621025', '621025', '姝ｅ畞鍘', '6210', 3);
+INSERT INTO `dic_city` VALUES ('621026', '621026', '瀹佸幙', '6210', 3);
+INSERT INTO `dic_city` VALUES ('621027', '621027', '闀囧師鍘', '6210', 3);
+INSERT INTO `dic_city` VALUES ('6211', '6211', '瀹氳タ甯', '62', 2);
+INSERT INTO `dic_city` VALUES ('621102', '621102', '瀹夊畾鍖', '6211', 3);
+INSERT INTO `dic_city` VALUES ('621121', '621121', '閫氭腑鍘', '6211', 3);
+INSERT INTO `dic_city` VALUES ('621122', '621122', '闄囪タ鍘', '6211', 3);
+INSERT INTO `dic_city` VALUES ('621123', '621123', '娓簮鍘', '6211', 3);
+INSERT INTO `dic_city` VALUES ('621124', '621124', '涓存串鍘', '6211', 3);
+INSERT INTO `dic_city` VALUES ('621125', '621125', '婕冲幙', '6211', 3);
+INSERT INTO `dic_city` VALUES ('621126', '621126', '宀峰幙', '6211', 3);
+INSERT INTO `dic_city` VALUES ('6212', '6212', '闄囧崡甯', '62', 2);
+INSERT INTO `dic_city` VALUES ('621202', '621202', '姝﹂兘鍖', '6212', 3);
+INSERT INTO `dic_city` VALUES ('621221', '621221', '鎴愬幙', '6212', 3);
+INSERT INTO `dic_city` VALUES ('621222', '621222', '鏂囧幙', '6212', 3);
+INSERT INTO `dic_city` VALUES ('621223', '621223', '瀹曟槍鍘', '6212', 3);
+INSERT INTO `dic_city` VALUES ('621224', '621224', '搴峰幙', '6212', 3);
+INSERT INTO `dic_city` VALUES ('621225', '621225', '瑗垮拰鍘', '6212', 3);
+INSERT INTO `dic_city` VALUES ('621226', '621226', '绀煎幙', '6212', 3);
+INSERT INTO `dic_city` VALUES ('621227', '621227', '寰藉幙', '6212', 3);
+INSERT INTO `dic_city` VALUES ('621228', '621228', '涓ゅ綋鍘', '6212', 3);
+INSERT INTO `dic_city` VALUES ('6229', '6229', '涓村鍥炴棌鑷不宸', '62', 2);
+INSERT INTO `dic_city` VALUES ('622901', '622901', '涓村甯', '6229', 3);
+INSERT INTO `dic_city` VALUES ('622921', '622921', '涓村鍘', '6229', 3);
+INSERT INTO `dic_city` VALUES ('622922', '622922', '搴蜂箰鍘', '6229', 3);
+INSERT INTO `dic_city` VALUES ('622923', '622923', '姘搁潠鍘', '6229', 3);
+INSERT INTO `dic_city` VALUES ('622924', '622924', '骞挎渤鍘', '6229', 3);
+INSERT INTO `dic_city` VALUES ('622925', '622925', '鍜屾斂鍘', '6229', 3);
+INSERT INTO `dic_city` VALUES ('622926', '622926', '涓滀埂鏃忚嚜娌诲幙', '6229', 3);
+INSERT INTO `dic_city` VALUES ('622927', '622927', '绉煶灞变繚瀹夋棌涓滀埂鏃忔拻鎷夋棌鑷不鍘', '6229', 3);
+INSERT INTO `dic_city` VALUES ('6230', '6230', '鐢樺崡钘忔棌鑷不宸', '62', 2);
+INSERT INTO `dic_city` VALUES ('623001', '623001', '鍚堜綔甯', '6230', 3);
+INSERT INTO `dic_city` VALUES ('623021', '623021', '涓存江鍘', '6230', 3);
+INSERT INTO `dic_city` VALUES ('623022', '623022', '鍗撳凹鍘', '6230', 3);
+INSERT INTO `dic_city` VALUES ('623023', '623023', '鑸熸洸鍘', '6230', 3);
+INSERT INTO `dic_city` VALUES ('623024', '623024', '杩儴鍘', '6230', 3);
+INSERT INTO `dic_city` VALUES ('623025', '623025', '鐜涙洸鍘', '6230', 3);
+INSERT INTO `dic_city` VALUES ('623026', '623026', '纰屾洸鍘', '6230', 3);
+INSERT INTO `dic_city` VALUES ('623027', '623027', '澶忔渤鍘', '6230', 3);
+INSERT INTO `dic_city` VALUES ('63', '63', '闈掓捣鐪', NULL, 1);
+INSERT INTO `dic_city` VALUES ('6301', '6301', '瑗垮畞甯', '63', 2);
+INSERT INTO `dic_city` VALUES ('630102', '630102', '鍩庝笢鍖', '6301', 3);
+INSERT INTO `dic_city` VALUES ('630103', '630103', '鍩庝腑鍖', '6301', 3);
+INSERT INTO `dic_city` VALUES ('630104', '630104', '鍩庤タ鍖', '6301', 3);
+INSERT INTO `dic_city` VALUES ('630105', '630105', '鍩庡寳鍖', '6301', 3);
+INSERT INTO `dic_city` VALUES ('630106', '630106', '婀熶腑鍖', '6301', 3);
+INSERT INTO `dic_city` VALUES ('630121', '630121', '澶ч€氬洖鏃忓湡鏃忚嚜娌诲幙', '6301', 3);
+INSERT INTO `dic_city` VALUES ('630123', '630123', '婀熸簮鍘', '6301', 3);
+INSERT INTO `dic_city` VALUES ('6302', '6302', '娴蜂笢甯', '63', 2);
+INSERT INTO `dic_city` VALUES ('630202', '630202', '涔愰兘鍖', '6302', 3);
+INSERT INTO `dic_city` VALUES ('630203', '630203', '骞冲畨鍖', '6302', 3);
+INSERT INTO `dic_city` VALUES ('630222', '630222', '姘戝拰鍥炴棌鍦熸棌鑷不鍘', '6302', 3);
+INSERT INTO `dic_city` VALUES ('630223', '630223', '浜掑姪鍦熸棌鑷不鍘', '6302', 3);
+INSERT INTO `dic_city` VALUES ('630224', '630224', '鍖栭殕鍥炴棌鑷不鍘', '6302', 3);
+INSERT INTO `dic_city` VALUES ('630225', '630225', '寰寲鎾掓媺鏃忚嚜娌诲幙', '6302', 3);
+INSERT INTO `dic_city` VALUES ('6322', '6322', '娴峰寳钘忔棌鑷不宸', '63', 2);
+INSERT INTO `dic_city` VALUES ('632221', '632221', '闂ㄦ簮鍥炴棌鑷不鍘', '6322', 3);
+INSERT INTO `dic_city` VALUES ('632222', '632222', '绁佽繛鍘', '6322', 3);
+INSERT INTO `dic_city` VALUES ('632223', '632223', '娴锋檹鍘', '6322', 3);
+INSERT INTO `dic_city` VALUES ('632224', '632224', '鍒氬療鍘', '6322', 3);
+INSERT INTO `dic_city` VALUES ('6323', '6323', '榛勫崡钘忔棌鑷不宸', '63', 2);
+INSERT INTO `dic_city` VALUES ('632321', '632321', '鍚屼粊鍘', '6323', 3);
+INSERT INTO `dic_city` VALUES ('632322', '632322', '灏栨墡鍘', '6323', 3);
+INSERT INTO `dic_city` VALUES ('632323', '632323', '娉藉簱鍘', '6323', 3);
+INSERT INTO `dic_city` VALUES ('632324', '632324', '娌冲崡钂欏彜鏃忚嚜娌诲幙', '6323', 3);
+INSERT INTO `dic_city` VALUES ('6325', '6325', '娴峰崡钘忔棌鑷不宸', '63', 2);
+INSERT INTO `dic_city` VALUES ('632521', '632521', '鍏卞拰鍘', '6325', 3);
+INSERT INTO `dic_city` VALUES ('632522', '632522', '鍚屽痉鍘', '6325', 3);
+INSERT INTO `dic_city` VALUES ('632523', '632523', '璐靛痉鍘', '6325', 3);
+INSERT INTO `dic_city` VALUES ('632524', '632524', '鍏存捣鍘', '6325', 3);
+INSERT INTO `dic_city` VALUES ('632525', '632525', '璐靛崡鍘', '6325', 3);
+INSERT INTO `dic_city` VALUES ('6326', '6326', '鏋滄礇钘忔棌鑷不宸', '63', 2);
+INSERT INTO `dic_city` VALUES ('632621', '632621', '鐜涙瞾鍘', '6326', 3);
+INSERT INTO `dic_city` VALUES ('632622', '632622', '鐝帥鍘', '6326', 3);
+INSERT INTO `dic_city` VALUES ('632623', '632623', '鐢樺痉鍘', '6326', 3);
+INSERT INTO `dic_city` VALUES ('632624', '632624', '杈炬棩鍘', '6326', 3);
+INSERT INTO `dic_city` VALUES ('632625', '632625', '涔呮不鍘', '6326', 3);
+INSERT INTO `dic_city` VALUES ('632626', '632626', '鐜涘鍘', '6326', 3);
+INSERT INTO `dic_city` VALUES ('6327', '6327', '鐜夋爲钘忔棌鑷不宸', '63', 2);
+INSERT INTO `dic_city` VALUES ('632701', '632701', '鐜夋爲甯', '6327', 3);
+INSERT INTO `dic_city` VALUES ('632722', '632722', '鏉傚鍘', '6327', 3);
+INSERT INTO `dic_city` VALUES ('632723', '632723', '绉板鍘', '6327', 3);
+INSERT INTO `dic_city` VALUES ('632724', '632724', '娌诲鍘', '6327', 3);
+INSERT INTO `dic_city` VALUES ('632725', '632725', '鍥婅唉鍘', '6327', 3);
+INSERT INTO `dic_city` VALUES ('632726', '632726', '鏇查夯鑾卞幙', '6327', 3);
+INSERT INTO `dic_city` VALUES ('6328', '6328', '娴疯タ钂欏彜鏃忚棌鏃忚嚜娌诲窞', '63', 2);
+INSERT INTO `dic_city` VALUES ('632801', '632801', '鏍煎皵鏈ㄥ競', '6328', 3);
+INSERT INTO `dic_city` VALUES ('632802', '632802', '寰蜂护鍝堝競', '6328', 3);
+INSERT INTO `dic_city` VALUES ('632803', '632803', '鑼礀甯', '6328', 3);
+INSERT INTO `dic_city` VALUES ('632821', '632821', '涔屽叞鍘', '6328', 3);
+INSERT INTO `dic_city` VALUES ('632822', '632822', '閮藉叞鍘', '6328', 3);
+INSERT INTO `dic_city` VALUES ('632823', '632823', '澶╁郴鍘', '6328', 3);
+INSERT INTO `dic_city` VALUES ('632857', '632857', '澶ф煷鏃﹁鏀垮鍛樹細', '6328', 3);
+INSERT INTO `dic_city` VALUES ('64', '64', '瀹佸鍥炴棌鑷不鍖', NULL, 1);
+INSERT INTO `dic_city` VALUES ('6401', '6401', '閾跺窛甯', '64', 2);
+INSERT INTO `dic_city` VALUES ('640104', '640104', '鍏村簡鍖', '6401', 3);
+INSERT INTO `dic_city` VALUES ('640105', '640105', '瑗垮鍖', '6401', 3);
+INSERT INTO `dic_city` VALUES ('640106', '640106', '閲戝嚖鍖', '6401', 3);
+INSERT INTO `dic_city` VALUES ('640121', '640121', '姘稿畞鍘', '6401', 3);
+INSERT INTO `dic_city` VALUES ('640122', '640122', '璐哄叞鍘', '6401', 3);
+INSERT INTO `dic_city` VALUES ('640181', '640181', '鐏垫甯', '6401', 3);
+INSERT INTO `dic_city` VALUES ('6402', '6402', '鐭冲槾灞卞競', '64', 2);
+INSERT INTO `dic_city` VALUES ('640202', '640202', '澶ф鍙ｅ尯', '6402', 3);
+INSERT INTO `dic_city` VALUES ('640205', '640205', '鎯犲啘鍖', '6402', 3);
+INSERT INTO `dic_city` VALUES ('640221', '640221', '骞崇綏鍘', '6402', 3);
+INSERT INTO `dic_city` VALUES ('6403', '6403', '鍚村繝甯', '64', 2);
+INSERT INTO `dic_city` VALUES ('640302', '640302', '鍒╅€氬尯', '6403', 3);
+INSERT INTO `dic_city` VALUES ('640303', '640303', '绾㈠鍫″尯', '6403', 3);
+INSERT INTO `dic_city` VALUES ('640323', '640323', '鐩愭睜鍘', '6403', 3);
+INSERT INTO `dic_city` VALUES ('640324', '640324', '鍚屽績鍘', '6403', 3);
+INSERT INTO `dic_city` VALUES ('640381', '640381', '闈掗摐宄″競', '6403', 3);
+INSERT INTO `dic_city` VALUES ('6404', '6404', '鍥哄師甯', '64', 2);
+INSERT INTO `dic_city` VALUES ('640402', '640402', '鍘熷窞鍖', '6404', 3);
+INSERT INTO `dic_city` VALUES ('640422', '640422', '瑗垮悏鍘', '6404', 3);
+INSERT INTO `dic_city` VALUES ('640423', '640423', '闅嗗痉鍘', '6404', 3);
+INSERT INTO `dic_city` VALUES ('640424', '640424', '娉炬簮鍘', '6404', 3);
+INSERT INTO `dic_city` VALUES ('640425', '640425', '褰槼鍘', '6404', 3);
+INSERT INTO `dic_city` VALUES ('6405', '6405', '涓崼甯', '64', 2);
+INSERT INTO `dic_city` VALUES ('640502', '640502', '娌欏潯澶村尯', '6405', 3);
+INSERT INTO `dic_city` VALUES ('640521', '640521', '涓畞鍘', '6405', 3);
+INSERT INTO `dic_city` VALUES ('640522', '640522', '娴峰師鍘', '6405', 3);
+INSERT INTO `dic_city` VALUES ('65', '65', '鏂扮枂缁村惥灏旇嚜娌诲尯', NULL, 1);
+INSERT INTO `dic_city` VALUES ('6501', '6501', '涔岄瞾鏈ㄩ綈甯', '65', 2);
+INSERT INTO `dic_city` VALUES ('650102', '650102', '澶╁北鍖', '6501', 3);
+INSERT INTO `dic_city` VALUES ('650103', '650103', '娌欎緷宸村厠鍖', '6501', 3);
+INSERT INTO `dic_city` VALUES ('650104', '650104', '鏂板競鍖', '6501', 3);
+INSERT INTO `dic_city` VALUES ('650105', '650105', '姘寸（娌熷尯', '6501', 3);
+INSERT INTO `dic_city` VALUES ('650106', '650106', '澶村悲娌冲尯', '6501', 3);
+INSERT INTO `dic_city` VALUES ('650107', '650107', '杈惧潅鍩庡尯', '6501', 3);
+INSERT INTO `dic_city` VALUES ('650109', '650109', '绫充笢鍖', '6501', 3);
+INSERT INTO `dic_city` VALUES ('650121', '650121', '涔岄瞾鏈ㄩ綈鍘', '6501', 3);
+INSERT INTO `dic_city` VALUES ('6502', '6502', '鍏嬫媺鐜涗緷甯', '65', 2);
+INSERT INTO `dic_city` VALUES ('650202', '650202', '鐙北瀛愬尯', '6502', 3);
+INSERT INTO `dic_city` VALUES ('650203', '650203', '鍏嬫媺鐜涗緷鍖', '6502', 3);
+INSERT INTO `dic_city` VALUES ('650204', '650204', '鐧界⒈婊╁尯', '6502', 3);
+INSERT INTO `dic_city` VALUES ('650205', '650205', '涔屽皵绂惧尯', '6502', 3);
+INSERT INTO `dic_city` VALUES ('6504', '6504', '鍚愰瞾鐣競', '65', 2);
+INSERT INTO `dic_city` VALUES ('650402', '650402', '楂樻槍鍖', '6504', 3);
+INSERT INTO `dic_city` VALUES ('650421', '650421', '閯杽鍘', '6504', 3);
+INSERT INTO `dic_city` VALUES ('650422', '650422', '鎵樺厠閫婂幙', '6504', 3);
+INSERT INTO `dic_city` VALUES ('6505', '6505', '鍝堝瘑甯', '65', 2);
+INSERT INTO `dic_city` VALUES ('650502', '650502', '浼婂窞鍖', '6505', 3);
+INSERT INTO `dic_city` VALUES ('650521', '650521', '宸撮噷鍧ゅ搱钀ㄥ厠鑷不鍘', '6505', 3);
+INSERT INTO `dic_city` VALUES ('650522', '650522', '浼婂惥鍘', '6505', 3);
+INSERT INTO `dic_city` VALUES ('6523', '6523', '鏄屽悏鍥炴棌鑷不宸', '65', 2);
+INSERT INTO `dic_city` VALUES ('652301', '652301', '鏄屽悏甯', '6523', 3);
+INSERT INTO `dic_city` VALUES ('652302', '652302', '闃滃悍甯', '6523', 3);
+INSERT INTO `dic_city` VALUES ('652323', '652323', '鍛煎浘澹佸幙', '6523', 3);
+INSERT INTO `dic_city` VALUES ('652324', '652324', '鐜涚撼鏂幙', '6523', 3);
+INSERT INTO `dic_city` VALUES ('652325', '652325', '濂囧彴鍘', '6523', 3);
+INSERT INTO `dic_city` VALUES ('652327', '652327', '鍚夋湪钀ㄥ皵鍘', '6523', 3);
+INSERT INTO `dic_city` VALUES ('652328', '652328', '鏈ㄥ瀿鍝堣惃鍏嬭嚜娌诲幙', '6523', 3);
+INSERT INTO `dic_city` VALUES ('6527', '6527', '鍗氬皵濉旀媺钂欏彜鑷不宸', '65', 2);
+INSERT INTO `dic_city` VALUES ('652701', '652701', '鍗氫箰甯', '6527', 3);
+INSERT INTO `dic_city` VALUES ('652702', '652702', '闃挎媺灞卞彛甯', '6527', 3);
+INSERT INTO `dic_city` VALUES ('652722', '652722', '绮炬渤鍘', '6527', 3);
+INSERT INTO `dic_city` VALUES ('652723', '652723', '娓╂硥鍘', '6527', 3);
+INSERT INTO `dic_city` VALUES ('6528', '6528', '宸撮煶閮钂欏彜鑷不宸', '65', 2);
+INSERT INTO `dic_city` VALUES ('652801', '652801', '搴撳皵鍕掑競', '6528', 3);
+INSERT INTO `dic_city` VALUES ('652822', '652822', '杞彴鍘', '6528', 3);
+INSERT INTO `dic_city` VALUES ('652823', '652823', '灏夌妬鍘', '6528', 3);
+INSERT INTO `dic_city` VALUES ('652824', '652824', '鑻ョ緦鍘', '6528', 3);
+INSERT INTO `dic_city` VALUES ('652825', '652825', '涓旀湯鍘', '6528', 3);
+INSERT INTO `dic_city` VALUES ('652826', '652826', '鐒夎€嗗洖鏃忚嚜娌诲幙', '6528', 3);
+INSERT INTO `dic_city` VALUES ('652827', '652827', '鍜岄潤鍘', '6528', 3);
+INSERT INTO `dic_city` VALUES ('652828', '652828', '鍜岀鍘', '6528', 3);
+INSERT INTO `dic_city` VALUES ('652829', '652829', '鍗氭箹鍘', '6528', 3);
+INSERT INTO `dic_city` VALUES ('652871', '652871', '搴撳皵鍕掔粡娴庢妧鏈紑鍙戝尯', '6528', 3);
+INSERT INTO `dic_city` VALUES ('6529', '6529', '闃垮厠鑻忓湴鍖', '65', 2);
+INSERT INTO `dic_city` VALUES ('652901', '652901', '闃垮厠鑻忓競', '6529', 3);
+INSERT INTO `dic_city` VALUES ('652902', '652902', '搴撹溅甯', '6529', 3);
+INSERT INTO `dic_city` VALUES ('652922', '652922', '娓╁鍘', '6529', 3);
+INSERT INTO `dic_city` VALUES ('652924', '652924', '娌欓泤鍘', '6529', 3);
+INSERT INTO `dic_city` VALUES ('652925', '652925', '鏂板拰鍘', '6529', 3);
+INSERT INTO `dic_city` VALUES ('652926', '652926', '鎷滃煄鍘', '6529', 3);
+INSERT INTO `dic_city` VALUES ('652927', '652927', '涔屼粈鍘', '6529', 3);
+INSERT INTO `dic_city` VALUES ('652928', '652928', '闃跨摝鎻愬幙', '6529', 3);
+INSERT INTO `dic_city` VALUES ('652929', '652929', '鏌潽鍘', '6529', 3);
+INSERT INTO `dic_city` VALUES ('6530', '6530', '鍏嬪瓬鍕掕嫃鏌皵鍏嬪瓬鑷不宸', '65', 2);
+INSERT INTO `dic_city` VALUES ('653001', '653001', '闃垮浘浠€甯', '6530', 3);
+INSERT INTO `dic_city` VALUES ('653022', '653022', '闃垮厠闄跺幙', '6530', 3);
+INSERT INTO `dic_city` VALUES ('653023', '653023', '闃垮悎濂囧幙', '6530', 3);
+INSERT INTO `dic_city` VALUES ('653024', '653024', '涔屾伆鍘', '6530', 3);
+INSERT INTO `dic_city` VALUES ('6531', '6531', '鍠€浠€鍦板尯', '65', 2);
+INSERT INTO `dic_city` VALUES ('653101', '653101', '鍠€浠€甯', '6531', 3);
+INSERT INTO `dic_city` VALUES ('653121', '653121', '鐤忛檮鍘', '6531', 3);
+INSERT INTO `dic_city` VALUES ('653122', '653122', '鐤忓嫆鍘', '6531', 3);
+INSERT INTO `dic_city` VALUES ('653123', '653123', '鑻卞悏娌欏幙', '6531', 3);
+INSERT INTO `dic_city` VALUES ('653124', '653124', '娉芥櫘鍘', '6531', 3);
+INSERT INTO `dic_city` VALUES ('653125', '653125', '鑾庤溅鍘', '6531', 3);
+INSERT INTO `dic_city` VALUES ('653126', '653126', '鍙跺煄鍘', '6531', 3);
+INSERT INTO `dic_city` VALUES ('653127', '653127', '楹︾洊鎻愬幙', '6531', 3);
+INSERT INTO `dic_city` VALUES ('653128', '653128', '宀虫櫘婀栧幙', '6531', 3);
+INSERT INTO `dic_city` VALUES ('653129', '653129', '浼藉笀鍘', '6531', 3);
+INSERT INTO `dic_city` VALUES ('653130', '653130', '宸存鍘', '6531', 3);
+INSERT INTO `dic_city` VALUES ('653131', '653131', '濉斾粈搴撳皵骞插鍚夊厠鑷不鍘', '6531', 3);
+INSERT INTO `dic_city` VALUES ('6532', '6532', '鍜岀敯鍦板尯', '65', 2);
+INSERT INTO `dic_city` VALUES ('653201', '653201', '鍜岀敯甯', '6532', 3);
+INSERT INTO `dic_city` VALUES ('653221', '653221', '鍜岀敯鍘', '6532', 3);
+INSERT INTO `dic_city` VALUES ('653222', '653222', '澧ㄧ帀鍘', '6532', 3);
+INSERT INTO `dic_city` VALUES ('653223', '653223', '鐨北鍘', '6532', 3);
+INSERT INTO `dic_city` VALUES ('653224', '653224', '娲涙郸鍘', '6532', 3);
+INSERT INTO `dic_city` VALUES ('653225', '653225', '绛栧嫆鍘', '6532', 3);
+INSERT INTO `dic_city` VALUES ('653226', '653226', '浜庣敯鍘', '6532', 3);
+INSERT INTO `dic_city` VALUES ('653227', '653227', '姘戜赴鍘', '6532', 3);
+INSERT INTO `dic_city` VALUES ('6540', '6540', '浼婄妬鍝堣惃鍏嬭嚜娌诲窞', '65', 2);
+INSERT INTO `dic_city` VALUES ('654002', '654002', '浼婂畞甯', '6540', 3);
+INSERT INTO `dic_city` VALUES ('654003', '654003', '濂庡悲甯', '6540', 3);
+INSERT INTO `dic_city` VALUES ('654004', '654004', '闇嶅皵鏋滄柉甯', '6540', 3);
+INSERT INTO `dic_city` VALUES ('654021', '654021', '浼婂畞鍘', '6540', 3);
+INSERT INTO `dic_city` VALUES ('654022', '654022', '瀵熷竷鏌ュ皵閿′集鑷不鍘', '6540', 3);
+INSERT INTO `dic_city` VALUES ('654023', '654023', '闇嶅煄鍘', '6540', 3);
+INSERT INTO `dic_city` VALUES ('654024', '654024', '宸╃暀鍘', '6540', 3);
+INSERT INTO `dic_city` VALUES ('654025', '654025', '鏂版簮鍘', '6540', 3);
+INSERT INTO `dic_city` VALUES ('654026', '654026', '鏄嫃鍘', '6540', 3);
+INSERT INTO `dic_city` VALUES ('654027', '654027', '鐗瑰厠鏂幙', '6540', 3);
+INSERT INTO `dic_city` VALUES ('654028', '654028', '灏煎嫆鍏嬪幙', '6540', 3);
+INSERT INTO `dic_city` VALUES ('6542', '6542', '濉斿煄鍦板尯', '65', 2);
+INSERT INTO `dic_city` VALUES ('654201', '654201', '濉斿煄甯', '6542', 3);
+INSERT INTO `dic_city` VALUES ('654202', '654202', '涔岃嫃甯', '6542', 3);
+INSERT INTO `dic_city` VALUES ('654221', '654221', '棰濇晱鍘', '6542', 3);
+INSERT INTO `dic_city` VALUES ('654223', '654223', '娌欐咕鍘', '6542', 3);
+INSERT INTO `dic_city` VALUES ('654224', '654224', '鎵橀噷鍘', '6542', 3);
+INSERT INTO `dic_city` VALUES ('654225', '654225', '瑁曟皯鍘', '6542', 3);
+INSERT INTO `dic_city` VALUES ('654226', '654226', '鍜屽竷鍏嬭禌灏旇挋鍙よ嚜娌诲幙', '6542', 3);
+INSERT INTO `dic_city` VALUES ('6543', '6543', '闃垮嫆娉板湴鍖', '65', 2);
+INSERT INTO `dic_city` VALUES ('654301', '654301', '闃垮嫆娉板競', '6543', 3);
+INSERT INTO `dic_city` VALUES ('654321', '654321', '甯冨皵娲ュ幙', '6543', 3);
+INSERT INTO `dic_city` VALUES ('654322', '654322', '瀵岃暣鍘', '6543', 3);
+INSERT INTO `dic_city` VALUES ('654323', '654323', '绂忔捣鍘', '6543', 3);
+INSERT INTO `dic_city` VALUES ('654324', '654324', '鍝堝反娌冲幙', '6543', 3);
+INSERT INTO `dic_city` VALUES ('654325', '654325', '闈掓渤鍘', '6543', 3);
+INSERT INTO `dic_city` VALUES ('654326', '654326', '鍚夋湪涔冨幙', '6543', 3);
+INSERT INTO `dic_city` VALUES ('6590', '6590', '鑷不鍖虹洿杈栧幙绾ц鏀垮尯鍒', '65', 2);
+INSERT INTO `dic_city` VALUES ('659001', '659001', '鐭虫渤瀛愬競', '6590', 3);
+INSERT INTO `dic_city` VALUES ('659002', '659002', '闃挎媺灏斿競', '6590', 3);
+INSERT INTO `dic_city` VALUES ('659003', '659003', '鍥炬湪鑸掑厠甯', '6590', 3);
+INSERT INTO `dic_city` VALUES ('659004', '659004', '浜斿娓犲競', '6590', 3);
+INSERT INTO `dic_city` VALUES ('659005', '659005', '鍖楀悲甯', '6590', 3);
+INSERT INTO `dic_city` VALUES ('659006', '659006', '閾侀棬鍏冲競', '6590', 3);
+INSERT INTO `dic_city` VALUES ('659007', '659007', '鍙屾渤甯', '6590', 3);
+INSERT INTO `dic_city` VALUES ('659008', '659008', '鍙厠杈炬媺甯', '6590', 3);
+INSERT INTO `dic_city` VALUES ('659009', '659009', '鏄嗙帀甯', '6590', 3);
+INSERT INTO `dic_city` VALUES ('659010', '659010', '鑳℃潹娌冲競', '6590', 3);
+
+-- ----------------------------
+-- Table structure for flow_cu_approve_his
+-- ----------------------------
+DROP TABLE IF EXISTS `flow_cu_approve_his`;
+CREATE TABLE `flow_cu_approve_his`  (
+  `id` bigint(20) NOT NULL COMMENT 'ID',
+  `definition_id` bigint(20) NOT NULL COMMENT '娴佺▼瀹氫箟ID',
+  `instance_id` bigint(20) NOT NULL COMMENT '娴佺▼瀹炰緥ID',
+  `node_code` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鑺傜偣缂栫爜',
+  `node_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鑺傜偣鍚嶇О',
+  `task_id` bigint(20) NULL DEFAULT NULL COMMENT '娴佺▼浠诲姟ID',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `message` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '璇存槑',
+  `skip_type` tinyint(3) NOT NULL COMMENT '瀹℃牳绫诲瀷',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `definition_id`(`definition_id`) USING BTREE,
+  INDEX `instance_id`(`instance_id`) USING BTREE,
+  INDEX `task_id`(`task_id`) USING BTREE,
+  INDEX `node_code`(`node_code`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '娴佺▼瀹℃牳鍘嗗彶' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of flow_cu_approve_his
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for flow_cu_category
+-- ----------------------------
+DROP TABLE IF EXISTS `flow_cu_category`;
+CREATE TABLE `flow_cu_category`  (
+  `id` varchar(32) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'ID',
+  `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '鍚嶇О',
+  `parent_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '鐖剁骇ID',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `parent_id`(`parent_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '娴佺▼鍒嗙被' ROW_FORMAT = COMPACT;
+
+-- ----------------------------
+-- Records of flow_cu_category
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for flow_cu_instance
+-- ----------------------------
+DROP TABLE IF EXISTS `flow_cu_instance`;
+CREATE TABLE `flow_cu_instance`  (
+  `id` bigint(20) NOT NULL COMMENT 'ID',
+  `title` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鏍囬',
+  `biz_type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '涓氬姟绫诲瀷',
+  `biz_flag` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '涓氬姟鏍囪瘑',
+  `start_time` datetime NOT NULL COMMENT '鍙戣捣鏃堕棿',
+  `end_time` datetime NULL DEFAULT NULL COMMENT '缁撴潫鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '娴佺▼瀹炰緥鎵╁睍琛' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of flow_cu_instance
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for flow_definition
+-- ----------------------------
+DROP TABLE IF EXISTS `flow_definition`;
+CREATE TABLE `flow_definition`  (
+  `id` bigint(20) NOT NULL COMMENT '涓婚敭id',
+  `flow_code` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '娴佺▼缂栫爜',
+  `flow_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '娴佺▼鍚嶇О',
+  `category` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '娴佺▼绫诲埆',
+  `version` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '娴佺▼鐗堟湰',
+  `is_publish` tinyint(3) NOT NULL DEFAULT 0 COMMENT '鏄惁鍙戝竷锛?鏈彂甯?1宸插彂甯?9澶辨晥锛',
+  `form_custom` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT 'N' COMMENT '瀹℃壒琛ㄥ崟鏄惁鑷畾涔夛紙Y鏄?N鍚︼級',
+  `form_path` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '瀹℃壒琛ㄥ崟璺緞',
+  `activity_status` tinyint(3) NOT NULL DEFAULT 1 COMMENT '娴佺▼婵€娲荤姸鎬侊紙0鎸傝捣 1婵€娲伙級',
+  `listener_type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鐩戝惉鍣ㄧ被鍨',
+  `listener_path` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鐩戝惉鍣ㄨ矾寰',
+  `ext` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '涓氬姟璇︽儏 瀛樹笟鍔¤〃瀵硅薄json瀛楃涓',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '鏇存柊鏃堕棿',
+  `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '鍒犻櫎鏍囧織',
+  `tenant_id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '绉熸埛id',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '娴佺▼瀹氫箟琛' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of flow_definition
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for flow_his_task
+-- ----------------------------
+DROP TABLE IF EXISTS `flow_his_task`;
+CREATE TABLE `flow_his_task`  (
+  `id` bigint(20) NOT NULL COMMENT '涓婚敭id',
+  `definition_id` bigint(20) NOT NULL COMMENT '瀵瑰簲flow_definition琛ㄧ殑id',
+  `instance_id` bigint(20) NOT NULL COMMENT '瀵瑰簲flow_instance琛ㄧ殑id',
+  `task_id` bigint(20) NOT NULL COMMENT '瀵瑰簲flow_task琛ㄧ殑id',
+  `node_code` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '寮€濮嬭妭鐐圭紪鐮',
+  `node_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '寮€濮嬭妭鐐瑰悕绉',
+  `node_type` tinyint(1) NULL DEFAULT NULL COMMENT '寮€濮嬭妭鐐圭被鍨嬶紙0寮€濮嬭妭鐐?1涓棿鑺傜偣 2缁撴潫鑺傜偣 3浜掓枼缃戝叧 4骞惰缃戝叧锛',
+  `target_node_code` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鐩爣鑺傜偣缂栫爜',
+  `target_node_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '缁撴潫鑺傜偣鍚嶇О',
+  `approver` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '瀹℃壒鑰',
+  `cooperate_type` tinyint(1) NOT NULL DEFAULT 0 COMMENT '鍗忎綔鏂瑰紡(1瀹℃壒 2杞姙 3濮旀淳 4浼氱 5绁ㄧ 6鍔犵 7鍑忕)',
+  `collaborator` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鍗忎綔浜',
+  `skip_type` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '娴佽浆绫诲瀷锛圥ASS閫氳繃 REJECT閫€鍥?NONE鏃犲姩浣滐級',
+  `flow_status` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '娴佺▼鐘舵€侊紙0寰呮彁浜?1瀹℃壒涓?2瀹℃壒閫氳繃 4缁堟 5浣滃簾 6鎾ら攢 8宸插畬鎴?9宸查€€鍥?10澶辨晥 11鎷垮洖锛',
+  `form_custom` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT 'N' COMMENT '瀹℃壒琛ㄥ崟鏄惁鑷畾涔夛紙Y鏄?N鍚︼級',
+  `form_path` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '瀹℃壒琛ㄥ崟璺緞',
+  `message` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '瀹℃壒鎰忚',
+  `variable` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '浠诲姟鍙橀噺',
+  `ext` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '涓氬姟璇︽儏 瀛樹笟鍔¤〃瀵硅薄json瀛楃涓',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '浠诲姟寮€濮嬫椂闂',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '瀹℃壒瀹屾垚鏃堕棿',
+  `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '鍒犻櫎鏍囧織',
+  `tenant_id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '绉熸埛id',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鍘嗗彶浠诲姟璁板綍琛' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of flow_his_task
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for flow_instance
+-- ----------------------------
+DROP TABLE IF EXISTS `flow_instance`;
+CREATE TABLE `flow_instance`  (
+  `id` bigint(20) NOT NULL COMMENT '涓婚敭id',
+  `definition_id` bigint(20) NOT NULL COMMENT '瀵瑰簲flow_definition琛ㄧ殑id',
+  `business_id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '涓氬姟id',
+  `node_type` tinyint(1) NOT NULL COMMENT '鑺傜偣绫诲瀷锛?寮€濮嬭妭鐐?1涓棿鑺傜偣 2缁撴潫鑺傜偣 3浜掓枼缃戝叧 4骞惰缃戝叧锛',
+  `node_code` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '娴佺▼鑺傜偣缂栫爜',
+  `node_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '娴佺▼鑺傜偣鍚嶇О',
+  `variable` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '浠诲姟鍙橀噺',
+  `flow_status` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '娴佺▼鐘舵€侊紙0寰呮彁浜?1瀹℃壒涓?2瀹℃壒閫氳繃 4缁堟 5浣滃簾 6鎾ら攢 8宸插畬鎴?9宸查€€鍥?10澶辨晥 11鎷垮洖锛',
+  `activity_status` tinyint(1) NOT NULL DEFAULT 1 COMMENT '娴佺▼婵€娲荤姸鎬侊紙0鎸傝捣 1婵€娲伙級',
+  `def_json` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '娴佺▼瀹氫箟json',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '鍒涘缓鑰',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '鏇存柊鏃堕棿',
+  `ext` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鎵╁睍瀛楁锛岄鐣欑粰涓氬姟绯荤粺浣跨敤',
+  `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '鍒犻櫎鏍囧織',
+  `tenant_id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '绉熸埛id',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '娴佺▼瀹炰緥琛' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of flow_instance
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for flow_node
+-- ----------------------------
+DROP TABLE IF EXISTS `flow_node`;
+CREATE TABLE `flow_node`  (
+  `id` bigint(20) NOT NULL COMMENT '涓婚敭id',
+  `node_type` tinyint(1) NOT NULL COMMENT '鑺傜偣绫诲瀷锛?寮€濮嬭妭鐐?1涓棿鑺傜偣 2缁撴潫鑺傜偣 3浜掓枼缃戝叧 4骞惰缃戝叧锛',
+  `definition_id` bigint(20) NOT NULL COMMENT '娴佺▼瀹氫箟id',
+  `node_code` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '娴佺▼鑺傜偣缂栫爜',
+  `node_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '娴佺▼鑺傜偣鍚嶇О',
+  `permission_flag` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鏉冮檺鏍囪瘑锛堟潈闄愮被鍨?鏉冮檺鏍囪瘑锛屽彲浠ュ涓紝鐢ˊ@闅斿紑)',
+  `node_ratio` decimal(6, 3) NULL DEFAULT NULL COMMENT '娴佺▼绛剧讲姣斾緥鍊',
+  `coordinate` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鍧愭爣',
+  `any_node_skip` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '浠绘剰缁撶偣璺宠浆',
+  `listener_type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鐩戝惉鍣ㄧ被鍨',
+  `listener_path` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鐩戝惉鍣ㄨ矾寰',
+  `handler_type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶勭悊鍣ㄧ被鍨',
+  `handler_path` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶勭悊鍣ㄨ矾寰',
+  `form_custom` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT 'N' COMMENT '瀹℃壒琛ㄥ崟鏄惁鑷畾涔夛紙Y鏄?N鍚︼級',
+  `form_path` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '瀹℃壒琛ㄥ崟璺緞',
+  `version` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鐗堟湰',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '鏇存柊鏃堕棿',
+  `ext` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '鎵╁睍灞炴€',
+  `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '鍒犻櫎鏍囧織',
+  `tenant_id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '绉熸埛id',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '娴佺▼鑺傜偣琛' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of flow_node
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for flow_skip
+-- ----------------------------
+DROP TABLE IF EXISTS `flow_skip`;
+CREATE TABLE `flow_skip`  (
+  `id` bigint(20) NOT NULL COMMENT '涓婚敭id',
+  `definition_id` bigint(20) NOT NULL COMMENT '娴佺▼瀹氫箟id',
+  `now_node_code` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '褰撳墠娴佺▼鑺傜偣鐨勭紪鐮',
+  `now_node_type` tinyint(1) NULL DEFAULT NULL COMMENT '褰撳墠鑺傜偣绫诲瀷锛?寮€濮嬭妭鐐?1涓棿鑺傜偣 2缁撴潫鑺傜偣 3浜掓枼缃戝叧 4骞惰缃戝叧锛',
+  `next_node_code` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '涓嬩竴涓祦绋嬭妭鐐圭殑缂栫爜',
+  `next_node_type` tinyint(1) NULL DEFAULT NULL COMMENT '涓嬩竴涓妭鐐圭被鍨嬶紙0寮€濮嬭妭鐐?1涓棿鑺傜偣 2缁撴潫鑺傜偣 3浜掓枼缃戝叧 4骞惰缃戝叧锛',
+  `skip_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '璺宠浆鍚嶇О',
+  `skip_type` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '璺宠浆绫诲瀷锛圥ASS瀹℃壒閫氳繃 REJECT閫€鍥烇級',
+  `skip_condition` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '璺宠浆鏉′欢',
+  `coordinate` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鍧愭爣',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '鏇存柊鏃堕棿',
+  `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '鍒犻櫎鏍囧織',
+  `tenant_id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '绉熸埛id',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鑺傜偣璺宠浆鍏宠仈琛' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of flow_skip
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for flow_task
+-- ----------------------------
+DROP TABLE IF EXISTS `flow_task`;
+CREATE TABLE `flow_task`  (
+  `id` bigint(20) NOT NULL COMMENT '涓婚敭id',
+  `definition_id` bigint(20) NOT NULL COMMENT '瀵瑰簲flow_definition琛ㄧ殑id',
+  `instance_id` bigint(20) NOT NULL COMMENT '瀵瑰簲flow_instance琛ㄧ殑id',
+  `node_code` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鑺傜偣缂栫爜',
+  `node_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鑺傜偣鍚嶇О',
+  `node_type` tinyint(1) NOT NULL COMMENT '鑺傜偣绫诲瀷锛?寮€濮嬭妭鐐?1涓棿鑺傜偣 2缁撴潫鑺傜偣 3浜掓枼缃戝叧 4骞惰缃戝叧锛',
+  `flow_status` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '娴佺▼鐘舵€侊紙0寰呮彁浜?1瀹℃壒涓?2瀹℃壒閫氳繃 4缁堟 5浣滃簾 6鎾ら攢 8宸插畬鎴?9宸查€€鍥?10澶辨晥 11鎷垮洖锛',
+  `form_custom` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT 'N' COMMENT '瀹℃壒琛ㄥ崟鏄惁鑷畾涔夛紙Y鏄?N鍚︼級',
+  `form_path` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '瀹℃壒琛ㄥ崟璺緞',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '鏇存柊鏃堕棿',
+  `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '鍒犻櫎鏍囧織',
+  `tenant_id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '绉熸埛id',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '寰呭姙浠诲姟琛' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of flow_task
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for flow_user
+-- ----------------------------
+DROP TABLE IF EXISTS `flow_user`;
+CREATE TABLE `flow_user`  (
+  `id` bigint(20) NOT NULL COMMENT '涓婚敭id',
+  `type` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '浜哄憳绫诲瀷锛?寰呭姙浠诲姟鐨勫鎵逛汉鏉冮檺 2寰呭姙浠诲姟鐨勮浆鍔炰汉鏉冮檺 3寰呭姙浠诲姟鐨勫鎵樹汉鏉冮檺锛',
+  `processed_by` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鏉冮檺浜',
+  `associated` bigint(20) NOT NULL COMMENT '浠诲姟琛╥d',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '鍒涘缓鏃堕棿',
+  `create_by` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鍒涘缓浜',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '鏇存柊鏃堕棿',
+  `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '鍒犻櫎鏍囧織',
+  `tenant_id` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '绉熸埛id',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `user_processed_type`(`processed_by`, `type`) USING BTREE,
+  INDEX `user_associated`(`associated`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '娴佺▼鐢ㄦ埛琛' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of flow_user
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for gen_create_column_config
+-- ----------------------------
+DROP TABLE IF EXISTS `gen_create_column_config`;
+CREATE TABLE `gen_create_column_config`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `required` tinyint(1) NOT NULL DEFAULT 0 COMMENT '鏄惁蹇呭～',
+  `order_no` int(11) NOT NULL COMMENT '鎺掑簭缂栧彿',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鏂板鍔熻兘浠ｇ爜鐢熸垚閰嶇疆' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of gen_create_column_config
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for gen_custom_form
+-- ----------------------------
+DROP TABLE IF EXISTS `gen_custom_form`;
+CREATE TABLE `gen_custom_form`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍚嶇О',
+  `category_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鍒嗙被ID',
+  `is_dialog` tinyint(1) NOT NULL DEFAULT 0 COMMENT '鏄惁瀵硅瘽妗嗚〃鍗',
+  `dialog_tittle` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '瀵硅瘽妗嗘爣棰',
+  `dialog_width` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '1' COMMENT '瀵硅瘽妗嗗搴',
+  `form_config` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '琛ㄥ崟閰嶇疆',
+  `prefix_submit` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '鍓嶇疆鎻愪氦鑴氭湰',
+  `suffix_submit` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '鍚庣疆鎻愪氦鑴氭湰',
+  `require_query` tinyint(1) NOT NULL DEFAULT 0 COMMENT '鏄惁闇€瑕佹煡璇',
+  `query_bean` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '鏌ヨ鏁版嵁Bean鍚嶇О',
+  `handle_bean` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '鎿嶄綔鏁版嵁Bean鍚嶇О',
+  `available` tinyint(1) NOT NULL DEFAULT 1 COMMENT '鐘舵€',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `category_id`(`category_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鑷畾涔夊璇濇' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of gen_custom_form
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for gen_custom_form_category
+-- ----------------------------
+DROP TABLE IF EXISTS `gen_custom_form_category`;
+CREATE TABLE `gen_custom_form_category`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '缂栧彿',
+  `name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍚嶇О',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `code`(`code`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鑷畾涔夊垪琛ㄥ垎绫' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of gen_custom_form_category
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for gen_custom_list
+-- ----------------------------
+DROP TABLE IF EXISTS `gen_custom_list`;
+CREATE TABLE `gen_custom_list`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍚嶇О',
+  `category_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鍒嗙被ID',
+  `data_obj_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '1' COMMENT '鏁版嵁瀵硅薄ID',
+  `list_type` tinyint(3) NOT NULL DEFAULT 0 COMMENT '鍒楄〃绫诲瀷',
+  `label_width` int(11) NOT NULL COMMENT '琛ㄥ崟Label瀹藉害',
+  `has_page` tinyint(1) NOT NULL DEFAULT 1 COMMENT '鏄惁鍒嗛〉',
+  `tree_data` tinyint(1) NOT NULL DEFAULT 0 COMMENT '鏄惁鏍戝舰鍒楄〃',
+  `id_column` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'ID瀛楁',
+  `id_column_rela_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'ID瀛楁鍏宠仈ID',
+  `tree_pid_column` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鐖剁骇ID瀛楁',
+  `tree_pid_column_rela_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鐖剁骇ID瀛楁鍏宠仈ID',
+  `tree_node_column` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鏍戝舰鑺傜偣瀛楁',
+  `tree_node_column_rela_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鏍戝舰鑺傜偣瀛楁鍏宠仈ID',
+  `tree_children_key` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '瀛愯妭鐐筀ey鍊',
+  `available` tinyint(1) NOT NULL DEFAULT 1 COMMENT '鐘舵€',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  `query_prefix_sql` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '鏌ヨ鍓嶇疆SQL',
+  `query_suffix_sql` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '鏌ヨ鍚庣疆SQL',
+  `suffix_sql` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '鍚庣疆SQL',
+  `allow_export` tinyint(1) NOT NULL DEFAULT 0 COMMENT '鏄惁鍏佽瀵煎嚭',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `category_id`(`category_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鑷畾涔夊垪琛' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of gen_custom_list
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for gen_custom_list_category
+-- ----------------------------
+DROP TABLE IF EXISTS `gen_custom_list_category`;
+CREATE TABLE `gen_custom_list_category`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '缂栧彿',
+  `name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍚嶇О',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `code`(`code`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鑷畾涔夊垪琛ㄥ垎绫' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of gen_custom_list_category
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for gen_custom_list_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `gen_custom_list_detail`;
+CREATE TABLE `gen_custom_list_detail`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `custom_list_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鑷畾涔夊垪琛↖D',
+  `rela_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鍏宠仈ID',
+  `data_entity_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鏁版嵁瀹炰綋ID',
+  `width_type` tinyint(3) NOT NULL COMMENT '瀹藉害绫诲瀷',
+  `width` int(11) NOT NULL COMMENT '瀹藉害',
+  `sortable` tinyint(1) NOT NULL DEFAULT 0 COMMENT '鏄惁椤甸潰鎺掑簭',
+  `order_no` int(11) NOT NULL COMMENT '鎺掑簭缂栧彿',
+  `type` tinyint(3) NOT NULL COMMENT '绫诲瀷',
+  `formatter` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '鏍煎紡鍖栬剼鏈',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `custom_list_id`(`custom_list_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鑷畾涔夊垪琛ㄦ槑缁' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of gen_custom_list_detail
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for gen_custom_list_handle_column
+-- ----------------------------
+DROP TABLE IF EXISTS `gen_custom_list_handle_column`;
+CREATE TABLE `gen_custom_list_handle_column`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `custom_list_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鑷畾涔夊垪琛↖D',
+  `name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鏄剧ず鍚嶇О',
+  `view_type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鏄剧ず绫诲瀷',
+  `btn_type` tinyint(3) NOT NULL COMMENT '鎸夐挳绫诲瀷',
+  `btn_config` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '鎸夐挳閰嶇疆',
+  `request_param` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '璇锋眰鍙傛暟',
+  `icon` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鍥炬爣',
+  `width` int(11) NOT NULL COMMENT '瀹藉害',
+  `order_no` int(11) NOT NULL COMMENT '鎺掑簭缂栧彿',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鑷畾涔夊垪琛ㄥ伐鍏锋爮' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of gen_custom_list_handle_column
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for gen_custom_list_query_params
+-- ----------------------------
+DROP TABLE IF EXISTS `gen_custom_list_query_params`;
+CREATE TABLE `gen_custom_list_query_params`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `custom_list_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鑷畾涔夊垪琛↖D',
+  `rela_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍏宠仈ID',
+  `data_entity_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鏁版嵁瀹炰綋ID',
+  `front_show` tinyint(1) NOT NULL DEFAULT 1 COMMENT '鍓嶇鏄剧ず',
+  `query_type` tinyint(3) NOT NULL COMMENT '鏌ヨ绫诲瀷',
+  `form_width` int(11) NOT NULL DEFAULT 6 COMMENT '琛ㄥ崟瀹藉害',
+  `default_value` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '榛樿鍊',
+  `order_no` int(11) NOT NULL COMMENT '鎺掑簭缂栧彿',
+  `type` tinyint(3) NOT NULL COMMENT '绫诲瀷',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `custom_list_id`(`custom_list_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鑷畾涔夊垪琛ㄦ煡璇㈠弬鏁' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of gen_custom_list_query_params
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for gen_custom_list_toolbar
+-- ----------------------------
+DROP TABLE IF EXISTS `gen_custom_list_toolbar`;
+CREATE TABLE `gen_custom_list_toolbar`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `custom_list_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鑷畾涔夊垪琛↖D',
+  `name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鏄剧ず鍚嶇О',
+  `view_type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鏄剧ず绫诲瀷',
+  `btn_type` tinyint(3) NOT NULL COMMENT '鎸夐挳绫诲瀷',
+  `btn_config` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '鎸夐挳閰嶇疆',
+  `request_param` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '璇锋眰鍙傛暟',
+  `icon` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鍥炬爣',
+  `order_no` int(11) NOT NULL COMMENT '鎺掑簭缂栧彿',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鑷畾涔夊垪琛ㄥ伐鍏锋爮' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of gen_custom_list_toolbar
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for gen_custom_page
+-- ----------------------------
+DROP TABLE IF EXISTS `gen_custom_page`;
+CREATE TABLE `gen_custom_page`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍚嶇О',
+  `category_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鍒嗙被ID',
+  `page_code` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '椤甸潰浠ｇ爜',
+  `script_code` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '鑴氭湰浠ｇ爜',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `category_id`(`category_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鑷畾涔夐〉闈' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of gen_custom_page
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for gen_custom_page_category
+-- ----------------------------
+DROP TABLE IF EXISTS `gen_custom_page_category`;
+CREATE TABLE `gen_custom_page_category`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `parent_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鐖剁骇ID',
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '缂栧彿',
+  `name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍚嶇О',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `code`(`code`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鑷畾涔夐〉闈㈠垎绫' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of gen_custom_page_category
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for gen_custom_selector
+-- ----------------------------
+DROP TABLE IF EXISTS `gen_custom_selector`;
+CREATE TABLE `gen_custom_selector`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍚嶇О',
+  `category_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鍒嗙被ID',
+  `custom_list_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '1' COMMENT '鏁版嵁瀵硅薄ID',
+  `dialog_tittle` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '瀵硅瘽妗嗘爣棰',
+  `dialog_width` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '1' COMMENT '瀵硅瘽妗嗗搴',
+  `placeholder` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鍗犱綅绗',
+  `id_column` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'ID瀛楁',
+  `id_column_rela_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'ID瀛楁鍏宠仈ID',
+  `name_column` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鍚嶇ОID瀛楁',
+  `name_column_rela_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鍚嶇ОID瀛楁鍏宠仈ID',
+  `available` tinyint(1) NOT NULL DEFAULT 1 COMMENT '鐘舵€',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `category_id`(`category_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鑷畾涔夊璇濇' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of gen_custom_selector
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for gen_custom_selector_category
+-- ----------------------------
+DROP TABLE IF EXISTS `gen_custom_selector_category`;
+CREATE TABLE `gen_custom_selector_category`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '缂栧彿',
+  `name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍚嶇О',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `code`(`code`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鑷畾涔夊璇濇鍒嗙被' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of gen_custom_selector_category
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for gen_data_entity
+-- ----------------------------
+DROP TABLE IF EXISTS `gen_data_entity`;
+CREATE TABLE `gen_data_entity`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍚嶇О',
+  `category_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鍒嗙被ID',
+  `available` tinyint(1) NOT NULL DEFAULT 1 COMMENT '鐘舵€',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  `gen_status` tinyint(3) NOT NULL DEFAULT 1 COMMENT '鐘舵€',
+  `table_schema` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鏁版嵁琛ㄦ墍灞炵殑鏁版嵁搴撳悕',
+  `table_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鏁版嵁搴撹〃鍚',
+  `engine` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鏁版嵁搴撳紩鎿',
+  `table_collation` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '瀛楃鏍￠獙缂栫爜闆',
+  `table_comment` varchar(2048) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '澶囨敞',
+  `convert_type` tinyint(3) NOT NULL COMMENT '杞崲鏂瑰紡',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `category_id`(`category_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鏁版嵁瀹炰綋' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of gen_data_entity
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for gen_data_entity_category
+-- ----------------------------
+DROP TABLE IF EXISTS `gen_data_entity_category`;
+CREATE TABLE `gen_data_entity_category`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '缂栧彿',
+  `name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍚嶇О',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `code`(`code`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鏁版嵁瀹炰綋鍒嗙被' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of gen_data_entity_category
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for gen_data_entity_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `gen_data_entity_detail`;
+CREATE TABLE `gen_data_entity_detail`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `entity_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '瀹炰綋ID',
+  `name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '瀛楁鏄剧ず鍚嶇О',
+  `column_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '瀛楁鍚嶇О',
+  `is_key` tinyint(1) NOT NULL DEFAULT 0 COMMENT '鏄惁涓婚敭',
+  `data_type` tinyint(3) NOT NULL COMMENT '鏁版嵁绫诲瀷',
+  `column_order` int(11) NOT NULL COMMENT '鎺掑簭缂栧彿',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶囨敞',
+  `view_type` tinyint(3) NOT NULL COMMENT '鏄剧ず绫诲瀷',
+  `data_dic_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鏁版嵁瀛楀吀ID',
+  `custom_selector_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鑷畾涔夐€夋嫨鍣↖D',
+  `fix_enum` tinyint(1) NOT NULL DEFAULT 0 COMMENT '鏄惁鍐呯疆鏋氫妇',
+  `enum_back` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鍚庣鏋氫妇鍚',
+  `enum_front` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鍓嶇鏋氫妇鍚',
+  `regular_expression` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '姝ｅ垯琛ㄨ揪寮',
+  `is_order` tinyint(1) NOT NULL DEFAULT 0 COMMENT '鏄惁鎺掑簭瀛楁',
+  `order_type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鎺掑簭绫诲瀷',
+  `len` bigint(20) NULL DEFAULT NULL COMMENT '闀垮害',
+  `decimals` int(11) NULL DEFAULT NULL COMMENT '灏忔暟浣嶆暟',
+  `db_column_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '瀛楁鍚',
+  `db_data_type` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '瀛楁鏁版嵁绫诲瀷',
+  `is_nullable` tinyint(1) NOT NULL DEFAULT 0 COMMENT '鏄惁鍏佽涓虹┖',
+  `column_default` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '榛樿鍊',
+  `ordinal_position` bigint(21) UNSIGNED NOT NULL DEFAULT 0 COMMENT '瀛楁鎺掑簭',
+  `column_comment` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '瀛楁澶囨敞',
+  `db_len` bigint(20) NULL DEFAULT NULL COMMENT '闀垮害',
+  `db_decimals` int(11) NULL DEFAULT NULL COMMENT '灏忔暟浣嶆暟',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `entity_id`(`entity_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鏁版嵁瀹炰綋鏄庣粏' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of gen_data_entity_detail
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for gen_data_obj
+-- ----------------------------
+DROP TABLE IF EXISTS `gen_data_obj`;
+CREATE TABLE `gen_data_obj`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍚嶇О',
+  `category_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鍒嗙被ID',
+  `main_table_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '1' COMMENT '涓昏〃ID',
+  `main_table_alias` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '涓昏〃鍒悕',
+  `available` tinyint(1) NOT NULL DEFAULT 1 COMMENT '鐘舵€',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `category_id`(`category_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鏁版嵁瀵硅薄' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of gen_data_obj
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for gen_data_obj_category
+-- ----------------------------
+DROP TABLE IF EXISTS `gen_data_obj_category`;
+CREATE TABLE `gen_data_obj_category`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '缂栧彿',
+  `name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍚嶇О',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `code`(`code`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鏁版嵁瀹炰綋鍒嗙被' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of gen_data_obj_category
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for gen_data_obj_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `gen_data_obj_detail`;
+CREATE TABLE `gen_data_obj_detail`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `data_obj_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鏁版嵁瀵硅薄ID',
+  `main_table_detail_ids` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '涓昏〃瀛楁',
+  `rela_type` tinyint(3) NOT NULL COMMENT '鍏宠仈绫诲瀷',
+  `rela_mode` tinyint(3) NOT NULL COMMENT '鍏宠仈鏂瑰紡',
+  `sub_table_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '瀛愯〃ID',
+  `sub_table_alias` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '瀛愯〃鍒悕',
+  `sub_table_detail_ids` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '瀛愯〃瀛楁',
+  `order_no` int(11) NOT NULL COMMENT '鎺掑簭',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `data_obj_id`(`data_obj_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鏁版嵁瀵硅薄鏄庣粏' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of gen_data_obj_detail
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for gen_data_obj_query_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `gen_data_obj_query_detail`;
+CREATE TABLE `gen_data_obj_query_detail`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `data_obj_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鏁版嵁瀵硅薄ID',
+  `custom_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鏄剧ず鍚嶇О',
+  `custom_sql` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鑷畾涔塖QL',
+  `custom_alias` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鑷畾涔夊埆鍚',
+  `data_type` tinyint(3) NOT NULL COMMENT '鏁版嵁绫诲瀷',
+  `order_no` int(11) NOT NULL COMMENT '鎺掑簭',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `data_obj_id`(`data_obj_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鏁版嵁瀵硅薄鑷畾涔夋煡璇㈡槑缁' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of gen_data_obj_query_detail
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for gen_detail_column_config
+-- ----------------------------
+DROP TABLE IF EXISTS `gen_detail_column_config`;
+CREATE TABLE `gen_detail_column_config`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `span` int(11) NOT NULL COMMENT '鍒楀',
+  `order_no` int(11) NOT NULL COMMENT '鎺掑簭缂栧彿',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '璇︽儏鍔熻兘浠ｇ爜鐢熸垚閰嶇疆' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of gen_detail_column_config
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for gen_generate_info
+-- ----------------------------
+DROP TABLE IF EXISTS `gen_generate_info`;
+CREATE TABLE `gen_generate_info`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `template_type` tinyint(3) NOT NULL COMMENT '鐢熸垚妯℃澘绫诲瀷',
+  `package_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍖呭悕',
+  `module_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '妯″潡鍚',
+  `biz_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '涓氬姟鍚',
+  `class_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '绫诲悕',
+  `parent_menu_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鐖剁骇鑿滃崟ID',
+  `key_type` tinyint(3) NOT NULL COMMENT '涓婚敭绫诲瀷',
+  `author` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '浣滆€',
+  `class_description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '绫绘弿杩',
+  `menu_code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鏈骇鑿滃崟缂栧彿',
+  `menu_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鏈骇鑿滃崟鍚嶇О',
+  `detail_span` int(11) NOT NULL COMMENT '璇︽儏椤礢pan鎬绘暟閲',
+  `is_cache` tinyint(1) NOT NULL DEFAULT 1 COMMENT '鏄惁搴旂敤缂撳瓨',
+  `has_delete` tinyint(1) NOT NULL DEFAULT 0 COMMENT '鏄惁鍐呯疆鍒犻櫎鍔熻兘',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '浠ｇ爜鐢熸垚鍩烘湰淇℃伅' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of gen_generate_info
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for gen_query_column_config
+-- ----------------------------
+DROP TABLE IF EXISTS `gen_query_column_config`;
+CREATE TABLE `gen_query_column_config`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `width_type` tinyint(3) NOT NULL COMMENT '瀹藉害绫诲瀷',
+  `width` int(11) NOT NULL COMMENT '瀹藉害',
+  `sortable` tinyint(1) NOT NULL DEFAULT 0 COMMENT '鏄惁椤甸潰鎺掑簭',
+  `order_no` int(11) NOT NULL COMMENT '鎺掑簭缂栧彿',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鏌ヨ鍔熻兘浠ｇ爜鐢熸垚閰嶇疆' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of gen_query_column_config
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for gen_query_params_column_config
+-- ----------------------------
+DROP TABLE IF EXISTS `gen_query_params_column_config`;
+CREATE TABLE `gen_query_params_column_config`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `query_type` tinyint(3) NOT NULL COMMENT '鏌ヨ绫诲瀷',
+  `order_no` int(11) NOT NULL COMMENT '鎺掑簭缂栧彿',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鏌ヨ鍙傛暟鍔熻兘浠ｇ爜鐢熸垚閰嶇疆' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of gen_query_params_column_config
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for gen_simple_table
+-- ----------------------------
+DROP TABLE IF EXISTS `gen_simple_table`;
+CREATE TABLE `gen_simple_table`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `table_schema` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鏁版嵁琛ㄦ墍灞炵殑鏁版嵁搴撳悕',
+  `table_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鏁版嵁搴撹〃鍚',
+  `engine` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鏁版嵁搴撳紩鎿',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '鍒涘缓鏃堕棿',
+  `table_collation` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '瀛楃鏍￠獙缂栫爜闆',
+  `table_comment` varchar(2048) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '澶囨敞',
+  `convert_type` tinyint(3) NOT NULL COMMENT '杞崲鏂瑰紡',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `table_schema`(`table_schema`, `table_name`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鏁版嵁搴撳崟琛' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of gen_simple_table
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for gen_simple_table_column
+-- ----------------------------
+DROP TABLE IF EXISTS `gen_simple_table_column`;
+CREATE TABLE `gen_simple_table_column`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `table_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `column_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '瀛楁鍚',
+  `data_type` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '瀛楁鏁版嵁绫诲瀷',
+  `is_nullable` tinyint(1) NOT NULL DEFAULT 0 COMMENT '鏄惁鍏佽涓虹┖',
+  `is_key` tinyint(1) NOT NULL DEFAULT 0 COMMENT '鏄惁涓婚敭',
+  `column_default` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '榛樿鍊',
+  `ordinal_position` bigint(21) UNSIGNED NOT NULL DEFAULT 0 COMMENT '瀛楁鎺掑簭',
+  `column_comment` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '瀛楁澶囨敞',
+  `len` bigint(20) NULL DEFAULT NULL COMMENT '闀垮害',
+  `decimals` int(11) NULL DEFAULT NULL COMMENT '灏忔暟浣嶆暟',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鏁版嵁搴撳崟琛ㄥ垪淇℃伅' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of gen_simple_table_column
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for gen_update_column_config
+-- ----------------------------
+DROP TABLE IF EXISTS `gen_update_column_config`;
+CREATE TABLE `gen_update_column_config`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `required` tinyint(1) NOT NULL DEFAULT 0,
+  `order_no` int(11) NOT NULL COMMENT '鎺掑簭缂栧彿',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '淇敼鍔熻兘浠ｇ爜鐢熸垚閰嶇疆' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of gen_update_column_config
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for op_logs
+-- ----------------------------
+DROP TABLE IF EXISTS `op_logs`;
+CREATE TABLE `op_logs`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鏃ュ織鍚嶇О',
+  `log_type` int(11) NOT NULL COMMENT '绫诲埆',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `extra` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '琛ュ厖淇℃伅',
+  `ip` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'IP鍦板潃',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `create_by`(`create_by`) USING BTREE,
+  INDEX `create_time`(`create_time`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鎿嶄綔鏃ュ織' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of op_logs
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for recursion_mapping
+-- ----------------------------
+DROP TABLE IF EXISTS `recursion_mapping`;
+CREATE TABLE `recursion_mapping`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `node_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鑺傜偣ID',
+  `node_type` tinyint(3) NOT NULL COMMENT '鑺傜偣绫诲瀷',
+  `path` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '浠庨《鐐瑰埌褰撳墠缁撶偣鐨勮矾寰勶紝鐢?鍒嗗壊',
+  `level` int(11) NOT NULL COMMENT '鑺傜偣灞傜骇',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `node_id`(`node_id`, `node_type`) USING BTREE,
+  INDEX `node_type`(`node_type`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鏍戝舰鏁版嵁鑺傜偣鍏崇郴琛' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of recursion_mapping
+-- ----------------------------
+INSERT INTO `recursion_mapping` VALUES ('1', '2', 1, NULL, 1);
+INSERT INTO `recursion_mapping` VALUES ('2', '4', 1, '2', 2);
+INSERT INTO `recursion_mapping` VALUES ('3', '3', 1, '1', 2);
+INSERT INTO `recursion_mapping` VALUES ('4', '1', 1, NULL, 1);
+
+-- ----------------------------
+-- Table structure for settle_check_sheet
+-- ----------------------------
+DROP TABLE IF EXISTS `settle_check_sheet`;
+CREATE TABLE `settle_check_sheet`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `code` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍗曞彿',
+  `supplier_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '渚涘簲鍟咺D',
+  `total_amount` decimal(32, 2) NOT NULL COMMENT '鎬婚噾棰',
+  `total_pay_amount` decimal(32, 2) NOT NULL COMMENT '搴斾粯閲戦',
+  `total_payed_amount` decimal(32, 2) NOT NULL COMMENT '宸蹭粯閲戦',
+  `total_discount_amount` decimal(32, 2) NOT NULL COMMENT '宸蹭紭鎯犻噾棰',
+  `start_date` date NOT NULL COMMENT '璧峰鏃ユ湡',
+  `end_date` date NOT NULL COMMENT '鎴鏃ユ湡',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  `approve_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '瀹℃牳浜',
+  `approve_time` datetime NULL DEFAULT NULL COMMENT '瀹℃牳鏃堕棿',
+  `status` tinyint(3) NOT NULL COMMENT '鐘舵€',
+  `refuse_reason` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鎷掔粷鍘熷洜',
+  `settle_status` tinyint(3) NOT NULL DEFAULT 0 COMMENT '缁撶畻鐘舵€',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `code`(`code`) USING BTREE,
+  INDEX `supplier_id`(`supplier_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '渚涘簲鍟嗗璐﹀崟' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of settle_check_sheet
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for settle_check_sheet_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `settle_check_sheet_detail`;
+CREATE TABLE `settle_check_sheet_detail`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `sheet_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '瀵硅处鍗旾D',
+  `biz_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍗曟嵁ID',
+  `biz_type` tinyint(3) NOT NULL COMMENT '涓氬姟绫诲瀷',
+  `calc_type` tinyint(3) NOT NULL COMMENT '璁＄畻绫诲瀷',
+  `pay_amount` decimal(32, 2) NOT NULL COMMENT '搴斾粯閲戦',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶囨敞',
+  `order_no` int(11) NOT NULL COMMENT '鎺掑簭缂栧彿',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `sheet_id`(`sheet_id`, `biz_id`) USING BTREE,
+  INDEX `biz_id`(`biz_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '渚涘簲鍟嗗璐﹀崟鏄庣粏' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of settle_check_sheet_detail
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for settle_fee_sheet
+-- ----------------------------
+DROP TABLE IF EXISTS `settle_fee_sheet`;
+CREATE TABLE `settle_fee_sheet`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `code` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍗曞彿',
+  `supplier_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '渚涘簲鍟咺D',
+  `sheet_type` tinyint(3) NOT NULL COMMENT '鍗曟嵁绫诲瀷',
+  `total_amount` decimal(32, 2) NOT NULL COMMENT '鎬婚噾棰',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  `approve_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '瀹℃牳浜',
+  `approve_time` datetime NULL DEFAULT NULL COMMENT '瀹℃牳鏃堕棿',
+  `status` tinyint(3) NOT NULL COMMENT '鐘舵€',
+  `refuse_reason` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鎷掔粷鍘熷洜',
+  `settle_status` tinyint(3) NOT NULL DEFAULT 0 COMMENT '缁撶畻鐘舵€',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `code`(`code`) USING BTREE,
+  INDEX `supplier_id`(`supplier_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '渚涘簲鍟嗚垂鐢ㄥ崟' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of settle_fee_sheet
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for settle_fee_sheet_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `settle_fee_sheet_detail`;
+CREATE TABLE `settle_fee_sheet_detail`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `sheet_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '璐圭敤鍗旾D',
+  `item_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '椤圭洰ID',
+  `amount` decimal(32, 2) NOT NULL COMMENT '閲戦',
+  `order_no` int(11) NOT NULL COMMENT '鎺掑簭缂栧彿',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `sheet_id`(`sheet_id`, `item_id`) USING BTREE,
+  INDEX `item_id`(`item_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '渚涘簲鍟嗚垂鐢ㄥ崟鏄庣粏' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of settle_fee_sheet_detail
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for settle_in_item
+-- ----------------------------
+DROP TABLE IF EXISTS `settle_in_item`;
+CREATE TABLE `settle_in_item`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '缂栧彿',
+  `name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍚嶇О',
+  `available` tinyint(1) NOT NULL COMMENT '鐘舵€',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `code`(`code`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鏀跺叆椤圭洰' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of settle_in_item
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for settle_out_item
+-- ----------------------------
+DROP TABLE IF EXISTS `settle_out_item`;
+CREATE TABLE `settle_out_item`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '缂栧彿',
+  `name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍚嶇О',
+  `available` tinyint(1) NOT NULL COMMENT '鐘舵€',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `code`(`code`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鏀嚭椤圭洰' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of settle_out_item
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for settle_pre_sheet
+-- ----------------------------
+DROP TABLE IF EXISTS `settle_pre_sheet`;
+CREATE TABLE `settle_pre_sheet`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `code` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍗曞彿',
+  `supplier_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '渚涘簲鍟咺D',
+  `total_amount` decimal(32, 2) NOT NULL COMMENT '鎬婚噾棰',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  `approve_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '瀹℃牳浜',
+  `approve_time` datetime NULL DEFAULT NULL COMMENT '瀹℃牳鏃堕棿',
+  `status` tinyint(3) NOT NULL COMMENT '鐘舵€',
+  `refuse_reason` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鎷掔粷鍘熷洜',
+  `settle_status` tinyint(3) NOT NULL DEFAULT 0 COMMENT '缁撶畻鐘舵€',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `code`(`code`) USING BTREE,
+  INDEX `supplier_id`(`supplier_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '渚涘簲鍟嗛浠樻鍗' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of settle_pre_sheet
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for settle_pre_sheet_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `settle_pre_sheet_detail`;
+CREATE TABLE `settle_pre_sheet_detail`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `sheet_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '棰勪粯娆惧崟ID',
+  `item_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '椤圭洰ID',
+  `amount` decimal(32, 2) NOT NULL COMMENT '閲戦',
+  `order_no` int(11) NOT NULL COMMENT '鎺掑簭缂栧彿',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `sheet_id`(`sheet_id`, `item_id`) USING BTREE,
+  INDEX `item_id`(`item_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '渚涘簲鍟嗛浠樻鍗曟槑缁' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of settle_pre_sheet_detail
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for settle_sheet
+-- ----------------------------
+DROP TABLE IF EXISTS `settle_sheet`;
+CREATE TABLE `settle_sheet`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `code` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍗曞彿',
+  `supplier_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '渚涘簲鍟咺D',
+  `total_amount` decimal(32, 2) NOT NULL COMMENT '鎬婚噾棰',
+  `total_discount_amount` decimal(32, 2) NOT NULL COMMENT '宸蹭紭鎯犻噾棰',
+  `start_date` date NOT NULL COMMENT '璧峰鏃ユ湡',
+  `end_date` date NOT NULL COMMENT '鎴鏃ユ湡',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  `approve_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '瀹℃牳浜',
+  `approve_time` datetime NULL DEFAULT NULL COMMENT '瀹℃牳鏃堕棿',
+  `status` tinyint(3) NOT NULL COMMENT '鐘舵€',
+  `refuse_reason` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鎷掔粷鍘熷洜',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `code`(`code`) USING BTREE,
+  INDEX `supplier_id`(`supplier_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '渚涘簲鍟嗙粨绠楀崟' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of settle_sheet
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for settle_sheet_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `settle_sheet_detail`;
+CREATE TABLE `settle_sheet_detail`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `sheet_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '缁撶畻鍗旾D',
+  `biz_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍗曟嵁ID',
+  `pay_amount` decimal(32, 2) NOT NULL COMMENT '瀹炰粯閲戦',
+  `discount_amount` decimal(32, 2) NOT NULL COMMENT '浼樻儬閲戦',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶囨敞',
+  `order_no` int(11) NOT NULL COMMENT '鎺掑簭缂栧彿',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `sheet_id`(`sheet_id`, `biz_id`) USING BTREE,
+  INDEX `biz_id`(`biz_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '渚涘簲鍟嗙粨绠楀崟鏄庣粏' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of settle_sheet_detail
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for sw_file_box
+-- ----------------------------
+DROP TABLE IF EXISTS `sw_file_box`;
+CREATE TABLE `sw_file_box`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍚嶇О',
+  `record_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '涓婁紶璁板綍ID',
+  `content_type` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'ContentType',
+  `file_type` tinyint(3) NOT NULL COMMENT '鏂囦欢绫诲瀷',
+  `file_size` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鏂囦欢澶у皬',
+  `file_path` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鏂囦欢璺緞',
+  `file_suffix` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鏂囦欢鍚庣紑',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鏂囦欢鏀剁撼绠' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sw_file_box
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for sw_online_excel
+-- ----------------------------
+DROP TABLE IF EXISTS `sw_online_excel`;
+CREATE TABLE `sw_online_excel`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍚嶇О',
+  `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍐呭',
+  `available` tinyint(1) NOT NULL DEFAULT 1 COMMENT '鐘舵€?1-鍦ㄧ敤 0鍋滅敤',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鍦ㄧ嚎Excel' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sw_online_excel
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for sys_data_dic
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_data_dic`;
+CREATE TABLE `sys_data_dic`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '缂栧彿',
+  `name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍚嶇О',
+  `category_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鍒嗙被ID',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `code`(`code`) USING BTREE,
+  UNIQUE INDEX `name`(`name`) USING BTREE,
+  INDEX `category_id`(`category_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鏁版嵁瀛楀吀' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_data_dic
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for sys_data_dic_category
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_data_dic_category`;
+CREATE TABLE `sys_data_dic_category`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '缂栧彿',
+  `name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍚嶇О',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `code`(`code`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鏁版嵁瀛楀吀鍒嗙被' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_data_dic_category
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for sys_data_dic_item
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_data_dic_item`;
+CREATE TABLE `sys_data_dic_item`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '缂栧彿',
+  `name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍚嶇О',
+  `dic_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '瀛楀吀ID',
+  `order_no` int(11) NOT NULL COMMENT '鎺掑簭缂栧彿',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `dic_id`(`dic_id`, `code`) USING BTREE,
+  UNIQUE INDEX `dic_id_2`(`dic_id`, `name`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鏁版嵁瀛楀吀' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_data_dic_item
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for sys_data_permission_data
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_data_permission_data`;
+CREATE TABLE `sys_data_permission_data`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `biz_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '涓氬姟ID',
+  `biz_type` tinyint(3) NOT NULL COMMENT '涓氬姟绫诲瀷',
+  `permission_type` tinyint(3) NOT NULL COMMENT '鏉冮檺绫诲瀷',
+  `permission` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鏁版嵁鏉冮檺',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `biz_id`(`biz_id`, `biz_type`, `permission_type`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鏁版嵁鏉冮檺鏁版嵁' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_data_permission_data
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for sys_data_permission_model_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_data_permission_model_detail`;
+CREATE TABLE `sys_data_permission_model_detail`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍚嶇О',
+  `model_id` int(11) NOT NULL COMMENT '妯″瀷ID',
+  `condition_type` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鏉′欢',
+  `input_type` tinyint(3) NOT NULL COMMENT '杈撳叆绫诲瀷',
+  `table_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '琛ㄥ悕',
+  `column_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '瀛楁鍚',
+  `enum_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鍓嶇鏋氫妇鍚',
+  `sql_value` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT 'SQL',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `model_id`(`model_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鏁版嵁鏉冮檺妯″瀷鏄庣粏' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_data_permission_model_detail
+-- ----------------------------
+INSERT INTO `sys_data_permission_model_detail` VALUES (1, '缂栧彿', 1, '0,1,2,3,4,5,6,7,8,9,10', 0, 'product', 'code', NULL, NULL);
+INSERT INTO `sys_data_permission_model_detail` VALUES (2, '鍚嶇О', 1, '0,1,2,3,4,5,6,7,8,9,10', 0, 'product', 'name', NULL, NULL);
+INSERT INTO `sys_data_permission_model_detail` VALUES (3, '绠€绉', 1, '0,1,2,3,4,5,6,7,8,9,10', 0, 'product', 'short_name', NULL, NULL);
+INSERT INTO `sys_data_permission_model_detail` VALUES (4, 'SKU', 1, '0,1,2,3,4,5,6,7,8,9,10', 0, 'product', 'sku_code', NULL, NULL);
+INSERT INTO `sys_data_permission_model_detail` VALUES (5, '绠€鐮', 1, '0,1,2,3,4,5,6,7,8,9,10', 0, 'product', 'external_code', NULL, NULL);
+INSERT INTO `sys_data_permission_model_detail` VALUES (6, '鍝佺被缂栧彿', 1, '0,1,2,3,4,5,6,7,8,9,10', 0, 'category', 'code', NULL, NULL);
+INSERT INTO `sys_data_permission_model_detail` VALUES (7, '鍝佺被鍚嶇О', 1, '0,1,2,3,4,5,6,7,8,9,10', 0, 'category', 'name', NULL, NULL);
+INSERT INTO `sys_data_permission_model_detail` VALUES (8, '鍝佺墝缂栧彿', 1, '0,1,2,3,4,5,6,7,8,9,10', 0, 'brand', 'code', NULL, NULL);
+INSERT INTO `sys_data_permission_model_detail` VALUES (9, '鍝佺墝鍚嶇О', 1, '0,1,2,3,4,5,6,7,8,9,10', 0, 'brand', 'name', NULL, NULL);
+INSERT INTO `sys_data_permission_model_detail` VALUES (10, '瑙勬牸', 1, '0,1,2,3,4,5,6,7,8,9,10', 0, 'product', 'spec', NULL, NULL);
+INSERT INTO `sys_data_permission_model_detail` VALUES (11, '鍗曚綅', 1, '0,1,2,3,4,5,6,7,8,9,10', 0, 'product', 'unit', NULL, NULL);
+INSERT INTO `sys_data_permission_model_detail` VALUES (12, '鐘舵€', 1, '0,5,6,7', 1, 'product', 'available', 'AVAILABLE', NULL);
+INSERT INTO `sys_data_permission_model_detail` VALUES (13, '鍒涘缓鏃堕棿', 1, '0,1,2,3,4,5', 2, 'product', 'create_time', NULL, NULL);
+INSERT INTO `sys_data_permission_model_detail` VALUES (14, '鍒涘缓浜洪儴闂ㄤ笌鏈汉鐩稿悓', 2, '6', 99, 'order', 'create_by_id', NULL, 'SELECT __ud.user_id FROM sys_user_dept AS __ud WHERE __ud.dept_id IN ({__var#curDeptIds})');
+INSERT INTO `sys_data_permission_model_detail` VALUES (15, '鍒涘缓浜洪儴闂ㄦ槸鏈汉鐨勪笂绾ч儴闂', 2, '6', 99, 'order', 'create_by_id', NULL, 'SELECT DISTINCT __ud.user_id FROM sys_user_dept AS __ud WHERE FIND_IN_SET(__ud.dept_id,(SELECT GROUP_CONCAT(__mp.path) FROM sys_dept AS __d INNER JOIN recursion_mapping AS __mp ON __mp.node_id=__d.id AND __mp.node_type=1 WHERE __d.id IN ({__var#curDeptIds}) AND __mp.level> 1))');
+INSERT INTO `sys_data_permission_model_detail` VALUES (16, '鍒涘缓浜洪儴闂ㄦ槸鏈汉鐨勪笅绾ч儴闂', 2, '6', 99, 'order', 'create_by_id', NULL, 'SELECT DISTINCT __ud.user_id FROM sys_user_dept AS __ud WHERE __ud.dept_id IN (SELECT __mp.node_id FROM recursion_mapping AS __mp WHERE FIND_IN_SET((SELECT __d.id FROM sys_dept AS __d WHERE __d.id IN ({__var#curDeptIds})),__mp.path) AND __mp.node_type=1)');
+INSERT INTO `sys_data_permission_model_detail` VALUES (17, '鍒涘缓鏃堕棿', 2, '0,1,2,3,4,5', 2, 'order', 'create_time', NULL, NULL);
+
+-- ----------------------------
+-- Table structure for sys_dept
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_dept`;
+CREATE TABLE `sys_dept`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '缂栧彿',
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍚嶇О',
+  `short_name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '绠€绉',
+  `parent_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鐖剁骇ID',
+  `available` tinyint(1) NOT NULL COMMENT '鐘舵€',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `code`(`code`) USING BTREE,
+  UNIQUE INDEX `name`(`name`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '閮ㄩ棬' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_dept
+-- ----------------------------
+INSERT INTO `sys_dept` VALUES ('1', '001', '閿€鍞腑蹇', '閿€鍞腑蹇', NULL, 1, '', '绯荤粺绠＄悊鍛', '1', '2022-01-13 00:37:06', '绯荤粺绠＄悊鍛', '1', '2022-01-13 00:37:06');
+INSERT INTO `sys_dept` VALUES ('2', '002', '鐮斿彂涓績', '鐮斿彂涓績', NULL, 1, '', '绯荤粺绠＄悊鍛', '1', '2022-01-13 00:37:17', '绯荤粺绠＄悊鍛', '1', '2022-01-13 00:37:17');
+INSERT INTO `sys_dept` VALUES ('3', '001001', '閿€鍞儴', '閿€鍞儴', '1', 1, '', '绯荤粺绠＄悊鍛', '1', '2022-01-13 00:38:03', '绯荤粺绠＄悊鍛', '1', '2022-01-13 00:38:03');
+INSERT INTO `sys_dept` VALUES ('4', '002001', '鐮斿彂閮', '鐮斿彂閮', '2', 1, '', '绯荤粺绠＄悊鍛', '1', '2022-01-13 00:38:15', '绯荤粺绠＄悊鍛', '1', '2022-01-13 00:38:15');
+
+-- ----------------------------
+-- Table structure for sys_generate_code
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_generate_code`;
+CREATE TABLE `sys_generate_code`  (
+  `id` int(11) NOT NULL COMMENT 'ID',
+  `name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍚嶇О',
+  `config_str` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '閰嶇疆淇℃伅锛圝SONArray锛',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '缂栧彿瑙勫垯' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_generate_code
+-- ----------------------------
+INSERT INTO `sys_generate_code` VALUES (1, '鐢ㄦ埛缂栧彿', '[{\"type\":6,\"val\":\"U\"},{\"type\":1,\"pattern\":\"yyMMdd\"},{\"type\":3,\"key\":\"58aabb1d160430444158d82e4c86cb9c7f2a\",\"len\":\"5\",\"step\":1,\"expireSeconds\":86400}]');
+INSERT INTO `sys_generate_code` VALUES (2, '閮ㄩ棬缂栧彿', '[{\"type\":6,\"val\":\"D\"},{\"type\":1,\"pattern\":\"yyMMdd\"},{\"type\":3,\"key\":\"6cba5a299099449fb385850b5f5c1ec4\",\"len\":\"5\",\"step\":1,\"expireSeconds\":86400}]');
+INSERT INTO `sys_generate_code` VALUES (3, '瑙掕壊缂栧彿', '[{\"type\":6,\"val\":\"R\"},{\"type\":1,\"pattern\":\"yyMMdd\"},{\"type\":3,\"key\":\"ccb59649d82547098b2626d35dd06064\",\"len\":\"5\",\"step\":1,\"expireSeconds\":86400}]');
+INSERT INTO `sys_generate_code` VALUES (4, '浠撳簱缂栧彿', '[{\"type\":6,\"val\":\"CK\"},{\"type\":1,\"pattern\":\"yyMMdd\"},{\"type\":3,\"key\":\"f3d4d218b3064f0d8bf7f12f5eb64fb9\",\"len\":\"5\",\"step\":1,\"expireSeconds\":86400}]');
+INSERT INTO `sys_generate_code` VALUES (5, '鏀惰揣鏂圭紪鍙', '[{\"type\":6,\"val\":\"KH\"},{\"type\":1,\"pattern\":\"yyMMdd\"},{\"type\":3,\"key\":\"0c9f51fcf94c442b9661280cf61c9ef7\",\"len\":\"5\",\"step\":1,\"expireSeconds\":86400}]');
+INSERT INTO `sys_generate_code` VALUES (6, '渚涘簲鍟嗙紪鍙', '[{\"type\":6,\"val\":\"GYS\"},{\"type\":1,\"pattern\":\"yyMMdd\"},{\"type\":3,\"key\":\"12262adfb244488d80de51caa8edb66e\",\"len\":\"5\",\"step\":1,\"expireSeconds\":86400}]');
+INSERT INTO `sys_generate_code` VALUES (7, '浼氬憳缂栧彿', '[{\"type\":6,\"val\":\"HY\"},{\"type\":1,\"pattern\":\"yyMMdd\"},{\"type\":3,\"key\":\"206d9d9abfdd49b4b0a4f2730b7b0288\",\"len\":\"5\",\"step\":1,\"expireSeconds\":86400}]');
+INSERT INTO `sys_generate_code` VALUES (8, '闂ㄥ簵缂栧彿', '[{\"type\":6,\"val\":\"M\"},{\"type\":1,\"pattern\":\"yyMMdd\"},{\"type\":3,\"key\":\"f3021011fee745c18eb6eba410c17527\",\"len\":\"5\",\"step\":1,\"expireSeconds\":86400}]');
+INSERT INTO `sys_generate_code` VALUES (9, '鍝佺墝缂栧彿', '[{\"type\":6,\"val\":\"B\"},{\"type\":1,\"pattern\":\"yyMMdd\"},{\"type\":3,\"key\":\"331e5e9818194b3096ccbe941f6dedc6\",\"len\":\"5\",\"step\":1,\"expireSeconds\":86400}]');
+INSERT INTO `sys_generate_code` VALUES (10, '鍟嗗搧缂栧彿', '[{\"type\":6,\"val\":\"P\"},{\"type\":1,\"pattern\":\"yyMMdd\"},{\"type\":3,\"key\":\"c9b6e74117f84fe68346201de3554b50\",\"len\":\"5\",\"step\":1,\"expireSeconds\":86400}]');
+INSERT INTO `sys_generate_code` VALUES (11, '鐢ㄦ埛鍒嗙粍缂栧彿', '[{\"type\":1,\"pattern\":\"yyMMdd\"},{\"type\":3,\"key\":\"4bf9dafec322744f1f08bdf2d2569076a4d7\",\"len\":\"5\",\"step\":1,\"expireSeconds\":86400}]');
+INSERT INTO `sys_generate_code` VALUES (12, '浠撲綅缂栧彿', '[{\"type\":\"6\",\"val\":\"C\"},{\"type\":\"1\",\"pattern\":\"yyMMdd\"},{\"type\":\"3\",\"key\":\"c31d11cdad371340a9985a110f8dad7cb9ea\",\"len\":\"5\",\"step\":1,\"expireType\":0,\"expireSeconds\":86400}]');
+INSERT INTO `sys_generate_code` VALUES (99, '閫氱敤缂栧彿', '[{\"type\":1,\"pattern\":\"yyMMdd\"},{\"type\":3,\"key\":\"9dfa3174afa0464794e98e19ad7bb121ef24\",\"len\":\"5\",\"step\":1,\"expireSeconds\":86400}]');
+INSERT INTO `sys_generate_code` VALUES (200, '閲囪喘璁㈠崟鍙', '[{\"type\":1,\"pattern\":\"yyyyMMdd\"},{\"type\":3,\"key\":\"37366f903834c842d5e8144bd707bdb77e35\",\"len\":10,\"step\":1,\"expireSeconds\":86400}]');
+INSERT INTO `sys_generate_code` VALUES (201, '閲囪喘鏀惰揣鍗曞彿', '[{\"type\":1,\"pattern\":\"yyyyMMdd\"},{\"type\":3,\"key\":\"12099be638c90d466b2a4af5465ed632459f\",\"len\":10,\"step\":1,\"expireSeconds\":86400}]');
+INSERT INTO `sys_generate_code` VALUES (202, '閲囪喘閫€鍗曞彿', '[{\"type\":1,\"pattern\":\"yyyyMMdd\"},{\"type\":3,\"key\":\"60fdc467f35db94c8569f6ed68d103ce5452\",\"len\":10,\"step\":1,\"expireSeconds\":86400}]');
+INSERT INTO `sys_generate_code` VALUES (203, '閿€鍞鍗曞彿', '[{\"type\":1,\"pattern\":\"yyyyMMdd\"},{\"type\":3,\"key\":\"d141ddad1cea5344ebe85ac6d3c6550a9d5b\",\"len\":10,\"step\":1,\"expireSeconds\":86400}]');
+INSERT INTO `sys_generate_code` VALUES (204, '閿€鍞嚭搴撳崟鍙', '[{\"type\":1,\"pattern\":\"yyyyMMdd\"},{\"type\":3,\"key\":\"2bec018f14b3d647b9e8641a408dcecf58bc\",\"len\":10,\"step\":1,\"expireSeconds\":86400}]');
+INSERT INTO `sys_generate_code` VALUES (205, '閿€鍞€€璐у崟鍙', '[{\"type\":1,\"pattern\":\"yyyyMMdd\"},{\"type\":3,\"key\":\"240604dc9024834d9d29abf86dd6bf7f3989\",\"len\":10,\"step\":1,\"expireSeconds\":86400}]');
+INSERT INTO `sys_generate_code` VALUES (206, '闆跺敭鍑哄簱鍗曞彿', '[{\"type\":1,\"pattern\":\"yyyyMMdd\"},{\"type\":3,\"key\":\"60ecbed8c835454552f8c177c69c155bdaf8\",\"len\":10,\"step\":1,\"expireSeconds\":86400}]');
+INSERT INTO `sys_generate_code` VALUES (207, '闆跺敭閫€璐у崟鍙', '[{\"type\":1,\"pattern\":\"yyyyMMdd\"},{\"type\":3,\"key\":\"8307f839bd2e24426de87884fc034fe8d546\",\"len\":10,\"step\":1,\"expireSeconds\":86400}]');
+INSERT INTO `sys_generate_code` VALUES (208, '棰勫厛鐩樼偣鍗曞彿', '[{\"type\":1,\"pattern\":\"yyyyMMdd\"},{\"type\":3,\"key\":\"5142a4fc6392764d35bb852e9dcfe544a482\",\"len\":10,\"step\":1,\"expireSeconds\":86400}]');
+INSERT INTO `sys_generate_code` VALUES (209, '鐩樼偣浠诲姟鍙', '[{\"type\":1,\"pattern\":\"yyyyMMdd\"},{\"type\":3,\"key\":\"e0937a56dc47a6437c1840195ab26a454db6\",\"len\":10,\"step\":1,\"expireSeconds\":86400}]');
+INSERT INTO `sys_generate_code` VALUES (210, '鐩樼偣鍗曞彿', '[{\"type\":1,\"pattern\":\"yyyyMMdd\"},{\"type\":3,\"key\":\"d5a2827d3b2f6844aae858e6cb62449a3283\",\"len\":10,\"step\":1,\"expireSeconds\":86400}]');
+INSERT INTO `sys_generate_code` VALUES (212, '搴撳瓨璋冩暣鍗曞彿', '[{\"type\":1,\"pattern\":\"yyyyMMdd\"},{\"type\":3,\"key\":\"10787084f2177b430709b260f42085ce14e9\",\"len\":10,\"step\":1,\"expireSeconds\":86400}]');
+INSERT INTO `sys_generate_code` VALUES (213, '浠撳簱璋冩嫧鍗曞彿', '[{\"type\":1,\"pattern\":\"yyyyMMdd\"},{\"type\":3,\"key\":\"3b0668d95c93234ca65a6afa6f5c333819ea\",\"len\":10,\"step\":1,\"expireSeconds\":86400}]');
+INSERT INTO `sys_generate_code` VALUES (214, '鐗╂祦鍗曞彿', '[{\"type\":1,\"pattern\":\"yyyyMMdd\"},{\"type\":3,\"key\":\"f693245a4a05ab4e7f19362e45e09da59d74\",\"len\":10,\"step\":1,\"expireSeconds\":86400}]');
+INSERT INTO `sys_generate_code` VALUES (300, '渚涘簲鍟嗗璐﹀崟鍙', '[{\"type\":1,\"pattern\":\"yyyyMMdd\"},{\"type\":3,\"key\":\"89398b781627df40f6fbfdab81fc7ab83c05\",\"len\":10,\"step\":1,\"expireSeconds\":86400}]');
+INSERT INTO `sys_generate_code` VALUES (301, '渚涘簲鍟嗚垂鐢ㄥ崟鍙', '[{\"type\":1,\"pattern\":\"yyyyMMdd\"},{\"type\":3,\"key\":\"286289a735b3f24859a91db603b14e48df4e\",\"len\":10,\"step\":1,\"expireSeconds\":86400}]');
+INSERT INTO `sys_generate_code` VALUES (302, '渚涘簲鍟嗕粯娆惧崟鍙', '[{\"type\":1,\"pattern\":\"yyyyMMdd\"},{\"type\":3,\"key\":\"f7ed22483ab83a435218cd0af3b6102fa308\",\"len\":10,\"step\":1,\"expireSeconds\":86400}]');
+INSERT INTO `sys_generate_code` VALUES (303, '渚涘簲鍟嗙粨绠楀崟鍙', '[{\"type\":1,\"pattern\":\"yyyyMMdd\"},{\"type\":3,\"key\":\"741524aed5dbd1452acbe05bf63a35d8bbeb\",\"len\":10,\"step\":1,\"expireSeconds\":86400}]');
+INSERT INTO `sys_generate_code` VALUES (304, '鏀惰揣鏂瑰璐﹀崟鍙', '[{\"type\":1,\"pattern\":\"yyyyMMdd\"},{\"type\":3,\"key\":\"d8bddcd37139d24bb12ae66b0f6732eecef9\",\"len\":10,\"step\":1,\"expireSeconds\":86400}]');
+INSERT INTO `sys_generate_code` VALUES (305, '鏀惰揣鏂硅垂鐢ㄥ崟鍙', '[{\"type\":1,\"pattern\":\"yyyyMMdd\"},{\"type\":3,\"key\":\"37f9d9a53699d042088918afe08d7de15d82\",\"len\":10,\"step\":1,\"expireSeconds\":86400}]');
+INSERT INTO `sys_generate_code` VALUES (306, '鏀惰揣鏂归浠樻鍗曞彿', '[{\"type\":1,\"pattern\":\"yyyyMMdd\"},{\"type\":3,\"key\":\"9a2cb171fd93464fb76928b35f77d0045b32\",\"len\":10,\"step\":1,\"expireSeconds\":86400}]');
+INSERT INTO `sys_generate_code` VALUES (307, '鏀惰揣鏂圭粨绠楀崟鍙', '[{\"type\":1,\"pattern\":\"yyyyMMdd\"},{\"type\":3,\"key\":\"e63f16fc2acf984c3e9bef378e6ea4546204\",\"len\":10,\"step\":1,\"expireSeconds\":86400}]');
+
+-- ----------------------------
+-- Table structure for sys_mail_message
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_mail_message`;
+CREATE TABLE `sys_mail_message`  (
+  `id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `title` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鏍囬',
+  `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍐呭',
+  `mail` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '閭',
+  `biz_key` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '涓氬姟閿',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  `send_status` tinyint(3) NOT NULL DEFAULT 0 COMMENT '鍙戦€佺姸鎬',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `mail`(`mail`) USING BTREE,
+  INDEX `biz_key`(`biz_key`) USING BTREE,
+  INDEX `create_time`(`create_time`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '閭欢娑堟伅' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_mail_message
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for sys_menu
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_menu`;
+CREATE TABLE `sys_menu`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '缂栧彿',
+  `name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鍚嶇О锛堝墠绔娇鐢級',
+  `title` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鏍囬',
+  `icon` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鍥炬爣',
+  `component_type` tinyint(3) NULL DEFAULT NULL COMMENT '缁勪欢绫诲瀷锛堝墠绔娇鐢級',
+  `component` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '缁勪欢锛堝墠绔娇鐢級',
+  `request_param` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '鑷畾涔夎姹傚弬鏁',
+  `parent_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鐖剁骇ID',
+  `sys_module_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '绯荤粺妯″潡ID',
+  `path` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '璺敱璺緞锛堝墠绔娇鐢級',
+  `no_cache` tinyint(1) NOT NULL DEFAULT 1 COMMENT '鏄惁缂撳瓨锛堝墠绔娇鐢級',
+  `display` tinyint(3) NOT NULL COMMENT '绫诲瀷 0-鐩綍 1-鑿滃崟 2-鍔熻兘',
+  `hidden` tinyint(1) NULL DEFAULT 0 COMMENT '鏄惁闅愯棌锛堝墠绔娇鐢級',
+  `permission` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鏉冮檺',
+  `is_special` tinyint(1) NOT NULL DEFAULT 0 COMMENT '鏄惁鐗规畩鑿滃崟',
+  `available` tinyint(1) NOT NULL DEFAULT 1 COMMENT '鐘舵€',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `code`(`code`, `name`, `title`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鑿滃崟' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_menu
+-- ----------------------------
+INSERT INTO `sys_menu` VALUES ('1000', '1000', 'System', '绯荤粺绠＄悊', 'ant-design:setting-outlined', NULL, '', NULL, NULL, '2', '/system', 0, 0, 0, '', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:22:05', '绯荤粺绠＄悊鍛', '1', '2023-10-27 17:01:09');
+INSERT INTO `sys_menu` VALUES ('1000001', '1000001', 'Menu', '鑿滃崟绠＄悊', NULL, 0, '/system/menu/index', NULL, '1001', '1', '/menu', 0, 1, 0, 'system:menu:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-08 18:37:01', '绯荤粺绠＄悊鍛', '1', '2023-10-27 17:01:09');
+INSERT INTO `sys_menu` VALUES ('1000001001', '1000001001', '', '鏂板鑿滃崟', NULL, 0, '', NULL, '1000001', '1', '', 0, 2, 0, 'system:menu:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2023-10-27 17:01:09');
+INSERT INTO `sys_menu` VALUES ('1000001002', '1000001002', '', '淇敼鑿滃崟', NULL, 0, '', NULL, '1000001', '1', '', 0, 2, 0, 'system:menu:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2023-10-27 17:00:27');
+INSERT INTO `sys_menu` VALUES ('1000001003', '1000001003', '', '鍒犻櫎鑿滃崟', NULL, 0, '', NULL, '1000001', '1', '', 0, 2, 0, 'system:menu:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:24:36', '绯荤粺绠＄悊鍛', '1', '2023-10-27 17:00:27');
+INSERT INTO `sys_menu` VALUES ('1000002', '1000002', 'Dept', '閮ㄩ棬绠＄悊', NULL, 0, '/system/dept/index', NULL, '1000', '2', '/dept', 0, 1, 0, 'system:dept:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 01:09:27', '绯荤粺绠＄悊鍛', '1', '2023-10-27 17:00:27');
+INSERT INTO `sys_menu` VALUES ('1000002001', '1000002001', '', '鏂板閮ㄩ棬', NULL, 0, '', NULL, '1000002', '2', '', 0, 2, 0, 'system:dept:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-06-27 01:33:31', '绯荤粺绠＄悊鍛', '1', '2023-10-27 17:00:27');
+INSERT INTO `sys_menu` VALUES ('1000002002', '1000002002', '', '淇敼閮ㄩ棬', NULL, 0, '', NULL, '1000002', '2', '', 0, 2, 0, 'system:dept:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-06-27 01:33:47', '绯荤粺绠＄悊鍛', '1', '2023-10-27 17:00:27');
+INSERT INTO `sys_menu` VALUES ('1000002003', '1000002003', '', '閮ㄩ棬鏉冮檺', NULL, 0, '', NULL, '1000002', '2', '', 0, 2, 0, 'system:dept:permission', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-06-27 01:33:47', '绯荤粺绠＄悊鍛', '1', '2023-10-27 17:00:27');
+INSERT INTO `sys_menu` VALUES ('1000002004', '1000002004', '', '鍒犻櫎閮ㄩ棬', NULL, 0, '', NULL, '1000002', '2', '', 0, 2, 0, 'system:dept:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-06-27 01:33:47', '绯荤粺绠＄悊鍛', '1', '2025-01-19 18:36:07');
+INSERT INTO `sys_menu` VALUES ('1000004', '1000004', 'Role', '瑙掕壊绠＄悊', NULL, 0, '/system/role/index', NULL, '1000', '2', '/role', 0, 1, 0, 'system:role:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:35:49', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:35:49');
+INSERT INTO `sys_menu` VALUES ('1000004001', '1000004001', '', '鏂板瑙掕壊', NULL, 0, '', NULL, '1000004', '2', '', 0, 2, 0, 'system:role:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-06-30 00:32:17', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('1000004002', '1000004002', '', '淇敼瑙掕壊', NULL, 0, '', NULL, '1000004', '2', '', 0, 2, 0, 'system:role:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-06-30 00:32:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('1000004003', '1000004003', '', '瑙掕壊鎺堟潈', NULL, 0, '', NULL, '1000004', '2', '', 0, 2, 0, 'system:role:permission', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-06-30 00:32:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('1000004004', '1000004004', '', '鍒犻櫎瑙掕壊', NULL, 0, '', NULL, '1000004', '2', '', 0, 2, 0, 'system:role:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-06-30 00:32:45', '绯荤粺绠＄悊鍛', '1', '2025-01-19 18:36:08');
+INSERT INTO `sys_menu` VALUES ('1000005', '1000005', 'User', '鐢ㄦ埛绠＄悊', NULL, 0, '/system/user/index', NULL, '1000', '2', '/user', 0, 1, 0, 'system:user:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 01:08:40', '绯荤粺绠＄悊鍛', '1', '2021-07-05 01:08:40');
+INSERT INTO `sys_menu` VALUES ('1000005001', '1000005001', '', '鏂板鐢ㄦ埛', NULL, 0, '', NULL, '1000005', '2', '', 0, 2, 0, 'system:user:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-06-30 00:32:17', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('1000005002', '1000005002', '', '淇敼鐢ㄦ埛', NULL, 0, '', NULL, '1000005', '2', '', 0, 2, 0, 'system:user:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-06-30 00:32:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('1000005003', '1000005003', '', '鐢ㄦ埛鎺堟潈', NULL, 0, '', NULL, '1000005', '2', '', 0, 2, 0, 'system:user:permission', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-06-30 00:32:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('1000005004', '1000005004', '', '鍒犻櫎鐢ㄦ埛', NULL, 0, '', NULL, '1000005', '2', '', 0, 2, 0, 'system:user:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-06-30 00:32:45', '绯荤粺绠＄悊鍛', '1', '2025-01-19 18:36:09');
+INSERT INTO `sys_menu` VALUES ('1000006', '1000006', 'Oplog', '鎿嶄綔鏃ュ織', NULL, 0, '/system/oplog/index', NULL, '1000', '2', '/oplog', 0, 1, 0, 'system:oplog:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 01:08:40', '绯荤粺绠＄悊鍛', '1', '2021-07-05 01:08:40');
+INSERT INTO `sys_menu` VALUES ('1000007', '1000007', 'SysParameter', '绯荤粺鍙傛暟', NULL, 0, '/system/parameter/index', NULL, '1001', '2', '/parameter', 0, 1, 0, 'system:parameter:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-08 18:37:01', '绯荤粺绠＄悊鍛', '1', '2021-12-09 17:54:42');
+INSERT INTO `sys_menu` VALUES ('1000007001', '1000007001', '', '鏂板绯荤粺鍙傛暟', NULL, 0, '', NULL, '1000007', '2', '', 0, 2, 0, 'system:parameter:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-12-09 17:54:42');
+INSERT INTO `sys_menu` VALUES ('1000007002', '1000007002', '', '淇敼绯荤粺鍙傛暟', NULL, 0, '', NULL, '1000007', '2', '', 0, 2, 0, 'system:parameter:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-12-09 17:54:42');
+INSERT INTO `sys_menu` VALUES ('1000007003', '1000007003', '', '鍒犻櫎绯荤粺鍙傛暟', NULL, 0, '', NULL, '1000007', '2', '', 0, 2, 0, 'system:parameter:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:24:36', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('1000008', '1000008', 'PublishSysNotice', '鍙戝竷绯荤粺閫氱煡', NULL, 0, '/system/notice/publish', NULL, '1002', '2', '/system/notice/publish', 0, 1, 0, 'system:notice:publish', 0, 1, '', '绯荤粺绠＄悊鍛', '1', '2022-08-18 14:31:12', '绯荤粺绠＄悊鍛', '1', '2022-08-18 14:31:12');
+INSERT INTO `sys_menu` VALUES ('1000008001', '1000008001', '', '鏂板绯荤粺閫氱煡', NULL, 0, '', NULL, '1000008', '2', '', 0, 2, 0, 'system:notice:add', 0, 1, '', '绯荤粺绠＄悊鍛', '1', '2022-08-18 14:31:12', '绯荤粺绠＄悊鍛', '1', '2022-08-18 14:31:12');
+INSERT INTO `sys_menu` VALUES ('1000008002', '1000008002', '', '淇敼绯荤粺閫氱煡', NULL, 0, '', NULL, '1000008', '2', '', 0, 2, 0, 'system:notice:modify', 0, 1, '', '绯荤粺绠＄悊鍛', '1', '2022-08-18 14:31:12', '绯荤粺绠＄悊鍛', '1', '2022-08-18 14:31:12');
+INSERT INTO `sys_menu` VALUES ('1000009', '1002001', 'MySysNotice', '鎴戠殑绯荤粺閫氱煡', NULL, 0, '/system/notice/index', NULL, '1002', '2', '/system/notice/my', 0, 1, 0, '', 0, 1, '', '绯荤粺绠＄悊鍛', '1', '2022-08-18 14:31:12', '绯荤粺绠＄悊鍛', '1', '2022-08-18 14:31:12');
+INSERT INTO `sys_menu` VALUES ('1000010', '1000010', 'SysDataDic', '鏁版嵁瀛楀吀', NULL, 0, '/system/dic/index', NULL, '1001', '2', '/dic', 0, 1, 0, 'system:dic:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-08 18:37:01', '绯荤粺绠＄悊鍛', '1', '2021-12-09 17:54:42');
+INSERT INTO `sys_menu` VALUES ('1000010001', '1000010001', '', '鏂板鏁版嵁瀛楀吀', NULL, 0, '', NULL, '1000010', '2', '', 0, 2, 0, 'system:dic:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-12-09 17:54:42');
+INSERT INTO `sys_menu` VALUES ('1000010002', '1000010002', '', '淇敼鏁版嵁瀛楀吀', NULL, 0, '', NULL, '1000010', '2', '', 0, 2, 0, 'system:dic:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-12-09 17:54:42');
+INSERT INTO `sys_menu` VALUES ('1000010003', '1000010003', '', '鍒犻櫎鏁版嵁瀛楀吀', NULL, 0, '', NULL, '1000010', '2', '', 0, 2, 0, 'system:dic:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:24:36', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('1000010004', '1000010004', '', '鏂板鏁版嵁瀛楀吀鍒嗙被', NULL, 0, '', NULL, '1000010', '2', '', 0, 2, 0, 'system:dic-category:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-12-09 17:54:42');
+INSERT INTO `sys_menu` VALUES ('1000010005', '1000010005', '', '淇敼鏁版嵁瀛楀吀鍒嗙被', NULL, 0, '', NULL, '1000010', '2', '', 0, 2, 0, 'system:dic-category:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-12-09 17:54:42');
+INSERT INTO `sys_menu` VALUES ('1000010006', '1000010006', '', '鍒犻櫎鏁版嵁瀛楀吀鍒嗙被', NULL, 0, '', NULL, '1000010', '2', '', 0, 2, 0, 'system:dic-category:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-12-09 17:54:42');
+INSERT INTO `sys_menu` VALUES ('1000010007', '1000010007', '', '鏂板鏁版嵁瀛楀吀鍊', NULL, 0, '', NULL, '1000010', '2', '', 0, 2, 0, 'system:dic-item:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-12-09 17:54:42');
+INSERT INTO `sys_menu` VALUES ('1000010008', '1000010008', '', '淇敼鏁版嵁瀛楀吀鍊', NULL, 0, '', NULL, '1000010', '2', '', 0, 2, 0, 'system:dic-item:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-12-09 17:54:42');
+INSERT INTO `sys_menu` VALUES ('1000010009', '1000010009', '', '鍒犻櫎鏁版嵁瀛楀吀鍊', NULL, 0, '', NULL, '1000010', '2', '', 0, 2, 0, 'system:dic-item:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-12-09 17:54:42');
+INSERT INTO `sys_menu` VALUES ('1000011', '1000011', 'SysTenant', '绉熸埛绠＄悊', NULL, 0, '/system/tenant/index', NULL, '1001', '1', '/system/tenant', 0, 1, 0, 'system:tenant:query', 0, 1, '', '绯荤粺绠＄悊鍛', '1', '2022-08-18 14:31:12', '绯荤粺绠＄悊鍛', '1', '2022-08-18 14:31:12');
+INSERT INTO `sys_menu` VALUES ('1000011001', '1000011001', '', '鏂板绉熸埛', NULL, 0, '', NULL, '1000011', '1', '', 0, 2, 0, 'system:tenant:add', 0, 1, '', '绯荤粺绠＄悊鍛', '1', '2022-08-18 14:31:12', '绯荤粺绠＄悊鍛', '1', '2022-08-18 14:31:12');
+INSERT INTO `sys_menu` VALUES ('1000011002', '1000011002', '', '淇敼绉熸埛', NULL, 0, '', NULL, '1000011', '1', '', 0, 2, 0, 'system:tenant:modify', 0, 1, '', '绯荤粺绠＄悊鍛', '1', '2022-08-18 14:31:12', '绯荤粺绠＄悊鍛', '1', '2022-08-18 14:31:12');
+INSERT INTO `sys_menu` VALUES ('1000011003', '1000011003', '', '鎺堟潈妯″潡', NULL, 0, '', NULL, '1000011', '1', '', 0, 2, 0, 'system:tenant:module', 0, 1, '', '绯荤粺绠＄悊鍛', '1', '2022-08-18 14:31:12', '绯荤粺绠＄悊鍛', '1', '2022-08-18 14:31:12');
+INSERT INTO `sys_menu` VALUES ('1000012', '1000012', 'OpenDomain', '寮€鏀惧煙', NULL, 0, '/system/open-domain/index', NULL, '1001', '14', '/open-domain', 0, 1, 0, 'system:open-domain:config', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-08 18:37:01', '绯荤粺绠＄悊鍛', '1', '2021-12-09 17:54:42');
+INSERT INTO `sys_menu` VALUES ('1000013', '1000013', 'SysGenerateCode', '缂栧彿瑙勫垯', NULL, 0, '/system/generate-code/index', NULL, '1000', '2', '/generate-code', 0, 1, 0, 'system:generate-code:manage', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-08 18:37:01', '绯荤粺绠＄悊鍛', '1', '2021-12-09 17:54:42');
+INSERT INTO `sys_menu` VALUES ('1000014', '1000014', 'SysNotifyGroup', '娑堟伅閫氱煡缁', NULL, 0, '/system/notify-group/index', NULL, '1000', '2', '/notify-group', 0, 1, 0, 'system:notify-group:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-08 18:37:01', '绯荤粺绠＄悊鍛', '1', '2021-12-09 17:54:42');
+INSERT INTO `sys_menu` VALUES ('1000014001', '1000014001', '', '鏂板娑堟伅閫氱煡缁', NULL, 0, '', NULL, '1000014', '8', '', 0, 2, 0, 'system:notify-group:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('1000014002', '1000014002', '', '淇敼娑堟伅閫氱煡缁', NULL, 0, '', NULL, '1000014', '8', '', 0, 2, 0, 'system:notify-group:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('1000014003', '1000014003', '', '鍒犻櫎娑堟伅閫氱煡缁', NULL, 0, '', NULL, '1000014', '8', '', 0, 2, 0, 'system:notify-group:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2025-01-19 18:36:11');
+INSERT INTO `sys_menu` VALUES ('1000015', '1000015', 'UserGroup', '鐢ㄦ埛鍒嗙粍', NULL, 0, '/system/user-group/index', NULL, '1000', '2', '/user-group', 0, 1, 0, 'system:user-group:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-08 18:37:01', '绯荤粺绠＄悊鍛', '1', '2025-01-19 18:36:11');
+INSERT INTO `sys_menu` VALUES ('1000015001', '1000015001', '', '鏂板鐢ㄦ埛鍒嗙粍', NULL, 0, '', NULL, '1000015', '8', '', 0, 2, 0, 'system:user-group:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2025-01-19 18:36:11');
+INSERT INTO `sys_menu` VALUES ('1000015002', '1000015002', '', '淇敼鐢ㄦ埛鍒嗙粍', NULL, 0, '', NULL, '1000015', '8', '', 0, 2, 0, 'system:user-group:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2025-01-19 18:36:11');
+INSERT INTO `sys_menu` VALUES ('1000015003', '1000015003', '', '鍒犻櫎鐢ㄦ埛鍒嗙粍', NULL, 0, '', NULL, '1000015', '8', '', 0, 2, 0, 'system:user-group:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2025-01-19 18:36:11');
+INSERT INTO `sys_menu` VALUES ('1001', '1001', 'Platform', '骞冲彴绠＄悊', 'ant-design:global-outlined', NULL, '', NULL, NULL, '1', '/platform', 0, 0, 1, '', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:22:05', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('1001001', '1001001', 'OnelineCode', '鍦ㄧ嚎寮€鍙', NULL, 0, '/iframes/index', NULL, '1001', '1', '/online-code?src=${magic-api.base-url}${magic-api.web}/index.html', 0, 1, 0, 'system:online-code:config', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-08 18:37:01', '绯荤粺绠＄悊鍛', '1', '2021-12-09 17:54:42');
+INSERT INTO `sys_menu` VALUES ('1002', '1002', 'MsgCenter', '娑堟伅涓績', 'ant-design:message-outlined', NULL, '', NULL, NULL, '2', '/msg-center', 0, 0, 0, '', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:22:05', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('1002001', '1002001', 'SiteMessage', '绔欏唴淇', NULL, 0, '/system/site-message/manage', NULL, '1002', '2', '/system/site-message/manage', 0, 1, 0, 'system:site-message:manage', 0, 1, '', '绯荤粺绠＄悊鍛', '1', '2022-08-18 14:31:12', '绯荤粺绠＄悊鍛', '1', '2022-08-18 14:31:12');
+INSERT INTO `sys_menu` VALUES ('1002002', '1002002', 'MySiteMessage', '鎴戠殑绔欏唴淇', NULL, 0, '/system/site-message/index', NULL, '1002', '2', '/system/site-message/my', 0, 1, 0, '', 0, 1, '', '绯荤粺绠＄悊鍛', '1', '2022-08-18 14:31:12', '绯荤粺绠＄悊鍛', '1', '2022-08-18 14:31:12');
+INSERT INTO `sys_menu` VALUES ('1002003', '1002003', 'MailMessage', '閭欢娑堟伅', NULL, 0, '/system/mail-message/index', NULL, '1002', '2', '/system/mail-message', 0, 1, 0, 'system:mail-message:manage', 0, 1, '', '绯荤粺绠＄悊鍛', '1', '2022-08-18 14:31:12', '绯荤粺绠＄悊鍛', '1', '2022-08-18 14:31:12');
+INSERT INTO `sys_menu` VALUES ('1003', '1003', 'BpmManage', '娴佺▼涓績', 'ant-design:project-outlined', NULL, '', NULL, NULL, '16', '/bpm', 0, 0, 1, '', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:22:05', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('1003001', '1003001', 'DesignFlowDefinition', '娴佺▼璁捐', NULL, 0, '/bpm/flow/definition/index', NULL, '1003', '16', '/flow-definition', 0, 1, 0, '', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-08 18:37:01', '绯荤粺绠＄悊鍛', '1', '2021-12-09 17:54:42');
+INSERT INTO `sys_menu` VALUES ('1003002', '1003002', 'MyFlow', '鎴戠殑鍙戣捣', NULL, 0, '/bpm/flow/task/my/index', NULL, '1003', '16', '/flow-my', 0, 1, 0, '', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-08 18:37:01', '绯荤粺绠＄悊鍛', '1', '2021-12-09 17:54:42');
+INSERT INTO `sys_menu` VALUES ('1003003', '1003003', 'FlowTodo', '寰呭姙浠诲姟', NULL, 0, '/bpm/flow/task/todo/index', NULL, '1003', '16', '/flow-todo', 0, 1, 0, '', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-08 18:37:01', '绯荤粺绠＄悊鍛', '1', '2021-12-09 17:54:42');
+INSERT INTO `sys_menu` VALUES ('1003004', '1003004', 'FlowInstanceManage', '娴佺▼瀹炰緥绠＄悊', NULL, 0, '/bpm/flow/instance/manage/index', NULL, '1003', '16', '/flow-instance-manage', 0, 1, 0, '', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-08 18:37:01', '绯荤粺绠＄悊鍛', '1', '2021-12-09 17:54:42');
+INSERT INTO `sys_menu` VALUES ('2000', '2000', 'BaseData', '鍩虹淇℃伅绠＄悊', 'ant-design:container-outlined', NULL, '', NULL, NULL, '3', '/base-data', 0, 0, 0, '', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 01:21:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 01:21:39');
+INSERT INTO `sys_menu` VALUES ('2000002', '2000002', 'StoreCenterInfo', '浠撳簱淇℃伅', NULL, 0, '/base-data/store-center/index', NULL, '2000', '3', '/store-center', 0, 1, 0, 'base-data:store-center:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:36');
+INSERT INTO `sys_menu` VALUES ('2000002001', '2000002001', '', '鏂板浠撳簱', NULL, 0, '', NULL, '2000002', '3', '', 0, 2, 0, 'base-data:store-center:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2000002002', '2000002002', '', '淇敼浠撳簱', NULL, 0, '', NULL, '2000002', '3', '', 0, 2, 0, 'base-data:store-center:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2000002003', '2000002003', '', '瀵煎叆浠撳簱', NULL, 0, '', NULL, '2000002', '3', '', 0, 2, 0, 'base-data:store-center:import', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2000002004', '2000002004', '', '鍒犻櫎浠撳簱', NULL, 0, '', NULL, '2000002', '3', '', 0, 2, 0, 'base-data:store-center:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2000002005', '2000002005', '', '浠撲綅鏌ヨ', NULL, 0, '', NULL, '2000002', '3', '', 0, 2, 0, 'base-data:stock-cell:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2000002006', '2000002006', '', '鏂板浠撲綅', NULL, 0, '', NULL, '2000002', '3', '', 0, 2, 0, 'base-data:stock-cell:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2000002007', '2000002007', '', '淇敼浠撲綅', NULL, 0, '', NULL, '2000002', '3', '', 0, 2, 0, 'base-data:stock-cell:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2000002008', '2000002008', '', '鍒犻櫎浠撲綅', NULL, 0, '', NULL, '2000002', '3', '', 0, 2, 0, 'base-data:stock-cell:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2000002009', '2000002009', '', '瀵煎叆浠撲綅', NULL, 0, '', NULL, '2000002', '3', '', 0, 2, 0, 'base-data:stock-cell:import', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2000004', '2000004', 'Customer', '鏀惰揣鏂逛俊鎭', NULL, 0, '/base-data/customer/index', NULL, '2000', '3', '/customer', 0, 1, 0, 'base-data:customer:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:36');
+INSERT INTO `sys_menu` VALUES ('2000004001', '2000004001', '', '鏂板鏀惰揣鏂', NULL, 0, '', NULL, '2000004', '3', '', 0, 2, 0, 'base-data:customer:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2000004002', '2000004002', '', '淇敼鏀惰揣鏂', NULL, 0, '', NULL, '2000004', '3', '', 0, 2, 0, 'base-data:customer:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2000004003', '2000004003', '', '瀵煎叆鏀惰揣鏂', NULL, 0, '', NULL, '2000004', '3', '', 0, 2, 0, 'base-data:customer:import', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2000004004', '2000004004', '', '鍒犻櫎鏀惰揣鏂', NULL, 0, '', NULL, '2000004', '3', '', 0, 2, 0, 'base-data:customer:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2000005', '2000005', 'Supplier', '渚涘簲鍟嗕俊鎭', NULL, 0, '/base-data/supplier/index', NULL, '2000', '3', '/supplier', 0, 1, 0, 'base-data:supplier:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:36');
+INSERT INTO `sys_menu` VALUES ('2000005001', '2000005001', '', '鏂板渚涘簲鍟', NULL, 0, '', NULL, '2000005', '3', '', 0, 2, 0, 'base-data:supplier:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2000005002', '2000005002', '', '淇敼渚涘簲鍟', NULL, 0, '', NULL, '2000005', '3', '', 0, 2, 0, 'base-data:supplier:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2000005003', '2000005003', '', '瀵煎叆渚涘簲鍟', NULL, 0, '', NULL, '2000005', '3', '', 0, 2, 0, 'base-data:supplier:import', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2000005004', '2000005004', '', '鍒犻櫎渚涘簲鍟', NULL, 0, '', NULL, '2000005', '3', '', 0, 2, 0, 'base-data:supplier:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2000006', '2000006', 'Member', '浼氬憳淇℃伅', NULL, 0, '/base-data/member/index', NULL, '2000', '3', '/member', 0, 1, 0, 'base-data:member:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:36');
+INSERT INTO `sys_menu` VALUES ('2000006001', '2000006001', '', '鏂板浼氬憳', NULL, 0, '', NULL, '2000006', '3', '', 0, 2, 0, 'base-data:member:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2000006002', '2000006002', '', '淇敼浼氬憳', NULL, 0, '', NULL, '2000006', '3', '', 0, 2, 0, 'base-data:member:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2000006003', '2000006003', '', '瀵煎叆浼氬憳', NULL, 0, '', NULL, '2000006', '3', '', 0, 2, 0, 'base-data:member:import', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2000006004', '2000006004', '', '鍒犻櫎浼氬憳', NULL, 0, '', NULL, '2000006', '3', '', 0, 2, 0, 'base-data:member:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2000007', '2000007', 'Shop', '闂ㄥ簵淇℃伅', NULL, 0, '/base-data/shop/index', NULL, '2000', '3', '/shop', 0, 1, 0, 'base-data:shop:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:36');
+INSERT INTO `sys_menu` VALUES ('2000007001', '2000007001', '', '鏂板闂ㄥ簵', NULL, 0, '', NULL, '2000007', '3', '', 0, 2, 0, 'base-data:shop:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2000007002', '2000007002', '', '淇敼闂ㄥ簵', NULL, 0, '', NULL, '2000007', '3', '', 0, 2, 0, 'base-data:shop:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2000007003', '2000007003', '', '瀵煎叆闂ㄥ簵', NULL, 0, '', NULL, '2000007', '3', '', 0, 2, 0, 'base-data:shop:import', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2000007004', '2000007004', '', '鍒犻櫎闂ㄥ簵', NULL, 0, '', NULL, '2000007', '3', '', 0, 2, 0, 'base-data:shop:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2000008', '2000008', 'PayType', '鏀粯鏂瑰紡', NULL, 0, '/base-data/pay-type/index', NULL, '2000', '3', '/pay-type', 0, 1, 0, 'base-data:pay-type:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:36');
+INSERT INTO `sys_menu` VALUES ('2000008001', '2000008001', '', '鏂板鏀粯鏂瑰紡', NULL, 0, '', NULL, '2000008', '3', '', 0, 2, 0, 'base-data:pay-type:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2000008002', '2000008002', '', '淇敼鏀粯鏂瑰紡', NULL, 0, '', NULL, '2000008', '3', '', 0, 2, 0, 'base-data:pay-type:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2000008003', '2000008003', '', '鍒犻櫎鏀粯鏂瑰紡', NULL, 0, '', NULL, '2000008', '3', '', 0, 2, 0, 'base-data:pay-type:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2000009', '2000009', 'Address', '鍦板潃搴', NULL, 0, '/base-data/address/index', NULL, '2000', '15', '/address', 0, 1, 0, 'base-data:address:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:36');
+INSERT INTO `sys_menu` VALUES ('2000009001', '2000009001', '', '鏂板鍦板潃', NULL, 0, '', NULL, '2000009', '15', '', 0, 2, 0, 'base-data:address:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2000009002', '2000009002', '', '淇敼鍦板潃', NULL, 0, '', NULL, '2000009', '15', '', 0, 2, 0, 'base-data:address:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2000009003', '2000009003', '', '瀵煎嚭鍦板潃', NULL, 0, '', NULL, '2000009', '15', '', 0, 2, 0, 'base-data:address:export', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2000009004', '2000009004', '', '瀵煎叆鍦板潃', NULL, 0, '', NULL, '2000009', '15', '', 0, 2, 0, 'base-data:address:import', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2000009005', '2000009005', '', '鍒犻櫎鍦板潃', NULL, 0, '', NULL, '2000009', '15', '', 0, 2, 0, 'base-data:address:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2000010', '2000010', 'LogisticsCompany', '鐗╂祦鍏徃', NULL, 0, '/base-data/logistics/company/index', NULL, '2000', '15', '/logistics/company', 0, 1, 0, 'base-data:logistics-company:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:36');
+INSERT INTO `sys_menu` VALUES ('2000010001', '2000010001', '', '鏂板鐗╂祦鍏徃', NULL, 0, '', NULL, '2000010', '15', '', 0, 2, 0, 'base-data:logistics-company:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2000010002', '2000010002', '', '淇敼鐗╂祦鍏徃', NULL, 0, '', NULL, '2000010', '15', '', 0, 2, 0, 'base-data:logistics-company:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2000010003', '2000010003', '', '鍒犻櫎鐗╂祦鍏徃', NULL, 0, '', NULL, '2000010', '15', '', 0, 2, 0, 'base-data:logistics-company:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2000011', '2000011', 'PrintTemplate', '鎵撳嵃妯℃澘', NULL, 0, '/base-data/print-template/index', NULL, '2000', '15', '/print-template', 0, 1, 0, 'base-data:print-template:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:36');
+INSERT INTO `sys_menu` VALUES ('2000011001', '2000011001', '', '鏂板鎵撳嵃妯℃澘', NULL, 0, '', NULL, '2000011', '15', '', 0, 2, 0, 'base-data:print-template:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2000011002', '2000011002', '', '淇敼鎵撳嵃妯℃澘', NULL, 0, '', NULL, '2000011', '15', '', 0, 2, 0, 'base-data:print-template:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2001', '2001', 'Product', '鍟嗗搧涓績', 'ant-design:appstore-outlined', NULL, '', NULL, NULL, '4', '/product', 0, 0, 0, '', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 01:21:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 01:21:39');
+INSERT INTO `sys_menu` VALUES ('2001001', '2001001', 'ProductCategory', '鍟嗗搧鍒嗙被', NULL, 0, '/base-data/product/category/index', NULL, '2001', '4', '/category', 0, 1, 0, 'base-data:product:category:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:36');
+INSERT INTO `sys_menu` VALUES ('2001001001', '2001001001', '', '鏂板鍒嗙被', NULL, 0, '', NULL, '2001001', '4', '', 0, 2, 0, 'base-data:product:category:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2001001002', '2001001002', '', '淇敼鍒嗙被', NULL, 0, '', NULL, '2001001', '4', '', 0, 2, 0, 'base-data:product:category:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2001001003', '2001001003', '', '瀵煎叆鍒嗙被', NULL, 0, '', NULL, '2001001', '4', '', 0, 2, 0, 'base-data:product:category:import', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2001001004', '2001001004', '', '鍒犻櫎鍒嗙被', NULL, 0, '', NULL, '2001001', '4', '', 0, 2, 0, 'base-data:product:category:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2001002', '2001002', 'ProductBrand', '鍟嗗搧鍝佺墝', NULL, 0, '/base-data/product/brand/index', NULL, '2001', '4', '/brand', 0, 1, 0, 'base-data:product:brand:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-06 17:01:00', '绯荤粺绠＄悊鍛', '1', '2021-07-06 17:01:00');
+INSERT INTO `sys_menu` VALUES ('2001002001', '2001002001', '', '鏂板鍝佺墝', NULL, 0, '', NULL, '2001002', '4', '', 0, 2, 0, 'base-data:product:brand:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2001002002', '2001002002', '', '淇敼鍝佺墝', NULL, 0, '', NULL, '2001002', '4', '', 0, 2, 0, 'base-data:product:brand:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2001002003', '2001002003', '', '瀵煎叆鍝佺墝', NULL, 0, '', NULL, '2001002', '4', '', 0, 2, 0, 'base-data:product:brand:import', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2001002004', '2001002004', '', '鍒犻櫎鍝佺墝', NULL, 0, '', NULL, '2001002', '4', '', 0, 2, 0, 'base-data:product:brand:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2001004', '2001004', 'ProductProperty', '鍟嗗搧灞炴€', NULL, 0, '/base-data/product/property/index', NULL, '2001', '4', '/property', 0, 1, 0, 'base-data:product:property:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-06 17:01:00', '绯荤粺绠＄悊鍛', '1', '2021-07-06 17:01:00');
+INSERT INTO `sys_menu` VALUES ('2001004001', '2001004001', '', '鏂板灞炴€', NULL, 0, '', NULL, '2001004', '4', '', 0, 2, 0, 'base-data:product:property:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2001004002', '2001004002', '', '淇敼灞炴€', NULL, 0, '', NULL, '2001004', '4', '', 0, 2, 0, 'base-data:product:property:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2001004003', '2001004003', '', '鏌ヨ灞炴€у€', NULL, 0, '', NULL, '2001004', '4', '', 0, 2, 0, 'base-data:product:property-item:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2001004004', '2001004004', '', '鏂板灞炴€у€', NULL, 0, '', NULL, '2001004', '4', '', 0, 2, 0, 'base-data:product:property-item:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2001004005', '2001004005', '', '淇敼灞炴€у€', NULL, 0, '', NULL, '2001004', '4', '', 0, 2, 0, 'base-data:product:property-item:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2001004006', '2001004006', '', '鍒犻櫎灞炴€', NULL, 0, '', NULL, '2001004', '4', '', 0, 2, 0, 'base-data:product:property:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2001004007', '2001004007', '', '鍒犻櫎灞炴€у€', NULL, 0, '', NULL, '2001004', '4', '', 0, 2, 0, 'base-data:product:property-item:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2001005', '2001005', 'ProductInfo', '鍟嗗搧绠＄悊', NULL, 0, '/base-data/product/info/index', NULL, '2001', '4', '/info', 0, 1, 0, 'base-data:product:info:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-06 17:01:00', '绯荤粺绠＄悊鍛', '1', '2021-07-06 17:01:00');
+INSERT INTO `sys_menu` VALUES ('2001005001', '2001005001', '', '鏂板鍟嗗搧', NULL, 0, '', NULL, '2001005', '4', '', 0, 2, 0, 'base-data:product:info:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2001005002', '2001005002', '', '淇敼鍟嗗搧', NULL, 0, '', NULL, '2001005', '4', '', 0, 2, 0, 'base-data:product:info:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2001005003', '2001005003', '', '瀵煎叆鍟嗗搧', NULL, 0, '', NULL, '2001005', '4', '', 0, 2, 0, 'base-data:product:info:import', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2001005004', '2001005004', '', '鍒犻櫎鍟嗗搧', NULL, 0, '', NULL, '2001005', '4', '', 0, 2, 0, 'base-data:product:info:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2001006', '2001006', 'StockCellProduct', '浠撲綅鍟嗗搧绠＄悊', NULL, 0, '/base-data/stock-cell-product/index', NULL, '2001', '4', '/stock-cell-product', 0, 1, 0, 'base-data:stock-cell-product:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-06 17:01:00', '绯荤粺绠＄悊鍛', '1', '2021-07-06 17:01:00');
+INSERT INTO `sys_menu` VALUES ('2001006001', '2001006001', '', '鏂板浠撲綅鍟嗗搧', NULL, 0, '', NULL, '2001006', '4', '', 0, 2, 0, 'base-data:stock-cell-product:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2001006002', '2001006002', '', '淇敼浠撲綅鍟嗗搧', NULL, 0, '', NULL, '2001006', '4', '', 0, 2, 0, 'base-data:stock-cell-product:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2001006003', '2001006003', '', '鍒犻櫎浠撲綅鍟嗗搧', NULL, 0, '', NULL, '2001006', '4', '', 0, 2, 0, 'base-data:stock-cell-product:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2001006004', '2001006004', '', '瀵煎叆浠撲綅鍟嗗搧', NULL, 0, '', NULL, '2001006', '4', '', 0, 2, 0, 'base-data:stock-cell-product:import', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2002', '2002', 'Purchase', '閲囪喘绠＄悊', 'ant-design:money-collect-outlined', NULL, '', NULL, NULL, '5', '/purchase', 0, 0, 1, '', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 01:21:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 01:21:39');
+INSERT INTO `sys_menu` VALUES ('2002001', '2002001', 'PurchaseConfig', '閲囪喘鍙傛暟璁剧疆', NULL, 0, '/sc/purchase/config/index', NULL, '2002', '5', '/config', 1, 1, 0, 'purchase:config:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:36');
+INSERT INTO `sys_menu` VALUES ('2002002', '2002002', 'PurchaseOrder', '閲囪喘璁㈠崟绠＄悊', NULL, 0, '/sc/purchase/order/index', NULL, '2002', '5', '/order', 0, 1, 0, 'purchase:order:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:36');
+INSERT INTO `sys_menu` VALUES ('2002002001', '2002002001', '', '鏂板閲囪喘璁㈠崟', NULL, 0, '', NULL, '2002002', '5', '', 0, 2, 0, 'purchase:order:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2002002002', '2002002002', '', '淇敼閲囪喘璁㈠崟', NULL, 0, '', NULL, '2002002', '5', '', 0, 2, 0, 'purchase:order:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2002002003', '2002002003', '', '鍒犻櫎閲囪喘璁㈠崟', NULL, 0, '', NULL, '2002002', '5', '', 0, 2, 0, 'purchase:order:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2002002004', '2002002004', '', '瀹℃牳閲囪喘璁㈠崟', NULL, 0, '', NULL, '2002002', '5', '', 0, 2, 0, 'purchase:order:approve', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2002002005', '2002002005', '', '瀵煎嚭閲囪喘璁㈠崟', NULL, 0, '', NULL, '2002002', '5', '', 0, 2, 0, 'purchase:order:export', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2002002006', '2002002006', '', '瀵煎叆閲囪喘璁㈠崟', NULL, 0, '', NULL, '2002002', '5', '', 0, 2, 0, 'purchase:order:import', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2002003', '2002003', 'ReceiveSheet', '閲囪喘鏀惰揣绠＄悊', NULL, 0, '/sc/purchase/receive/index', NULL, '2002', '5', '/receive', 0, 1, 0, 'purchase:receive:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:36');
+INSERT INTO `sys_menu` VALUES ('2002003001', '2002003001', '', '鏂板閲囪喘鏀惰揣鍗', NULL, 0, '', NULL, '2002003', '5', '', 0, 2, 0, 'purchase:receive:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2002003002', '2002003002', '', '淇敼閲囪喘鏀惰揣鍗', NULL, 0, '', NULL, '2002003', '5', '', 0, 2, 0, 'purchase:receive:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2002003003', '2002003003', '', '鍒犻櫎閲囪喘鏀惰揣鍗', NULL, 0, '', NULL, '2002003', '5', '', 0, 2, 0, 'purchase:receive:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2002003004', '2002003004', '', '瀹℃牳閲囪喘鏀惰揣鍗', NULL, 0, '', NULL, '2002003', '5', '', 0, 2, 0, 'purchase:receive:approve', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2002003005', '2002003005', '', '瀵煎嚭閲囪喘鏀惰揣鍗', NULL, 0, '', NULL, '2002003', '5', '', 0, 2, 0, 'purchase:receive:export', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2002003006', '2002003006', '', '瀵煎叆閲囪喘鏀惰揣鍗', NULL, 0, '', NULL, '2002003', '5', '', 0, 2, 0, 'purchase:receive:import', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2002004', '2002004', 'PurchaseReturn', '閲囪喘閫€璐х鐞', NULL, 0, '/sc/purchase/return/index', NULL, '2002', '5', '/return', 0, 1, 0, 'purchase:return:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:36');
+INSERT INTO `sys_menu` VALUES ('2002004001', '2002004001', '', '鏂板閲囪喘閫€璐у崟', NULL, 0, '', NULL, '2002004', '5', '', 0, 2, 0, 'purchase:return:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2002004002', '2002004002', '', '淇敼閲囪喘閫€璐у崟', NULL, 0, '', NULL, '2002004', '5', '', 0, 2, 0, 'purchase:return:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2002004003', '2002004003', '', '鍒犻櫎閲囪喘閫€璐у崟', NULL, 0, '', NULL, '2002004', '5', '', 0, 2, 0, 'purchase:return:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2002004004', '2002004004', '', '瀹℃牳閲囪喘閫€璐у崟', NULL, 0, '', NULL, '2002004', '5', '', 0, 2, 0, 'purchase:return:approve', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2002004005', '2002004005', '', '瀵煎嚭閲囪喘閫€璐у崟', NULL, 0, '', NULL, '2002004', '5', '', 0, 2, 0, 'purchase:return:export', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2003', '2003', 'Sale', '鍏ュ簱/鍑哄簱绠＄悊', 'ant-design:rocket-outlined', NULL, '', NULL, NULL, '6', '/sale', 0, 0, 0, '', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 01:21:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 01:21:39');
+INSERT INTO `sys_menu` VALUES ('2003001', '2003001', 'SaleConfig', '閿€鍞弬鏁拌缃', NULL, 0, '/sc/sale/config/index', NULL, '2003', '6', '/config', 1, 1, 1, 'sale:config:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:36');
+INSERT INTO `sys_menu` VALUES ('2003002', '2003002', 'SaleOrder', '閿€鍞鍗曠鐞', NULL, 0, '/sc/sale/order/index', NULL, '2003', '6', '/order', 0, 1, 1, 'sale:order:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:36');
+INSERT INTO `sys_menu` VALUES ('2003002001', '2003002001', '', '鏂板閿€鍞鍗', NULL, 0, '', NULL, '2003002', '6', '', 0, 2, 0, 'sale:order:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2003002002', '2003002002', '', '淇敼閿€鍞鍗', NULL, 0, '', NULL, '2003002', '6', '', 0, 2, 0, 'sale:order:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2003002003', '2003002003', '', '鍒犻櫎閿€鍞鍗', NULL, 0, '', NULL, '2003002', '6', '', 0, 2, 0, 'sale:order:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2003002004', '2003002004', '', '瀹℃牳閿€鍞鍗', NULL, 0, '', NULL, '2003002', '6', '', 0, 2, 0, 'sale:order:approve', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2003002005', '2003002005', '', '瀵煎嚭閿€鍞鍗', NULL, 0, '', NULL, '2003002', '6', '', 0, 2, 0, 'sale:order:export', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2003003', '2003003', 'SaleOutSheet', '鍑哄簱绠＄悊', NULL, 0, '/sc/sale/out/index', NULL, '2003', '6', '/out', 0, 1, 0, 'sale:out:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:36');
+INSERT INTO `sys_menu` VALUES ('2003005', '2003005', 'SaleInSheet', '鍏ュ簱绠＄悊', NULL, 0, '/sc/purchase/receive/index', NULL, '2003', '6', '/in', 0, 1, 0, 'purchase:receive:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:36');
+INSERT INTO `sys_menu` VALUES ('2003003001', '2003003001', '', '鏂板閿€鍞嚭搴撳崟', NULL, 0, '', NULL, '2003003', '6', '', 0, 2, 0, 'sale:out:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2003003002', '2003003002', '', '淇敼閿€鍞嚭搴撳崟', NULL, 0, '', NULL, '2003003', '6', '', 0, 2, 0, 'sale:out:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2003003003', '2003003003', '', '鍒犻櫎閿€鍞嚭搴撳崟', NULL, 0, '', NULL, '2003003', '6', '', 0, 2, 0, 'sale:out:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2003003004', '2003003004', '', '瀹℃牳閿€鍞嚭搴撳崟', NULL, 0, '', NULL, '2003003', '6', '', 0, 2, 0, 'sale:out:approve', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2003003005', '2003003005', '', '瀵煎嚭閿€鍞嚭搴撳崟', NULL, 0, '', NULL, '2003003', '6', '', 0, 2, 0, 'sale:out:export', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2003004', '2003004', 'SaleReturn', '閿€鍞€€璐х鐞', NULL, 0, '/sc/sale/return/index', NULL, '2003', '6', '/return', 0, 1, 1, 'sale:return:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:36');
+INSERT INTO `sys_menu` VALUES ('2003004001', '2003004001', '', '鏂板閿€鍞€€璐у崟', NULL, 0, '', NULL, '2003004', '6', '', 0, 2, 0, 'sale:return:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2003004002', '2003004002', '', '淇敼閿€鍞€€璐у崟', NULL, 0, '', NULL, '2003004', '6', '', 0, 2, 0, 'sale:return:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2003004003', '2003004003', '', '鍒犻櫎閿€鍞€€璐у崟', NULL, 0, '', NULL, '2003004', '6', '', 0, 2, 0, 'sale:return:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2003004004', '2003004004', '', '瀹℃牳閿€鍞€€璐у崟', NULL, 0, '', NULL, '2003004', '6', '', 0, 2, 0, 'sale:return:approve', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2003004005', '2003004005', '', '瀵煎嚭閿€鍞€€璐у崟', NULL, 0, '', NULL, '2003004', '6', '', 0, 2, 0, 'sale:return:export', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2004', '2004', 'Retail', '闆跺敭绠＄悊', 'ant-design:flag-outlined', NULL, '', NULL, NULL, '7', '/retail', 0, 0, 1, '', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 01:21:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 01:21:39');
+INSERT INTO `sys_menu` VALUES ('2004001', '2004001', 'RetailConfig', '闆跺敭鍙傛暟璁剧疆', NULL, 0, '/sc/retail/config/index', NULL, '2004', '7', '/config', 1, 1, 0, 'retail:config:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:36');
+INSERT INTO `sys_menu` VALUES ('2004002', '2004002', 'RetailOutSheet', '闆跺敭鍑哄簱绠＄悊', NULL, 0, '/sc/retail/out/index', NULL, '2004', '7', '/out', 0, 1, 0, 'retail:out:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:36');
+INSERT INTO `sys_menu` VALUES ('2004002001', '2004002001', '', '鏂板闆跺敭鍑哄簱鍗', NULL, 0, '', NULL, '2004002', '7', '', 0, 2, 0, 'retail:out:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2004002002', '2004002002', '', '淇敼闆跺敭鍑哄簱鍗', NULL, 0, '', NULL, '2004002', '7', '', 0, 2, 0, 'retail:out:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2004002003', '2004002003', '', '鍒犻櫎闆跺敭鍑哄簱鍗', NULL, 0, '', NULL, '2004002', '7', '', 0, 2, 0, 'retail:out:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2004002004', '2004002004', '', '瀹℃牳闆跺敭鍑哄簱鍗', NULL, 0, '', NULL, '2004002', '7', '', 0, 2, 0, 'retail:out:approve', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2004002005', '2004002005', '', '瀵煎嚭闆跺敭鍑哄簱鍗', NULL, 0, '', NULL, '2004002', '7', '', 0, 2, 0, 'retail:out:export', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2004003', '2004003', 'RetailReturn', '闆跺敭閫€璐х鐞', NULL, 0, '/sc/retail/return/index', NULL, '2004', '7', '/return', 0, 1, 0, 'retail:return:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:36');
+INSERT INTO `sys_menu` VALUES ('2004003001', '2004003001', '', '鏂板闆跺敭閫€璐у崟', NULL, 0, '', NULL, '2004003', '7', '', 0, 2, 0, 'retail:return:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2004003002', '2004003002', '', '淇敼闆跺敭閫€璐у崟', NULL, 0, '', NULL, '2004003', '7', '', 0, 2, 0, 'retail:return:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2004003003', '2004003003', '', '鍒犻櫎闆跺敭閫€璐у崟', NULL, 0, '', NULL, '2004003', '7', '', 0, 2, 0, 'retail:return:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2004003004', '2004003004', '', '瀹℃牳闆跺敭閫€璐у崟', NULL, 0, '', NULL, '2004003', '7', '', 0, 2, 0, 'retail:return:approve', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('2004003005', '2004003005', '', '瀵煎嚭闆跺敭閫€璐у崟', NULL, 0, '', NULL, '2004003', '7', '', 0, 2, 0, 'retail:return:export', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('3000', '3000', 'StockManage', '搴撳瓨绠＄悊', 'ant-design:hdd-outlined', NULL, '', NULL, NULL, '8', '/stock', 0, 0, 0, '', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 01:21:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 01:21:39');
+INSERT INTO `sys_menu` VALUES ('3000001', '3000001', 'ProductStock', '鍟嗗搧搴撳瓨', NULL, 0, '/sc/stock/product/index', NULL, '3000', '8', '/product', 0, 1, 0, 'stock:product:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:36');
+INSERT INTO `sys_menu` VALUES ('3000001001', '3000001001', '', '瀵煎嚭鍟嗗搧搴撳瓨', NULL, 0, '', NULL, '3000001', '8', '', 0, 2, 0, 'stock:product:export', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('3000003', '3000003', 'ProductStockLog', '鍟嗗搧搴撳瓨鍙樺姩璁板綍', NULL, 0, '/sc/stock/product-log/index', NULL, '3000', '8', '/product/log', 0, 1, 0, 'stock:product-log:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:36');
+INSERT INTO `sys_menu` VALUES ('3000003001', '3000003001', '', '瀵煎嚭鍟嗗搧搴撳瓨鍙樺姩璁板綍', NULL, 0, '', NULL, '3000003', '8', '', 0, 2, 0, 'stock:product-log:export', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('3000004', '3000004', 'TakeStock', '搴撳瓨鐩樼偣', 'ant-design:monitor-outlined', NULL, '', NULL, NULL, '9', '/take', 0, 0, 0, '', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 01:21:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 01:21:39');
+INSERT INTO `sys_menu` VALUES ('3000004001', '3000004001', 'TakeStockConfig', '鐩樼偣鍙傛暟璁剧疆', NULL, 0, '/sc/stock/take/config/index', NULL, '3000004', '9', '/config', 1, 1, 0, 'stock:take:config:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:36');
+INSERT INTO `sys_menu` VALUES ('3000004002', '3000004002', 'PreTakeStockSheet', '棰勫厛鐩樼偣鍗曠鐞', NULL, 0, '/sc/stock/take/pre/index', NULL, '3000004', '9', '/pre', 0, 1, 0, 'stock:take:pre:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:36');
+INSERT INTO `sys_menu` VALUES ('3000004002001', '3000004002001', '', '鏂板棰勫厛鐩樼偣鍗', NULL, 0, '', NULL, '3000004002', '9', '', 0, 2, 0, 'stock:take:pre:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('3000004002002', '3000004002002', '', '淇敼棰勫厛鐩樼偣鍗', NULL, 0, '', NULL, '3000004002', '9', '', 0, 2, 0, 'stock:take:pre:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('3000004002003', '3000004002003', '', '鍒犻櫎棰勫厛鐩樼偣鍗', NULL, 0, '', NULL, '3000004002', '9', '', 0, 2, 0, 'stock:take:pre:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('3000004002004', '3000004002004', '', '瀵煎嚭棰勫厛鐩樼偣鍗', NULL, 0, '', NULL, '3000004002', '9', '', 0, 2, 0, 'stock:take:pre:export', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('3000004003', '3000004003', 'TakeStockPlan', '鐩樼偣浠诲姟绠＄悊', NULL, 0, '/sc/stock/take/plan/index', NULL, '3000004', '9', '/plan', 0, 1, 0, 'stock:take:plan:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:36');
+INSERT INTO `sys_menu` VALUES ('3000004003001', '3000004003001', '', '鏂板鐩樼偣浠诲姟', NULL, 0, '', NULL, '3000004003', '9', '', 0, 2, 0, 'stock:take:plan:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('3000004003002', '3000004003002', '', '淇敼鐩樼偣浠诲姟', NULL, 0, '', NULL, '3000004003', '9', '', 0, 2, 0, 'stock:take:plan:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('3000004003003', '3000004003003', '', '鍒犻櫎鐩樼偣浠诲姟', NULL, 0, '', NULL, '3000004003', '9', '', 0, 2, 0, 'stock:take:plan:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('3000004003004', '3000004003004', '', '瀵煎嚭鐩樼偣浠诲姟', NULL, 0, '', NULL, '3000004003', '9', '', 0, 2, 0, 'stock:take:plan:export', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('3000004003005', '3000004003005', '', '宸紓鐢熸垚', NULL, 0, '', NULL, '3000004003', '9', '', 0, 2, 0, 'stock:take:plan:create-diff', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('3000004003006', '3000004003006', '', '宸紓澶勭悊', NULL, 0, '', NULL, '3000004003', '9', '', 0, 2, 0, 'stock:take:plan:handle-diff', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('3000004003007', '3000004003007', '', '浣滃簾鐩樼偣浠诲姟', NULL, 0, '', NULL, '3000004003', '9', '', 0, 2, 0, 'stock:take:plan:cancel', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('3000004004', '3000004004', 'TakeStockSheet', '鐩樼偣鍗曠鐞', NULL, 0, '/sc/stock/take/sheet/index', NULL, '3000004', '9', '/sheet', 0, 1, 0, 'stock:take:sheet:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:36');
+INSERT INTO `sys_menu` VALUES ('3000004004001', '3000004004001', '', '鏂板鐩樼偣鍗', NULL, 0, '', NULL, '3000004004', '9', '', 0, 2, 0, 'stock:take:sheet:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('3000004004002', '3000004004002', '', '淇敼鐩樼偣鍗', NULL, 0, '', NULL, '3000004004', '9', '', 0, 2, 0, 'stock:take:sheet:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('3000004004003', '3000004004003', '', '鍒犻櫎鐩樼偣鍗', NULL, 0, '', NULL, '3000004004', '9', '', 0, 2, 0, 'stock:take:sheet:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('3000004004004', '3000004004004', '', '瀵煎嚭鐩樼偣鍗', NULL, 0, '', NULL, '3000004004', '9', '', 0, 2, 0, 'stock:take:sheet:export', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('3000004004005', '3000004004005', '', '瀹℃牳鐩樼偣鍗', NULL, 0, '', NULL, '3000004004', '9', '', 0, 2, 0, 'stock:take:sheet:approve', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('3000004004006', '3000004004006', '', '鍙栨秷瀹℃牳鐩樼偣鍗', NULL, 0, '', NULL, '3000004004', '9', '', 0, 2, 0, 'stock:take:sheet:cancel-approve', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('3000005', '3000005', 'StockAdjust', '搴撳瓨璋冩暣', 'ant-design:thunderbolt-outlined', NULL, '', NULL, NULL, '10', '/take-adjust', 0, 0, 0, '', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 01:21:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 01:21:39');
+INSERT INTO `sys_menu` VALUES ('3000005002', '3000005002', 'StockAdjustReason', '搴撳瓨璋冩暣鍘熷洜', NULL, 0, '/sc/stock/adjust/stock/reason/index', NULL, '3000005', '10', '/stock/reason', 0, 1, 0, 'stock:adjust:reason:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:36');
+INSERT INTO `sys_menu` VALUES ('3000005002001', '3000005002001', '', '鏂板搴撳瓨璋冩暣鍘熷洜', NULL, 0, '', NULL, '3000005002', '10', '', 0, 2, 0, 'stock:adjust:reason:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('3000005002002', '3000005002002', '', '淇敼搴撳瓨璋冩暣鍘熷洜', NULL, 0, '', NULL, '3000005002', '10', '', 0, 2, 0, 'stock:adjust:reason:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('3000005002003', '3000005002003', '', '鍒犻櫎搴撳瓨璋冩暣鍘熷洜', NULL, 0, '', NULL, '3000005002', '10', '', 0, 2, 0, 'stock:adjust:reason:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('3000005003', '3000005003', 'StockAdjustSheet', '搴撳瓨璋冩暣', NULL, 0, '/sc/stock/adjust/stock/index', NULL, '3000005', '10', '/stock', 0, 1, 0, 'stock:adjust:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:36');
+INSERT INTO `sys_menu` VALUES ('3000005003001', '3000005003001', '', '鏂板搴撳瓨璋冩暣鍗', NULL, 0, '', NULL, '3000005003', '10', '', 0, 2, 0, 'stock:adjust:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('3000005003002', '3000005003002', '', '淇敼搴撳瓨璋冩暣鍗', NULL, 0, '', NULL, '3000005003', '10', '', 0, 2, 0, 'stock:adjust:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('3000005003003', '3000005003003', '', '鍒犻櫎搴撳瓨璋冩暣鍗', NULL, 0, '', NULL, '3000005003', '10', '', 0, 2, 0, 'stock:adjust:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('3000005003004', '3000005003004', '', '瀵煎嚭搴撳瓨璋冩暣鍗', NULL, 0, '', NULL, '3000005003', '10', '', 0, 2, 0, 'stock:adjust:export', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('3000005003005', '3000005003005', '', '瀹℃牳搴撳瓨璋冩暣鍗', NULL, 0, '', NULL, '3000005003', '10', '', 0, 2, 0, 'stock:adjust:approve', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('3000006', '3000006', 'ScTransferOrder', '浠撳簱璋冩嫧', NULL, 0, '/sc/stock/transfer/index', NULL, '3000', '8', '/transfer', 0, 1, 0, 'stock:sc-transfer:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:36');
+INSERT INTO `sys_menu` VALUES ('3000006001', '3000006001', '', '鏂板浠撳簱璋冩嫧鍗', NULL, 0, '', NULL, '3000006', '8', '', 0, 2, 0, 'stock:sc-transfer:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('3000006002', '3000006002', '', '淇敼浠撳簱璋冩嫧鍗', NULL, 0, '', NULL, '3000006', '8', '', 0, 2, 0, 'stock:sc-transfer:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('3000006003', '3000006003', '', '鍒犻櫎浠撳簱璋冩嫧鍗', NULL, 0, '', NULL, '3000006', '8', '', 0, 2, 0, 'stock:sc-transfer:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('3000006004', '3000006004', '', '瀵煎嚭浠撳簱璋冩嫧鍗', NULL, 0, '', NULL, '3000006', '8', '', 0, 2, 0, 'stock:sc-transfer:export', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('3000006005', '3000006005', '', '瀹℃牳浠撳簱璋冩嫧鍗', NULL, 0, '', NULL, '3000006', '8', '', 0, 2, 0, 'stock:sc-transfer:approve', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('3000006006', '3000006006', '', '浠撳簱璋冩嫧鍗曟敹璐', NULL, 0, '', NULL, '3000006', '8', '', 0, 2, 0, 'stock:sc-transfer:receive', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('3000007', '3000007', 'StockWarning', '搴撳瓨棰勮', NULL, 0, '/sc/stock/warning/index', NULL, '3000', '8', '/warning', 0, 1, 0, 'stock:warning:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:36');
+INSERT INTO `sys_menu` VALUES ('3000007001', '3000007001', '', '鏂板搴撳瓨棰勮', NULL, 0, '', NULL, '3000007', '8', '', 0, 2, 0, 'stock:warning:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('3000007002', '3000007002', '', '淇敼搴撳瓨棰勮', NULL, 0, '', NULL, '3000007', '8', '', 0, 2, 0, 'stock:warning:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('3000007003', '3000007003', '', '鍒犻櫎搴撳瓨棰勮', NULL, 0, '', NULL, '3000007', '8', '', 0, 2, 0, 'stock:warning:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('3000007004', '3000007004', '', '璁剧疆娑堟伅閫氱煡缁', NULL, 0, '', NULL, '3000007', '8', '', 0, 2, 0, 'stock:warning:notify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('3000007005', '3000007005', '', '瀵煎叆搴撳瓨棰勮', NULL, 0, '', NULL, '3000007', '8', '', 0, 2, 0, 'stock:warning:import', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('4000', '4000', 'SettleManage', '缁撶畻绠＄悊', 'ant-design:credit-card-outlined', NULL, '', NULL, NULL, '11', '/settle', 0, 0, 1, '', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 01:21:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 01:21:39');
+INSERT INTO `sys_menu` VALUES ('4000001', '4000001', 'SettleInItem', '鏀跺叆椤圭洰', NULL, 0, '/settle/in-item/index', NULL, '4000', '11', '/in-item', 0, 1, 0, 'settle:in-item:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:36');
+INSERT INTO `sys_menu` VALUES ('4000001001', '4000001001', '', '鏂板鏀跺叆椤圭洰', NULL, 0, '', NULL, '4000001', '11', '', 0, 2, 0, 'settle:in-item:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('4000001002', '4000001002', '', '淇敼鏀跺叆椤圭洰', NULL, 0, '', NULL, '4000001', '11', '', 0, 2, 0, 'settle:in-item:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('4000001003', '4000001003', '', '瀵煎嚭鏀跺叆椤圭洰', NULL, 0, '', NULL, '4000001', '11', '', 0, 2, 0, 'settle:in-item:export', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('4000001004', '4000001004', '', '鍒犻櫎鏀跺叆椤圭洰', NULL, 0, '', NULL, '4000001', '11', '', 0, 2, 0, 'settle:in-item:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('4000002', '4000002', 'SettleOutItem', '鏀嚭椤圭洰', NULL, 0, '/settle/out-item/index', NULL, '4000', '11', '/out-item', 0, 1, 0, 'settle:out-item:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:36');
+INSERT INTO `sys_menu` VALUES ('4000002001', '4000002001', '', '鏂板鏀嚭椤圭洰', NULL, 0, '', NULL, '4000002', '11', '', 0, 2, 0, 'settle:out-item:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('4000002002', '4000002002', '', '淇敼鏀嚭椤圭洰', NULL, 0, '', NULL, '4000002', '11', '', 0, 2, 0, 'settle:out-item:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('4000002003', '4000002003', '', '瀵煎嚭鏀嚭椤圭洰', NULL, 0, '', NULL, '4000002', '11', '', 0, 2, 0, 'settle:out-item:export', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('4000002004', '4000002004', '', '鍒犻櫎鏀嚭椤圭洰', NULL, 0, '', NULL, '4000002', '11', '', 0, 2, 0, 'settle:out-item:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('4000003', '4000003', 'SettleFeeSheet', '渚涘簲鍟嗚垂鐢', NULL, 0, '/settle/fee-sheet/index', NULL, '4000007', '11', '/fee-sheet', 0, 1, 0, 'settle:fee-sheet:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:36');
+INSERT INTO `sys_menu` VALUES ('4000003001', '4000003001', '', '鏂板渚涘簲鍟嗚垂鐢ㄥ崟', NULL, 0, '', NULL, '4000003', '11', '', 0, 2, 0, 'settle:fee-sheet:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('4000003002', '4000003002', '', '淇敼渚涘簲鍟嗚垂鐢ㄥ崟', NULL, 0, '', NULL, '4000003', '11', '', 0, 2, 0, 'settle:fee-sheet:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('4000003003', '4000003003', '', '鍒犻櫎渚涘簲鍟嗚垂鐢ㄥ崟', NULL, 0, '', NULL, '4000003', '11', '', 0, 2, 0, 'settle:fee-sheet:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('4000003004', '4000003004', '', '瀹℃牳渚涘簲鍟嗚垂鐢ㄥ崟', NULL, 0, '', NULL, '4000003', '11', '', 0, 2, 0, 'settle:fee-sheet:approve', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('4000003005', '4000003005', '', '瀵煎嚭渚涘簲鍟嗚垂鐢ㄥ崟', NULL, 0, '', NULL, '4000003', '11', '', 0, 2, 0, 'settle:fee-sheet:export', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('4000004', '4000004', 'SettlePreSheet', '渚涘簲鍟嗛浠樻', NULL, 0, '/settle/pre-sheet/index', NULL, '4000007', '11', '/pre-sheet', 0, 1, 0, 'settle:pre-sheet:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:36');
+INSERT INTO `sys_menu` VALUES ('4000004001', '4000004001', '', '鏂板渚涘簲鍟嗛浠樻鍗', NULL, 0, '', NULL, '4000004', '11', '', 0, 2, 0, 'settle:pre-sheet:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('4000004002', '4000004002', '', '淇敼渚涘簲鍟嗛浠樻鍗', NULL, 0, '', NULL, '4000004', '11', '', 0, 2, 0, 'settle:pre-sheet:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('4000004003', '4000004003', '', '鍒犻櫎渚涘簲鍟嗛浠樻鍗', NULL, 0, '', NULL, '4000004', '11', '', 0, 2, 0, 'settle:pre-sheet:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('4000004004', '4000004004', '', '瀹℃牳渚涘簲鍟嗛浠樻鍗', NULL, 0, '', NULL, '4000004', '11', '', 0, 2, 0, 'settle:pre-sheet:approve', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('4000004005', '4000004005', '', '瀵煎嚭渚涘簲鍟嗛浠樻鍗', NULL, 0, '', NULL, '4000004', '11', '', 0, 2, 0, 'settle:pre-sheet:export', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('4000005', '4000005', 'SettleCheckSheet', '渚涘簲鍟嗗璐', NULL, 0, '/settle/check-sheet/index', NULL, '4000007', '11', '/check-sheet', 0, 1, 0, 'settle:check-sheet:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:36');
+INSERT INTO `sys_menu` VALUES ('4000005001', '4000005001', '', '鏂板渚涘簲鍟嗗璐﹀崟', NULL, 0, '', NULL, '4000005', '11', '', 0, 2, 0, 'settle:check-sheet:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('4000005002', '4000005002', '', '淇敼渚涘簲鍟嗗璐﹀崟', NULL, 0, '', NULL, '4000005', '11', '', 0, 2, 0, 'settle:check-sheet:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('4000005003', '4000005003', '', '鍒犻櫎渚涘簲鍟嗗璐﹀崟', NULL, 0, '', NULL, '4000005', '11', '', 0, 2, 0, 'settle:check-sheet:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('4000005004', '4000005004', '', '瀹℃牳渚涘簲鍟嗗璐﹀崟', NULL, 0, '', NULL, '4000005', '11', '', 0, 2, 0, 'settle:check-sheet:approve', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('4000005005', '4000005005', '', '瀵煎嚭渚涘簲鍟嗗璐﹀崟', NULL, 0, '', NULL, '4000005', '11', '', 0, 2, 0, 'settle:check-sheet:export', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('4000006', '4000006', 'SettleSheet', '渚涘簲鍟嗙粨绠', NULL, 0, '/settle/sheet/index', NULL, '4000007', '11', '/sheet', 0, 1, 0, 'settle:sheet:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:36');
+INSERT INTO `sys_menu` VALUES ('4000006001', '4000006001', '', '鏂板渚涘簲鍟嗙粨绠楀崟', NULL, 0, '', NULL, '4000006', '11', '', 0, 2, 0, 'settle:sheet:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('4000006002', '4000006002', '', '淇敼渚涘簲鍟嗙粨绠楀崟', NULL, 0, '', NULL, '4000006', '11', '', 0, 2, 0, 'settle:sheet:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('4000006003', '4000006003', '', '鍒犻櫎渚涘簲鍟嗙粨绠楀崟', NULL, 0, '', NULL, '4000006', '11', '', 0, 2, 0, 'settle:sheet:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('4000006004', '4000006004', '', '瀹℃牳渚涘簲鍟嗙粨绠楀崟', NULL, 0, '', NULL, '4000006', '11', '', 0, 2, 0, 'settle:sheet:approve', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('4000006005', '4000006005', '', '瀵煎嚭渚涘簲鍟嗙粨绠楀崟', NULL, 0, '', NULL, '4000006', '11', '', 0, 2, 0, 'settle:sheet:export', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('4000007', '4000007', 'SupplierSettleManage', '渚涘簲鍟嗙粨绠', NULL, NULL, '', NULL, '4000', '11', '/supplier', 0, 0, 0, '', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 01:21:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 01:21:39');
+INSERT INTO `sys_menu` VALUES ('4000008', '4000008', 'CustomerSettleManage', '鏀惰揣鏂圭粨绠', NULL, NULL, '', NULL, '4000', '11', '/customer', 0, 0, 0, '', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 01:21:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 01:21:39');
+INSERT INTO `sys_menu` VALUES ('4000009', '4000009', 'CustomerSettleFeeSheet', '鏀惰揣鏂硅垂鐢', NULL, 0, '/customer-settle/fee-sheet/index', NULL, '4000008', '11', '/fee-sheet', 0, 1, 0, 'customer-settle:fee-sheet:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:36');
+INSERT INTO `sys_menu` VALUES ('4000009001', '4000009001', '', '鏂板鏀惰揣鏂硅垂鐢ㄥ崟', NULL, 0, '', NULL, '4000009', '11', '', 0, 2, 0, 'customer-settle:fee-sheet:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('4000009002', '4000009002', '', '淇敼鏀惰揣鏂硅垂鐢ㄥ崟', NULL, 0, '', NULL, '4000009', '11', '', 0, 2, 0, 'customer-settle:fee-sheet:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('4000009003', '4000009003', '', '鍒犻櫎鏀惰揣鏂硅垂鐢ㄥ崟', NULL, 0, '', NULL, '4000009', '11', '', 0, 2, 0, 'customer-settle:fee-sheet:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('4000009004', '4000009004', '', '瀹℃牳鏀惰揣鏂硅垂鐢ㄥ崟', NULL, 0, '', NULL, '4000009', '11', '', 0, 2, 0, 'customer-settle:fee-sheet:approve', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('4000009005', '4000009005', '', '瀵煎嚭鏀惰揣鏂硅垂鐢ㄥ崟', NULL, 0, '', NULL, '4000009', '11', '', 0, 2, 0, 'customer-settle:fee-sheet:export', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('4000010', '4000010', 'CustomerSettlePreSheet', '鏀惰揣鏂归鏀舵', NULL, 0, '/customer-settle/pre-sheet/index', NULL, '4000008', '11', '/pre-sheet', 0, 1, 0, 'customer-settle:pre-sheet:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:36');
+INSERT INTO `sys_menu` VALUES ('4000010001', '4000010001', '', '鏂板鏀惰揣鏂归鏀舵鍗', NULL, 0, '', NULL, '4000010', '11', '', 0, 2, 0, 'customer-settle:pre-sheet:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('4000010002', '4000010002', '', '淇敼鏀惰揣鏂归鏀舵鍗', NULL, 0, '', NULL, '4000010', '11', '', 0, 2, 0, 'customer-settle:pre-sheet:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('4000010003', '4000010003', '', '鍒犻櫎鏀惰揣鏂归鏀舵鍗', NULL, 0, '', NULL, '4000010', '11', '', 0, 2, 0, 'customer-settle:pre-sheet:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('4000010004', '4000010004', '', '瀹℃牳鏀惰揣鏂归鏀舵鍗', NULL, 0, '', NULL, '4000010', '11', '', 0, 2, 0, 'customer-settle:pre-sheet:approve', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('4000010005', '4000010005', '', '瀵煎嚭鏀惰揣鏂归鏀舵鍗', NULL, 0, '', NULL, '4000010', '11', '', 0, 2, 0, 'customer-settle:pre-sheet:export', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('4000011', '4000011', 'CustomerSettleCheckSheet', '鏀惰揣鏂瑰璐', NULL, 0, '/customer-settle/check-sheet/index', NULL, '4000008', '11', '/check-sheet', 0, 1, 0, 'customer-settle:check-sheet:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:36');
+INSERT INTO `sys_menu` VALUES ('4000011001', '4000011001', '', '鏂板鏀惰揣鏂瑰璐﹀崟', NULL, 0, '', NULL, '4000011', '11', '', 0, 2, 0, 'customer-settle:check-sheet:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('4000011002', '4000011002', '', '淇敼鏀惰揣鏂瑰璐﹀崟', NULL, 0, '', NULL, '4000011', '11', '', 0, 2, 0, 'customer-settle:check-sheet:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('4000011003', '4000011003', '', '鍒犻櫎鏀惰揣鏂瑰璐﹀崟', NULL, 0, '', NULL, '4000011', '11', '', 0, 2, 0, 'customer-settle:check-sheet:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('4000011004', '4000011004', '', '瀹℃牳鏀惰揣鏂瑰璐﹀崟', NULL, 0, '', NULL, '4000011', '11', '', 0, 2, 0, 'customer-settle:check-sheet:approve', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('4000011005', '4000011005', '', '瀵煎嚭鏀惰揣鏂瑰璐﹀崟', NULL, 0, '', NULL, '4000011', '11', '', 0, 2, 0, 'customer-settle:check-sheet:export', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('4000012', '4000012', 'CustomerSettleSheet', '鏀惰揣鏂圭粨绠', NULL, 0, '/customer-settle/sheet/index', NULL, '4000008', '11', '/sheet', 0, 1, 0, 'customer-settle:sheet:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:35', '绯荤粺绠＄悊鍛', '1', '2021-07-05 21:59:36');
+INSERT INTO `sys_menu` VALUES ('4000012001', '4000012001', '', '鏂板鏀惰揣鏂圭粨绠楀崟', NULL, 0, '', NULL, '4000012', '11', '', 0, 2, 0, 'customer-settle:sheet:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('4000012002', '4000012002', '', '淇敼鏀惰揣鏂圭粨绠楀崟', NULL, 0, '', NULL, '4000012', '11', '', 0, 2, 0, 'customer-settle:sheet:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('4000012003', '4000012003', '', '鍒犻櫎鏀惰揣鏂圭粨绠楀崟', NULL, 0, '', NULL, '4000012', '11', '', 0, 2, 0, 'customer-settle:sheet:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('4000012004', '4000012004', '', '瀹℃牳鏀惰揣鏂圭粨绠楀崟', NULL, 0, '', NULL, '4000012', '11', '', 0, 2, 0, 'customer-settle:sheet:approve', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('4000012005', '4000012005', '', '瀵煎嚭鏀惰揣鏂圭粨绠楀崟', NULL, 0, '', NULL, '4000012', '11', '', 0, 2, 0, 'customer-settle:sheet:export', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 10:53:45', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('5000', '5000', 'Logistics', '鐗╂祦绠＄悊', 'ant-design:gift-outlined', NULL, '', NULL, NULL, '15', '/logistics', 0, 0, 1, '', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:22:05', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('5000001', '5000001', 'LogisticsSheet', '鐗╂祦鍗曠鐞', NULL, 0, '/sc/logistics/sheet/index', NULL, '5000', '15', '/sheet', 0, 1, 0, 'logistics:sheet:query', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-08 18:37:01', '绯荤粺绠＄悊鍛', '1', '2021-12-09 17:54:42');
+INSERT INTO `sys_menu` VALUES ('5000001001', '5000001001', '', '鏂板鐗╂祦鍗', NULL, 0, '', NULL, '5000001', '15', '', 0, 2, 0, 'logistics:sheet:add', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 22:50:27', '绯荤粺绠＄悊鍛', '1', '2021-12-09 17:54:42');
+INSERT INTO `sys_menu` VALUES ('5000001002', '5000001002', '', '淇敼鐗╂祦鍗', NULL, 0, '', NULL, '5000001', '15', '', 0, 2, 0, 'logistics:sheet:modify', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:23:33', '绯荤粺绠＄悊鍛', '1', '2021-12-09 17:54:42');
+INSERT INTO `sys_menu` VALUES ('5000001003', '5000001003', '', '鍒犻櫎鐗╂祦鍗', NULL, 0, '', NULL, '5000001', '15', '', 0, 2, 0, 'logistics:sheet:delete', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:24:36', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('5000001004', '5000001004', '', '鐗╂祦鍗曞彂璐', NULL, 0, '', NULL, '5000001', '15', '', 0, 2, 0, 'logistics:sheet:delivery', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:24:36', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('5000001005', '5000001005', '', '瀵煎叆鐗╂祦鍗', NULL, 0, '', NULL, '5000001', '15', '', 0, 2, 0, 'logistics:sheet:import', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:24:36', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('5000001006', '5000001006', '', '瀵煎嚭鐗╂祦鍗', NULL, 0, '', NULL, '5000001', '15', '', 0, 2, 0, 'logistics:sheet:export', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-12 23:24:36', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('9000', '9000', 'Development', '寮€鍙戠鐞', NULL, NULL, '', NULL, '1001', '12', '/development', 0, 0, 0, '', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:22:05', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('9000001', '9000001', 'Qrtz', '瀹氭椂鍣ㄧ鐞', NULL, 0, '/development/qrtz/index', NULL, '9000', '12', '/qrtz', 0, 1, 0, 'development:qrtz:manage', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-08 18:37:01', '绯荤粺绠＄悊鍛', '1', '2021-12-09 17:54:42');
+INSERT INTO `sys_menu` VALUES ('9001', '9001', 'SmartWork', '渚挎嵎鍔炲叕', 'ant-design:read-outlined', NULL, '', NULL, NULL, '13', '/smart-work', 0, 0, 1, '', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:22:05', '绯荤粺绠＄悊鍛', '1', '2021-07-04 00:34:23');
+INSERT INTO `sys_menu` VALUES ('9001001', '9001001', 'FileBox', '鏂囦欢鏀剁撼绠', NULL, 0, '/smart-work/file-box/index', NULL, '9001', '13', '/file-box', 0, 1, 0, '', 1, 1, '', '绯荤粺绠＄悊鍛', '1', '2021-05-08 18:37:01', '绯荤粺绠＄悊鍛', '1', '2021-12-09 17:54:42');
+
+-- ----------------------------
+-- Table structure for sys_menu_collect
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_menu_collect`;
+CREATE TABLE `sys_menu_collect`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `user_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鐢ㄦ埛ID',
+  `menu_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鑿滃崟ID',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `user_id, menu_id`(`user_id`, `menu_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鑿滃崟鏀惰棌' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_menu_collect
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for sys_notice
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_notice`;
+CREATE TABLE `sys_notice`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `title` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鏍囬',
+  `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '鍐呭',
+  `available` tinyint(1) NOT NULL DEFAULT 1 COMMENT '鐘舵€',
+  `published` tinyint(1) NOT NULL DEFAULT 0 COMMENT '鏄惁鍙戝竷',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  `readed_num` int(11) NOT NULL DEFAULT 0 COMMENT '宸茶浜烘暟',
+  `un_read_num` int(11) NOT NULL DEFAULT 0 COMMENT '鏈浜烘暟',
+  `publish_time` datetime NULL DEFAULT NULL COMMENT '鍙戝竷鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '绯荤粺閫氱煡' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_notice
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for sys_notice_log
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_notice_log`;
+CREATE TABLE `sys_notice_log`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `notice_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鏍囬',
+  `user_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鐢ㄦ埛ID',
+  `readed` tinyint(1) NOT NULL DEFAULT 0 COMMENT '鏄惁宸茶',
+  `read_time` datetime NULL DEFAULT NULL COMMENT '宸茶鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `notice_id`(`notice_id`, `user_id`) USING BTREE,
+  INDEX `user_id`(`user_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '绯荤粺閫氱煡璁板綍' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_notice_log
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for sys_notify_group
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_notify_group`;
+CREATE TABLE `sys_notify_group`  (
+  `id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍚嶇О',
+  `receiver_type` tinyint(3) NOT NULL COMMENT '鎺ユ敹鑰呯被鍨',
+  `message_type` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '娑堟伅绫诲瀷',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  `available` tinyint(1) NOT NULL COMMENT '鐘舵€',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `name`(`name`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '娑堟伅閫氱煡缁' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_notify_group
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for sys_notify_group_receiver
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_notify_group_receiver`;
+CREATE TABLE `sys_notify_group_receiver`  (
+  `id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `group_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '娑堟伅閫氱煡缁処D',
+  `receiver_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鎺ユ敹鑰匢D',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `group_id`(`group_id`, `receiver_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '娑堟伅閫氱煡缁?鎺ユ敹鑰呭叧绯昏〃' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_notify_group_receiver
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for sys_parameter
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_parameter`;
+CREATE TABLE `sys_parameter`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `pm_key` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '閿',
+  `pm_value` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '鍊',
+  `description` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `pm_key`(`pm_key`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '绯荤粺鍙傛暟' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_parameter
+-- ----------------------------
+INSERT INTO `sys_parameter` VALUES (1, 'tx-map.key', 'OLJBZ-ZFJK6-QWUSK-MB7XT-6UTN2-AWBSY', '鑵捐鍦板浘Key', '绯荤粺绠＄悊鍛', '1', '2022-05-22 04:18:59', '绯荤粺绠＄悊鍛', '1', '2022-05-22 04:18:59');
+INSERT INTO `sys_parameter` VALUES (2, 'tx-map.secret', 'secret', '鑵捐鍦板浘Secret', '绯荤粺绠＄悊鍛', '1', '2022-05-22 04:18:59', '绯荤粺绠＄悊鍛', '1', '2022-05-22 04:18:59');
+INSERT INTO `sys_parameter` VALUES (3, 'excel-import.max-size', '2000', 'Excel瀵煎叆鏈€澶ф潯鏁', '绯荤粺绠＄悊鍛', '1', '2022-06-10 21:39:32', '绯荤粺绠＄悊鍛', '1', '2022-06-10 21:39:32');
+INSERT INTO `sys_parameter` VALUES (8, 'mail', '{\n    \"pass\":\"123456\",\n    \"sslEnable\":true,\n    \"timeOut\":30000,\n    \"port\":25,\n    \"host\":\"smtp.xingyun.com\",\n    \"connectTimeOut\":1000,\n    \"from\":\"test@xingyun.com\",\n    \"user\":\"test\"\n}', '閭欢閰嶇疆', '绯荤粺绠＄悊鍛', '1', '2023-03-14 21:13:44', '绯荤粺绠＄悊鍛', '1', '2023-03-14 21:13:44');
+INSERT INTO `sys_parameter` VALUES (9, 'upload.type', 'LOCAL', '涓婁紶绫诲瀷锛屽垎涓篖OCAL銆丱SS銆丆OS銆丱BS銆侺OCAL锛氭湇鍔″櫒鏈湴瀛樺偍銆侽SS锛氶樋閲屼簯瀵硅薄瀛樺偍銆侰OS锛氳吘璁簯瀵硅薄瀛樺偍銆侽BS锛氬崕涓轰簯瀵硅薄瀛樺偍', '绯荤粺绠＄悊鍛', '1', '2023-06-27 10:38:05', '绯荤粺绠＄悊鍛', '1', '2023-06-27 10:38:10');
+INSERT INTO `sys_parameter` VALUES (10, 'upload.oss.config', '{\"customUrl\":\"\",\"endpoint\":\"yourEndpoint\",\"internalEndPoint\":\"\",\"accessKeyId\":\"yourAccessKeyId\",\"accessKeySecret\":\"yourAccessKeySecret\",\"bucketName\":\"yourBacketName\"}', '闃块噷浜戝璞″瓨鍌ㄩ厤缃俊鎭紝upload.type=OSS鏃剁敓鏁堬紝娉ㄦ剰锛氬綋鏈嶅姟鍣ㄤ笌OSS鍚屼竴鍦板煙鏃讹紝寤鸿濉啓internalEndPoint锛屾鍊艰〃绀哄唴缃慹ndpoint锛屽湪涓婁紶鏃朵細浼樺厛浣跨敤鍐呯綉endpoint銆俢ustomUrl涓鸿嚜瀹氫箟鍩熷悕锛堥渶甯﹀崗璁級涓虹┖浠ｈ〃涓嶄娇鐢ㄨ嚜瀹氫箟鍩熷悕锛岀ず渚嬪€硷細https://www.lframework.com銆傚叾浠栧弬鏁板潎鍦ㄩ樋閲屼簯鎺у彴鑾峰彇銆', '绯荤粺绠＄悊鍛', '1', '2023-06-27 10:38:05', '绯荤粺绠＄悊鍛', '1', '2025-04-10 20:48:54');
+INSERT INTO `sys_parameter` VALUES (11, 'upload.obs.config', '{\"customUrl\":\"\",\"endpoint\":\"yourEndpoint\",\"ak\":\"yourAk\",\"sk\":\"yourSk\",\"bucketName\":\"yourBucketName\"}', '鍗庝负浜戝璞″瓨鍌ㄩ厤缃俊鎭紝upload.type=OBS鏃剁敓鏁堛€俢ustomUrl涓鸿嚜瀹氫箟鍩熷悕锛堢洰鍓嶅崕涓轰簯OBS涓嶆敮鎸乭ttps鍗忚鐨勮嚜瀹氫箟鍩熷悕锛変负绌轰唬琛ㄤ笉浣跨敤鑷畾涔夊煙鍚嶏紝绀轰緥鍊硷細http://www.lframework.com銆傚叾浠栧弬鏁板潎鍦ㄥ崕涓轰簯鎺у彴鑾峰彇銆', '绯荤粺绠＄悊鍛', '1', '2023-06-27 10:38:05', '绯荤粺绠＄悊鍛', '1', '2025-04-10 20:50:10');
+INSERT INTO `sys_parameter` VALUES (12, 'upload.cos.config', '{\"customUrl\":\"\",\"endpoint\":\"yourEndpoint\",\"region\":\"yourRegion\",\"secretId\":\"yourSecretId\",\"secretKey\":\"yourSecretKey\",\"bucketName\":\"yourBucketName\"}', '鑵捐浜戝璞″瓨鍌ㄩ厤缃俊鎭紝upload.type=COS鏃剁敓鏁堛€俥npoint涓轰笅杞芥枃浠舵椂鐨勫煙鍚嶏紝customUrl涓鸿嚜瀹氫箟鍩熷悕锛堥渶甯﹀崗璁級涓虹┖浠ｈ〃涓嶄娇鐢ㄨ嚜瀹氫箟鍩熷悕锛岀ず渚嬪€硷細https://www.lframework.com銆傚叾浠栧弬鏁板潎鍦ㄨ吘璁簯鎺у彴鑾峰彇銆', '绯荤粺绠＄悊鍛', '1', '2023-06-27 10:38:05', '绯荤粺绠＄悊鍛', '1', '2025-04-10 20:51:53');
+INSERT INTO `sys_parameter` VALUES (13, 'login-captcha.enabled', 'false', '鐧诲綍鏃舵槸鍚﹂渶瑕侀獙璇佺爜锛宼rue锛氶渶瑕侊紱false锛氫笉闇€瑕併€', '绯荤粺绠＄悊鍛', '1', '2024-10-16 21:39:32', '绯荤粺绠＄悊鍛', '1', '2024-10-16 21:39:32');
+INSERT INTO `sys_parameter` VALUES (14, 'security-upload.type', 'LOCAL', '涓婁紶绫诲瀷锛屽垎涓篖OCAL銆丱SS銆丆OS銆丱BS銆侺OCAL锛氭湇鍔″櫒鏈湴瀛樺偍銆侽SS锛氶樋閲屼簯瀵硅薄瀛樺偍銆侰OS锛氳吘璁簯瀵硅薄瀛樺偍銆侽BS锛氬崕涓轰簯瀵硅薄瀛樺偍', '绯荤粺绠＄悊鍛', '1', '2023-06-27 10:38:05', '绯荤粺绠＄悊鍛', '1', '2025-04-10 20:50:49');
+INSERT INTO `sys_parameter` VALUES (15, 'security-upload.oss.config', '{\"customUrl\":\"\",\"endpoint\":\"yourEndpoint\",\"internalEndPoint\":\"\",\"accessKeyId\":\"yourAccessKeyId\",\"accessKeySecret\":\"yourAccessKeySecret\",\"bucketName\":\"yourBacketName\"}', '闃块噷浜戝璞″瓨鍌ㄩ厤缃俊鎭紝security-upload.type=OSS鏃剁敓鏁堬紝娉ㄦ剰锛氬綋鏈嶅姟鍣ㄤ笌OSS鍚屼竴鍦板煙鏃讹紝寤鸿濉啓internalEndPoint锛屾鍊艰〃绀哄唴缃慹ndpoint锛屽湪涓婁紶鏃朵細浼樺厛浣跨敤鍐呯綉endpoint銆俢ustomUrl涓鸿嚜瀹氫箟鍩熷悕锛堥渶甯﹀崗璁級涓虹┖浠ｈ〃涓嶄娇鐢ㄨ嚜瀹氫箟鍩熷悕锛岀ず渚嬪€硷細https://www.lframework.com銆傚叾浠栧弬鏁板潎鍦ㄩ樋閲屼簯鎺у彴鑾峰彇銆', '绯荤粺绠＄悊鍛', '1', '2023-06-27 10:38:05', '绯荤粺绠＄悊鍛', '1', '2025-04-10 20:48:59');
+INSERT INTO `sys_parameter` VALUES (16, 'security-upload.obs.config', '{\"customUrl\":\"\",\"endpoint\":\"yourEndpoint\",\"ak\":\"yourAk\",\"sk\":\"yourSk\",\"bucketName\":\"yourBucketName\"}', '鍗庝负浜戝璞″瓨鍌ㄩ厤缃俊鎭紝security-upload.type=OBS鏃剁敓鏁堛€俢ustomUrl涓鸿嚜瀹氫箟鍩熷悕锛堢洰鍓嶅崕涓轰簯OBS涓嶆敮鎸乭ttps鍗忚鐨勮嚜瀹氫箟鍩熷悕锛変负绌轰唬琛ㄤ笉浣跨敤鑷畾涔夊煙鍚嶏紝绀轰緥鍊硷細http://www.lframework.com銆傚叾浠栧弬鏁板潎鍦ㄥ崕涓轰簯鎺у彴鑾峰彇銆', '绯荤粺绠＄悊鍛', '1', '2023-06-27 10:38:05', '绯荤粺绠＄悊鍛', '1', '2025-04-10 20:50:40');
+INSERT INTO `sys_parameter` VALUES (17, 'security-upload.cos.config', '{\"customUrl\":\"\",\"endpoint\":\"yourEndpoint\",\"region\":\"yourRegion\",\"secretId\":\"yourSecretId\",\"secretKey\":\"yourSecretKey\",\"bucketName\":\"yourBucketName\"}', '鑵捐浜戝璞″瓨鍌ㄩ厤缃俊鎭紝security-upload.type=COS鏃剁敓鏁堛€俥npoint涓轰笅杞芥枃浠舵椂鐨勫煙鍚嶏紝customUrl涓鸿嚜瀹氫箟鍩熷悕锛堥渶甯﹀崗璁級涓虹┖浠ｈ〃涓嶄娇鐢ㄨ嚜瀹氫箟鍩熷悕锛岀ず渚嬪€硷細https://www.lframework.com銆傚叾浠栧弬鏁板潎鍦ㄨ吘璁簯鎺у彴鑾峰彇銆', '绯荤粺绠＄悊鍛', '1', '2023-06-27 10:38:05', '绯荤粺绠＄悊鍛', '1', '2025-04-10 20:52:09');
+INSERT INTO `sys_parameter` VALUES (18, 'security-upload.sign-url-expired', '600', '棰勭鍚峌RL杩囨湡鏃堕棿锛屽崟浣嶏細绉掋€', '绯荤粺绠＄悊鍛', '1', '2023-06-27 10:38:05', '绯荤粺绠＄悊鍛', '1', '2023-06-27 14:48:02');
+INSERT INTO `sys_parameter` VALUES (19, 'export.timeout', '600', '鍗曚釜瀵煎嚭浠诲姟瓒呮椂鏃堕棿锛屽崟浣嶏細绉掋€', '绯荤粺绠＄悊鍛', '1', '2025-04-10 10:38:05', '绯荤粺绠＄悊鍛', '1', '2025-04-10 10:38:05');
+
+-- ----------------------------
+-- Table structure for sys_role
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_role`;
+CREATE TABLE `sys_role`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `category_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒嗙被ID',
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '缂栧彿',
+  `name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍚嶇О',
+  `permission` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鏉冮檺',
+  `available` tinyint(1) NOT NULL COMMENT '鐘舵€',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `category_id`(`category_id`) USING BTREE,
+  INDEX `code`(`code`) USING BTREE,
+  INDEX `name`(`name`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '瑙掕壊' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_role
+-- ----------------------------
+INSERT INTO `sys_role` VALUES ('1', '1', '001', '绯荤粺绠＄悊鍛', 'admin', 1, '绯荤粺绠＄悊鍛', '绯荤粺绠＄悊鍛', '1', '2021-05-08 18:04:41', '绯荤粺绠＄悊鍛', '1', '2021-05-08 18:04:45');
+
+-- ----------------------------
+-- Table structure for sys_role_category
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_role_category`;
+CREATE TABLE `sys_role_category`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '缂栧彿',
+  `name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍚嶇О',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `code`(`code`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '瑙掕壊鍒嗙被' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_role_category
+-- ----------------------------
+INSERT INTO `sys_role_category` VALUES ('1', '001', '榛樿', '绯荤粺绠＄悊鍛', '1', '2025-05-12 00:00:00', '绯荤粺绠＄悊鍛', '1', '2025-05-12 00:00:00');
+
+-- ----------------------------
+-- Table structure for sys_role_menu
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_role_menu`;
+CREATE TABLE `sys_role_menu`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `role_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '瑙掕壊ID',
+  `menu_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鑿滃崟ID',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `role_id, menu_id`(`role_id`, `menu_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '瑙掕壊涓庤彍鍗曞叧绯昏〃' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_role_menu
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for sys_site_message
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_site_message`;
+CREATE TABLE `sys_site_message`  (
+  `id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `title` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鏍囬',
+  `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍐呭',
+  `receiver_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鎺ユ敹浜篒D',
+  `biz_key` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '涓氬姟閿',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  `readed` tinyint(1) NOT NULL DEFAULT 0 COMMENT '鏄惁宸茶',
+  `read_time` datetime NULL DEFAULT NULL COMMENT '宸茶鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `biz_key`(`biz_key`) USING BTREE,
+  INDEX `receiver_id`(`receiver_id`) USING BTREE,
+  INDEX `create_time`(`create_time`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '绔欏唴淇' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_site_message
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for sys_user
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_user`;
+CREATE TABLE `sys_user`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '缂栧彿',
+  `name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '濮撳悕',
+  `username` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鐢ㄦ埛鍚',
+  `password` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '瀵嗙爜',
+  `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '閭',
+  `telephone` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鑱旂郴鐢佃瘽',
+  `gender` tinyint(3) NOT NULL DEFAULT 0 COMMENT '鎬у埆 0-鏈煡 1-鐢?2-濂',
+  `available` tinyint(1) NOT NULL DEFAULT 1 COMMENT '鐘舵€?1-鍦ㄧ敤 0鍋滅敤',
+  `lock_status` tinyint(1) NOT NULL DEFAULT 0 COMMENT '閿佸畾鐘舵€',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `code`(`code`) USING BTREE,
+  INDEX `username`(`username`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鐢ㄦ埛' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_user
+-- ----------------------------
+INSERT INTO `sys_user` VALUES ('1', '001', '绯荤粺绠＄悊鍛', 'admin', '$2a$10$IJtHluhnhAYkgvM4PdKuZek5PWbtuxtjB9pB.twZdxg/qrlR4s4q6', 'xingyun@lframework.com', '17600000001', 0, 1, 0, '', '绯荤粺绠＄悊鍛', '1', '2021-04-22 22:00:27', '绯荤粺绠＄悊鍛', '1', '2023-03-09 13:30:44');
+
+-- ----------------------------
+-- Table structure for sys_user_dept
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_user_dept`;
+CREATE TABLE `sys_user_dept`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `user_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鐢ㄦ埛ID',
+  `dept_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '閮ㄩ棬ID',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `user_id`(`user_id`, `dept_id`) USING BTREE,
+  INDEX `dept_id`(`dept_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鐢ㄦ埛涓庨儴闂ㄥ叧绯昏〃' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_user_dept
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for sys_user_group
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_user_group`;
+CREATE TABLE `sys_user_group`  (
+  `id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '缂栧彿',
+  `name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍚嶇О',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  `available` tinyint(1) NOT NULL COMMENT '鐘舵€',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `name`(`name`) USING BTREE,
+  INDEX `code`(`code`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鐢ㄦ埛缁' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_user_group
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for sys_user_group_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_user_group_detail`;
+CREATE TABLE `sys_user_group_detail`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `user_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鐢ㄦ埛ID',
+  `group_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鐢ㄦ埛缁処D',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `user_id, group_id`(`user_id`, `group_id`) USING BTREE,
+  INDEX `group_id`(`group_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鐢ㄦ埛涓庣敤鎴风粍鍏崇郴琛' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_user_group_detail
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for sys_user_menu_sort
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_user_menu_sort`;
+CREATE TABLE `sys_user_menu_sort`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `user_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鐢ㄦ埛ID',
+  `menu_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鑿滃崟ID',
+  `parent_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鐖剁骇鑿滃崟ID',
+  `sort_no` int(11) NOT NULL COMMENT '鎺掑簭',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `user_id`(`user_id`) USING BTREE,
+  INDEX `menu_id`(`menu_id`) USING BTREE,
+  INDEX `parent_id`(`parent_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sys_user_menu_sort
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for sys_user_position
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_user_position`;
+CREATE TABLE `sys_user_position`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `user_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鐢ㄦ埛ID',
+  `position_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '宀椾綅ID',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `user_id`(`user_id`, `position_id`) USING BTREE,
+  INDEX `position_id`(`position_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鐢ㄦ埛涓庡矖浣嶅叧绯昏〃' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_user_position
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for sys_user_role
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_user_role`;
+CREATE TABLE `sys_user_role`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `user_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鐢ㄦ埛ID',
+  `role_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '瑙掕壊ID',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `user_id, role_id`(`user_id`, `role_id`) USING BTREE,
+  INDEX `role_id`(`role_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鐢ㄦ埛涓庤鑹插叧绯昏〃' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_user_role
+-- ----------------------------
+INSERT INTO `sys_user_role` VALUES ('1', '1', '1');
+
+-- ----------------------------
+-- Table structure for sys_user_telephone
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_user_telephone`;
+CREATE TABLE `sys_user_telephone`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `telephone` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鎵嬫満鍙',
+  `user_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鐢ㄦ埛ID',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `telephone`(`telephone`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鐢ㄦ埛缁戝畾鎵嬫満鍙疯〃' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_user_telephone
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_export_task
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_export_task`;
+CREATE TABLE `tbl_export_task`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍚嶇О',
+  `record_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '涓婁紶璁板綍ID',
+  `status` tinyint(3) NOT NULL COMMENT '鐘舵€',
+  `error_msg` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '閿欒淇℃伅',
+  `req_class_name` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '璇锋眰绫诲悕',
+  `req_params` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '璇锋眰绫绘柟娉曞弬鏁',
+  `req_params_sign` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '璇锋眰绫绘柟娉曞弬鏁扮鍚',
+  `total_count` bigint(20) NOT NULL DEFAULT 0 COMMENT '鎬绘暟鎹潯鏁',
+  `cur_count` bigint(20) NOT NULL DEFAULT 0 COMMENT '褰撳墠瀹屾垚鏁版嵁鏉℃暟',
+  `file_size` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鏂囦欢澶у皬',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `finish_time` datetime NULL DEFAULT NULL COMMENT '缁撴潫鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `status`(`status`) USING BTREE,
+  INDEX `create_time`(`create_time`) USING BTREE,
+  INDEX `finish_time`(`finish_time`) USING BTREE,
+  INDEX `req_params_sign`(`req_params_sign`) USING BTREE,
+  INDEX `create_by_id`(`create_by_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '瀵煎嚭浠诲姟' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_export_task
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_logistics_sheet
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_logistics_sheet`;
+CREATE TABLE `tbl_logistics_sheet`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `code` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '涓氬姟鍗曟嵁鍙',
+  `logistics_no` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鐗╂祦鍗曞彿',
+  `logistics_company_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鐗╂祦鍏徃ID',
+  `sender_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '瀵勪欢浜哄鍚',
+  `sender_telephone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '瀵勪欢浜鸿仈绯荤數璇',
+  `sender_province_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '瀵勪欢浜虹渷',
+  `sender_city_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '瀵勪欢浜哄競',
+  `sender_district_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '瀵勪欢浜哄尯',
+  `sender_address` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '瀵勪欢浜哄湴鍧€',
+  `receiver_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鏀朵欢浜哄鍚',
+  `receiver_telephone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鏀朵欢浜鸿仈绯荤數璇',
+  `receiver_province_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鏀朵欢浜虹渷',
+  `receiver_city_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鏀朵欢浜哄競',
+  `receiver_district_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鏀朵欢浜哄尯',
+  `receiver_address` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鏀朵欢浜哄湴鍧€',
+  `total_weight` decimal(16, 2) NULL DEFAULT NULL COMMENT '鎬婚噸閲忥紙kg锛',
+  `total_volume` decimal(16, 2) NULL DEFAULT NULL COMMENT '鎬讳綋绉紙cm3锛',
+  `total_amount` decimal(32, 2) NULL DEFAULT NULL COMMENT '鐗╂祦璐',
+  `status` tinyint(3) NOT NULL COMMENT '鐘舵€',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '澶囨敞',
+  `delivery_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鍙戣揣浜',
+  `delivery_time` datetime NULL DEFAULT NULL COMMENT '鍙戣揣鏃堕棿',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `code`(`code`) USING BTREE,
+  INDEX `logistics_no`(`logistics_no`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鐗╂祦鍗' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_logistics_sheet
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_logistics_sheet_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_logistics_sheet_detail`;
+CREATE TABLE `tbl_logistics_sheet_detail`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `sheet_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鐗╂祦鍗旾D',
+  `biz_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '涓氬姟鍗曟嵁ID',
+  `biz_type` tinyint(3) NOT NULL COMMENT '涓氬姟绫诲瀷',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `biz_id`(`biz_id`, `biz_type`) USING BTREE,
+  INDEX `sheet_id`(`sheet_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鐗╂祦鍗曟槑缁' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_logistics_sheet_detail
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_order_chart
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_order_chart`;
+CREATE TABLE `tbl_order_chart`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `total_amount` decimal(32, 2) NOT NULL COMMENT '鍗曟嵁鎬婚噾棰',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `create_date` varchar(19) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓鏃ユ湡',
+  `create_hour` varchar(13) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓鏃堕棿锛堝皬鏃讹級',
+  `biz_type` tinyint(3) NOT NULL COMMENT '涓氬姟绫诲瀷',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `create_time`(`create_time`) USING BTREE,
+  INDEX `create_date`(`create_date`) USING BTREE,
+  INDEX `create_hour`(`create_hour`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '璁㈠崟鍥捐〃鏁版嵁' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_order_chart
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_order_pay_type
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_order_pay_type`;
+CREATE TABLE `tbl_order_pay_type`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `order_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '璁㈠崟ID',
+  `pay_type_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鏀粯鏂瑰紡ID',
+  `pay_amount` decimal(32, 2) NOT NULL COMMENT '鏀粯閲戦',
+  `text` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鏀粯鍐呭',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `order_id`(`order_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '璁㈠崟鏀粯鏂瑰紡' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_order_pay_type
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_order_time_line
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_order_time_line`;
+CREATE TABLE `tbl_order_time_line`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `order_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍗曟嵁ID',
+  `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '鎻忚堪鍐呭',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `biz_type` tinyint(3) NOT NULL COMMENT '涓氬姟绫诲瀷',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `order_id`(`order_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鍗曟嵁鏃堕棿杞' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_order_time_line
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_pre_take_stock_sheet
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_pre_take_stock_sheet`;
+CREATE TABLE `tbl_pre_take_stock_sheet`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `code` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '涓氬姟鍗曟嵁鍙',
+  `sc_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '浠撳簱ID',
+  `take_status` tinyint(3) NOT NULL COMMENT '鐩樼偣鐘舵€',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `code`(`code`) USING BTREE,
+  INDEX `sc_id`(`sc_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '搴撳瓨棰勫厛鐩樼偣鍗' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_pre_take_stock_sheet
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_pre_take_stock_sheet_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_pre_take_stock_sheet_detail`;
+CREATE TABLE `tbl_pre_take_stock_sheet_detail`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `sheet_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '棰勫厛鐩樼偣鍗旾D',
+  `product_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍟嗗搧ID',
+  `first_num` decimal(24, 8) NULL DEFAULT NULL COMMENT '鍒濈洏鏁伴噺',
+  `second_num` decimal(24, 8) NULL DEFAULT NULL COMMENT '澶嶇洏鏁伴噺',
+  `rand_num` decimal(24, 8) NULL DEFAULT NULL COMMENT '鎶界洏鏁伴噺',
+  `order_no` int(11) NOT NULL COMMENT '鎺掑簭',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `sheet_id`(`sheet_id`, `product_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '搴撳瓨棰勫厛鐩樼偣鍗曟槑缁' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_pre_take_stock_sheet_detail
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_print_template
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_print_template`;
+CREATE TABLE `tbl_print_template`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍚嶇О',
+  `template_json` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT 'JSON閰嶇疆',
+  `demo_data` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '绀轰緥鏁版嵁',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鎵撳嵃妯℃澘' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_print_template
+-- ----------------------------
+INSERT INTO `tbl_print_template` VALUES (1, '閲囪喘璁㈠崟', '{\"tempItems\":[{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":122,\"height\":14,\"left\":500,\"top\":5,\"title\":\"鏍囬\",\"value\":\"閲囪喘璁㈠崟\",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":14,\"FontColor\":\"#000000\",\"Bold\":\"1\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"center\",\"ItemType\":\"1\",\"bordered\":false,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":0,\"leftOffset\":0},\"uuid\":\"35205865ddd83246b7aa9b82addbc49b5a7e\"},{\"type\":\"braid-barcode\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":200,\"height\":40,\"left\":920,\"top\":5,\"title\":\"鍗曞彿鏉＄爜\",\"name\":\"code\",\"style\":{\"zIndex\":0,\"FontSize\":\"9\",\"ShowBarText\":\"1\",\"CodeType\":\"Code39\",\"ItemType\":\"1\"},\"value\":\"{鍗曞彿}\",\"uuid\":\"027597a790715443beeae5d06cd8d1f06b60\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":10,\"top\":60,\"title\":\"浠撳簱缂栧彿-鏍囬\",\"value\":\"浠撳簱缂栧彿锛歕",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"387f44812bf5e84fc2a89b8689beb7ae95ff\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":118,\"top\":60,\"title\":\"浠撳簱缂栧彿\",\"value\":\"{浠撳簱缂栧彿}\",\"name\":\"scCode\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"b7217c3c1571794c4428f5d5823bfb0a4a99\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":286,\"top\":60,\"title\":\"浠撳簱鍚嶇О-鏍囬\",\"value\":\"浠撳簱鍚嶇О锛歕",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"a400e796d4c955457bc819f8cf6c43d6c19a\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":394,\"top\":60,\"title\":\"浠撳簱鍚嶇О\",\"value\":\"{浠撳簱鍚嶇О}\",\"name\":\"scName\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"7cf2034a2a4e1b443ffa3d5972bfc322a88e\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":562,\"top\":60,\"title\":\"渚涘簲鍟嗙紪鍙?鏍囬\",\"value\":\"渚涘簲鍟嗙紪鍙凤細\",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"09bc7fd608d8e641df48b4e94b47f05ff923\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":670,\"top\":60,\"title\":\"渚涘簲鍟嗙紪鍙穃",\"value\":\"{渚涘簲鍟嗙紪鍙穧\",\"name\":\"supplierCode\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"4a08de3bd8296a4ac6ab9f2c5cab79f61584\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":838,\"top\":60,\"title\":\"渚涘簲鍟嗗悕绉?鏍囬\",\"value\":\"渚涘簲鍟嗗悕绉帮細\",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"2bcbd47062dffb4d0038afc6ac3e58455eab\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":946,\"top\":60,\"title\":\"渚涘簲鍟嗗悕绉癨",\"value\":\"{渚涘簲鍟嗗悕绉皚\",\"name\":\"supplierName\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"c39584ca3946284d908bd758d6dad5a70517\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":10,\"top\":84,\"title\":\"閲囪喘鍛?鏍囬\",\"value\":\"閲囪喘鍛橈細\",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"4c9ba4c9e0da3443d2097761f206563a6e31\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":118,\"top\":84,\"title\":\"閲囪喘鍛榎",\"value\":\"{閲囪喘鍛榼\",\"name\":\"purchaserName\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"a4508027b5bd034c440a063e59b7ee0cc297\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":286,\"top\":84,\"title\":\"鎿嶄綔浜?鏍囬\",\"value\":\"鎿嶄綔浜猴細\",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"09debe4c6886374dbdd847de695a364339aa\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":394,\"top\":84,\"title\":\"鎿嶄綔浜篭",\"value\":\"{鎿嶄綔浜簘\",\"name\":\"createBy\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"aea91c8a37984b4d90e8545fa84a823a9e2b\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":562,\"top\":84,\"title\":\"鎿嶄綔鏃堕棿-鏍囬\",\"value\":\"鎿嶄綔鏃堕棿锛歕",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"b80a43b94128624c56a97c3e88689b6af8d6\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":670,\"top\":84,\"title\":\"鎿嶄綔鏃堕棿\",\"value\":\"{鎿嶄綔鏃堕棿}\",\"name\":\"createTime\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"89d3b43387c17e44f798ef2bf220d26bf3e3\"},{\"type\":\"braid-table\",\"isEdit\":0,\"draggable\":true,\"resizable\":true,\"width\":1104,\"height\":60,\"left\":10,\"top\":118,\"title\":\"閲囪喘鍟嗗搧鏄庣粏\",\"value\":\"{details}\",\"defaultValue\":[],\"tabelHtml\":\"\",\"columnsAttr\":[{\"title\":\"搴忓彿\",\"name\":\"_seq\"},{\"title\":\"鍟嗗搧缂栧彿\",\"value\":\"{鍟嗗搧缂栧彿}\",\"name\":\"productCode\"},{\"title\":\"鍟嗗搧鍚嶇О\",\"value\":\"{鍟嗗搧鍚嶇О}\",\"name\":\"productName\"},{\"title\":\"鍟嗗搧SKU缂栧彿\",\"value\":\"{鍟嗗搧SKU缂栧彿}\",\"name\":\"skuCode\"},{\"title\":\"鍟嗗搧绠€鐮乗",\"value\":\"{鍟嗗搧绠€鐮亇\",\"name\":\"externalCode\"},{\"title\":\"閲囪喘鏁伴噺\",\"value\":\"{閲囪喘鏁伴噺}\",\"name\":\"purchaseNum\"},{\"title\":\"閲囪喘浠穃",\"value\":\"{閲囪喘浠穧\",\"name\":\"purchasePrice\"},{\"title\":\"閲囪喘閲戦\",\"value\":\"{閲囪喘閲戦}\",\"name\":\"purchaseAmount\"}],\"columns\":[{\"title\":\"搴忓彿\",\"name\":\"_seq\"},{\"title\":\"鍟嗗搧缂栧彿\",\"value\":\"{鍟嗗搧缂栧彿}\",\"name\":\"productCode\"},{\"title\":\"鍟嗗搧鍚嶇О\",\"value\":\"{鍟嗗搧鍚嶇О}\",\"name\":\"productName\"},{\"title\":\"鍟嗗搧SKU缂栧彿\",\"value\":\"{鍟嗗搧SKU缂栧彿}\",\"name\":\"skuCode\"},{\"title\":\"鍟嗗搧绠€鐮乗",\"value\":\"{鍟嗗搧绠€鐮亇\",\"name\":\"externalCode\"},{\"title\":\"閲囪喘鏁伴噺\",\"value\":\"{閲囪喘鏁伴噺}\",\"name\":\"purchaseNum\"},{\"title\":\"閲囪喘浠穃",\"value\":\"{閲囪喘浠穧\",\"name\":\"purchasePrice\"},{\"title\":\"閲囪喘閲戦\",\"value\":\"{閲囪喘閲戦}\",\"name\":\"purchaseAmount\"}],\"selectCol\":[\"_seq\",\"productCode\",\"productName\",\"skuCode\",\"externalCode\",\"purchaseNum\",\"purchasePrice\",\"purchaseAmount\"],\"name\":\"details\",\"style\":{\"zIndex\":0,\"Alignment\":\"left\",\"FontSize\":12,\"FontColor\":\"#000000\",\"borderColor\":\"#000000\",\"autoHeight\":true,\"BottomMargin\":20},\"uuid\":\"a54b8d97a637b64fd5f9ca417d7d5211716e\"},{\"type\":\"braid-page\",\"isEdit\":false,\"draggable\":true,\"resizable\":true,\"width\":97,\"height\":20,\"left\":1025,\"top\":770,\"title\":\"鍒嗛〉\",\"curPageStyle\":\"绗?#椤礬",\"splitPageStyle\":\"/\",\"totalPageStyle\":\"鍏?#椤礬",\"name\":\"\",\"style\":{\"zIndex\":0,\"ItemType\":\"1\",\"autoHeight\":false,\"BottomMargin\":5,\"Alignment\":\"right\",\"FontSize\":12,\"FontColor\":\"#000000\"},\"uuid\":\"d6f62ce0a7931e438188be50bc350f99da7d\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":838,\"top\":84,\"title\":\"棰勮鍒拌揣鏃ユ湡-鏍囬\",\"value\":\"棰勮鍒拌揣鏃ユ湡锛歕",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"604209e64d1a984bbaabe0ad64ad77f5eeee\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":946,\"top\":84,\"title\":\"棰勮鍒拌揣鏃ユ湡\",\"value\":\"{棰勮鍒拌揣鏃ユ湡}\",\"name\":\"expectArriveDate\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"e874b94582286747e2a8865a0ded60b4d639\"}],\"title\":\"閲囪喘璁㈠崟\",\"pageWidth\":210,\"pageHeight\":297,\"width\":1122,\"height\":793,\"pageDirection\":2}', '{\n  \"code\": \"202503220000000002\",\n  \"scCode\": \"1\",\n  \"scName\": \"娴嬭瘯浠撳簱\",\n  \"supplierCode\": \"1\",\n  \"supplierName\": \"娴嬭瘯渚涘簲鍟哱",\n  \"purchaserName\": \"\",\n  \"expectArriveDate\": \"2025-04-22\",\n  \"description\": \"\",\n  \"createBy\": \"绯荤粺绠＄悊鍛榎",\n  \"createTime\": \"2025-03-22 08:04:30\",\n  \"approveBy\": \"\",\n  \"approveTime\": \"\",\n  \"details\": [\n    {\n      \"productCode\": \"11\",\n      \"productName\": \"鍟嗗搧222\",\n      \"skuCode\": \"41\",\n      \"externalCode\": \"51\",\n      \"purchaseNum\": 1,\n      \"purchasePrice\": 121,\n      \"purchaseAmount\": 121\n    }\n  ]\n}', '绯荤粺绠＄悊鍛', '1', '2025-01-28 18:41:35', '绯荤粺绠＄悊鍛', '1', '2025-05-09 19:49:08');
+INSERT INTO `tbl_print_template` VALUES (2, '閲囪喘鏀惰揣鍗', '{\"tempItems\":[{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":122,\"height\":14,\"left\":500,\"top\":5,\"title\":\"鏍囬\",\"value\":\"閲囪喘鏀惰揣鍗昞",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":14,\"FontColor\":\"#000000\",\"Bold\":\"1\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"center\",\"ItemType\":\"1\",\"bordered\":false,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":0,\"leftOffset\":0},\"uuid\":\"35205865ddd83246b7aa9b82addbc49b5a7e\"},{\"type\":\"braid-barcode\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":200,\"height\":40,\"left\":920,\"top\":5,\"title\":\"鍗曞彿鏉＄爜\",\"name\":\"code\",\"style\":{\"zIndex\":0,\"FontSize\":\"9\",\"ShowBarText\":\"1\",\"CodeType\":\"Code39\",\"ItemType\":\"1\"},\"value\":\"{鍗曞彿}\",\"uuid\":\"027597a790715443beeae5d06cd8d1f06b60\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":10,\"top\":60,\"title\":\"浠撳簱缂栧彿-鏍囬\",\"value\":\"浠撳簱缂栧彿锛歕",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"387f44812bf5e84fc2a89b8689beb7ae95ff\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":118,\"top\":60,\"title\":\"浠撳簱缂栧彿\",\"value\":\"{浠撳簱缂栧彿}\",\"name\":\"scCode\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"b7217c3c1571794c4428f5d5823bfb0a4a99\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":286,\"top\":60,\"title\":\"浠撳簱鍚嶇О-鏍囬\",\"value\":\"浠撳簱鍚嶇О锛歕",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"a400e796d4c955457bc819f8cf6c43d6c19a\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":394,\"top\":60,\"title\":\"浠撳簱鍚嶇О\",\"value\":\"{浠撳簱鍚嶇О}\",\"name\":\"scName\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"7cf2034a2a4e1b443ffa3d5972bfc322a88e\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":562,\"top\":60,\"title\":\"渚涘簲鍟嗙紪鍙?鏍囬\",\"value\":\"渚涘簲鍟嗙紪鍙凤細\",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"09bc7fd608d8e641df48b4e94b47f05ff923\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":670,\"top\":60,\"title\":\"渚涘簲鍟嗙紪鍙穃",\"value\":\"{渚涘簲鍟嗙紪鍙穧\",\"name\":\"supplierCode\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"4a08de3bd8296a4ac6ab9f2c5cab79f61584\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":838,\"top\":60,\"title\":\"渚涘簲鍟嗗悕绉?鏍囬\",\"value\":\"渚涘簲鍟嗗悕绉帮細\",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"2bcbd47062dffb4d0038afc6ac3e58455eab\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":946,\"top\":60,\"title\":\"渚涘簲鍟嗗悕绉癨",\"value\":\"{渚涘簲鍟嗗悕绉皚\",\"name\":\"supplierName\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"c39584ca3946284d908bd758d6dad5a70517\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":10,\"top\":84,\"title\":\"閲囪喘鍛?鏍囬\",\"value\":\"閲囪喘鍛橈細\",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"4c9ba4c9e0da3443d2097761f206563a6e31\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":118,\"top\":84,\"title\":\"閲囪喘鍛榎",\"value\":\"{閲囪喘鍛榼\",\"name\":\"purchaserName\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"a4508027b5bd034c440a063e59b7ee0cc297\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":286,\"top\":84,\"title\":\"鎿嶄綔浜?鏍囬\",\"value\":\"鎿嶄綔浜猴細\",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"09debe4c6886374dbdd847de695a364339aa\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":394,\"top\":84,\"title\":\"鎿嶄綔浜篭",\"value\":\"{鎿嶄綔浜簘\",\"name\":\"createBy\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"aea91c8a37984b4d90e8545fa84a823a9e2b\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":562,\"top\":84,\"title\":\"鎿嶄綔鏃堕棿-鏍囬\",\"value\":\"鎿嶄綔鏃堕棿锛歕",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"b80a43b94128624c56a97c3e88689b6af8d6\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":670,\"top\":84,\"title\":\"鎿嶄綔鏃堕棿\",\"value\":\"{鎿嶄綔鏃堕棿}\",\"name\":\"createTime\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"89d3b43387c17e44f798ef2bf220d26bf3e3\"},{\"type\":\"braid-table\",\"isEdit\":0,\"draggable\":true,\"resizable\":true,\"width\":1104,\"height\":60,\"left\":10,\"top\":142,\"title\":\"鏀惰揣鍟嗗搧鏄庣粏\",\"value\":\"{details}\",\"defaultValue\":[],\"tabelHtml\":\"\",\"columnsAttr\":[{\"title\":\"搴忓彿\",\"name\":\"_seq\"},{\"title\":\"鍟嗗搧缂栧彿\",\"value\":\"{鍟嗗搧缂栧彿}\",\"name\":\"productCode\"},{\"title\":\"鍟嗗搧鍚嶇О\",\"value\":\"{鍟嗗搧鍚嶇О}\",\"name\":\"productName\"},{\"title\":\"鍟嗗搧SKU缂栧彿\",\"value\":\"{鍟嗗搧SKU缂栧彿}\",\"name\":\"skuCode\"},{\"title\":\"鍟嗗搧绠€鐮乗",\"value\":\"{鍟嗗搧绠€鐮亇\",\"name\":\"externalCode\"},{\"title\":\"鏀惰揣鏁伴噺\",\"value\":\"{鏀惰揣鏁伴噺}\",\"name\":\"receiveNum\"},{\"title\":\"閲囪喘浠穃",\"value\":\"{閲囪喘浠穧\",\"name\":\"purchasePrice\"},{\"title\":\"鏀惰揣閲戦\",\"value\":\"{鏀惰揣閲戦}\",\"name\":\"receiveAmount\"}],\"columns\":[{\"title\":\"搴忓彿\",\"name\":\"_seq\"},{\"title\":\"鍟嗗搧缂栧彿\",\"value\":\"{鍟嗗搧缂栧彿}\",\"name\":\"productCode\"},{\"title\":\"鍟嗗搧鍚嶇О\",\"value\":\"{鍟嗗搧鍚嶇О}\",\"name\":\"productName\"},{\"title\":\"鍟嗗搧SKU缂栧彿\",\"value\":\"{鍟嗗搧SKU缂栧彿}\",\"name\":\"skuCode\"},{\"title\":\"鍟嗗搧绠€鐮乗",\"value\":\"{鍟嗗搧绠€鐮亇\",\"name\":\"externalCode\"},{\"title\":\"鏀惰揣鏁伴噺\",\"value\":\"{鏀惰揣鏁伴噺}\",\"name\":\"receiveNum\"},{\"title\":\"閲囪喘浠穃",\"value\":\"{閲囪喘浠穧\",\"name\":\"purchasePrice\"},{\"title\":\"鏀惰揣閲戦\",\"value\":\"{鏀惰揣閲戦}\",\"name\":\"receiveAmount\"}],\"selectCol\":[\"_seq\",\"productCode\",\"productName\",\"skuCode\",\"externalCode\",\"receiveNum\",\"purchasePrice\",\"receiveAmount\"],\"name\":\"details\",\"style\":{\"zIndex\":0,\"Alignment\":\"left\",\"FontSize\":12,\"FontColor\":\"#000000\",\"borderColor\":\"#000000\",\"autoHeight\":true,\"BottomMargin\":20},\"uuid\":\"a54b8d97a637b64fd5f9ca417d7d5211716e\"},{\"type\":\"braid-page\",\"isEdit\":false,\"draggable\":true,\"resizable\":true,\"width\":97,\"height\":20,\"left\":1025,\"top\":770,\"title\":\"鍒嗛〉\",\"curPageStyle\":\"绗?#椤礬",\"splitPageStyle\":\"/\",\"totalPageStyle\":\"鍏?#椤礬",\"name\":\"\",\"style\":{\"zIndex\":0,\"ItemType\":\"1\",\"autoHeight\":false,\"BottomMargin\":5,\"Alignment\":\"right\",\"FontSize\":12,\"FontColor\":\"#000000\"},\"uuid\":\"d6f62ce0a7931e438188be50bc350f99da7d\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":10,\"top\":108,\"title\":\"浠樻鏃ユ湡-鏍囬\",\"value\":\"浠樻鏃ユ湡锛歕",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"604209e64d1a984bbaabe0ad64ad77f5eeee\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":118,\"top\":108,\"title\":\"浠樻鏃ユ湡\",\"value\":\"{浠樻鏃ユ湡}\",\"name\":\"paymentDate\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"e874b94582286747e2a8865a0ded60b4d639\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":286,\"top\":108,\"title\":\"瀹為檯鍒拌揣鏃ユ湡-鏍囬\",\"value\":\"瀹為檯鍒拌揣鏃ユ湡锛歕",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"6dd07e667962904ffc295c2ebc5e75c164ad\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":394,\"top\":108,\"title\":\"瀹為檯鍒拌揣鏃ユ湡\",\"value\":\"{瀹為檯鍒拌揣鏃ユ湡}\",\"name\":\"receiveDate\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"572db42f6ec9644a9c4863c94af8b229e6e8\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":838,\"top\":84,\"title\":\"閲囪喘璁㈠崟鍙?鏍囬\",\"value\":\"閲囪喘璁㈠崟鍙凤細\",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"a4e29827b8e062405258d7f5e7bb535f9dd5\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":946,\"top\":84,\"title\":\"閲囪喘璁㈠崟鍙穃",\"value\":\"{閲囪喘璁㈠崟鍙穧\",\"name\":\"purchaseOrderCode\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"e7681d4c03d9664ad96b96efc49bd124f871\"}],\"title\":\"閲囪喘鏀惰揣鍗昞",\"pageWidth\":210,\"pageHeight\":297,\"width\":1122,\"height\":793,\"pageDirection\":2}', '{\n  \"code\": \"202501190000000003\",\n  \"scCode\": \"1\",\n  \"scName\": \"娴嬭瘯浠撳簱\",\n  \"supplierCode\": \"1\",\n  \"supplierName\": \"娴嬭瘯渚涘簲鍟哱",\n  \"purchaserName\": \"\",\n  \"paymentDate\": \"2025-02-19\",\n  \"receiveDate\": \"2025-01-19\",\n  \"purchaseOrderCode\": \"\",\n  \"description\": \"\",\n  \"createBy\": \"绯荤粺绠＄悊鍛榎",\n  \"createTime\": \"2025-01-19 21:39:08\",\n  \"approveBy\": \"\",\n  \"approveTime\": \"\",\n  \"details\": [\n    {\n      \"productCode\": \"11\",\n      \"productName\": \"鍟嗗搧222\",\n      \"skuCode\": \"41\",\n      \"externalCode\": \"51\",\n      \"receiveNum\": 1,\n      \"purchasePrice\": 121,\n      \"receiveAmount\": 121\n    }\n  ]\n}', '绯荤粺绠＄悊鍛', '1', '2025-01-28 18:44:12', '绯荤粺绠＄悊鍛', '1', '2025-05-09 18:04:40');
+INSERT INTO `tbl_print_template` VALUES (3, '閲囪喘閫€璐у崟', '{\"tempItems\":[{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":122,\"height\":14,\"left\":500,\"top\":5,\"title\":\"鏍囬\",\"value\":\"閲囪喘閫€璐у崟\",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":14,\"FontColor\":\"#000000\",\"Bold\":\"1\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"center\",\"ItemType\":\"1\",\"bordered\":false,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":0,\"leftOffset\":0},\"uuid\":\"35205865ddd83246b7aa9b82addbc49b5a7e\"},{\"type\":\"braid-barcode\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":200,\"height\":40,\"left\":920,\"top\":5,\"title\":\"鍗曞彿鏉＄爜\",\"name\":\"code\",\"style\":{\"zIndex\":0,\"FontSize\":\"9\",\"ShowBarText\":\"1\",\"CodeType\":\"Code39\",\"ItemType\":\"1\"},\"value\":\"{鍗曞彿}\",\"uuid\":\"027597a790715443beeae5d06cd8d1f06b60\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":10,\"top\":60,\"title\":\"浠撳簱缂栧彿-鏍囬\",\"value\":\"浠撳簱缂栧彿锛歕",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"387f44812bf5e84fc2a89b8689beb7ae95ff\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":118,\"top\":60,\"title\":\"浠撳簱缂栧彿\",\"value\":\"{浠撳簱缂栧彿}\",\"name\":\"scCode\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"b7217c3c1571794c4428f5d5823bfb0a4a99\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":286,\"top\":60,\"title\":\"浠撳簱鍚嶇О-鏍囬\",\"value\":\"浠撳簱鍚嶇О锛歕",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"a400e796d4c955457bc819f8cf6c43d6c19a\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":394,\"top\":60,\"title\":\"浠撳簱鍚嶇О\",\"value\":\"{浠撳簱鍚嶇О}\",\"name\":\"scName\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"7cf2034a2a4e1b443ffa3d5972bfc322a88e\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":562,\"top\":60,\"title\":\"渚涘簲鍟嗙紪鍙?鏍囬\",\"value\":\"渚涘簲鍟嗙紪鍙凤細\",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"09bc7fd608d8e641df48b4e94b47f05ff923\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":670,\"top\":60,\"title\":\"渚涘簲鍟嗙紪鍙穃",\"value\":\"{渚涘簲鍟嗙紪鍙穧\",\"name\":\"supplierCode\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"4a08de3bd8296a4ac6ab9f2c5cab79f61584\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":838,\"top\":60,\"title\":\"渚涘簲鍟嗗悕绉?鏍囬\",\"value\":\"渚涘簲鍟嗗悕绉帮細\",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"2bcbd47062dffb4d0038afc6ac3e58455eab\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":946,\"top\":60,\"title\":\"渚涘簲鍟嗗悕绉癨",\"value\":\"{渚涘簲鍟嗗悕绉皚\",\"name\":\"supplierName\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"c39584ca3946284d908bd758d6dad5a70517\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":10,\"top\":84,\"title\":\"閲囪喘鍛?鏍囬\",\"value\":\"閲囪喘鍛橈細\",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"4c9ba4c9e0da3443d2097761f206563a6e31\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":118,\"top\":84,\"title\":\"閲囪喘鍛榎",\"value\":\"{閲囪喘鍛榼\",\"name\":\"purchaserName\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"a4508027b5bd034c440a063e59b7ee0cc297\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":286,\"top\":84,\"title\":\"鎿嶄綔浜?鏍囬\",\"value\":\"鎿嶄綔浜猴細\",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"09debe4c6886374dbdd847de695a364339aa\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":394,\"top\":84,\"title\":\"鎿嶄綔浜篭",\"value\":\"{鎿嶄綔浜簘\",\"name\":\"createBy\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"aea91c8a37984b4d90e8545fa84a823a9e2b\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":562,\"top\":84,\"title\":\"鎿嶄綔鏃堕棿-鏍囬\",\"value\":\"鎿嶄綔鏃堕棿锛歕",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"b80a43b94128624c56a97c3e88689b6af8d6\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":670,\"top\":84,\"title\":\"鎿嶄綔鏃堕棿\",\"value\":\"{鎿嶄綔鏃堕棿}\",\"name\":\"createTime\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"89d3b43387c17e44f798ef2bf220d26bf3e3\"},{\"type\":\"braid-table\",\"isEdit\":0,\"draggable\":true,\"resizable\":true,\"width\":1104,\"height\":60,\"left\":10,\"top\":142,\"title\":\"閫€璐у晢鍝佹槑缁哱",\"value\":\"{details}\",\"defaultValue\":[],\"tabelHtml\":\"\",\"columnsAttr\":[{\"title\":\"搴忓彿\",\"name\":\"_seq\"},{\"title\":\"鍟嗗搧缂栧彿\",\"value\":\"{鍟嗗搧缂栧彿}\",\"name\":\"productCode\"},{\"title\":\"鍟嗗搧鍚嶇О\",\"value\":\"{鍟嗗搧鍚嶇О}\",\"name\":\"productName\"},{\"title\":\"鍟嗗搧SKU缂栧彿\",\"value\":\"{鍟嗗搧SKU缂栧彿}\",\"name\":\"skuCode\"},{\"title\":\"鍟嗗搧绠€鐮乗",\"value\":\"{鍟嗗搧绠€鐮亇\",\"name\":\"externalCode\"},{\"title\":\"閫€璐ф暟閲廫",\"value\":\"{閫€璐ф暟閲弣\",\"name\":\"returnNum\"},{\"title\":\"閫€璐т环\",\"value\":\"{閫€璐т环}\",\"name\":\"purchasePrice\"},{\"title\":\"閫€璐ч噾棰漒",\"value\":\"{閫€璐ч噾棰潁\",\"name\":\"returnAmount\"}],\"columns\":[{\"title\":\"搴忓彿\",\"name\":\"_seq\"},{\"title\":\"鍟嗗搧缂栧彿\",\"value\":\"{鍟嗗搧缂栧彿}\",\"name\":\"productCode\"},{\"title\":\"鍟嗗搧鍚嶇О\",\"value\":\"{鍟嗗搧鍚嶇О}\",\"name\":\"productName\"},{\"title\":\"鍟嗗搧SKU缂栧彿\",\"value\":\"{鍟嗗搧SKU缂栧彿}\",\"name\":\"skuCode\"},{\"title\":\"鍟嗗搧绠€鐮乗",\"value\":\"{鍟嗗搧绠€鐮亇\",\"name\":\"externalCode\"},{\"title\":\"閫€璐ф暟閲廫",\"value\":\"{閫€璐ф暟閲弣\",\"name\":\"returnNum\"},{\"title\":\"閫€璐т环\",\"value\":\"{閫€璐т环}\",\"name\":\"purchasePrice\"},{\"title\":\"閫€璐ч噾棰漒",\"value\":\"{閫€璐ч噾棰潁\",\"name\":\"returnAmount\"}],\"selectCol\":[\"_seq\",\"productCode\",\"productName\",\"skuCode\",\"externalCode\",\"returnNum\",\"purchasePrice\",\"returnAmount\"],\"name\":\"details\",\"style\":{\"zIndex\":0,\"Alignment\":\"left\",\"FontSize\":12,\"FontColor\":\"#000000\",\"borderColor\":\"#000000\",\"autoHeight\":true,\"BottomMargin\":20},\"uuid\":\"a54b8d97a637b64fd5f9ca417d7d5211716e\"},{\"type\":\"braid-page\",\"isEdit\":false,\"draggable\":true,\"resizable\":true,\"width\":97,\"height\":20,\"left\":1025,\"top\":770,\"title\":\"鍒嗛〉\",\"curPageStyle\":\"绗?#椤礬",\"splitPageStyle\":\"/\",\"totalPageStyle\":\"鍏?#椤礬",\"name\":\"\",\"style\":{\"zIndex\":0,\"ItemType\":\"1\",\"autoHeight\":false,\"BottomMargin\":5,\"Alignment\":\"right\",\"FontSize\":12,\"FontColor\":\"#000000\"},\"uuid\":\"d6f62ce0a7931e438188be50bc350f99da7d\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":10,\"top\":108,\"title\":\"浠樻鏃ユ湡-鏍囬\",\"value\":\"浠樻鏃ユ湡锛歕",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"604209e64d1a984bbaabe0ad64ad77f5eeee\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":118,\"top\":108,\"title\":\"浠樻鏃ユ湡\",\"value\":\"{浠樻鏃ユ湡}\",\"name\":\"paymentDate\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"e874b94582286747e2a8865a0ded60b4d639\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":838,\"top\":84,\"title\":\"閲囪喘鏀惰揣鍗曞彿-鏍囬\",\"value\":\"閲囪喘鏀惰揣鍗曞彿锛歕",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"a4e29827b8e062405258d7f5e7bb535f9dd5\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":946,\"top\":84,\"title\":\"閲囪喘鏀惰揣鍗曞彿\",\"value\":\"{閲囪喘鏀惰揣鍗曞彿}\",\"name\":\"receiveSheetCode\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"e7681d4c03d9664ad96b96efc49bd124f871\"}],\"title\":\"閲囪喘閫€璐у崟\",\"pageWidth\":210,\"pageHeight\":297,\"width\":1122,\"height\":793,\"pageDirection\":2}', '{\n  \"code\": \"202501190000000005\",\n  \"scCode\": \"1\",\n  \"scName\": \"娴嬭瘯浠撳簱\",\n  \"supplierCode\": \"1\",\n  \"supplierName\": \"娴嬭瘯渚涘簲鍟哱",\n  \"purchaserName\": \"\",\n  \"paymentDate\": \"2025-02-19\",\n  \"receiveSheetCode\": \"\",\n  \"description\": \"\",\n  \"createBy\": \"绯荤粺绠＄悊鍛榎",\n  \"createTime\": \"2025-01-19 21:51:18\",\n  \"approveBy\": \"绯荤粺绠＄悊鍛榎",\n  \"approveTime\": \"2025-01-19 21:51:24\",\n  \"details\": [\n    {\n      \"id\": \"1880976328979779584\",\n      \"productId\": \"1738409214449160192\",\n      \"productCode\": \"11\",\n      \"productName\": \"鍟嗗搧222\",\n      \"skuCode\": \"41\",\n      \"externalCode\": \"51\",\n      \"returnNum\": 1,\n      \"purchasePrice\": 121,\n      \"returnAmount\": 121\n    }\n  ]\n}', '绯荤粺绠＄悊鍛', '1', '2025-05-09 18:03:12', '绯荤粺绠＄悊鍛', '1', '2025-05-09 19:45:12');
+INSERT INTO `tbl_print_template` VALUES (4, '闆跺敭鍑哄簱鍗', '{\"tempItems\":[{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":122,\"height\":14,\"left\":500,\"top\":5,\"title\":\"鏍囬\",\"value\":\"闆跺敭鍑哄簱鍗昞",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":14,\"FontColor\":\"#000000\",\"Bold\":\"1\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"center\",\"ItemType\":\"1\",\"bordered\":false,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":0,\"leftOffset\":0},\"uuid\":\"35205865ddd83246b7aa9b82addbc49b5a7e\"},{\"type\":\"braid-barcode\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":200,\"height\":40,\"left\":920,\"top\":5,\"title\":\"鍗曞彿鏉＄爜\",\"name\":\"code\",\"style\":{\"zIndex\":0,\"FontSize\":\"9\",\"ShowBarText\":\"1\",\"CodeType\":\"Code39\",\"ItemType\":\"1\"},\"value\":\"{鍗曞彿}\",\"uuid\":\"027597a790715443beeae5d06cd8d1f06b60\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":10,\"top\":60,\"title\":\"浠撳簱缂栧彿-鏍囬\",\"value\":\"浠撳簱缂栧彿锛歕",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"387f44812bf5e84fc2a89b8689beb7ae95ff\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":118,\"top\":60,\"title\":\"浠撳簱缂栧彿\",\"value\":\"{浠撳簱缂栧彿}\",\"name\":\"scCode\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"b7217c3c1571794c4428f5d5823bfb0a4a99\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":286,\"top\":60,\"title\":\"浠撳簱鍚嶇О-鏍囬\",\"value\":\"浠撳簱鍚嶇О锛歕",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"a400e796d4c955457bc819f8cf6c43d6c19a\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":394,\"top\":60,\"title\":\"浠撳簱鍚嶇О\",\"value\":\"{浠撳簱鍚嶇О}\",\"name\":\"scName\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"7cf2034a2a4e1b443ffa3d5972bfc322a88e\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":562,\"top\":60,\"title\":\"浼氬憳缂栧彿-鏍囬\",\"value\":\"浼氬憳缂栧彿锛歕",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"09bc7fd608d8e641df48b4e94b47f05ff923\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":670,\"top\":60,\"title\":\"浼氬憳缂栧彿\",\"value\":\"{浼氬憳缂栧彿}\",\"name\":\"memberCode\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"4a08de3bd8296a4ac6ab9f2c5cab79f61584\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":838,\"top\":60,\"title\":\"浼氬憳鍚嶇О-鏍囬\",\"value\":\"浼氬憳鍚嶇О锛歕",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"2bcbd47062dffb4d0038afc6ac3e58455eab\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":946,\"top\":60,\"title\":\"浼氬憳鍚嶇О\",\"value\":\"{浼氬憳鍚嶇О}\",\"name\":\"memberName\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"c39584ca3946284d908bd758d6dad5a70517\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":10,\"top\":84,\"title\":\"閿€鍞憳-鏍囬\",\"value\":\"閿€鍞憳锛歕",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"4c9ba4c9e0da3443d2097761f206563a6e31\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":118,\"top\":84,\"title\":\"閿€鍞憳\",\"value\":\"{閿€鍞憳}\",\"name\":\"salerName\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"a4508027b5bd034c440a063e59b7ee0cc297\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":286,\"top\":84,\"title\":\"鎿嶄綔浜?鏍囬\",\"value\":\"鎿嶄綔浜猴細\",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"09debe4c6886374dbdd847de695a364339aa\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":394,\"top\":84,\"title\":\"鎿嶄綔浜篭",\"value\":\"{鎿嶄綔浜簘\",\"name\":\"createBy\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"aea91c8a37984b4d90e8545fa84a823a9e2b\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":562,\"top\":84,\"title\":\"鎿嶄綔鏃堕棿-鏍囬\",\"value\":\"鎿嶄綔鏃堕棿锛歕",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"b80a43b94128624c56a97c3e88689b6af8d6\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":670,\"top\":84,\"title\":\"鎿嶄綔鏃堕棿\",\"value\":\"{鎿嶄綔鏃堕棿}\",\"name\":\"createTime\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"89d3b43387c17e44f798ef2bf220d26bf3e3\"},{\"type\":\"braid-table\",\"isEdit\":0,\"draggable\":true,\"resizable\":true,\"width\":1104,\"height\":60,\"left\":10,\"top\":118,\"title\":\"鍑哄簱鍟嗗搧鏄庣粏\",\"value\":\"{details}\",\"defaultValue\":[],\"tabelHtml\":\"\",\"columnsAttr\":[{\"title\":\"搴忓彿\",\"name\":\"_seq\"},{\"title\":\"鍟嗗搧缂栧彿\",\"value\":\"{鍟嗗搧缂栧彿}\",\"name\":\"productCode\"},{\"title\":\"鍟嗗搧鍚嶇О\",\"value\":\"{鍟嗗搧鍚嶇О}\",\"name\":\"productName\"},{\"title\":\"鍟嗗搧SKU缂栧彿\",\"value\":\"{鍟嗗搧SKU缂栧彿}\",\"name\":\"skuCode\"},{\"title\":\"鍟嗗搧绠€鐮乗",\"value\":\"{鍟嗗搧绠€鐮亇\",\"name\":\"externalCode\"},{\"title\":\"鍑哄簱鏁伴噺\",\"value\":\"{鍑哄簱鏁伴噺}\",\"name\":\"outNum\"},{\"title\":\"浠锋牸\",\"value\":\"{浠锋牸}\",\"name\":\"taxPrice\"},{\"title\":\"鍑哄簱閲戦\",\"value\":\"{鍑哄簱閲戦}\",\"name\":\"outAmount\"}],\"columns\":[{\"title\":\"搴忓彿\",\"name\":\"_seq\"},{\"title\":\"鍟嗗搧缂栧彿\",\"value\":\"{鍟嗗搧缂栧彿}\",\"name\":\"productCode\"},{\"title\":\"鍟嗗搧鍚嶇О\",\"value\":\"{鍟嗗搧鍚嶇О}\",\"name\":\"productName\"},{\"title\":\"鍟嗗搧SKU缂栧彿\",\"value\":\"{鍟嗗搧SKU缂栧彿}\",\"name\":\"skuCode\"},{\"title\":\"鍟嗗搧绠€鐮乗",\"value\":\"{鍟嗗搧绠€鐮亇\",\"name\":\"externalCode\"},{\"title\":\"鍑哄簱鏁伴噺\",\"value\":\"{鍑哄簱鏁伴噺}\",\"name\":\"outNum\"},{\"title\":\"浠锋牸\",\"value\":\"{浠锋牸}\",\"name\":\"taxPrice\"},{\"title\":\"鍑哄簱閲戦\",\"value\":\"{鍑哄簱閲戦}\",\"name\":\"outAmount\"}],\"selectCol\":[\"_seq\",\"productCode\",\"productName\",\"skuCode\",\"externalCode\",\"outNum\",\"taxPrice\",\"outAmount\"],\"name\":\"details\",\"style\":{\"zIndex\":0,\"Alignment\":\"left\",\"FontSize\":12,\"FontColor\":\"#000000\",\"borderColor\":\"#000000\",\"autoHeight\":true,\"BottomMargin\":20},\"uuid\":\"a54b8d97a637b64fd5f9ca417d7d5211716e\"},{\"type\":\"braid-page\",\"isEdit\":false,\"draggable\":true,\"resizable\":true,\"width\":97,\"height\":20,\"left\":1025,\"top\":770,\"title\":\"鍒嗛〉\",\"curPageStyle\":\"绗?#椤礬",\"splitPageStyle\":\"/\",\"totalPageStyle\":\"鍏?#椤礬",\"name\":\"\",\"style\":{\"zIndex\":0,\"ItemType\":\"1\",\"autoHeight\":false,\"BottomMargin\":5,\"Alignment\":\"right\",\"FontSize\":12,\"FontColor\":\"#000000\"},\"uuid\":\"d6f62ce0a7931e438188be50bc350f99da7d\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":838,\"top\":84,\"title\":\"浠樻鏃ユ湡-鏍囬\",\"value\":\"浠樻鏃ユ湡锛歕",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"604209e64d1a984bbaabe0ad64ad77f5eeee\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":946,\"top\":84,\"title\":\"浠樻鏃ユ湡\",\"value\":\"{浠樻鏃ユ湡}\",\"name\":\"paymentDate\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"e874b94582286747e2a8865a0ded60b4d639\"}],\"title\":\"闆跺敭鍑哄簱鍗昞",\"pageWidth\":210,\"pageHeight\":297,\"width\":1122,\"height\":793,\"pageDirection\":2}', '{\n  \"code\": \"202501190000000004\",\n  \"scCode\": \"1\",\n  \"scName\": \"娴嬭瘯浠撳簱\",\n  \"memberCode\": \"1\",\n  \"memberName\": \"娴嬭瘯浼氬憳\",\n  \"salerName\": \"\",\n  \"paymentDate\": \"2025-02-19\",\n  \"description\": \"\",\n  \"createBy\": \"绯荤粺绠＄悊鍛榎",\n  \"createTime\": \"2025-01-19 22:20:59\",\n  \"approveBy\": \"绯荤粺绠＄悊鍛榎",\n  \"approveTime\": \"2025-01-19 22:21:23\",\n  \"details\": [\n    {\n      \"productCode\": \"11\",\n      \"productName\": \"鍟嗗搧222\",\n      \"skuCode\": \"41\",\n      \"externalCode\": \"51\",\n      \"outNum\": 1,\n      \"taxPrice\": 141,\n      \"outAmount\": 141\n    }\n  ]\n}', '绯荤粺绠＄悊鍛', '1', '2025-05-09 19:54:59', '绯荤粺绠＄悊鍛', '1', '2025-05-09 20:03:51');
+INSERT INTO `tbl_print_template` VALUES (5, '闆跺敭閫€璐у崟', '{\"tempItems\":[{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":122,\"height\":14,\"left\":500,\"top\":5,\"title\":\"鏍囬\",\"value\":\"闆跺敭閫€璐у崟\",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":14,\"FontColor\":\"#000000\",\"Bold\":\"1\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"center\",\"ItemType\":\"1\",\"bordered\":false,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":0,\"leftOffset\":0},\"uuid\":\"35205865ddd83246b7aa9b82addbc49b5a7e\"},{\"type\":\"braid-barcode\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":200,\"height\":40,\"left\":920,\"top\":5,\"title\":\"鍗曞彿鏉＄爜\",\"name\":\"code\",\"style\":{\"zIndex\":0,\"FontSize\":\"9\",\"ShowBarText\":\"1\",\"CodeType\":\"Code39\",\"ItemType\":\"1\"},\"value\":\"{鍗曞彿}\",\"uuid\":\"027597a790715443beeae5d06cd8d1f06b60\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":10,\"top\":60,\"title\":\"浠撳簱缂栧彿-鏍囬\",\"value\":\"浠撳簱缂栧彿锛歕",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"387f44812bf5e84fc2a89b8689beb7ae95ff\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":118,\"top\":60,\"title\":\"浠撳簱缂栧彿\",\"value\":\"{浠撳簱缂栧彿}\",\"name\":\"scCode\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"b7217c3c1571794c4428f5d5823bfb0a4a99\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":286,\"top\":60,\"title\":\"浠撳簱鍚嶇О-鏍囬\",\"value\":\"浠撳簱鍚嶇О锛歕",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"a400e796d4c955457bc819f8cf6c43d6c19a\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":394,\"top\":60,\"title\":\"浠撳簱鍚嶇О\",\"value\":\"{浠撳簱鍚嶇О}\",\"name\":\"scName\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"7cf2034a2a4e1b443ffa3d5972bfc322a88e\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":562,\"top\":60,\"title\":\"浼氬憳缂栧彿-鏍囬\",\"value\":\"浼氬憳缂栧彿锛歕",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"09bc7fd608d8e641df48b4e94b47f05ff923\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":670,\"top\":60,\"title\":\"浼氬憳缂栧彿\",\"value\":\"{浼氬憳缂栧彿}\",\"name\":\"memberCode\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"4a08de3bd8296a4ac6ab9f2c5cab79f61584\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":838,\"top\":60,\"title\":\"浼氬憳鍚嶇О-鏍囬\",\"value\":\"浼氬憳鍚嶇О锛歕",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"2bcbd47062dffb4d0038afc6ac3e58455eab\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":946,\"top\":60,\"title\":\"浼氬憳鍚嶇О\",\"value\":\"{浼氬憳鍚嶇О}\",\"name\":\"memberName\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"c39584ca3946284d908bd758d6dad5a70517\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":10,\"top\":84,\"title\":\"閿€鍞憳-鏍囬\",\"value\":\"閿€鍞憳锛歕",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"4c9ba4c9e0da3443d2097761f206563a6e31\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":118,\"top\":84,\"title\":\"閿€鍞憳\",\"value\":\"{閿€鍞憳}\",\"name\":\"salerName\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"a4508027b5bd034c440a063e59b7ee0cc297\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":286,\"top\":84,\"title\":\"鎿嶄綔浜?鏍囬\",\"value\":\"鎿嶄綔浜猴細\",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"09debe4c6886374dbdd847de695a364339aa\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":394,\"top\":84,\"title\":\"鎿嶄綔浜篭",\"value\":\"{鎿嶄綔浜簘\",\"name\":\"createBy\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"aea91c8a37984b4d90e8545fa84a823a9e2b\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":562,\"top\":84,\"title\":\"鎿嶄綔鏃堕棿-鏍囬\",\"value\":\"鎿嶄綔鏃堕棿锛歕",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"b80a43b94128624c56a97c3e88689b6af8d6\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":670,\"top\":84,\"title\":\"鎿嶄綔鏃堕棿\",\"value\":\"{鎿嶄綔鏃堕棿}\",\"name\":\"createTime\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"89d3b43387c17e44f798ef2bf220d26bf3e3\"},{\"type\":\"braid-table\",\"isEdit\":0,\"draggable\":true,\"resizable\":true,\"width\":1104,\"height\":60,\"left\":10,\"top\":142,\"title\":\"閫€璐у晢鍝佹槑缁哱",\"value\":\"{details}\",\"defaultValue\":[],\"tabelHtml\":\"\",\"columnsAttr\":[{\"title\":\"搴忓彿\",\"name\":\"_seq\"},{\"title\":\"鍟嗗搧缂栧彿\",\"value\":\"{鍟嗗搧缂栧彿}\",\"name\":\"productCode\"},{\"title\":\"鍟嗗搧鍚嶇О\",\"value\":\"{鍟嗗搧鍚嶇О}\",\"name\":\"productName\"},{\"title\":\"鍟嗗搧SKU缂栧彿\",\"value\":\"{鍟嗗搧SKU缂栧彿}\",\"name\":\"skuCode\"},{\"title\":\"鍟嗗搧绠€鐮乗",\"value\":\"{鍟嗗搧绠€鐮亇\",\"name\":\"externalCode\"},{\"title\":\"閫€璐ф暟閲廫",\"value\":\"{閫€璐ф暟閲弣\",\"name\":\"returnNum\"},{\"title\":\"浠锋牸\",\"value\":\"{浠锋牸}\",\"name\":\"taxPrice\"},{\"title\":\"閫€璐ч噾棰漒",\"value\":\"{閫€璐ч噾棰潁\",\"name\":\"returnAmount\"}],\"columns\":[{\"title\":\"搴忓彿\",\"name\":\"_seq\"},{\"title\":\"鍟嗗搧缂栧彿\",\"value\":\"{鍟嗗搧缂栧彿}\",\"name\":\"productCode\"},{\"title\":\"鍟嗗搧鍚嶇О\",\"value\":\"{鍟嗗搧鍚嶇О}\",\"name\":\"productName\"},{\"title\":\"鍟嗗搧SKU缂栧彿\",\"value\":\"{鍟嗗搧SKU缂栧彿}\",\"name\":\"skuCode\"},{\"title\":\"鍟嗗搧绠€鐮乗",\"value\":\"{鍟嗗搧绠€鐮亇\",\"name\":\"externalCode\"},{\"title\":\"閫€璐ф暟閲廫",\"value\":\"{閫€璐ф暟閲弣\",\"name\":\"returnNum\"},{\"title\":\"浠锋牸\",\"value\":\"{浠锋牸}\",\"name\":\"taxPrice\"},{\"title\":\"閫€璐ч噾棰漒",\"value\":\"{閫€璐ч噾棰潁\",\"name\":\"returnAmount\"}],\"selectCol\":[\"_seq\",\"productCode\",\"productName\",\"skuCode\",\"externalCode\",\"returnNum\",\"taxPrice\",\"returnAmount\"],\"name\":\"details\",\"style\":{\"zIndex\":0,\"Alignment\":\"left\",\"FontSize\":12,\"FontColor\":\"#000000\",\"borderColor\":\"#000000\",\"autoHeight\":true,\"BottomMargin\":20},\"uuid\":\"a54b8d97a637b64fd5f9ca417d7d5211716e\"},{\"type\":\"braid-page\",\"isEdit\":false,\"draggable\":true,\"resizable\":true,\"width\":97,\"height\":20,\"left\":1025,\"top\":770,\"title\":\"鍒嗛〉\",\"curPageStyle\":\"绗?#椤礬",\"splitPageStyle\":\"/\",\"totalPageStyle\":\"鍏?#椤礬",\"name\":\"\",\"style\":{\"zIndex\":0,\"ItemType\":\"1\",\"autoHeight\":false,\"BottomMargin\":5,\"Alignment\":\"right\",\"FontSize\":12,\"FontColor\":\"#000000\"},\"uuid\":\"d6f62ce0a7931e438188be50bc350f99da7d\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":10,\"top\":108,\"title\":\"浠樻鏃ユ湡-鏍囬\",\"value\":\"浠樻鏃ユ湡锛歕",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"604209e64d1a984bbaabe0ad64ad77f5eeee\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":118,\"top\":108,\"title\":\"浠樻鏃ユ湡\",\"value\":\"{浠樻鏃ユ湡}\",\"name\":\"paymentDate\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"e874b94582286747e2a8865a0ded60b4d639\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":838,\"top\":84,\"title\":\"闆跺敭鍑哄簱鍗曞彿-鏍囬\",\"value\":\"闆跺敭鍑哄簱鍗曞彿锛歕",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"10488b69c261764f0e388a6607267aae769f\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":946,\"top\":84,\"title\":\"闆跺敭鍑哄簱鍗曞彿\",\"value\":\"{闆跺敭鍑哄簱鍗曞彿}\",\"name\":\"outSheetCode\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"ba426c11fae59f4442a84d29ef5ab38c82ff\"}],\"title\":\"闆跺敭閫€璐у崟\",\"pageWidth\":210,\"pageHeight\":297,\"width\":1122,\"height\":793,\"pageDirection\":2}', '{\n  \"code\": \"202501190000000003\",\n  \"scCode\": \"1\",\n  \"scName\": \"娴嬭瘯浠撳簱\",\n  \"memberCode\": \"1\",\n  \"memberName\": \"娴嬭瘯浼氬憳\",\n  \"salerName\": \"\",\n  \"paymentDate\": \"2025-02-19\",\n  \"outSheetCode\": \"\",\n  \"description\": \"\",\n  \"createBy\": \"绯荤粺绠＄悊鍛榎",\n  \"createTime\": \"2025-01-19 22:28:28\",\n  \"approveBy\": \"\",\n  \"approveTime\": \"\",\n  \"details\": [\n    {\n      \"productCode\": \"11\",\n      \"productName\": \"鍟嗗搧222\",\n      \"skuCode\": \"41\",\n      \"externalCode\": \"51\",\n      \"returnNum\": 1,\n      \"taxPrice\": 141,\n      \"returnAmount\": 141\n    }\n  ]\n}', '绯荤粺绠＄悊鍛', '1', '2025-05-09 20:54:00', '绯荤粺绠＄悊鍛', '1', '2025-05-09 21:03:49');
+INSERT INTO `tbl_print_template` VALUES (6, '閿€鍞鍗', '{\"tempItems\":[{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":122,\"height\":14,\"left\":500,\"top\":5,\"title\":\"鏍囬\",\"value\":\"閿€鍞鍗昞",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":14,\"FontColor\":\"#000000\",\"Bold\":\"1\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"center\",\"ItemType\":\"1\",\"bordered\":false,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":0,\"leftOffset\":0},\"uuid\":\"35205865ddd83246b7aa9b82addbc49b5a7e\"},{\"type\":\"braid-barcode\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":200,\"height\":40,\"left\":920,\"top\":5,\"title\":\"鍗曞彿鏉＄爜\",\"name\":\"code\",\"style\":{\"zIndex\":0,\"FontSize\":\"9\",\"ShowBarText\":\"1\",\"CodeType\":\"Code39\",\"ItemType\":\"1\"},\"value\":\"{鍗曞彿}\",\"uuid\":\"027597a790715443beeae5d06cd8d1f06b60\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":10,\"top\":60,\"title\":\"浠撳簱缂栧彿-鏍囬\",\"value\":\"浠撳簱缂栧彿锛歕",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"387f44812bf5e84fc2a89b8689beb7ae95ff\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":118,\"top\":60,\"title\":\"浠撳簱缂栧彿\",\"value\":\"{浠撳簱缂栧彿}\",\"name\":\"scCode\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"b7217c3c1571794c4428f5d5823bfb0a4a99\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":286,\"top\":60,\"title\":\"浠撳簱鍚嶇О-鏍囬\",\"value\":\"浠撳簱鍚嶇О锛歕",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"a400e796d4c955457bc819f8cf6c43d6c19a\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":394,\"top\":60,\"title\":\"浠撳簱鍚嶇О\",\"value\":\"{浠撳簱鍚嶇О}\",\"name\":\"scName\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"7cf2034a2a4e1b443ffa3d5972bfc322a88e\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":562,\"top\":60,\"title\":\"鏀惰揣鏂圭紪鍙?鏍囬\",\"value\":\"鏀惰揣鏂圭紪鍙凤細\",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"09bc7fd608d8e641df48b4e94b47f05ff923\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":670,\"top\":60,\"title\":\"鏀惰揣鏂圭紪鍙穃",\"value\":\"{鏀惰揣鏂圭紪鍙穧\",\"name\":\"customerCode\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"4a08de3bd8296a4ac6ab9f2c5cab79f61584\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":838,\"top\":60,\"title\":\"鏀惰揣鏂瑰悕绉?鏍囬\",\"value\":\"鏀惰揣鏂瑰悕绉帮細\",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"2bcbd47062dffb4d0038afc6ac3e58455eab\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":946,\"top\":60,\"title\":\"鏀惰揣鏂瑰悕绉癨",\"value\":\"{鏀惰揣鏂瑰悕绉皚\",\"name\":\"customerName\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"c39584ca3946284d908bd758d6dad5a70517\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":10,\"top\":84,\"title\":\"閿€鍞憳-鏍囬\",\"value\":\"閿€鍞憳锛歕",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"4c9ba4c9e0da3443d2097761f206563a6e31\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":118,\"top\":84,\"title\":\"閿€鍞憳\",\"value\":\"{閿€鍞憳}\",\"name\":\"salerName\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"a4508027b5bd034c440a063e59b7ee0cc297\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":286,\"top\":84,\"title\":\"鎿嶄綔浜?鏍囬\",\"value\":\"鎿嶄綔浜猴細\",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"09debe4c6886374dbdd847de695a364339aa\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":394,\"top\":84,\"title\":\"鎿嶄綔浜篭",\"value\":\"{鎿嶄綔浜簘\",\"name\":\"createBy\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"aea91c8a37984b4d90e8545fa84a823a9e2b\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":562,\"top\":84,\"title\":\"鎿嶄綔鏃堕棿-鏍囬\",\"value\":\"鎿嶄綔鏃堕棿锛歕",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"b80a43b94128624c56a97c3e88689b6af8d6\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":670,\"top\":84,\"title\":\"鎿嶄綔鏃堕棿\",\"value\":\"{鎿嶄綔鏃堕棿}\",\"name\":\"createTime\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"89d3b43387c17e44f798ef2bf220d26bf3e3\"},{\"type\":\"braid-table\",\"isEdit\":0,\"draggable\":true,\"resizable\":true,\"width\":1104,\"height\":60,\"left\":10,\"top\":118,\"title\":\"閿€鍞晢鍝佹槑缁哱",\"value\":\"{details}\",\"defaultValue\":[],\"tabelHtml\":\"\",\"columnsAttr\":[{\"title\":\"搴忓彿\",\"name\":\"_seq\"},{\"title\":\"鍟嗗搧缂栧彿\",\"value\":\"{鍟嗗搧缂栧彿}\",\"name\":\"productCode\"},{\"title\":\"鍟嗗搧鍚嶇О\",\"value\":\"{鍟嗗搧鍚嶇О}\",\"name\":\"productName\"},{\"title\":\"鍟嗗搧SKU缂栧彿\",\"value\":\"{鍟嗗搧SKU缂栧彿}\",\"name\":\"skuCode\"},{\"title\":\"鍟嗗搧绠€鐮乗",\"value\":\"{鍟嗗搧绠€鐮亇\",\"name\":\"externalCode\"},{\"title\":\"閿€鍞暟閲廫",\"value\":\"{閿€鍞暟閲弣\",\"name\":\"orderNum\"},{\"title\":\"浠锋牸\",\"value\":\"{浠锋牸}\",\"name\":\"taxPrice\"},{\"title\":\"閿€鍞噾棰漒",\"value\":\"{閿€鍞噾棰潁\",\"name\":\"orderAmount\"}],\"columns\":[{\"title\":\"搴忓彿\",\"name\":\"_seq\"},{\"title\":\"鍟嗗搧缂栧彿\",\"value\":\"{鍟嗗搧缂栧彿}\",\"name\":\"productCode\"},{\"title\":\"鍟嗗搧鍚嶇О\",\"value\":\"{鍟嗗搧鍚嶇О}\",\"name\":\"productName\"},{\"title\":\"鍟嗗搧SKU缂栧彿\",\"value\":\"{鍟嗗搧SKU缂栧彿}\",\"name\":\"skuCode\"},{\"title\":\"鍟嗗搧绠€鐮乗",\"value\":\"{鍟嗗搧绠€鐮亇\",\"name\":\"externalCode\"},{\"title\":\"閿€鍞暟閲廫",\"value\":\"{閿€鍞暟閲弣\",\"name\":\"orderNum\"},{\"title\":\"浠锋牸\",\"value\":\"{浠锋牸}\",\"name\":\"taxPrice\"},{\"title\":\"閿€鍞噾棰漒",\"value\":\"{閿€鍞噾棰潁\",\"name\":\"orderAmount\"}],\"selectCol\":[\"_seq\",\"productCode\",\"productName\",\"skuCode\",\"externalCode\",\"orderNum\",\"taxPrice\",\"orderAmount\"],\"name\":\"details\",\"style\":{\"zIndex\":0,\"Alignment\":\"left\",\"FontSize\":12,\"FontColor\":\"#000000\",\"borderColor\":\"#000000\",\"autoHeight\":true,\"BottomMargin\":20},\"uuid\":\"a54b8d97a637b64fd5f9ca417d7d5211716e\"},{\"type\":\"braid-page\",\"isEdit\":false,\"draggable\":true,\"resizable\":true,\"width\":97,\"height\":20,\"left\":1025,\"top\":770,\"title\":\"鍒嗛〉\",\"curPageStyle\":\"绗?#椤礬",\"splitPageStyle\":\"/\",\"totalPageStyle\":\"鍏?#椤礬",\"name\":\"\",\"style\":{\"zIndex\":0,\"ItemType\":\"1\",\"autoHeight\":false,\"BottomMargin\":5,\"Alignment\":\"right\",\"FontSize\":12,\"FontColor\":\"#000000\"},\"uuid\":\"d6f62ce0a7931e438188be50bc350f99da7d\"}],\"title\":\"闆跺敭鍑哄簱鍗昞",\"pageWidth\":210,\"pageHeight\":297,\"width\":1122,\"height\":793,\"pageDirection\":2}', '{\n  \"code\": \"202501190000000003\",\n  \"scCode\": \"1\",\n  \"scName\": \"娴嬭瘯浠撳簱\",\n  \"customerCode\": \"1\",\n  \"customerName\": \"娴嬭瘯鏀惰揣鏂筡",\n  \"salerName\": \"\",\n  \"description\": \"\",\n  \"createBy\": \"绯荤粺绠＄悊鍛榎",\n  \"createTime\": \"2025-01-19 22:08:46\",\n  \"approveBy\": \"\",\n  \"approveTime\": \"\",\n  \"details\": [\n    {\n      \"productCode\": \"11\",\n      \"productName\": \"鍟嗗搧222\",\n      \"skuCode\": \"41\",\n      \"externalCode\": \"51\",\n      \"orderNum\": 1,\n      \"taxPrice\": 131,\n      \"orderAmount\": 131\n    }\n  ]\n}', '绯荤粺绠＄悊鍛', '1', '2025-05-09 22:34:50', '绯荤粺绠＄悊鍛', '1', '2025-05-09 22:35:00');
+INSERT INTO `tbl_print_template` VALUES (7, '閿€鍞嚭搴撳崟', '{\"tempItems\":[{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":122,\"height\":14,\"left\":500,\"top\":5,\"title\":\"鏍囬\",\"value\":\"閿€鍞嚭搴撳崟\",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":14,\"FontColor\":\"#000000\",\"Bold\":\"1\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"center\",\"ItemType\":\"1\",\"bordered\":false,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":0,\"leftOffset\":0},\"uuid\":\"35205865ddd83246b7aa9b82addbc49b5a7e\"},{\"type\":\"braid-barcode\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":200,\"height\":40,\"left\":920,\"top\":5,\"title\":\"鍗曞彿鏉＄爜\",\"name\":\"code\",\"style\":{\"zIndex\":0,\"FontSize\":\"9\",\"ShowBarText\":\"1\",\"CodeType\":\"Code39\",\"ItemType\":\"1\"},\"value\":\"{鍗曞彿}\",\"uuid\":\"027597a790715443beeae5d06cd8d1f06b60\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":10,\"top\":60,\"title\":\"浠撳簱缂栧彿-鏍囬\",\"value\":\"浠撳簱缂栧彿锛歕",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"387f44812bf5e84fc2a89b8689beb7ae95ff\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":118,\"top\":60,\"title\":\"浠撳簱缂栧彿\",\"value\":\"{浠撳簱缂栧彿}\",\"name\":\"scCode\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"b7217c3c1571794c4428f5d5823bfb0a4a99\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":286,\"top\":60,\"title\":\"浠撳簱鍚嶇О-鏍囬\",\"value\":\"浠撳簱鍚嶇О锛歕",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"a400e796d4c955457bc819f8cf6c43d6c19a\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":394,\"top\":60,\"title\":\"浠撳簱鍚嶇О\",\"value\":\"{浠撳簱鍚嶇О}\",\"name\":\"scName\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"7cf2034a2a4e1b443ffa3d5972bfc322a88e\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":562,\"top\":60,\"title\":\"鏀惰揣鏂圭紪鍙?鏍囬\",\"value\":\"鏀惰揣鏂圭紪鍙凤細\",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"09bc7fd608d8e641df48b4e94b47f05ff923\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":670,\"top\":60,\"title\":\"鏀惰揣鏂圭紪鍙穃",\"value\":\"{鏀惰揣鏂圭紪鍙穧\",\"name\":\"customerCode\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"4a08de3bd8296a4ac6ab9f2c5cab79f61584\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":838,\"top\":60,\"title\":\"鏀惰揣鏂瑰悕绉?鏍囬\",\"value\":\"鏀惰揣鏂瑰悕绉帮細\",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"2bcbd47062dffb4d0038afc6ac3e58455eab\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":946,\"top\":60,\"title\":\"鏀惰揣鏂瑰悕绉癨",\"value\":\"{鏀惰揣鏂瑰悕绉皚\",\"name\":\"customerName\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"c39584ca3946284d908bd758d6dad5a70517\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":10,\"top\":84,\"title\":\"閿€鍞憳-鏍囬\",\"value\":\"閿€鍞憳锛歕",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"4c9ba4c9e0da3443d2097761f206563a6e31\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":118,\"top\":84,\"title\":\"閿€鍞憳\",\"value\":\"{閿€鍞憳}\",\"name\":\"salerName\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"a4508027b5bd034c440a063e59b7ee0cc297\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":286,\"top\":84,\"title\":\"鎿嶄綔浜?鏍囬\",\"value\":\"鎿嶄綔浜猴細\",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"09debe4c6886374dbdd847de695a364339aa\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":394,\"top\":84,\"title\":\"鎿嶄綔浜篭",\"value\":\"{鎿嶄綔浜簘\",\"name\":\"createBy\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"aea91c8a37984b4d90e8545fa84a823a9e2b\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":562,\"top\":84,\"title\":\"鎿嶄綔鏃堕棿-鏍囬\",\"value\":\"鎿嶄綔鏃堕棿锛歕",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"b80a43b94128624c56a97c3e88689b6af8d6\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":670,\"top\":84,\"title\":\"鎿嶄綔鏃堕棿\",\"value\":\"{鎿嶄綔鏃堕棿}\",\"name\":\"createTime\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"89d3b43387c17e44f798ef2bf220d26bf3e3\"},{\"type\":\"braid-table\",\"isEdit\":0,\"draggable\":true,\"resizable\":true,\"width\":1104,\"height\":60,\"left\":10,\"top\":142,\"title\":\"鍑哄簱鍟嗗搧鏄庣粏\",\"value\":\"{details}\",\"defaultValue\":[],\"tabelHtml\":\"\",\"columnsAttr\":[{\"title\":\"搴忓彿\",\"name\":\"_seq\"},{\"title\":\"鍟嗗搧缂栧彿\",\"value\":\"{鍟嗗搧缂栧彿}\",\"name\":\"productCode\"},{\"title\":\"鍟嗗搧鍚嶇О\",\"value\":\"{鍟嗗搧鍚嶇О}\",\"name\":\"productName\"},{\"title\":\"鍟嗗搧SKU缂栧彿\",\"value\":\"{鍟嗗搧SKU缂栧彿}\",\"name\":\"skuCode\"},{\"title\":\"鍟嗗搧绠€鐮乗",\"value\":\"{鍟嗗搧绠€鐮亇\",\"name\":\"externalCode\"},{\"title\":\"鍑哄簱鏁伴噺\",\"value\":\"{鍑哄簱鏁伴噺}\",\"name\":\"outNum\"},{\"title\":\"浠锋牸\",\"value\":\"{浠锋牸}\",\"name\":\"taxPrice\"},{\"title\":\"鍑哄簱閲戦\",\"value\":\"{鍑哄簱閲戦}\",\"name\":\"outAmount\"}],\"columns\":[{\"title\":\"搴忓彿\",\"name\":\"_seq\"},{\"title\":\"鍟嗗搧缂栧彿\",\"value\":\"{鍟嗗搧缂栧彿}\",\"name\":\"productCode\"},{\"title\":\"鍟嗗搧鍚嶇О\",\"value\":\"{鍟嗗搧鍚嶇О}\",\"name\":\"productName\"},{\"title\":\"鍟嗗搧SKU缂栧彿\",\"value\":\"{鍟嗗搧SKU缂栧彿}\",\"name\":\"skuCode\"},{\"title\":\"鍟嗗搧绠€鐮乗",\"value\":\"{鍟嗗搧绠€鐮亇\",\"name\":\"externalCode\"},{\"title\":\"鍑哄簱鏁伴噺\",\"value\":\"{鍑哄簱鏁伴噺}\",\"name\":\"outNum\"},{\"title\":\"浠锋牸\",\"value\":\"{浠锋牸}\",\"name\":\"taxPrice\"},{\"title\":\"鍑哄簱閲戦\",\"value\":\"{鍑哄簱閲戦}\",\"name\":\"outAmount\"}],\"selectCol\":[\"_seq\",\"productCode\",\"productName\",\"skuCode\",\"externalCode\",\"outNum\",\"taxPrice\",\"outAmount\"],\"name\":\"details\",\"style\":{\"zIndex\":0,\"Alignment\":\"left\",\"FontSize\":12,\"FontColor\":\"#000000\",\"borderColor\":\"#000000\",\"autoHeight\":true,\"BottomMargin\":20},\"uuid\":\"a54b8d97a637b64fd5f9ca417d7d5211716e\"},{\"type\":\"braid-page\",\"isEdit\":false,\"draggable\":true,\"resizable\":true,\"width\":97,\"height\":20,\"left\":1025,\"top\":770,\"title\":\"鍒嗛〉\",\"curPageStyle\":\"绗?#椤礬",\"splitPageStyle\":\"/\",\"totalPageStyle\":\"鍏?#椤礬",\"name\":\"\",\"style\":{\"zIndex\":0,\"ItemType\":\"1\",\"autoHeight\":false,\"BottomMargin\":5,\"Alignment\":\"right\",\"FontSize\":12,\"FontColor\":\"#000000\"},\"uuid\":\"d6f62ce0a7931e438188be50bc350f99da7d\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":10,\"top\":108,\"title\":\"浠樻鏃ユ湡-鏍囬\",\"value\":\"浠樻鏃ユ湡锛歕",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"604209e64d1a984bbaabe0ad64ad77f5eeee\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":118,\"top\":108,\"title\":\"浠樻鏃ユ湡\",\"value\":\"{浠樻鏃ユ湡}\",\"name\":\"paymentDate\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"e874b94582286747e2a8865a0ded60b4d639\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":838,\"top\":84,\"title\":\"閿€鍞鍗曞彿-鏍囬\",\"value\":\"閿€鍞鍗曞彿锛歕",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"a4e29827b8e062405258d7f5e7bb535f9dd5\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":946,\"top\":84,\"title\":\"閿€鍞鍗曞彿\",\"value\":\"{閿€鍞鍗曞彿}\",\"name\":\"saleOrderCode\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"e7681d4c03d9664ad96b96efc49bd124f871\"}],\"title\":\"閿€鍞嚭搴撳崟\",\"pageWidth\":210,\"pageHeight\":297,\"width\":1122,\"height\":793,\"pageDirection\":2}', '{\n  \"code\": \"202501190000000004\",\n  \"scCode\": \"1\",\n  \"scName\": \"娴嬭瘯浠撳簱\",\n  \"customerCode\": \"1\",\n  \"customerName\": \"娴嬭瘯鏀惰揣鏂筡",\n  \"salerName\": \"\",\n  \"paymentDate\": \"2025-02-19\",\n  \"saleOrderCode\": \"\",\n  \"description\": \"\",\n  \"createBy\": \"绯荤粺绠＄悊鍛榎",\n  \"createTime\": \"2025-01-19 22:09:55\",\n  \"approveBy\": \"绯荤粺绠＄悊鍛榎",\n  \"approveTime\": \"2025-01-19 22:10:01\",\n  \"details\": [\n    {\n      \"productCode\": \"11\",\n      \"productName\": \"鍟嗗搧222\",\n      \"skuCode\": \"41\",\n      \"externalCode\": \"51\",\n      \"outNum\": 1,\n      \"taxPrice\": 131,\n      \"outAmount\": 131\n    }\n  ]\n}', '绯荤粺绠＄悊鍛', '1', '2025-05-09 22:50:02', '绯荤粺绠＄悊鍛', '1', '2025-05-09 22:50:13');
+INSERT INTO `tbl_print_template` VALUES (8, '閿€鍞€€璐у崟', '{\"tempItems\":[{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":122,\"height\":14,\"left\":500,\"top\":5,\"title\":\"鏍囬\",\"value\":\"閿€鍞€€璐у崟\",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":14,\"FontColor\":\"#000000\",\"Bold\":\"1\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"center\",\"ItemType\":\"1\",\"bordered\":false,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":0,\"leftOffset\":0},\"uuid\":\"35205865ddd83246b7aa9b82addbc49b5a7e\"},{\"type\":\"braid-barcode\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":200,\"height\":40,\"left\":920,\"top\":5,\"title\":\"鍗曞彿鏉＄爜\",\"name\":\"code\",\"style\":{\"zIndex\":0,\"FontSize\":\"9\",\"ShowBarText\":\"1\",\"CodeType\":\"Code39\",\"ItemType\":\"1\"},\"value\":\"{鍗曞彿}\",\"uuid\":\"027597a790715443beeae5d06cd8d1f06b60\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":10,\"top\":60,\"title\":\"浠撳簱缂栧彿-鏍囬\",\"value\":\"浠撳簱缂栧彿锛歕",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"387f44812bf5e84fc2a89b8689beb7ae95ff\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":118,\"top\":60,\"title\":\"浠撳簱缂栧彿\",\"value\":\"{浠撳簱缂栧彿}\",\"name\":\"scCode\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"b7217c3c1571794c4428f5d5823bfb0a4a99\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":286,\"top\":60,\"title\":\"浠撳簱鍚嶇О-鏍囬\",\"value\":\"浠撳簱鍚嶇О锛歕",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"a400e796d4c955457bc819f8cf6c43d6c19a\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":394,\"top\":60,\"title\":\"浠撳簱鍚嶇О\",\"value\":\"{浠撳簱鍚嶇О}\",\"name\":\"scName\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"7cf2034a2a4e1b443ffa3d5972bfc322a88e\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":562,\"top\":60,\"title\":\"鏀惰揣鏂圭紪鍙?鏍囬\",\"value\":\"鏀惰揣鏂圭紪鍙凤細\",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"09bc7fd608d8e641df48b4e94b47f05ff923\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":670,\"top\":60,\"title\":\"鏀惰揣鏂圭紪鍙穃",\"value\":\"{鏀惰揣鏂圭紪鍙穧\",\"name\":\"customerCode\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"4a08de3bd8296a4ac6ab9f2c5cab79f61584\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":838,\"top\":60,\"title\":\"鏀惰揣鏂瑰悕绉?鏍囬\",\"value\":\"鏀惰揣鏂瑰悕绉帮細\",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"2bcbd47062dffb4d0038afc6ac3e58455eab\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":946,\"top\":60,\"title\":\"鏀惰揣鏂瑰悕绉癨",\"value\":\"{鏀惰揣鏂瑰悕绉皚\",\"name\":\"customerName\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"c39584ca3946284d908bd758d6dad5a70517\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":10,\"top\":84,\"title\":\"閿€鍞憳-鏍囬\",\"value\":\"閿€鍞憳锛歕",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"4c9ba4c9e0da3443d2097761f206563a6e31\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":118,\"top\":84,\"title\":\"閿€鍞憳\",\"value\":\"{閿€鍞憳}\",\"name\":\"salerName\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"a4508027b5bd034c440a063e59b7ee0cc297\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":286,\"top\":84,\"title\":\"鎿嶄綔浜?鏍囬\",\"value\":\"鎿嶄綔浜猴細\",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"09debe4c6886374dbdd847de695a364339aa\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":394,\"top\":84,\"title\":\"鎿嶄綔浜篭",\"value\":\"{鎿嶄綔浜簘\",\"name\":\"createBy\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"aea91c8a37984b4d90e8545fa84a823a9e2b\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":562,\"top\":84,\"title\":\"鎿嶄綔鏃堕棿-鏍囬\",\"value\":\"鎿嶄綔鏃堕棿锛歕",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"b80a43b94128624c56a97c3e88689b6af8d6\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":670,\"top\":84,\"title\":\"鎿嶄綔鏃堕棿\",\"value\":\"{鎿嶄綔鏃堕棿}\",\"name\":\"createTime\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"89d3b43387c17e44f798ef2bf220d26bf3e3\"},{\"type\":\"braid-table\",\"isEdit\":0,\"draggable\":true,\"resizable\":true,\"width\":1104,\"height\":60,\"left\":10,\"top\":142,\"title\":\"閫€璐у晢鍝佹槑缁哱",\"value\":\"{details}\",\"defaultValue\":[],\"tabelHtml\":\"\",\"columnsAttr\":[{\"title\":\"搴忓彿\",\"name\":\"_seq\"},{\"title\":\"鍟嗗搧缂栧彿\",\"value\":\"{鍟嗗搧缂栧彿}\",\"name\":\"productCode\"},{\"title\":\"鍟嗗搧鍚嶇О\",\"value\":\"{鍟嗗搧鍚嶇О}\",\"name\":\"productName\"},{\"title\":\"鍟嗗搧SKU缂栧彿\",\"value\":\"{鍟嗗搧SKU缂栧彿}\",\"name\":\"skuCode\"},{\"title\":\"鍟嗗搧绠€鐮乗",\"value\":\"{鍟嗗搧绠€鐮亇\",\"name\":\"externalCode\"},{\"title\":\"閫€璐ф暟閲廫",\"value\":\"{閫€璐ф暟閲弣\",\"name\":\"returnNum\"},{\"title\":\"浠锋牸\",\"value\":\"{浠锋牸}\",\"name\":\"taxPrice\"},{\"title\":\"閫€璐ч噾棰漒",\"value\":\"{閫€璐ч噾棰潁\",\"name\":\"returnAmount\"}],\"columns\":[{\"title\":\"搴忓彿\",\"name\":\"_seq\"},{\"title\":\"鍟嗗搧缂栧彿\",\"value\":\"{鍟嗗搧缂栧彿}\",\"name\":\"productCode\"},{\"title\":\"鍟嗗搧鍚嶇О\",\"value\":\"{鍟嗗搧鍚嶇О}\",\"name\":\"productName\"},{\"title\":\"鍟嗗搧SKU缂栧彿\",\"value\":\"{鍟嗗搧SKU缂栧彿}\",\"name\":\"skuCode\"},{\"title\":\"鍟嗗搧绠€鐮乗",\"value\":\"{鍟嗗搧绠€鐮亇\",\"name\":\"externalCode\"},{\"title\":\"閫€璐ф暟閲廫",\"value\":\"{閫€璐ф暟閲弣\",\"name\":\"returnNum\"},{\"title\":\"浠锋牸\",\"value\":\"{浠锋牸}\",\"name\":\"taxPrice\"},{\"title\":\"閫€璐ч噾棰漒",\"value\":\"{閫€璐ч噾棰潁\",\"name\":\"returnAmount\"}],\"selectCol\":[\"_seq\",\"productCode\",\"productName\",\"skuCode\",\"externalCode\",\"returnNum\",\"taxPrice\",\"returnAmount\"],\"name\":\"details\",\"style\":{\"zIndex\":0,\"Alignment\":\"left\",\"FontSize\":12,\"FontColor\":\"#000000\",\"borderColor\":\"#000000\",\"autoHeight\":true,\"BottomMargin\":20},\"uuid\":\"a54b8d97a637b64fd5f9ca417d7d5211716e\"},{\"type\":\"braid-page\",\"isEdit\":false,\"draggable\":true,\"resizable\":true,\"width\":97,\"height\":20,\"left\":1025,\"top\":770,\"title\":\"鍒嗛〉\",\"curPageStyle\":\"绗?#椤礬",\"splitPageStyle\":\"/\",\"totalPageStyle\":\"鍏?#椤礬",\"name\":\"\",\"style\":{\"zIndex\":0,\"ItemType\":\"1\",\"autoHeight\":false,\"BottomMargin\":5,\"Alignment\":\"right\",\"FontSize\":12,\"FontColor\":\"#000000\"},\"uuid\":\"d6f62ce0a7931e438188be50bc350f99da7d\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":10,\"top\":108,\"title\":\"浠樻鏃ユ湡-鏍囬\",\"value\":\"浠樻鏃ユ湡锛歕",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"604209e64d1a984bbaabe0ad64ad77f5eeee\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":118,\"top\":108,\"title\":\"浠樻鏃ユ湡\",\"value\":\"{浠樻鏃ユ湡}\",\"name\":\"paymentDate\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"e874b94582286747e2a8865a0ded60b4d639\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":108,\"height\":24,\"left\":838,\"top\":84,\"title\":\"閿€鍞嚭搴撳崟鍙?鏍囬\",\"value\":\"閿€鍞嚭搴撳崟鍙凤細\",\"name\":\"\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"right\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":0},\"uuid\":\"10488b69c261764f0e388a6607267aae769f\"},{\"type\":\"braid-txt\",\"isEdit\":1,\"draggable\":true,\"resizable\":true,\"width\":168,\"height\":24,\"left\":946,\"top\":84,\"title\":\"閿€鍞嚭搴撳崟鍙穃",\"value\":\"{閿€鍞嚭搴撳崟鍙穧\",\"name\":\"outSheetCode\",\"style\":{\"zIndex\":0,\"FontSize\":12,\"FontColor\":\"#000000\",\"Bold\":\"0\",\"Italic\":\"0\",\"Underline\":\"0\",\"Alignment\":\"left\",\"ItemType\":\"1\",\"bordered\":true,\"intLineStyle\":0,\"intLineWidth\":1,\"topOffset\":4,\"leftOffset\":5},\"uuid\":\"ba426c11fae59f4442a84d29ef5ab38c82ff\"}],\"title\":\"閿€鍞€€璐у崟\",\"pageWidth\":210,\"pageHeight\":297,\"width\":1122,\"height\":793,\"pageDirection\":2}', '{\n  \"code\": \"202501190000000003\",\n  \"scCode\": \"1\",\n  \"scName\": \"娴嬭瘯浠撳簱\",\n  \"customerCode\": \"1\",\n  \"customerName\": \"娴嬭瘯鏀惰揣鏂筡",\n  \"salerName\": \"\",\n  \"paymentDate\": \"2025-02-19\",\n  \"outSheetCode\": \"\",\n  \"description\": \"\",\n  \"createBy\": \"绯荤粺绠＄悊鍛榎",\n  \"createTime\": \"2025-01-19 22:10:44\",\n  \"approveBy\": \"\",\n  \"approveTime\": \"\",\n  \"details\": [\n    {\n      \"productCode\": \"11\",\n      \"productName\": \"鍟嗗搧222\",\n      \"skuCode\": \"41\",\n      \"externalCode\": \"51\",\n      \"returnNum\": 1,\n      \"taxPrice\": 131,\n      \"returnAmount\": 131\n    }\n  ]\n}', '绯荤粺绠＄悊鍛', '1', '2025-05-09 23:03:03', '绯荤粺绠＄悊鍛', '1', '2025-05-09 23:03:35');
+
+-- ----------------------------
+-- Table structure for tbl_print_template_comp
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_print_template_comp`;
+CREATE TABLE `tbl_print_template_comp`  (
+  `id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `template_id` int(11) NOT NULL COMMENT '妯℃澘ID',
+  `comp_json` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '缁勪欢閰嶇疆',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `template_id`(`template_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鎵撳嵃妯℃澘缁勪欢' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_print_template_comp
+-- ----------------------------
+INSERT INTO `tbl_print_template_comp` VALUES ('1', 0, '{\"type\":\"braid-txt\"}');
+INSERT INTO `tbl_print_template_comp` VALUES ('100', 1, '{\"type\":\"braid-table\",\"isEdit\":0,\"title\":\"閲囪喘鍟嗗搧鏄庣粏\",\"name\":\"details\",\"value\":\"{details}\",\"style\":{},\"tabelHtml\":\"\",\"columnsAttr\":[{\"title\":\"搴忓彿\",\"name\":\"_seq\"},{\"title\":\"鍟嗗搧缂栧彿\",\"value\":\"{鍟嗗搧缂栧彿}\",\"name\":\"productCode\"},{\"title\":\"鍟嗗搧鍚嶇О\",\"value\":\"{鍟嗗搧鍚嶇О}\",\"name\":\"productName\"},{\"title\":\"鍟嗗搧SKU缂栧彿\",\"value\":\"{鍟嗗搧SKU缂栧彿}\",\"name\":\"skuCode\"},{\"title\":\"鍟嗗搧绠€鐮乗",\"value\":\"{鍟嗗搧绠€鐮亇\",\"name\":\"externalCode\"},{\"title\":\"閲囪喘鏁伴噺\",\"value\":\"{閲囪喘鏁伴噺}\",\"name\":\"purchaseNum\"},{\"title\":\"閲囪喘浠穃",\"value\":\"{閲囪喘浠穧\",\"name\":\"purchasePrice\"},{\"title\":\"閲囪喘閲戦\",\"value\":\"{閲囪喘閲戦}\",\"name\":\"purchaseAmount\"}],\"columns\":[]}');
+INSERT INTO `tbl_print_template_comp` VALUES ('101', 2, '{\"type\":\"braid-table\",\"isEdit\":0,\"title\":\"鏀惰揣鍟嗗搧鏄庣粏\",\"name\":\"details\",\"value\":\"{details}\",\"style\":{},\"tabelHtml\":\"\",\"columnsAttr\":[{\"title\":\"搴忓彿\",\"name\":\"_seq\"},{\"title\":\"鍟嗗搧缂栧彿\",\"value\":\"{鍟嗗搧缂栧彿}\",\"name\":\"productCode\"},{\"title\":\"鍟嗗搧鍚嶇О\",\"value\":\"{鍟嗗搧鍚嶇О}\",\"name\":\"productName\"},{\"title\":\"鍟嗗搧SKU缂栧彿\",\"value\":\"{鍟嗗搧SKU缂栧彿}\",\"name\":\"skuCode\"},{\"title\":\"鍟嗗搧绠€鐮乗",\"value\":\"{鍟嗗搧绠€鐮亇\",\"name\":\"externalCode\"},{\"title\":\"鏀惰揣鏁伴噺\",\"value\":\"{鏀惰揣鏁伴噺}\",\"name\":\"receiveNum\"},{\"title\":\"閲囪喘浠穃",\"value\":\"{閲囪喘浠穧\",\"name\":\"purchasePrice\"},{\"title\":\"鏀惰揣閲戦\",\"value\":\"{鏀惰揣閲戦}\",\"name\":\"receiveAmount\"}],\"columns\":[]}');
+INSERT INTO `tbl_print_template_comp` VALUES ('102', 3, '{\"type\":\"braid-table\",\"isEdit\":0,\"title\":\"閫€璐у晢鍝佹槑缁哱",\"name\":\"details\",\"value\":\"{details}\",\"style\":{},\"tabelHtml\":\"\",\"columnsAttr\":[{\"title\":\"搴忓彿\",\"name\":\"_seq\"},{\"title\":\"鍟嗗搧缂栧彿\",\"value\":\"{鍟嗗搧缂栧彿}\",\"name\":\"productCode\"},{\"title\":\"鍟嗗搧鍚嶇О\",\"value\":\"{鍟嗗搧鍚嶇О}\",\"name\":\"productName\"},{\"title\":\"鍟嗗搧SKU缂栧彿\",\"value\":\"{鍟嗗搧SKU缂栧彿}\",\"name\":\"skuCode\"},{\"title\":\"鍟嗗搧绠€鐮乗",\"value\":\"{鍟嗗搧绠€鐮亇\",\"name\":\"externalCode\"},{\"title\":\"閫€璐ф暟閲廫",\"value\":\"{閫€璐ф暟閲弣\",\"name\":\"returnNum\"},{\"title\":\"閫€璐т环\",\"value\":\"{閫€璐т环}\",\"name\":\"purchasePrice\"},{\"title\":\"閫€璐ч噾棰漒",\"value\":\"{閫€璐ч噾棰潁\",\"name\":\"returnAmount\"}],\"columns\":[]}');
+INSERT INTO `tbl_print_template_comp` VALUES ('103', 4, '{\"type\":\"braid-table\",\"isEdit\":0,\"title\":\"鍑哄簱鍟嗗搧鏄庣粏\",\"name\":\"details\",\"value\":\"{details}\",\"style\":{},\"tabelHtml\":\"\",\"columnsAttr\":[{\"title\":\"搴忓彿\",\"name\":\"_seq\"},{\"title\":\"鍟嗗搧缂栧彿\",\"value\":\"{鍟嗗搧缂栧彿}\",\"name\":\"productCode\"},{\"title\":\"鍟嗗搧鍚嶇О\",\"value\":\"{鍟嗗搧鍚嶇О}\",\"name\":\"productName\"},{\"title\":\"鍟嗗搧SKU缂栧彿\",\"value\":\"{鍟嗗搧SKU缂栧彿}\",\"name\":\"skuCode\"},{\"title\":\"鍟嗗搧绠€鐮乗",\"value\":\"{鍟嗗搧绠€鐮亇\",\"name\":\"externalCode\"},{\"title\":\"鍑哄簱鏁伴噺\",\"value\":\"{鍑哄簱鏁伴噺}\",\"name\":\"outNum\"},{\"title\":\"浠锋牸\",\"value\":\"{浠锋牸}\",\"name\":\"taxPrice\"},{\"title\":\"鍑哄簱閲戦\",\"value\":\"{鍑哄簱閲戦}\",\"name\":\"outAmount\"}],\"columns\":[]}');
+INSERT INTO `tbl_print_template_comp` VALUES ('104', 5, '{\"type\":\"braid-table\",\"isEdit\":0,\"title\":\"閫€璐у晢鍝佹槑缁哱",\"name\":\"details\",\"value\":\"{details}\",\"style\":{},\"tabelHtml\":\"\",\"columnsAttr\":[{\"title\":\"搴忓彿\",\"name\":\"_seq\"},{\"title\":\"鍟嗗搧缂栧彿\",\"value\":\"{鍟嗗搧缂栧彿}\",\"name\":\"productCode\"},{\"title\":\"鍟嗗搧鍚嶇О\",\"value\":\"{鍟嗗搧鍚嶇О}\",\"name\":\"productName\"},{\"title\":\"鍟嗗搧SKU缂栧彿\",\"value\":\"{鍟嗗搧SKU缂栧彿}\",\"name\":\"skuCode\"},{\"title\":\"鍟嗗搧绠€鐮乗",\"value\":\"{鍟嗗搧绠€鐮亇\",\"name\":\"externalCode\"},{\"title\":\"閫€璐ф暟閲廫",\"value\":\"{閫€璐ф暟閲弣\",\"name\":\"returnNum\"},{\"title\":\"浠锋牸\",\"value\":\"{浠锋牸}\",\"name\":\"taxPrice\"},{\"title\":\"閫€璐ч噾棰漒",\"value\":\"{閫€璐ч噾棰潁\",\"name\":\"returnAmount\"}],\"columns\":[]}');
+INSERT INTO `tbl_print_template_comp` VALUES ('105', 6, '{\"type\":\"braid-table\",\"isEdit\":0,\"title\":\"閿€鍞晢鍝佹槑缁哱",\"name\":\"details\",\"value\":\"{details}\",\"style\":{},\"tabelHtml\":\"\",\"columnsAttr\":[{\"title\":\"搴忓彿\",\"name\":\"_seq\"},{\"title\":\"鍟嗗搧缂栧彿\",\"value\":\"{鍟嗗搧缂栧彿}\",\"name\":\"productCode\"},{\"title\":\"鍟嗗搧鍚嶇О\",\"value\":\"{鍟嗗搧鍚嶇О}\",\"name\":\"productName\"},{\"title\":\"鍟嗗搧SKU缂栧彿\",\"value\":\"{鍟嗗搧SKU缂栧彿}\",\"name\":\"skuCode\"},{\"title\":\"鍟嗗搧绠€鐮乗",\"value\":\"{鍟嗗搧绠€鐮亇\",\"name\":\"externalCode\"},{\"title\":\"閿€鍞暟閲廫",\"value\":\"{閿€鍞暟閲弣\",\"name\":\"orderNum\"},{\"title\":\"浠锋牸\",\"value\":\"{浠锋牸}\",\"name\":\"taxPrice\"},{\"title\":\"閿€鍞噾棰漒",\"value\":\"{閿€鍞噾棰潁\",\"name\":\"orderAmount\"}],\"columns\":[]}');
+INSERT INTO `tbl_print_template_comp` VALUES ('106', 7, '{\"type\":\"braid-table\",\"isEdit\":0,\"title\":\"鍑哄簱鍟嗗搧鏄庣粏\",\"name\":\"details\",\"value\":\"{details}\",\"style\":{},\"tabelHtml\":\"\",\"columnsAttr\":[{\"title\":\"搴忓彿\",\"name\":\"_seq\"},{\"title\":\"鍟嗗搧缂栧彿\",\"value\":\"{鍟嗗搧缂栧彿}\",\"name\":\"productCode\"},{\"title\":\"鍟嗗搧鍚嶇О\",\"value\":\"{鍟嗗搧鍚嶇О}\",\"name\":\"productName\"},{\"title\":\"鍟嗗搧SKU缂栧彿\",\"value\":\"{鍟嗗搧SKU缂栧彿}\",\"name\":\"skuCode\"},{\"title\":\"鍟嗗搧绠€鐮乗",\"value\":\"{鍟嗗搧绠€鐮亇\",\"name\":\"externalCode\"},{\"title\":\"鍑哄簱鏁伴噺\",\"value\":\"{鍑哄簱鏁伴噺}\",\"name\":\"outNum\"},{\"title\":\"浠锋牸\",\"value\":\"{浠锋牸}\",\"name\":\"taxPrice\"},{\"title\":\"鍑哄簱閲戦\",\"value\":\"{鍑哄簱閲戦}\",\"name\":\"outAmount\"}],\"columns\":[]}');
+INSERT INTO `tbl_print_template_comp` VALUES ('107', 8, '{\"type\":\"braid-table\",\"isEdit\":0,\"title\":\"閫€璐у晢鍝佹槑缁哱",\"name\":\"details\",\"value\":\"{details}\",\"style\":{},\"tabelHtml\":\"\",\"columnsAttr\":[{\"title\":\"搴忓彿\",\"name\":\"_seq\"},{\"title\":\"鍟嗗搧缂栧彿\",\"value\":\"{鍟嗗搧缂栧彿}\",\"name\":\"productCode\"},{\"title\":\"鍟嗗搧鍚嶇О\",\"value\":\"{鍟嗗搧鍚嶇О}\",\"name\":\"productName\"},{\"title\":\"鍟嗗搧SKU缂栧彿\",\"value\":\"{鍟嗗搧SKU缂栧彿}\",\"name\":\"skuCode\"},{\"title\":\"鍟嗗搧绠€鐮乗",\"value\":\"{鍟嗗搧绠€鐮亇\",\"name\":\"externalCode\"},{\"title\":\"閫€璐ф暟閲廫",\"value\":\"{閫€璐ф暟閲弣\",\"name\":\"returnNum\"},{\"title\":\"浠锋牸\",\"value\":\"{浠锋牸}\",\"name\":\"taxPrice\"},{\"title\":\"閫€璐ч噾棰漒",\"value\":\"{閫€璐ч噾棰潁\",\"name\":\"returnAmount\"}],\"columns\":[]}');
+INSERT INTO `tbl_print_template_comp` VALUES ('2', 0, '{\"type\":\"braid-page\"}');
+INSERT INTO `tbl_print_template_comp` VALUES ('3', 0, '{\"type\":\"braid-react\"}');
+INSERT INTO `tbl_print_template_comp` VALUES ('4', 0, '{\"type\":\"braid-barcode\"}');
+
+-- ----------------------------
+-- Table structure for tbl_product_stock
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_product_stock`;
+CREATE TABLE `tbl_product_stock`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `sc_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '浠撳簱ID',
+  `product_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍟嗗搧ID',
+  `stock_num` decimal(24, 8) NOT NULL DEFAULT 0.00000000 COMMENT '搴撳瓨鏁伴噺',
+  `tax_price` decimal(24, 6) NOT NULL DEFAULT 0.000000 COMMENT '鍚◣浠锋牸',
+  `tax_amount` decimal(32, 2) NOT NULL COMMENT '鍚◣閲戦',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `product_id`(`product_id`, `sc_id`) USING BTREE,
+  INDEX `sc_id`(`sc_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鍟嗗搧搴撳瓨' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_product_stock
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_product_stock_log
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_product_stock_log`;
+CREATE TABLE `tbl_product_stock_log`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `sc_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '浠撳簱ID',
+  `product_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍟嗗搧ID',
+  `ori_tax_price` decimal(24, 6) NOT NULL COMMENT '鍘熷惈绋庢垚鏈环',
+  `cur_tax_price` decimal(24, 6) NOT NULL COMMENT '鐜板惈绋庢垚鏈环',
+  `ori_stock_num` decimal(24, 8) NOT NULL DEFAULT 0.00000000 COMMENT '鍙樺姩鍓嶅簱瀛樻暟閲',
+  `cur_stock_num` decimal(24, 8) NOT NULL DEFAULT 0.00000000 COMMENT '鍙樺姩鍚庡簱瀛樻暟閲',
+  `stock_num` decimal(24, 8) NOT NULL DEFAULT 0.00000000 COMMENT '鍙樺姩搴撳瓨鏁伴噺',
+  `tax_amount` decimal(32, 2) NOT NULL COMMENT '鍚◣閲戦',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `biz_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '涓氬姟鍗曟嵁ID',
+  `biz_code` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '涓氬姟鍗曟嵁鍙',
+  `biz_detail_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '涓氬姟鍗曟嵁鏄庣粏ID',
+  `biz_type` tinyint(3) NOT NULL COMMENT '涓氬姟绫诲瀷',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `sc_id`(`sc_id`) USING BTREE,
+  INDEX `create_time`(`create_time`) USING BTREE,
+  INDEX `product_id`(`product_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '鍟嗗搧搴撳瓨鍙樺姩璁板綍' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_product_stock_log
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_product_stock_warning
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_product_stock_warning`;
+CREATE TABLE `tbl_product_stock_warning`  (
+  `id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `sc_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '浠撳簱ID',
+  `product_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍟嗗搧ID',
+  `max_limit` decimal(24, 8) NOT NULL DEFAULT 0.00000000 COMMENT '棰勮涓婇檺',
+  `min_limit` decimal(24, 8) NOT NULL DEFAULT 0.00000000 COMMENT '棰勮涓嬮檺',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  `available` tinyint(1) NOT NULL DEFAULT 1 COMMENT '鐘舵€',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `sc_id`(`sc_id`, `product_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '搴撳瓨棰勮' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_product_stock_warning
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_product_stock_warning_notify
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_product_stock_warning_notify`;
+CREATE TABLE `tbl_product_stock_warning_notify`  (
+  `id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `notify_group_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '閫氱煡缁処D',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `notify_group_id`(`notify_group_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '搴撳瓨棰勮閫氱煡缁' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_product_stock_warning_notify
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_purchase_config
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_purchase_config`;
+CREATE TABLE `tbl_purchase_config`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `purchase_require_bpm` tinyint(1) NOT NULL DEFAULT 0 COMMENT '閲囪喘璁㈠崟鏄惁寮€鍚鎵规祦绋',
+  `purchase_bpm_process_id` bigint(20) NULL DEFAULT NULL COMMENT '閲囪喘璁㈠崟鍏宠仈鐨勫鎵规祦绋婭D',
+  `purchase_bpm_process_code` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '閲囪喘璁㈠崟鍏宠仈鐨勫鎵规祦绋嬬紪鍙',
+  `receive_require_purchase` tinyint(1) NOT NULL DEFAULT 0 COMMENT '閲囪喘鏀惰揣鍗曟槸鍚﹀叧鑱旈噰璐鍗',
+  `receive_multiple_relate_purchase` tinyint(1) NOT NULL DEFAULT 0 COMMENT '閲囪喘鏀惰揣鍗曟槸鍚﹀娆″叧鑱旈噰璐鍗',
+  `purchase_return_require_receive` tinyint(1) NOT NULL DEFAULT 0 COMMENT '閲囪喘閫€璐у崟鏄惁鍏宠仈閲囪喘鏀惰揣鍗',
+  `purchase_return_multiple_relate_receive` tinyint(1) NOT NULL DEFAULT 0 COMMENT '閲囪喘閫€璐у崟鏄惁澶氭鍏宠仈閲囪喘鏀惰揣鍗',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '閲囪喘鍙傛暟璁剧疆' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_purchase_config
+-- ----------------------------
+INSERT INTO `tbl_purchase_config` VALUES ('1', 0, NULL, NULL, 1, 1, 1, 1);
+
+-- ----------------------------
+-- Table structure for tbl_purchase_order
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_purchase_order`;
+CREATE TABLE `tbl_purchase_order`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `code` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍗曞彿',
+  `sc_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '浠撳簱ID',
+  `supplier_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '渚涘簲鍟咺D',
+  `purchaser_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '閲囪喘鍛業D',
+  `expect_arrive_date` date NULL DEFAULT NULL COMMENT '棰勮鍒拌揣鏃ユ湡',
+  `total_num` decimal(24, 8) NOT NULL DEFAULT 0.00000000 COMMENT '閲囪喘鏁伴噺',
+  `total_gift_num` decimal(24, 8) NOT NULL DEFAULT 0.00000000 COMMENT '閲囪喘浠',
+  `total_amount` decimal(32, 2) NOT NULL DEFAULT 0.00 COMMENT '閲囪喘閲戦',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  `approve_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '瀹℃牳浜',
+  `approve_time` datetime NULL DEFAULT NULL COMMENT '瀹℃牳鏃堕棿',
+  `status` tinyint(3) NOT NULL COMMENT '鐘舵€',
+  `refuse_reason` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鎷掔粷鍘熷洜',
+  `flow_instance_id` bigint(20) NULL DEFAULT NULL COMMENT '鍏宠仈鐨勫鎵规祦绋婭D',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `code`(`code`) USING BTREE,
+  INDEX `sc_id`(`sc_id`) USING BTREE,
+  INDEX `supplier_id`(`supplier_id`) USING BTREE,
+  INDEX `create_time`(`create_time`) USING BTREE,
+  INDEX `flow_instance_id`(`flow_instance_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '閲囪喘璁㈠崟' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_purchase_order
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_purchase_order_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_purchase_order_detail`;
+CREATE TABLE `tbl_purchase_order_detail`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `order_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '璁㈠崟ID',
+  `product_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍟嗗搧ID',
+  `order_num` decimal(24, 8) NOT NULL DEFAULT 0.00000000 COMMENT '閲囪喘鏁伴噺',
+  `tax_price` decimal(24, 6) NOT NULL DEFAULT 0.000000 COMMENT '閲囪喘浠',
+  `is_gift` tinyint(1) NOT NULL DEFAULT 0 COMMENT '鏄惁璧犲搧',
+  `tax_rate` decimal(16, 2) NOT NULL COMMENT '绋庣巼锛?锛',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶囨敞',
+  `order_no` int(11) NOT NULL COMMENT '鎺掑簭缂栧彿',
+  `receive_num` decimal(24, 8) NOT NULL DEFAULT 0.00000000 COMMENT '宸叉敹璐ф暟閲',
+  `tax_amount` decimal(32, 2) NOT NULL DEFAULT 0.00 COMMENT '鍚◣鎬婚噾棰',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `order_id`(`order_id`) USING BTREE,
+  INDEX `product_id`(`product_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '閲囪喘璁㈠崟鏄庣粏' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_purchase_order_detail
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_purchase_order_detail_bundle
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_purchase_order_detail_bundle`;
+CREATE TABLE `tbl_purchase_order_detail_bundle`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `order_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '閲囪喘鍗旾D',
+  `detail_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鏄庣粏ID',
+  `main_product_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '缁勫悎鍟嗗搧ID',
+  `order_num` decimal(24, 8) NOT NULL DEFAULT 0.00000000 COMMENT '缁勫悎鍟嗗搧鏁伴噺',
+  `product_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍗曞搧ID',
+  `product_order_num` decimal(24, 8) NOT NULL COMMENT '鍗曞搧鏁伴噺',
+  `product_ori_price` decimal(24, 6) NOT NULL COMMENT '鍗曞搧鍘熶环',
+  `product_tax_price` decimal(24, 6) NOT NULL COMMENT '鍗曞搧鍚◣浠锋牸',
+  `product_tax_rate` decimal(16, 2) NOT NULL COMMENT '鍗曞搧绋庣巼',
+  `product_detail_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鍗曞搧鏄庣粏ID',
+  `product_tax_amount` decimal(32, 2) NOT NULL COMMENT '鍗曞搧鍚◣閲戦',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `order_id`(`order_id`, `product_detail_id`) USING BTREE,
+  INDEX `detail_id`(`detail_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '閲囪喘鍗曠粍鍚堝晢鍝佹槑缁' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_purchase_order_detail_bundle
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_purchase_order_detail_bundle_form
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_purchase_order_detail_bundle_form`;
+CREATE TABLE `tbl_purchase_order_detail_bundle_form`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `order_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '閲囪喘鍗旾D',
+  `detail_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鏄庣粏ID',
+  `main_product_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '缁勫悎鍟嗗搧ID',
+  `order_num` decimal(24, 8) NOT NULL DEFAULT 0.00000000 COMMENT '缁勫悎鍟嗗搧鏁伴噺',
+  `product_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍗曞搧ID',
+  `product_order_num` decimal(24, 8) NOT NULL COMMENT '鍗曞搧鏁伴噺',
+  `product_ori_price` decimal(24, 6) NOT NULL COMMENT '鍗曞搧鍘熶环',
+  `product_tax_price` decimal(24, 6) NOT NULL COMMENT '鍗曞搧鍚◣浠锋牸',
+  `product_tax_rate` decimal(16, 2) NOT NULL COMMENT '鍗曞搧绋庣巼',
+  `product_detail_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鍗曞搧鏄庣粏ID',
+  `product_tax_amount` decimal(32, 2) NOT NULL COMMENT '鍗曞搧鍚◣閲戦',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `order_id`(`order_id`, `product_detail_id`) USING BTREE,
+  INDEX `detail_id`(`detail_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '閲囪喘鍗曠粍鍚堝晢鍝佹槑缁' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_purchase_order_detail_bundle_form
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_purchase_order_detail_form
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_purchase_order_detail_form`;
+CREATE TABLE `tbl_purchase_order_detail_form`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `order_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '璁㈠崟ID',
+  `product_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍟嗗搧ID',
+  `order_num` decimal(24, 8) NOT NULL DEFAULT 0.00000000 COMMENT '閲囪喘鏁伴噺',
+  `tax_price` decimal(24, 6) NOT NULL DEFAULT 0.000000 COMMENT '閲囪喘浠',
+  `is_gift` tinyint(1) NOT NULL DEFAULT 0 COMMENT '鏄惁璧犲搧',
+  `tax_rate` decimal(16, 2) NOT NULL COMMENT '绋庣巼锛?锛',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶囨敞',
+  `order_no` int(11) NOT NULL COMMENT '鎺掑簭缂栧彿',
+  `receive_num` decimal(24, 8) NOT NULL DEFAULT 0.00000000 COMMENT '宸叉敹璐ф暟閲',
+  `tax_amount` decimal(32, 2) NOT NULL DEFAULT 0.00 COMMENT '鍚◣鎬婚噾棰',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `order_id`(`order_id`) USING BTREE,
+  INDEX `product_id`(`product_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '閲囪喘璁㈠崟鏄庣粏' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_purchase_order_detail_form
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_purchase_order_form
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_purchase_order_form`;
+CREATE TABLE `tbl_purchase_order_form`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `code` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍗曞彿',
+  `sc_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '浠撳簱ID',
+  `supplier_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '渚涘簲鍟咺D',
+  `purchaser_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '閲囪喘鍛業D',
+  `expect_arrive_date` date NULL DEFAULT NULL COMMENT '棰勮鍒拌揣鏃ユ湡',
+  `total_num` decimal(24, 8) NOT NULL DEFAULT 0.00000000 COMMENT '閲囪喘鏁伴噺',
+  `total_gift_num` decimal(24, 8) NOT NULL DEFAULT 0.00000000 COMMENT '閲囪喘浠',
+  `total_amount` decimal(32, 2) NOT NULL DEFAULT 0.00 COMMENT '閲囪喘閲戦',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  `approve_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '瀹℃牳浜',
+  `approve_time` datetime NULL DEFAULT NULL COMMENT '瀹℃牳鏃堕棿',
+  `status` tinyint(3) NOT NULL COMMENT '鐘舵€',
+  `refuse_reason` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鎷掔粷鍘熷洜',
+  `flow_instance_id` bigint(20) NULL DEFAULT NULL COMMENT '鍏宠仈鐨勫鎵规祦绋婭D',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `code`(`code`) USING BTREE,
+  INDEX `sc_id`(`sc_id`) USING BTREE,
+  INDEX `supplier_id`(`supplier_id`) USING BTREE,
+  INDEX `create_time`(`create_time`) USING BTREE,
+  INDEX `flow_instance_id`(`flow_instance_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '閲囪喘璁㈠崟' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_purchase_order_form
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_purchase_return
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_purchase_return`;
+CREATE TABLE `tbl_purchase_return`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `code` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍗曞彿',
+  `sc_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '浠撳簱ID',
+  `supplier_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '渚涘簲鍟咺D',
+  `purchaser_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '閲囪喘鍛業D',
+  `payment_date` date NULL DEFAULT NULL COMMENT '浠樻鏃ユ湡',
+  `receive_sheet_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鏀惰揣鍗旾D',
+  `total_num` decimal(24, 8) NOT NULL DEFAULT 0.00000000 COMMENT '鍟嗗搧鏁伴噺',
+  `total_gift_num` decimal(24, 8) NOT NULL DEFAULT 0.00000000 COMMENT '璧犲搧鏁伴噺',
+  `total_amount` decimal(32, 2) NOT NULL DEFAULT 0.00 COMMENT '閫€璐ч噾棰',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  `approve_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '瀹℃牳浜',
+  `approve_time` datetime NULL DEFAULT NULL COMMENT '瀹℃牳鏃堕棿',
+  `status` tinyint(3) NOT NULL COMMENT '鐘舵€',
+  `refuse_reason` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鎷掔粷鍘熷洜',
+  `settle_status` tinyint(3) NOT NULL DEFAULT 0 COMMENT '缁撶畻鐘舵€',
+  `tx_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '浜嬪姟ID',
+  `ori_settle_status` tinyint(3) NULL DEFAULT NULL COMMENT '缁撶畻鐘舵€佷腑闂存€',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `code`(`code`) USING BTREE,
+  INDEX `sc_id`(`sc_id`) USING BTREE,
+  INDEX `supplier_id`(`supplier_id`) USING BTREE,
+  INDEX `receive_sheet_id`(`receive_sheet_id`) USING BTREE,
+  INDEX `create_time`(`create_time`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '閲囪喘閫€鍗' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_purchase_return
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_purchase_return_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_purchase_return_detail`;
+CREATE TABLE `tbl_purchase_return_detail`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `return_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鏀惰揣鍗旾D',
+  `product_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍟嗗搧ID',
+  `return_num` decimal(24, 8) NOT NULL COMMENT '閫€璐ф暟閲',
+  `tax_price` decimal(24, 6) NOT NULL COMMENT '閲囪喘浠',
+  `is_gift` tinyint(1) NOT NULL DEFAULT 0 COMMENT '鏄惁璧犲搧',
+  `tax_rate` decimal(16, 2) NOT NULL COMMENT '绋庣巼锛?锛',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶囨敞',
+  `order_no` int(11) NOT NULL COMMENT '鎺掑簭缂栧彿',
+  `receive_sheet_detail_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鏀惰揣鍗曟槑缁咺D',
+  `tax_amount` decimal(32, 2) NOT NULL DEFAULT 0.00 COMMENT '閫€璐ф€婚噾棰',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `return_id`(`return_id`) USING BTREE,
+  INDEX `receive_sheet_detail_id`(`receive_sheet_detail_id`) USING BTREE,
+  INDEX `product_id`(`product_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '閲囪喘閫€鍗曟槑缁' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_purchase_return_detail
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_receive_sheet
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_receive_sheet`;
+CREATE TABLE `tbl_receive_sheet`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `code` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍗曞彿',
+  `sc_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '浠撳簱ID',
+  `supplier_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '渚涘簲鍟咺D',
+  `purchaser_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '閲囪喘鍛業D',
+  `payment_date` date NULL DEFAULT NULL COMMENT '浠樻鏃ユ湡',
+  `receive_date` date NULL DEFAULT NULL COMMENT '鍒拌揣鏃ユ湡',
+  `purchase_order_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '閲囪喘鍗旾D',
+  `total_num` decimal(24, 8) NOT NULL DEFAULT 0.00000000 COMMENT '鍟嗗搧鏁伴噺',
+  `total_gift_num` decimal(24, 8) NOT NULL DEFAULT 0.00000000 COMMENT '璧犲搧鏁伴噺',
+  `total_amount` decimal(32, 2) NOT NULL DEFAULT 0.00 COMMENT '鏀惰揣閲戦',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  `approve_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '瀹℃牳浜',
+  `approve_time` datetime NULL DEFAULT NULL COMMENT '瀹℃牳鏃堕棿',
+  `status` tinyint(3) NOT NULL COMMENT '鐘舵€',
+  `refuse_reason` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鎷掔粷鍘熷洜',
+  `settle_status` tinyint(3) NOT NULL DEFAULT 0 COMMENT '缁撶畻鐘舵€',
+  `tx_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '浜嬪姟ID',
+  `ori_settle_status` tinyint(3) NULL DEFAULT NULL COMMENT '缁撶畻鐘舵€佷腑闂存€',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `code`(`code`) USING BTREE,
+  INDEX `sc_id`(`sc_id`) USING BTREE,
+  INDEX `supplier_id`(`supplier_id`) USING BTREE,
+  INDEX `purchase_order_id`(`purchase_order_id`) USING BTREE,
+  INDEX `create_time`(`create_time`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '閲囪喘鏀惰揣鍗' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_receive_sheet
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_receive_sheet_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_receive_sheet_detail`;
+CREATE TABLE `tbl_receive_sheet_detail`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `sheet_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鏀惰揣鍗旾D',
+  `product_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍟嗗搧ID',
+  `order_num` decimal(24, 8) NOT NULL DEFAULT 0.00000000 COMMENT '閲囪喘鏁伴噺',
+  `tax_price` decimal(24, 6) NOT NULL DEFAULT 0.000000 COMMENT '閲囪喘浠',
+  `is_gift` tinyint(1) NOT NULL DEFAULT 0 COMMENT '鏄惁璧犲搧',
+  `tax_rate` decimal(16, 2) NOT NULL COMMENT '绋庣巼锛?锛',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶囨敞',
+  `order_no` int(11) NOT NULL COMMENT '鎺掑簭缂栧彿',
+  `return_num` decimal(24, 8) NOT NULL DEFAULT 0.00000000 COMMENT '宸查€€璐ф暟閲',
+  `purchase_order_detail_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '閲囪喘璁㈠崟鏄庣粏ID',
+  `tax_amount` decimal(32, 2) NOT NULL DEFAULT 0.00 COMMENT '閲囪喘鎬婚噾棰',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `sheet_id`(`sheet_id`) USING BTREE,
+  INDEX `purchase_order_detail_id`(`purchase_order_detail_id`) USING BTREE,
+  INDEX `product_id`(`product_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '閲囪喘鏀惰揣鍗曟槑缁' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_receive_sheet_detail
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_receive_sheet_detail_bundle
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_receive_sheet_detail_bundle`;
+CREATE TABLE `tbl_receive_sheet_detail_bundle`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `sheet_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鏀惰揣鍗旾D',
+  `detail_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鏄庣粏ID',
+  `main_product_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '缁勫悎鍟嗗搧ID',
+  `order_num` decimal(24, 8) NOT NULL DEFAULT 0.00000000 COMMENT '缁勫悎鍟嗗搧鏁伴噺',
+  `product_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍗曞搧ID',
+  `product_order_num` decimal(24, 8) NOT NULL COMMENT '鍗曞搧鏁伴噺',
+  `product_ori_price` decimal(24, 6) NOT NULL COMMENT '鍗曞搧鍘熶环',
+  `product_tax_price` decimal(24, 6) NOT NULL COMMENT '鍗曞搧鍚◣浠锋牸',
+  `product_tax_rate` decimal(16, 2) NOT NULL COMMENT '鍗曞搧绋庣巼',
+  `product_detail_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鍗曞搧鏄庣粏ID',
+  `product_tax_amount` decimal(32, 2) NOT NULL COMMENT '鍗曞搧鍚◣閲戦',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `sheet_id`(`sheet_id`, `product_detail_id`) USING BTREE,
+  INDEX `detail_id`(`detail_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '閲囪喘鏀惰揣鍗曠粍鍚堝晢鍝佹槑缁' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_receive_sheet_detail_bundle
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_retail_config
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_retail_config`;
+CREATE TABLE `tbl_retail_config`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `retail_out_sheet_require_member` tinyint(1) NOT NULL DEFAULT 1 COMMENT '闆跺敭鍑哄簱鍗曚笂鐨勪細鍛樻槸鍚﹀繀濉',
+  `retail_return_require_out_stock` tinyint(1) NOT NULL DEFAULT 0 COMMENT '闆跺敭閫€璐у崟鏄惁鍏宠仈闆跺敭鍑哄簱鍗',
+  `retail_return_multiple_relate_out_stock` tinyint(1) NOT NULL DEFAULT 0 COMMENT '闆跺敭閫€璐у崟鏄惁澶氭鍏宠仈闆跺敭鍑哄簱鍗',
+  `retail_return_require_member` tinyint(1) NOT NULL DEFAULT 1 COMMENT '闆跺敭閫€璐у崟涓婄殑浼氬憳鏄惁蹇呭～',
+  `retail_out_sheet_require_logistics` tinyint(1) NOT NULL DEFAULT 0 COMMENT '闆跺敭鍑哄簱鍗曟槸鍚﹂渶瑕佸彂璐',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '闆跺敭鍙傛暟璁剧疆' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_retail_config
+-- ----------------------------
+INSERT INTO `tbl_retail_config` VALUES ('1', 0, 0, 1, 0, 0);
+
+-- ----------------------------
+-- Table structure for tbl_retail_out_sheet
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_retail_out_sheet`;
+CREATE TABLE `tbl_retail_out_sheet`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `code` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍗曞彿',
+  `sc_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '浠撳簱ID',
+  `member_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '浼氬憳ID',
+  `saler_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '閿€鍞憳ID',
+  `payment_date` date NULL DEFAULT NULL COMMENT '浠樻鏃ユ湡',
+  `total_num` decimal(24, 8) NOT NULL DEFAULT 0.00000000 COMMENT '鍟嗗搧鏁伴噺',
+  `total_gift_num` decimal(24, 8) NOT NULL DEFAULT 0.00000000 COMMENT '璧犲搧鏁伴噺',
+  `total_amount` decimal(32, 2) NOT NULL DEFAULT 0.00 COMMENT '鍑哄簱閲戦',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  `approve_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '瀹℃牳浜',
+  `approve_time` datetime NULL DEFAULT NULL COMMENT '瀹℃牳鏃堕棿',
+  `status` tinyint(3) NOT NULL COMMENT '鐘舵€',
+  `refuse_reason` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鎷掔粷鍘熷洜',
+  `settle_status` tinyint(3) NOT NULL DEFAULT 0 COMMENT '缁撶畻鐘舵€',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `code`(`code`) USING BTREE,
+  INDEX `sc_id`(`sc_id`) USING BTREE,
+  INDEX `create_time`(`create_time`) USING BTREE,
+  INDEX `member_id`(`member_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '闆跺敭鍑哄簱鍗' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_retail_out_sheet
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_retail_out_sheet_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_retail_out_sheet_detail`;
+CREATE TABLE `tbl_retail_out_sheet_detail`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `sheet_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍑哄簱鍗旾D',
+  `product_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍟嗗搧ID',
+  `order_num` decimal(24, 8) NOT NULL COMMENT '鍑哄簱鏁伴噺',
+  `ori_price` decimal(24, 6) NOT NULL COMMENT '鍘熶环',
+  `tax_price` decimal(24, 6) NOT NULL COMMENT '鐜颁环',
+  `discount_rate` decimal(16, 2) NOT NULL COMMENT '鎶樻墸鐜囷紙%锛',
+  `is_gift` tinyint(1) NOT NULL DEFAULT 0 COMMENT '鏄惁璧犲搧',
+  `tax_rate` decimal(16, 2) NOT NULL COMMENT '绋庣巼锛?锛',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶囨敞',
+  `order_no` int(11) NOT NULL COMMENT '鎺掑簭缂栧彿',
+  `settle_status` tinyint(3) NOT NULL DEFAULT 0 COMMENT '缁撶畻鐘舵€',
+  `return_num` decimal(24, 8) NOT NULL DEFAULT 0.00000000 COMMENT '宸查€€璐ф暟閲',
+  `ori_bundle_detail_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '缁勫悎鍟嗗搧鍘熷鏄庣粏ID',
+  `tax_amount` decimal(32, 2) NOT NULL COMMENT '鎬婚噾棰',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `sheet_id`(`sheet_id`) USING BTREE,
+  INDEX `product_id`(`product_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '闆跺敭鍑哄簱鍗曟槑缁' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_retail_out_sheet_detail
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_retail_out_sheet_detail_bundle
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_retail_out_sheet_detail_bundle`;
+CREATE TABLE `tbl_retail_out_sheet_detail_bundle`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `sheet_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍑哄簱鍗旾D',
+  `detail_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鏄庣粏ID',
+  `main_product_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '缁勫悎鍟嗗搧ID',
+  `order_num` decimal(24, 8) NOT NULL DEFAULT 0.00000000 COMMENT '缁勫悎鍟嗗搧鏁伴噺',
+  `product_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍗曞搧ID',
+  `product_order_num` int(11) NOT NULL COMMENT '鍗曞搧鏁伴噺',
+  `product_ori_price` decimal(24, 6) NOT NULL COMMENT '鍗曞搧鍘熶环',
+  `product_tax_price` decimal(24, 6) NOT NULL COMMENT '鍗曞搧鍚◣浠锋牸',
+  `product_tax_rate` decimal(16, 2) NOT NULL COMMENT '鍗曞搧绋庣巼',
+  `product_detail_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鍗曞搧鏄庣粏ID',
+  `product_tax_amount` decimal(32, 2) NOT NULL COMMENT '鍗曞搧鍚◣閲戦',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `sheet_id`(`sheet_id`, `product_detail_id`) USING BTREE,
+  INDEX `detail_id`(`detail_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '闆跺敭鍑哄簱鍗曠粍鍚堝晢鍝佹槑缁' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_retail_out_sheet_detail_bundle
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_retail_out_sheet_detail_lot
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_retail_out_sheet_detail_lot`;
+CREATE TABLE `tbl_retail_out_sheet_detail_lot`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `detail_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鏄庣粏ID',
+  `order_num` decimal(24, 8) NOT NULL COMMENT '鍑哄簱鏁伴噺',
+  `return_num` decimal(24, 8) NOT NULL DEFAULT 0.00000000 COMMENT '宸查€€璐ф暟閲',
+  `cost_tax_amount` decimal(32, 2) NOT NULL COMMENT '鍚◣鎴愭湰閲戦',
+  `settle_status` tinyint(3) NOT NULL COMMENT '缁撶畻鐘舵€',
+  `order_no` int(11) NOT NULL COMMENT '鎺掑簭缂栧彿',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `detail_id`(`detail_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '闆跺敭鍑哄簱鍗曟壒娆℃槑缁' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_retail_out_sheet_detail_lot
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_retail_return
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_retail_return`;
+CREATE TABLE `tbl_retail_return`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `code` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍗曞彿',
+  `sc_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '浠撳簱ID',
+  `member_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '浼氬憳ID',
+  `saler_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '閿€鍞憳ID',
+  `payment_date` date NULL DEFAULT NULL COMMENT '浠樻鏃ユ湡',
+  `out_sheet_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鍑哄簱鍗旾D',
+  `total_num` decimal(24, 8) NOT NULL DEFAULT 0.00000000 COMMENT '鍟嗗搧鏁伴噺',
+  `total_gift_num` decimal(24, 8) NOT NULL DEFAULT 0.00000000 COMMENT '璧犲搧鏁伴噺',
+  `total_amount` decimal(32, 2) NOT NULL DEFAULT 0.00 COMMENT '閫€璐ч噾棰',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  `approve_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '瀹℃牳浜',
+  `approve_time` datetime NULL DEFAULT NULL COMMENT '瀹℃牳鏃堕棿',
+  `status` tinyint(3) NOT NULL COMMENT '鐘舵€',
+  `refuse_reason` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鎷掔粷鍘熷洜',
+  `settle_status` tinyint(3) NOT NULL DEFAULT 0 COMMENT '缁撶畻鐘舵€',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `code`(`code`) USING BTREE,
+  INDEX `sc_id`(`sc_id`) USING BTREE,
+  INDEX `create_time`(`create_time`) USING BTREE,
+  INDEX `out_sheet_id`(`out_sheet_id`) USING BTREE,
+  INDEX `member_id`(`member_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '闆跺敭閫€鍗' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_retail_return
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_retail_return_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_retail_return_detail`;
+CREATE TABLE `tbl_retail_return_detail`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `return_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '閫€璐у崟ID',
+  `product_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍟嗗搧ID',
+  `return_num` decimal(24, 8) NOT NULL COMMENT '閫€璐ф暟閲',
+  `ori_price` decimal(24, 6) NOT NULL COMMENT '鍘熶环',
+  `tax_price` decimal(24, 6) NOT NULL COMMENT '鐜颁环',
+  `discount_rate` decimal(16, 2) NOT NULL COMMENT '鎶樻墸鐜囷紙%锛',
+  `is_gift` tinyint(1) NOT NULL DEFAULT 0 COMMENT '鏄惁璧犲搧',
+  `tax_rate` decimal(16, 2) NOT NULL COMMENT '绋庣巼锛?锛',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶囨敞',
+  `order_no` int(11) NOT NULL COMMENT '鎺掑簭缂栧彿',
+  `settle_status` tinyint(3) NOT NULL DEFAULT 0 COMMENT '缁撶畻鐘舵€',
+  `out_sheet_detail_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鍑哄簱鍗曟槑缁咺D',
+  `tax_amount` decimal(32, 2) NOT NULL COMMENT '鎬婚噾棰',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `return_id`(`return_id`) USING BTREE,
+  INDEX `out_sheet_detail_id`(`out_sheet_detail_id`) USING BTREE,
+  INDEX `product_id`(`product_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '闆跺敭閫€鍗曟槑缁' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_retail_return_detail
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_sale_config
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_sale_config`;
+CREATE TABLE `tbl_sale_config`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `out_stock_require_sale` tinyint(1) NOT NULL DEFAULT 0 COMMENT '閿€鍞嚭搴撳崟鏄惁鍏宠仈閿€鍞鍗',
+  `out_stock_multiple_relate_sale` tinyint(1) NOT NULL DEFAULT 0 COMMENT '閿€鍞嚭搴撳崟鏄惁澶氭鍏宠仈閿€鍞鍗',
+  `sale_return_require_out_stock` tinyint(1) NOT NULL DEFAULT 0 COMMENT '閿€鍞€€璐у崟鏄惁鍏宠仈閿€鍞嚭搴撳崟',
+  `sale_return_multiple_relate_out_stock` tinyint(1) NOT NULL DEFAULT 0 COMMENT '閿€鍞€€璐у崟鏄惁澶氭鍏宠仈閿€鍞嚭搴撳崟',
+  `out_stock_require_logistics` tinyint(1) NOT NULL DEFAULT 0 COMMENT '閿€鍞嚭搴撳崟鏄惁闇€瑕佺墿娴佸崟',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '閿€鍞弬鏁拌缃' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_sale_config
+-- ----------------------------
+INSERT INTO `tbl_sale_config` VALUES ('1', 0, 0, 0, 0, 0);
+
+-- ----------------------------
+-- Table structure for tbl_sale_order
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_sale_order`;
+CREATE TABLE `tbl_sale_order`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `code` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍗曞彿',
+  `sc_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '浠撳簱ID',
+  `customer_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鏀惰揣鏂笽D',
+  `saler_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '閿€鍞憳ID',
+  `total_num` decimal(24, 8) NOT NULL DEFAULT 0.00000000 COMMENT '閿€鍞暟閲',
+  `total_gift_num` decimal(24, 8) NOT NULL DEFAULT 0.00000000 COMMENT '璧犲搧鏁伴噺',
+  `total_amount` decimal(32, 2) NOT NULL DEFAULT 0.00 COMMENT '閿€鍞噾棰',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  `approve_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '瀹℃牳浜',
+  `approve_time` datetime NULL DEFAULT NULL COMMENT '瀹℃牳鏃堕棿',
+  `status` tinyint(3) NOT NULL COMMENT '鐘舵€',
+  `refuse_reason` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鎷掔粷鍘熷洜',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `code`(`code`) USING BTREE,
+  INDEX `sc_id`(`sc_id`) USING BTREE,
+  INDEX `create_time`(`create_time`) USING BTREE,
+  INDEX `customer_id`(`customer_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '閿€鍞鍗' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_sale_order
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_sale_order_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_sale_order_detail`;
+CREATE TABLE `tbl_sale_order_detail`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `order_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '璁㈠崟ID',
+  `product_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍟嗗搧ID',
+  `order_num` decimal(24, 8) NOT NULL COMMENT '閿€鍞暟閲',
+  `ori_price` decimal(24, 6) NOT NULL COMMENT '鍘熶环',
+  `tax_price` decimal(24, 6) NOT NULL COMMENT '鐜颁环',
+  `discount_rate` decimal(16, 2) NOT NULL COMMENT '鎶樻墸鐜囷紙%锛',
+  `is_gift` tinyint(1) NOT NULL DEFAULT 0 COMMENT '鏄惁璧犲搧',
+  `tax_rate` decimal(16, 2) NOT NULL COMMENT '绋庣巼锛?锛',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶囨敞',
+  `order_no` int(11) NOT NULL COMMENT '鎺掑簭缂栧彿',
+  `out_num` decimal(24, 8) NOT NULL DEFAULT 0.00000000 COMMENT '宸插嚭搴撴暟閲',
+  `ori_bundle_detail_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '缁勫悎鍟嗗搧鍘熷鏄庣粏ID',
+  `tax_amount` decimal(32, 2) NOT NULL COMMENT '鎬婚噾棰',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `order_id`(`order_id`) USING BTREE,
+  INDEX `product_id`(`product_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '閿€鍞鍗曟槑缁' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_sale_order_detail
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_sale_order_detail_bundle
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_sale_order_detail_bundle`;
+CREATE TABLE `tbl_sale_order_detail_bundle`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `order_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '閿€鍞崟ID',
+  `detail_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鏄庣粏ID',
+  `main_product_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '缁勫悎鍟嗗搧ID',
+  `order_num` decimal(24, 8) NOT NULL DEFAULT 0.00000000 COMMENT '缁勫悎鍟嗗搧鏁伴噺',
+  `product_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍗曞搧ID',
+  `product_order_num` decimal(24, 8) NOT NULL COMMENT '鍗曞搧鏁伴噺',
+  `product_ori_price` decimal(24, 6) NOT NULL COMMENT '鍗曞搧鍘熶环',
+  `product_tax_price` decimal(24, 6) NOT NULL COMMENT '鍗曞搧鍚◣浠锋牸',
+  `product_tax_rate` decimal(16, 2) NOT NULL COMMENT '鍗曞搧绋庣巼',
+  `product_detail_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鍗曞搧鏄庣粏ID',
+  `product_tax_amount` decimal(32, 2) NOT NULL COMMENT '鍗曞搧鍚◣閲戦',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `order_id`(`order_id`, `product_detail_id`) USING BTREE,
+  INDEX `detail_id`(`detail_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '閿€鍞崟缁勫悎鍟嗗搧鏄庣粏' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_sale_order_detail_bundle
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_sale_out_sheet
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_sale_out_sheet`;
+CREATE TABLE `tbl_sale_out_sheet`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `code` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍗曞彿',
+  `sc_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '浠撳簱ID',
+  `customer_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '收货方ID',
+  `saler_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '閿€鍞憳ID',
+  `payment_date` date NULL DEFAULT NULL COMMENT '浠樻鏃ユ湡',
+  `sale_order_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '閿€鍞崟ID',
+  `total_num` decimal(24, 8) NOT NULL DEFAULT 0.00000000 COMMENT '鍟嗗搧鏁伴噺',
+  `total_gift_num` decimal(24, 8) NOT NULL DEFAULT 0.00000000 COMMENT '璧犲搧鏁伴噺',
+  `total_amount` decimal(32, 2) NOT NULL DEFAULT 0.00 COMMENT '鍑哄簱閲戦',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  `approve_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '瀹℃牳浜',
+  `approve_time` datetime NULL DEFAULT NULL COMMENT '瀹℃牳鏃堕棿',
+  `status` tinyint(3) NOT NULL COMMENT '鐘舵€',
+  `refuse_reason` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鎷掔粷鍘熷洜',
+  `settle_status` tinyint(3) NOT NULL DEFAULT 0 COMMENT '缁撶畻鐘舵€',
+  `tx_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '浜嬪姟ID',
+  `ori_settle_status` tinyint(3) NULL DEFAULT NULL COMMENT '缁撶畻鐘舵€佷腑闂存€',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `code`(`code`) USING BTREE,
+  INDEX `sc_id`(`sc_id`) USING BTREE,
+  INDEX `create_time`(`create_time`) USING BTREE,
+  INDEX `customer_id`(`customer_id`) USING BTREE,
+  INDEX `sale_order_id`(`sale_order_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '閿€鍞嚭搴撳崟' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_sale_out_sheet
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_sale_out_sheet_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_sale_out_sheet_detail`;
+CREATE TABLE `tbl_sale_out_sheet_detail`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `sheet_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍑哄簱鍗旾D',
+  `product_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍟嗗搧ID',
+  `order_num` decimal(24, 8) NOT NULL COMMENT '鍑哄簱鏁伴噺',
+  `ori_price` decimal(24, 6) NOT NULL COMMENT '鍘熶环',
+  `tax_price` decimal(24, 6) NOT NULL COMMENT '鐜颁环',
+  `discount_rate` decimal(16, 2) NOT NULL COMMENT '鎶樻墸鐜囷紙%锛',
+  `is_gift` tinyint(1) NOT NULL DEFAULT 0 COMMENT '鏄惁璧犲搧',
+  `tax_rate` decimal(16, 2) NOT NULL COMMENT '绋庣巼锛?锛',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶囨敞',
+  `order_no` int(11) NOT NULL COMMENT '鎺掑簭缂栧彿',
+  `settle_status` tinyint(3) NOT NULL DEFAULT 0 COMMENT '缁撶畻鐘舵€',
+  `sale_order_detail_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '閿€鍞鍗曟槑缁咺D',
+  `ori_bundle_detail_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '缁勫悎鍟嗗搧鍘熷鏄庣粏ID',
+  `return_num` decimal(24, 8) NOT NULL DEFAULT 0.00000000 COMMENT '宸查€€璐ф暟閲',
+  `tax_amount` decimal(32, 2) NOT NULL COMMENT '鎬婚噾棰',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `sheet_id`(`sheet_id`) USING BTREE,
+  INDEX `purchase_order_detail_id`(`sale_order_detail_id`) USING BTREE,
+  INDEX `product_id`(`product_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '閿€鍞嚭搴撳崟鏄庣粏' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_sale_out_sheet_detail
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_sale_out_sheet_detail_bundle
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_sale_out_sheet_detail_bundle`;
+CREATE TABLE `tbl_sale_out_sheet_detail_bundle`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `sheet_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍑哄簱鍗旾D',
+  `detail_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鏄庣粏ID',
+  `main_product_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '缁勫悎鍟嗗搧ID',
+  `order_num` decimal(24, 8) NOT NULL DEFAULT 0.00000000 COMMENT '缁勫悎鍟嗗搧鏁伴噺',
+  `product_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍗曞搧ID',
+  `product_order_num` decimal(24, 8) NOT NULL COMMENT '鍗曞搧鏁伴噺',
+  `product_ori_price` decimal(24, 6) NOT NULL COMMENT '鍗曞搧鍘熶环',
+  `product_tax_price` decimal(24, 6) NOT NULL COMMENT '鍗曞搧鍚◣浠锋牸',
+  `product_tax_rate` decimal(16, 2) NOT NULL COMMENT '鍗曞搧绋庣巼',
+  `product_detail_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鍗曞搧鏄庣粏ID',
+  `product_tax_amount` decimal(32, 2) NOT NULL COMMENT '鍗曞搧鍚◣閲戦',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `sheet_id`(`sheet_id`, `product_detail_id`) USING BTREE,
+  INDEX `detail_id`(`detail_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '閿€鍞嚭搴撳崟缁勫悎鍟嗗搧鏄庣粏' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_sale_out_sheet_detail_bundle
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_sale_out_sheet_detail_lot
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_sale_out_sheet_detail_lot`;
+CREATE TABLE `tbl_sale_out_sheet_detail_lot`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `detail_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鏄庣粏ID',
+  `order_num` decimal(24, 8) NOT NULL COMMENT '鍑哄簱鏁伴噺',
+  `return_num` decimal(24, 8) NOT NULL DEFAULT 0.00000000 COMMENT '宸查€€璐ф暟閲',
+  `cost_tax_amount` decimal(32, 2) NOT NULL COMMENT '鍚◣鎴愭湰閲戦',
+  `settle_status` tinyint(3) NOT NULL COMMENT '缁撶畻鐘舵€',
+  `order_no` int(11) NOT NULL COMMENT '鎺掑簭缂栧彿',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `detail_id`(`detail_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '閿€鍞嚭搴撳崟鎵规鏄庣粏' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_sale_out_sheet_detail_lot
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_sale_return
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_sale_return`;
+CREATE TABLE `tbl_sale_return`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `code` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍗曞彿',
+  `sc_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '浠撳簱ID',
+  `customer_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鏀惰揣鏂笽D',
+  `saler_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '閿€鍞憳ID',
+  `payment_date` date NULL DEFAULT NULL COMMENT '浠樻鏃ユ湡',
+  `out_sheet_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鍑哄簱鍗旾D',
+  `total_num` decimal(24, 8) NOT NULL DEFAULT 0.00000000 COMMENT '鍟嗗搧鏁伴噺',
+  `total_gift_num` decimal(24, 8) NOT NULL DEFAULT 0.00000000 COMMENT '璧犲搧鏁伴噺',
+  `total_amount` decimal(32, 2) NOT NULL DEFAULT 0.00 COMMENT '閫€璐ч噾棰',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  `approve_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '瀹℃牳浜',
+  `approve_time` datetime NULL DEFAULT NULL COMMENT '瀹℃牳鏃堕棿',
+  `status` tinyint(3) NOT NULL COMMENT '鐘舵€',
+  `refuse_reason` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鎷掔粷鍘熷洜',
+  `settle_status` tinyint(3) NOT NULL DEFAULT 0 COMMENT '缁撶畻鐘舵€',
+  `tx_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '浜嬪姟ID',
+  `ori_settle_status` tinyint(3) NULL DEFAULT NULL COMMENT '缁撶畻鐘舵€佷腑闂存€',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `code`(`code`) USING BTREE,
+  INDEX `sc_id`(`sc_id`) USING BTREE,
+  INDEX `create_time`(`create_time`) USING BTREE,
+  INDEX `customer_id`(`customer_id`) USING BTREE,
+  INDEX `out_sheet_id`(`out_sheet_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '閿€鍞€€鍗' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_sale_return
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_sale_return_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_sale_return_detail`;
+CREATE TABLE `tbl_sale_return_detail`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `return_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '閫€璐у崟ID',
+  `product_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍟嗗搧ID',
+  `return_num` decimal(24, 8) NOT NULL COMMENT '閫€璐ф暟閲',
+  `ori_price` decimal(24, 6) NOT NULL COMMENT '鍘熶环',
+  `tax_price` decimal(24, 6) NOT NULL COMMENT '鐜颁环',
+  `discount_rate` decimal(16, 2) NOT NULL COMMENT '鎶樻墸鐜囷紙%锛',
+  `is_gift` tinyint(1) NOT NULL DEFAULT 0 COMMENT '鏄惁璧犲搧',
+  `tax_rate` decimal(16, 2) NOT NULL COMMENT '绋庣巼锛?锛',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶囨敞',
+  `order_no` int(11) NOT NULL COMMENT '鎺掑簭缂栧彿',
+  `settle_status` tinyint(3) NOT NULL DEFAULT 0 COMMENT '缁撶畻鐘舵€',
+  `out_sheet_detail_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鍑哄簱鍗曟槑缁咺D',
+  `tax_amount` decimal(32, 2) NOT NULL COMMENT '鎬婚噾棰',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `return_id`(`return_id`) USING BTREE,
+  INDEX `out_sheet_detail_id`(`out_sheet_detail_id`) USING BTREE,
+  INDEX `product_id`(`product_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '閿€鍞€€鍗曟槑缁' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_sale_return_detail
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_sc_transfer_order
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_sc_transfer_order`;
+CREATE TABLE `tbl_sc_transfer_order`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `code` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍗曞彿',
+  `source_sc_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '杞嚭浠撳簱ID',
+  `target_sc_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '杞叆浠撳簱ID',
+  `total_num` decimal(24, 8) NOT NULL DEFAULT 0.00000000 COMMENT '璋冩嫧鏁伴噺',
+  `total_amount` decimal(32, 2) NOT NULL DEFAULT 0.00 COMMENT '璋冩嫧鎴愭湰閲戦',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  `approve_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '瀹℃牳浜',
+  `approve_time` datetime NULL DEFAULT NULL COMMENT '瀹℃牳鏃堕棿',
+  `status` tinyint(3) NOT NULL COMMENT '鐘舵€',
+  `refuse_reason` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鎷掔粷鍘熷洜',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `code`(`code`) USING BTREE,
+  INDEX `source_sc_id`(`source_sc_id`) USING BTREE,
+  INDEX `target_sc_id`(`target_sc_id`) USING BTREE,
+  INDEX `create_time`(`create_time`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '浠撳簱璋冩嫧鍗' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_sc_transfer_order
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_sc_transfer_order_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_sc_transfer_order_detail`;
+CREATE TABLE `tbl_sc_transfer_order_detail`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `order_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '璋冩嫧鍗旾D',
+  `product_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍟嗗搧ID',
+  `transfer_num` decimal(24, 8) NOT NULL COMMENT '璋冩嫧鏁伴噺',
+  `transfer_amount` decimal(32, 2) NOT NULL DEFAULT 0.00 COMMENT '璋冩嫧閲戦',
+  `tax_price` decimal(24, 6) NULL DEFAULT NULL COMMENT '鎴愭湰浠',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶囨敞',
+  `order_no` int(11) NOT NULL COMMENT '鎺掑簭缂栧彿',
+  `receive_num` decimal(24, 8) NOT NULL DEFAULT 0.00000000 COMMENT '宸叉敹璐ф暟閲',
+  `receive_amount` decimal(32, 2) NOT NULL DEFAULT 0.00 COMMENT '宸叉敹璐ч噾棰',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `order_id`(`order_id`) USING BTREE,
+  INDEX `product_id`(`product_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '浠撳簱璋冩嫧鍗曟槑缁' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_sc_transfer_order_detail
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_sc_transfer_order_detail_receive
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_sc_transfer_order_detail_receive`;
+CREATE TABLE `tbl_sc_transfer_order_detail_receive`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `order_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '璋冩嫧鍗旾D',
+  `detail_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鏄庣粏ID',
+  `receive_num` decimal(24, 8) NOT NULL COMMENT '鏀惰揣鏁伴噺',
+  `receive_amount` decimal(32, 2) NOT NULL DEFAULT 0.00 COMMENT '鏀惰揣閲戦',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `order_id`(`order_id`, `detail_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '浠撳簱璋冩嫧鍗曟敹璐ф槑缁' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_sc_transfer_order_detail_receive
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_security_upload_record
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_security_upload_record`;
+CREATE TABLE `tbl_security_upload_record`  (
+  `id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `upload_type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '涓婁紶鏂瑰紡',
+  `file_path` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鏂囦欢璺緞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '瀹夊叏涓婁紶璁板綍' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_security_upload_record
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_shop
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_shop`;
+CREATE TABLE `tbl_shop`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '缂栧彿',
+  `name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍚嶇О',
+  `dept_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鎵€灞為儴闂↖D',
+  `lng` decimal(16, 6) NULL DEFAULT NULL COMMENT '缁忓害',
+  `lat` decimal(16, 6) NULL DEFAULT NULL COMMENT '绾害',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '澶囨敞',
+  `available` tinyint(1) NOT NULL DEFAULT 1 COMMENT '鐘舵€?1-鍦ㄧ敤 0鍋滅敤',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `code`(`code`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '闂ㄥ簵' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_shop
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_stock_adjust_reason
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_stock_adjust_reason`;
+CREATE TABLE `tbl_stock_adjust_reason`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '缂栧彿',
+  `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍚嶇О',
+  `available` tinyint(1) NOT NULL COMMENT '鐘舵€',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `code`(`code`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '搴撳瓨璋冩暣鍘熷洜' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_stock_adjust_reason
+-- ----------------------------
+INSERT INTO `tbl_stock_adjust_reason` VALUES ('1', '001', '鍒濆鍖栨暟鎹', 1, '绯荤粺鍐呯疆', '绯荤粺绠＄悊鍛', '1', '2023-04-18 14:04:34', '绯荤粺绠＄悊鍛', '1', '2023-04-18 14:04:53');
+INSERT INTO `tbl_stock_adjust_reason` VALUES ('2', '002', '鎹熸孩', 1, '绯荤粺鍐呯疆', '绯荤粺绠＄悊鍛', '1', '2023-04-18 14:04:34', '绯荤粺绠＄悊鍛', '1', '2023-04-18 14:04:53');
+INSERT INTO `tbl_stock_adjust_reason` VALUES ('3', '003', '鍏朵粬', 1, '绯荤粺鍐呯疆', '绯荤粺绠＄悊鍛', '1', '2023-04-18 14:04:34', '绯荤粺绠＄悊鍛', '1', '2023-04-18 14:04:53');
+
+-- ----------------------------
+-- Table structure for tbl_stock_adjust_sheet
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_stock_adjust_sheet`;
+CREATE TABLE `tbl_stock_adjust_sheet`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `code` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '涓氬姟鍗曟嵁鍙',
+  `sc_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '浠撳簱ID',
+  `biz_type` tinyint(3) NOT NULL COMMENT '涓氬姟绫诲瀷',
+  `reason_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '璋冩暣鍘熷洜ID',
+  `status` tinyint(3) NOT NULL COMMENT '鐘舵€',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  `approve_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '瀹℃牳浜',
+  `approve_time` datetime NULL DEFAULT NULL COMMENT '瀹℃牳鏃堕棿',
+  `refuse_reason` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鎷掔粷鍘熷洜',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `code`(`code`) USING BTREE,
+  INDEX `sc_id`(`sc_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '搴撳瓨璋冩暣鍗' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_stock_adjust_sheet
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_stock_adjust_sheet_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_stock_adjust_sheet_detail`;
+CREATE TABLE `tbl_stock_adjust_sheet_detail`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `sheet_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍗曟嵁ID',
+  `product_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍟嗗搧ID',
+  `stock_num` decimal(24, 8) NOT NULL COMMENT '璋冩暣搴撳瓨鏁伴噺',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶囨敞',
+  `order_no` int(11) NOT NULL COMMENT '鎺掑簭',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `sheet_id`(`sheet_id`, `product_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '搴撳瓨璋冩暣鍗曟槑缁' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_stock_adjust_sheet_detail
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_stock_cell_product
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_stock_cell_product`;
+CREATE TABLE `tbl_stock_cell_product`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `sc_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '浠撳簱ID',
+  `stock_cell_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '浠撲綅ID',
+  `product_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍟嗗搧ID',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `sc_id`(`sc_id`) USING BTREE,
+  INDEX `stock_cell_id`(`stock_cell_id`) USING BTREE,
+  INDEX `product_id`(`product_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '浠撲綅鍟嗗搧' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of tbl_stock_cell_product
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_take_stock_config
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_take_stock_config`;
+CREATE TABLE `tbl_take_stock_config`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `show_product` tinyint(1) NOT NULL DEFAULT 0 COMMENT '搴撳瓨鐩樼偣鍗曞叧鑱旂洏鐐逛换鍔″悗锛屾槸鍚︽樉绀虹洏鐐逛换鍔′腑鐨勫晢鍝佹暟鎹',
+  `show_stock` tinyint(1) NOT NULL DEFAULT 0 COMMENT '搴撳瓨鐩樼偣鍗曟槸鍚︽樉绀虹洏鐐逛换鍔″垱寤烘椂鍟嗗搧鐨勭郴缁熷簱瀛樻暟閲',
+  `auto_change_stock` tinyint(1) NOT NULL DEFAULT 0 COMMENT '鐩樼偣宸紓鐢熸垚鏃舵槸鍚﹁嚜鍔ㄨ皟鏁寸洏鐐逛换鍔′腑鍟嗗搧鐨勭郴缁熷簱瀛樻暟閲',
+  `allow_change_num` tinyint(1) NOT NULL DEFAULT 0 COMMENT '鐩樼偣宸紓鍗曚腑鐨勭洏鐐规暟閲忔槸鍚﹀厑璁告墜鍔ㄤ慨鏀',
+  `cancel_hours` int(11) NOT NULL DEFAULT 24 COMMENT '鐩樼偣浠诲姟鍒涘缓鍚庡灏戝皬鏃跺唴鍐呮湭瀹屾垚锛屽垯鑷姩浣滃簾',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '搴撳瓨鐩樼偣鍙傛暟璁剧疆' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_take_stock_config
+-- ----------------------------
+INSERT INTO `tbl_take_stock_config` VALUES ('1', 1, 1, 1, 1, 168);
+
+-- ----------------------------
+-- Table structure for tbl_take_stock_plan
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_take_stock_plan`;
+CREATE TABLE `tbl_take_stock_plan`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `code` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '涓氬姟鍗曟嵁鍙',
+  `sc_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '浠撳簱ID',
+  `take_type` tinyint(3) NOT NULL COMMENT '鐩樼偣绫诲埆',
+  `biz_id` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '涓氬姟ID',
+  `take_status` tinyint(3) NOT NULL DEFAULT 0 COMMENT '鐩樼偣鐘舵€',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `code`(`code`) USING BTREE,
+  INDEX `sc_id`(`sc_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '搴撳瓨鐩樼偣浠诲姟' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_take_stock_plan
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_take_stock_plan_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_take_stock_plan_detail`;
+CREATE TABLE `tbl_take_stock_plan_detail`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `plan_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鐩樼偣浠诲姟ID',
+  `product_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍟嗗搧ID',
+  `stock_num` decimal(24, 8) NOT NULL COMMENT '鍒濆搴撳瓨鏁伴噺',
+  `ori_take_num` decimal(24, 8) NULL DEFAULT NULL COMMENT '鐩樼偣鏁伴噺',
+  `take_num` decimal(24, 8) NULL DEFAULT NULL COMMENT '淇敼鍚庣殑鐩樼偣鏁伴噺',
+  `total_out_num` decimal(24, 8) NOT NULL DEFAULT 0.00000000 COMMENT '鍑洪」鏁伴噺',
+  `total_in_num` decimal(24, 8) NOT NULL DEFAULT 0.00000000 COMMENT '鍏ラ」鏁伴噺',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶囨敞',
+  `order_no` int(11) NOT NULL DEFAULT 0 COMMENT '鎺掑簭',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `plan_id`(`plan_id`, `product_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '搴撳瓨鐩樼偣浠诲姟鏄庣粏' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_take_stock_plan_detail
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_take_stock_sheet
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_take_stock_sheet`;
+CREATE TABLE `tbl_take_stock_sheet`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `code` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '涓氬姟鍗曟嵁鍙',
+  `plan_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鐩樼偣浠诲姟ID',
+  `pre_sheet_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '棰勫厛鐩樼偣鍗旾D',
+  `sc_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '浠撳簱ID',
+  `status` tinyint(3) NOT NULL COMMENT '鐘舵€',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶囨敞',
+  `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜',
+  `create_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍒涘缓浜篒D',
+  `create_time` datetime NOT NULL COMMENT '鍒涘缓鏃堕棿',
+  `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜',
+  `update_by_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '淇敼浜篒D',
+  `update_time` datetime NOT NULL COMMENT '淇敼鏃堕棿',
+  `approve_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '瀹℃牳浜',
+  `approve_time` datetime NULL DEFAULT NULL COMMENT '瀹℃牳鏃堕棿',
+  `refuse_reason` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '鎷掔粷鍘熷洜',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `code`(`code`) USING BTREE,
+  INDEX `plan_id`(`plan_id`) USING BTREE,
+  INDEX `sc_id`(`sc_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '搴撳瓨鐩樼偣鍗' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_take_stock_sheet
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tbl_take_stock_sheet_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_take_stock_sheet_detail`;
+CREATE TABLE `tbl_take_stock_sheet_detail`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'ID',
+  `sheet_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鐩樼偣鍗旾D',
+  `product_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '鍟嗗搧ID',
+  `take_num` decimal(24, 8) NOT NULL COMMENT '鐩樼偣鏁伴噺',
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '澶囨敞',
+  `order_no` int(11) NOT NULL COMMENT '鎺掑簭',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `sheet_id`(`sheet_id`, `product_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '搴撳瓨鐩樼偣鍗曟槑缁' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tbl_take_stock_sheet_detail
+-- ----------------------------
+
+SET FOREIGN_KEY_CHECKS = 1;

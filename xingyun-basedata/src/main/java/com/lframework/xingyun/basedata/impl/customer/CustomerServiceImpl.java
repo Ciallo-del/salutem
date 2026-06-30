@@ -84,7 +84,7 @@ public class CustomerServiceImpl extends BaseMpServiceImpl<CustomerMapper, Custo
     return PageResultUtil.convert(new PageInfo<>(datas));
   }
 
-  @OpLog(type = BaseDataOpLogType.class, name = "删除客户，ID：{}", params = "#id")
+  @OpLog(type = BaseDataOpLogType.class, name = "删除收货方，ID：{}", params = "#id")
   @Transactional(rollbackFor = Exception.class)
   @Override
   public void deleteById(String id) {
@@ -99,7 +99,7 @@ public class CustomerServiceImpl extends BaseMpServiceImpl<CustomerMapper, Custo
     DataChangeEventBuilder.publishLogicDelete(this, DeleteCustomerEvent.class, record);
   }
 
-  @OpLog(type = BaseDataOpLogType.class, name = "新增客户，ID：{}, 编号：{}", params = {"#id",
+  @OpLog(type = BaseDataOpLogType.class, name = "新增收货方，ID：{}, 编号：{}", params = {"#id",
       "#code"})
   @Transactional(rollbackFor = Exception.class)
   @Override
@@ -172,7 +172,7 @@ public class CustomerServiceImpl extends BaseMpServiceImpl<CustomerMapper, Custo
     return data.getId();
   }
 
-  @OpLog(type = BaseDataOpLogType.class, name = "修改客户，ID：{}, 编号：{}", params = {"#id",
+  @OpLog(type = BaseDataOpLogType.class, name = "修改收货方，ID：{}, 编号：{}", params = {"#id",
       "#code"})
   @Transactional(rollbackFor = Exception.class)
   @Override
@@ -180,7 +180,7 @@ public class CustomerServiceImpl extends BaseMpServiceImpl<CustomerMapper, Custo
 
     Customer data = getBaseMapper().selectById(vo.getId());
     if (ObjectUtil.isNull(data)) {
-      throw new DefaultClientException("客户不存在！");
+      throw new DefaultClientException("收货方不存在！");
     }
 
     Wrapper<Customer> checkWrapper = Wrappers.lambdaQuery(Customer.class)

@@ -64,7 +64,7 @@ public class ProductCategoryServiceImpl extends
     return getBaseMapper().selector(vo);
   }
 
-  @OpLog(type = BaseDataOpLogType.class, name = "删除商品分类，ID：{}", params = "#id")
+  @OpLog(type = BaseDataOpLogType.class, name = "删除药品分类，ID：{}", params = "#id")
   @Transactional(rollbackFor = Exception.class)
   @Override
   public void deleteById(String id) {
@@ -88,7 +88,7 @@ public class ProductCategoryServiceImpl extends
     }
   }
 
-  @OpLog(type = BaseDataOpLogType.class, name = "新增商品分类，ID：{}, 编号：{}", params = {"#id",
+  @OpLog(type = BaseDataOpLogType.class, name = "新增药品分类，ID：{}, 编号：{}", params = {"#id",
       "#code"})
   @Transactional(rollbackFor = Exception.class)
   @Override
@@ -117,12 +117,12 @@ public class ProductCategoryServiceImpl extends
         throw new DefaultClientException("上级分类不存在，请检查！");
       }
 
-      // 然后判断上级分类下是否有商品，如果有商品不允许新增子分类
+      // 然后判断上级分类下是否有药品，如果有药品不允许新增子分类
       Wrapper<Product> checkProductWrapper = Wrappers.lambdaQuery(Product.class)
           .eq(Product::getCategoryId, vo.getParentId())
           .eq(Product::getAvailable, Boolean.TRUE);
       if (productService.count(checkProductWrapper) > 0) {
-        throw new DefaultClientException("上级分类已关联商品，不允许新增子分类！");
+        throw new DefaultClientException("上级分类已关联药品，不允许新增子分类！");
       }
     }
 
@@ -147,7 +147,7 @@ public class ProductCategoryServiceImpl extends
     return data.getId();
   }
 
-  @OpLog(type = BaseDataOpLogType.class, name = "修改商品分类，ID：{}, 编号：{}", params = {"#id",
+  @OpLog(type = BaseDataOpLogType.class, name = "修改药品分类，ID：{}, 编号：{}", params = {"#id",
       "#code"})
   @Transactional(rollbackFor = Exception.class)
   @Override

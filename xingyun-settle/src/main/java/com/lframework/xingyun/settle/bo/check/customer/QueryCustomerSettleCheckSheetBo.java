@@ -32,21 +32,21 @@ public class QueryCustomerSettleCheckSheetBo extends BaseBo<CustomerSettleCheckS
   private String code;
 
   /**
-   * 客户ID
+   * 收货方ID
    */
-  @ApiModelProperty("客户ID")
+  @ApiModelProperty("收货方ID")
   private String customerId;
 
   /**
-   * 客户编号
+   * 收货方编号
    */
-  @ApiModelProperty("客户编号")
+  @ApiModelProperty("收货方编号")
   private String customerCode;
 
   /**
-   * 客户名称
+   * 收货方名称
    */
-  @ApiModelProperty("客户名称")
+  @ApiModelProperty("收货方名称")
   private String customerName;
 
   /**

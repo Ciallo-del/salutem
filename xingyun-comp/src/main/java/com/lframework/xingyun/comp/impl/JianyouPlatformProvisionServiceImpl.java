@@ -38,6 +38,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.jdbc.datasource.init.ScriptException;
@@ -860,11 +861,10 @@ public class JianyouPlatformProvisionServiceImpl implements JianyouPlatformProvi
   private SysOpenDomain findOrCreateOpenDomain(String platformOrgCard, String token, Integer tenantId,
       String platformOrgName) {
     String openDomainName = buildOpenDomainName(token);
-    List<SysOpenDomain> domains = sysOpenDomainService.list(Wrappers.lambdaQuery(SysOpenDomain.class)
-        .eq(SysOpenDomain::getName, openDomainName)
-        .eq(SysOpenDomain::getTenantId, tenantId));
-    if (!CollectionUtil.isEmpty(domains)) {
-      return domains.get(0);
+    SysOpenDomain existing = findOpenDomainByName(openDomainName);
+    if (existing != null) {
+      ensureOpenDomainTenantBinding(existing, tenantId, platformOrgCard);
+      return existing;
     }
 
     CreateSysOpenDomainVo createVo = new CreateSysOpenDomainVo();
@@ -872,12 +872,77 @@ public class JianyouPlatformProvisionServiceImpl implements JianyouPlatformProvi
     createVo.setApiSecret(DigestUtils.md5Hex(platformOrgCard + ":" + token));
     createVo.setTenantId(tenantId);
     createVo.setDescription("建友平台商开放域：" + platformOrgName);
-    String openDomainId = sysOpenDomainService.create(createVo);
-    SysOpenDomain openDomain = sysOpenDomainService.findById(Integer.valueOf(openDomainId));
-    if (openDomain == null) {
-      throw new DefaultClientException("创建平台商开放域失败");
+    try {
+      String openDomainId = sysOpenDomainService.create(createVo);
+      SysOpenDomain openDomain = sysOpenDomainService.findById(Integer.valueOf(openDomainId));
+      if (openDomain == null) {
+        throw new DefaultClientException("创建平台商开放域失败");
+      }
+      return openDomain;
+    } catch (DuplicateKeyException e) {
+      SysOpenDomain concurrent = findOpenDomainByName(openDomainName);
+      if (concurrent == null) {
+        throw new DefaultClientException("创建平台商开放域失败");
+      }
+      ensureOpenDomainTenantBinding(concurrent, tenantId, platformOrgCard);
+      return concurrent;
     }
-    return openDomain;
+  }
+
+  private SysOpenDomain findOpenDomainByName(String openDomainName) {
+    List<SysOpenDomain> domains = sysOpenDomainService.list(Wrappers.lambdaQuery(SysOpenDomain.class)
+        .eq(SysOpenDomain::getName, openDomainName));
+    if (CollectionUtil.isEmpty(domains)) {
+      return null;
+    }
+    return domains.get(0);
+  }
+
+  private void ensureOpenDomainTenantBinding(SysOpenDomain openDomain, Integer tenantId, String platformOrgCard) {
+    if (tenantId == null) {
+      throw new DefaultClientException("租户不存在");
+    }
+    if (openDomain.getTenantId() != null && openDomain.getTenantId().equals(tenantId)) {
+      return;
+    }
+
+    String expectedServerName = buildTenantServerName(platformOrgCard);
+    if (openDomain.getTenantId() == null) {
+      log.warn("开放域未绑定租户，自动绑定: openDomainId={}, tenantId={}", openDomain.getId(), tenantId);
+    } else {
+      Tenant boundTenant = tenantService.findById(openDomain.getTenantId());
+      if (boundTenant != null) {
+        if (StringUtils.equals(expectedServerName, boundTenant.getServerName())) {
+          log.warn("开放域租户ID与当前租户不一致，自动修正绑定: openDomainId={}, oldTenantId={}, newTenantId={}",
+              openDomain.getId(), openDomain.getTenantId(), tenantId);
+        } else {
+          throw new DefaultClientException("开放域已绑定其他租户，请使用修复接口 /xy/xingyun/jianyou/platform/repair");
+        }
+      } else {
+        log.warn("开放域绑定租户已不存在，自动修正: openDomainId={}, oldTenantId={}, newTenantId={}",
+            openDomain.getId(), openDomain.getTenantId(), tenantId);
+      }
+    }
+
+    updateOpenDomainTenantId(Integer.valueOf(openDomain.getId()), tenantId);
+    openDomain.setTenantId(tenantId);
+  }
+
+  private void updateOpenDomainTenantId(Integer openDomainId, Integer tenantId) {
+    DataSource dataSource = ApplicationUtil.safeGetBean(DataSource.class);
+    if (dataSource == null) {
+      throw new DefaultClientException("主数据源未初始化完成，请稍后重试");
+    }
+
+    JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+    int rows = jdbcTemplate.update(
+        "UPDATE sys_open_domain SET tenant_id = ?, update_time = ? WHERE id = ?",
+        tenantId,
+        LocalDateTime.now(),
+        openDomainId);
+    if (rows <= 0) {
+      throw new DefaultClientException("修正开放域租户绑定失败");
+    }
   }
 
   private void switchToTenant(Integer tenantId) {

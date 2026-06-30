@@ -38,11 +38,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 客户预付款单
+ * 收货方预付款单
  *
  * @author zmj
  */
-@Api(tags = "客户预付款单")
+@Api(tags = "收货方预付款单")
 @Validated
 @RestController
 @RequestMapping("/customer/settle/presheet")
@@ -52,9 +52,9 @@ public class CustomerSettlePreSheetController extends DefaultBaseController {
   private CustomerSettlePreSheetService settlePreSheetService;
 
   /**
-   * 客户预付款单列表
+   * 收货方预付款单列表
    */
-  @ApiOperation("客户预付款单列表")
+  @ApiOperation("收货方预付款单列表")
   @HasPermission({"customer-settle:pre-sheet:query"})
   @GetMapping("/query")
   public InvokeResult<PageResult<QueryCustomerSettlePreSheetBo>> query(
@@ -81,7 +81,7 @@ public class CustomerSettlePreSheetController extends DefaultBaseController {
   @PostMapping("/export")
   public InvokeResult<Void> export(@Valid QueryCustomerSettlePreSheetVo vo) {
 
-    ExportTaskUtil.exportTask("客户预收款单信息", CustomerSettlePreSheetExportTaskWorker.class, vo);
+    ExportTaskUtil.exportTask("收货方预收款单信息", CustomerSettlePreSheetExportTaskWorker.class, vo);
 
     return InvokeResultBuilder.success();
   }
@@ -94,7 +94,7 @@ public class CustomerSettlePreSheetController extends DefaultBaseController {
   @HasPermission({"customer-settle:pre-sheet:query"})
   @GetMapping
   public InvokeResult<GetCustomerSettlePreSheetBo> findById(
-      @NotBlank(message = "客户预付款单ID不能为空！") String id) {
+      @NotBlank(message = "收货方预付款单ID不能为空！") String id) {
 
     CustomerSettlePreSheetFullDto data = settlePreSheetService.getDetail(id);
 
@@ -104,9 +104,9 @@ public class CustomerSettlePreSheetController extends DefaultBaseController {
   }
 
   /**
-   * 创建客户预付款单
+   * 创建收货方预付款单
    */
-  @ApiOperation("创建客户预付款单")
+  @ApiOperation("创建收货方预付款单")
   @HasPermission({"customer-settle:pre-sheet:add"})
   @PostMapping
   public InvokeResult<String> create(@RequestBody @Valid CreateCustomerSettlePreSheetVo vo) {
@@ -119,9 +119,9 @@ public class CustomerSettlePreSheetController extends DefaultBaseController {
   }
 
   /**
-   * 修改客户预付款单
+   * 修改收货方预付款单
    */
-  @ApiOperation("修改客户预付款单")
+  @ApiOperation("修改收货方预付款单")
   @HasPermission({"customer-settle:pre-sheet:modify"})
   @PutMapping
   public InvokeResult<Void> update(@RequestBody @Valid UpdateCustomerSettlePreSheetVo vo) {
@@ -134,9 +134,9 @@ public class CustomerSettlePreSheetController extends DefaultBaseController {
   }
 
   /**
-   * 审核通过客户预付款单
+   * 审核通过收货方预付款单
    */
-  @ApiOperation("审核通过客户预付款单")
+  @ApiOperation("审核通过收货方预付款单")
   @HasPermission({"customer-settle:pre-sheet:approve"})
   @PatchMapping("/approve/pass")
   public InvokeResult<Void> approvePass(
@@ -148,9 +148,9 @@ public class CustomerSettlePreSheetController extends DefaultBaseController {
   }
 
   /**
-   * 直接审核通过客户预付款单
+   * 直接审核通过收货方预付款单
    */
-  @ApiOperation("直接审核通过客户预付款单")
+  @ApiOperation("直接审核通过收货方预付款单")
   @HasPermission({"customer-settle:pre-sheet:approve"})
   @PostMapping("/approve/pass/direct")
   public InvokeResult<Void> directApprovePass(
@@ -164,9 +164,9 @@ public class CustomerSettlePreSheetController extends DefaultBaseController {
   }
 
   /**
-   * 审核拒绝客户预付款单
+   * 审核拒绝收货方预付款单
    */
-  @ApiOperation("审核拒绝客户预付款单")
+  @ApiOperation("审核拒绝收货方预付款单")
   @HasPermission({"customer-settle:pre-sheet:approve"})
   @PatchMapping("/approve/refuse")
   public InvokeResult<Void> approveRefuse(
@@ -178,13 +178,13 @@ public class CustomerSettlePreSheetController extends DefaultBaseController {
   }
 
   /**
-   * 删除客户预付款单
+   * 删除收货方预付款单
    */
-  @ApiOperation("删除客户预付款单")
+  @ApiOperation("删除收货方预付款单")
   @ApiImplicitParam(value = "ID", name = "id", paramType = "query", required = true)
   @HasPermission({"customer-settle:pre-sheet:delete"})
   @DeleteMapping
-  public InvokeResult<Void> deleteById(@NotBlank(message = "客户预付款单ID不能为空！") String id) {
+  public InvokeResult<Void> deleteById(@NotBlank(message = "收货方预付款单ID不能为空！") String id) {
 
     settlePreSheetService.deleteById(id);
 

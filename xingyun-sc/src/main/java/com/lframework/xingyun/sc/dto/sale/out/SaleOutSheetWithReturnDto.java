@@ -22,7 +22,7 @@ public class SaleOutSheetWithReturnDto implements BaseDto, Serializable {
   private String scId;
 
   /**
-   * 客户ID
+   * 收货方ID
    */
   private String customerId;
 
@@ -47,7 +47,7 @@ public class SaleOutSheetWithReturnDto implements BaseDto, Serializable {
     private String id;
 
     /**
-     * 商品ID
+     * 药品ID
      */
     private String productId;
 

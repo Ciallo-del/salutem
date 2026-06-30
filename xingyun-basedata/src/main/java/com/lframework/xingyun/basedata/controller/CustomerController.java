@@ -39,11 +39,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
- * 客户管理
+ * 收货方管理
  *
  * @author zmj
  */
-@Api(tags = "客户管理")
+@Api(tags = "收货方管理")
 @Validated
 @RestController
 @RequestMapping("/basedata/customer")
@@ -53,9 +53,9 @@ public class CustomerController extends DefaultBaseController {
   private CustomerService customerService;
 
   /**
-   * 客户列表
+   * 收货方列表
    */
-  @ApiOperation("客户列表")
+  @ApiOperation("收货方列表")
   @HasPermission({"base-data:customer:query", "base-data:customer:add",
       "base-data:customer:modify"})
   @GetMapping("/query")
@@ -74,9 +74,9 @@ public class CustomerController extends DefaultBaseController {
   }
 
   /**
-   * 查询客户
+   * 查询收货方
    */
-  @ApiOperation("查询客户")
+  @ApiOperation("查询收货方")
   @ApiImplicitParam(value = "ID", name = "id", paramType = "query", required = true)
   @HasPermission({"base-data:customer:query", "base-data:customer:add",
       "base-data:customer:modify"})
@@ -85,7 +85,7 @@ public class CustomerController extends DefaultBaseController {
 
     Customer data = customerService.findById(id);
     if (data == null) {
-      throw new DefaultClientException("客户不存在！");
+      throw new DefaultClientException("收货方不存在！");
     }
 
     GetCustomerBo result = new GetCustomerBo(data);
@@ -94,13 +94,13 @@ public class CustomerController extends DefaultBaseController {
   }
 
   /**
-   * 删除客户
+   * 删除收货方
    */
-  @ApiOperation("删除客户")
+  @ApiOperation("删除收货方")
   @HasPermission({"base-data:customer:delete"})
   @DeleteMapping
   public InvokeResult<Void> deleteById(
-      @ApiParam(value = "ID", required = true) @NotEmpty(message = "客户ID不能为空！") String id) {
+      @ApiParam(value = "ID", required = true) @NotEmpty(message = "收货方ID不能为空！") String id) {
 
     customerService.deleteById(id);
 
@@ -110,9 +110,9 @@ public class CustomerController extends DefaultBaseController {
   }
 
   /**
-   * 新增客户
+   * 新增收货方
    */
-  @ApiOperation("新增客户")
+  @ApiOperation("新增收货方")
   @HasPermission({"base-data:customer:add"})
   @PostMapping
   public InvokeResult<Void> create(@Valid CreateCustomerVo vo) {
@@ -123,9 +123,9 @@ public class CustomerController extends DefaultBaseController {
   }
 
   /**
-   * 修改客户
+   * 修改收货方
    */
-  @ApiOperation("修改客户")
+  @ApiOperation("修改收货方")
   @HasPermission({"base-data:customer:modify"})
   @PutMapping
   public InvokeResult<Void> update(@Valid UpdateCustomerVo vo) {
@@ -141,7 +141,7 @@ public class CustomerController extends DefaultBaseController {
   @HasPermission({"base-data:customer:import"})
   @GetMapping("/import/template")
   public void downloadImportTemplate() {
-    ExcelUtil.exportXls("客户导入模板", CustomerImportModel.class);
+    ExcelUtil.exportXls("收货方导入模板", CustomerImportModel.class);
   }
 
   @ApiOperation("导入")

@@ -17,7 +17,7 @@ import org.apache.ibatis.annotations.Param;
 public interface ProductPropertyRelationMapper extends BaseMapper<ProductPropertyRelation> {
 
     /**
-     * 根据商品ID查询
+     * 根据药品ID查询
      *
      * @param productId
      * @return

@@ -24,38 +24,38 @@ public class CreateProductPolyVo implements BaseVo, Serializable {
   private static final long serialVersionUID = 1L;
 
   /**
-   * 商品货号
+   * 药品货号
    */
-  @ApiModelProperty(value = "商品货号", required = true)
+  @ApiModelProperty(value = "药品货号", required = true)
   @IsCode
-  @NotBlank(message = "商品货号不能为空！")
+  @NotBlank(message = "药品货号不能为空！")
   private String code;
 
   /**
-   * 商品名称
+   * 药品名称
    */
-  @ApiModelProperty(value = "商品名称", required = true)
-  @NotBlank(message = "商品名称不能为空！")
+  @ApiModelProperty(value = "药品名称", required = true)
+  @NotBlank(message = "药品名称不能为空！")
   private String name;
 
   /**
-   * 商品简称
+   * 药品简称
    */
-  @ApiModelProperty("商品简称")
+  @ApiModelProperty("药品简称")
   private String shortName;
 
   /**
    * 分类ID
    */
   @ApiModelProperty(value = "分类ID", required = true)
-  @NotBlank(message = "请选择商品分类！")
+  @NotBlank(message = "请选择药品分类！")
   private String categoryId;
 
   /**
    * 品牌ID
    */
   @ApiModelProperty(value = "品牌ID", required = true)
-  @NotBlank(message = "请选择商品品牌！")
+  @NotBlank(message = "请选择药品品牌！")
   private String brandId;
 
   /**
@@ -84,16 +84,16 @@ public class CreateProductPolyVo implements BaseVo, Serializable {
   private BigDecimal saleTaxRate;
 
   /**
-   * 商品属性
+   * 药品属性
    */
-  @ApiModelProperty(value = "商品属性", required = true)
+  @ApiModelProperty(value = "药品属性", required = true)
   @Valid
   private List<PropertyVo> properties;
 
   /**
-   * 商品信息
+   * 药品信息
    */
-  @ApiModelProperty(value = "商品信息", required = true)
+  @ApiModelProperty(value = "药品信息", required = true)
   @Valid
   @NotEmpty
   private List<ProductVo> products;
@@ -109,27 +109,27 @@ public class CreateProductPolyVo implements BaseVo, Serializable {
       }
 
       if (StringUtil.isBlank(product.getCode())) {
-        throw new InputErrorException("第" + (orderNo) + "行商品编号不能为空！");
+        throw new InputErrorException("第" + (orderNo) + "行药品编号不能为空！");
       }
 
       if (!RegUtil.isMatch(PatternPool.PATTERN_CODE, product.getCode())) {
-        throw new InputErrorException("第" + (orderNo) + "行商品编号必须由字母或数字组成，长度不能超过20位！");
+        throw new InputErrorException("第" + (orderNo) + "行药品编号必须由字母或数字组成，长度不能超过20位！");
       }
 
       if (StringUtil.isBlank(product.getName())) {
-        throw new InputErrorException("第" + (orderNo) + "行商品名称不能为空！");
+        throw new InputErrorException("第" + (orderNo) + "行药品名称不能为空！");
       }
 
       if (product.getPurchasePrice() == null) {
-        throw new InputErrorException("第" + (orderNo) + "行商品采购价不能为空！");
+        throw new InputErrorException("第" + (orderNo) + "行药品采购价不能为空！");
       }
 
       if (product.getSalePrice() == null) {
-        throw new InputErrorException("第" + (orderNo) + "行商品销售价不能为空！");
+        throw new InputErrorException("第" + (orderNo) + "行药品销售价不能为空！");
       }
 
       if (product.getRetailPrice() == null) {
-        throw new InputErrorException("第" + (orderNo) + "行商品零售价不能为空！");
+        throw new InputErrorException("第" + (orderNo) + "行药品零售价不能为空！");
       }
 
       orderNo++;
@@ -169,12 +169,12 @@ public class CreateProductPolyVo implements BaseVo, Serializable {
     private String salePropItemId2;
 
     /**
-     * 商品编号
+     * 药品编号
      */
     private String code;
 
     /**
-     * 商品名称
+     * 药品名称
      */
     private String name;
 

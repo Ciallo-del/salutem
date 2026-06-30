@@ -277,7 +277,7 @@ CREATE TABLE `qrtz_triggers`  (
 DROP TABLE IF EXISTS `sys_module`;
 CREATE TABLE `sys_module`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '名称',
+  `name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '名称',
   `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '备注',
   `is_platform` tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否为平台功能模块',
   `create_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建人',
@@ -294,15 +294,15 @@ CREATE TABLE `sys_module`  (
 -- ----------------------------
 INSERT INTO `sys_module` VALUES (1, '平台管理', '系统平台的核心模块。', 1, '系统管理员', '1', '2023-06-06 10:26:30', '系统管理员', '1', '2023-06-06 10:26:41');
 INSERT INTO `sys_module` VALUES (2, '系统管理', '维护企业、系统基础数据，包括部门、岗位、角色和参数等。', 0, '系统管理员', '1', '2023-06-06 10:26:30', '系统管理员', '1', '2023-06-06 10:26:41');
-INSERT INTO `sys_module` VALUES (3, '基础信息管理', '维护基础业务数据，包括仓库、客户、供应商、会员等。', 0, '系统管理员', '1', '2023-06-06 10:26:30', '系统管理员', '1', '2023-06-06 10:26:41');
-INSERT INTO `sys_module` VALUES (4, '商品中心', '管理商品核心数据。', 0, '系统管理员', '1', '2023-06-06 10:26:30', '系统管理员', '1', '2023-06-06 10:26:41');
+INSERT INTO `sys_module` VALUES (3, '基础信息管理', '维护基础业务数据，包括仓库、收货方、供应商、会员等。', 0, '系统管理员', '1', '2023-06-06 10:26:30', '系统管理员', '1', '2023-06-06 10:26:41');
+INSERT INTO `sys_module` VALUES (4, '药品中心', '管理药品核心数据。', 0, '系统管理员', '1', '2023-06-06 10:26:30', '系统管理员', '1', '2023-06-06 10:26:41');
 INSERT INTO `sys_module` VALUES (5, '采购业务', '管理供应商与企业的采购业务。', 0, '系统管理员', '1', '2023-06-06 10:26:30', '系统管理员', '1', '2023-06-06 10:26:41');
-INSERT INTO `sys_module` VALUES (6, '销售业务', '管理企业与TOB端大客户的销售业务。', 0, '系统管理员', '1', '2023-06-06 10:26:30', '系统管理员', '1', '2023-06-06 10:26:41');
+INSERT INTO `sys_module` VALUES (6, '销售业务', '管理企业与TOB端收货方的销售业务。', 0, '系统管理员', '1', '2023-06-06 10:26:30', '系统管理员', '1', '2023-06-06 10:26:41');
 INSERT INTO `sys_module` VALUES (7, '零售业务', '管理企业与TOC端会员的零售业务。', 0, '系统管理员', '1', '2023-06-06 10:26:30', '系统管理员', '1', '2023-06-06 10:26:41');
-INSERT INTO `sys_module` VALUES (8, '库存管理及调拨', '查询商品库存和进行商品调拨。', 0, '系统管理员', '1', '2023-06-06 10:26:30', '系统管理员', '1', '2023-06-06 10:26:41');
-INSERT INTO `sys_module` VALUES (9, '库存盘点', '库存商品盘点。', 0, '系统管理员', '1', '2023-06-06 10:26:30', '系统管理员', '1', '2023-06-06 10:26:41');
-INSERT INTO `sys_module` VALUES (10, '库存调整', '商品库存调整。', 0, '系统管理员', '1', '2023-06-06 10:26:30', '系统管理员', '1', '2023-06-06 10:26:41');
-INSERT INTO `sys_module` VALUES (11, '结算管理', '企业与供应商、客户进行结算。', 0, '系统管理员', '1', '2023-06-06 10:26:30', '系统管理员', '1', '2023-06-06 10:26:41');
+INSERT INTO `sys_module` VALUES (8, '库存管理及调拨', '查询药品库存和进行药品调拨。', 0, '系统管理员', '1', '2023-06-06 10:26:30', '系统管理员', '1', '2023-06-06 10:26:41');
+INSERT INTO `sys_module` VALUES (9, '库存盘点', '库存药品盘点。', 0, '系统管理员', '1', '2023-06-06 10:26:30', '系统管理员', '1', '2023-06-06 10:26:41');
+INSERT INTO `sys_module` VALUES (10, '库存调整', '药品库存调整。', 0, '系统管理员', '1', '2023-06-06 10:26:30', '系统管理员', '1', '2023-06-06 10:26:41');
+INSERT INTO `sys_module` VALUES (11, '结算管理', '企业与供应商、收货方进行结算。', 0, '系统管理员', '1', '2023-06-06 10:26:30', '系统管理员', '1', '2023-06-06 10:26:41');
 INSERT INTO `sys_module` VALUES (12, '开发管理', '系统快捷开发，如管理定时器、数据实体、数据对象、表单生成等。', 1, '系统管理员', '1', '2023-06-06 10:26:30', '系统管理员', '1', '2023-06-06 10:26:41');
 INSERT INTO `sys_module` VALUES (13, '便捷办公', '支持文件收纳和在线Excel。', 0, '系统管理员', '1', '2023-06-06 10:26:30', '系统管理员', '1', '2023-06-06 10:26:41');
 INSERT INTO `sys_module` VALUES (14, '开放平台', '系统开放平台管理。', 1, '系统管理员', '1', '2023-06-06 10:26:30', '系统管理员', '1', '2023-06-06 10:26:41');
@@ -348,7 +348,7 @@ INSERT INTO `sys_module_tenant` VALUES ('1748649349774184463', 16, 1000, '2099-0
 DROP TABLE IF EXISTS `sys_open_domain`;
 CREATE TABLE `sys_open_domain`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '名称',
+  `name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '名称',
   `api_secret` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'API秘钥',
   `available` tinyint(1) NOT NULL COMMENT '状态',
   `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '备注',

@@ -96,7 +96,7 @@ public class CustomerSettleFeeSheetServiceImpl extends
     return getBaseMapper().getDetail(id);
   }
 
-  @OpLog(type = SettleOpLogType.class, name = "创建客户费用单，单号：{}", params = "#code")
+  @OpLog(type = SettleOpLogType.class, name = "创建收货方费用单，单号：{}", params = "#code")
   @OrderTimeLineLog(type = CreateOrderTimeLineBizType.class, orderId = "#_result", name = "创建费用单")
   @Transactional(rollbackFor = Exception.class)
   @Override
@@ -119,7 +119,7 @@ public class CustomerSettleFeeSheetServiceImpl extends
     return sheet.getId();
   }
 
-  @OpLog(type = SettleOpLogType.class, name = "修改客户费用单，单号：{}", params = "#code")
+  @OpLog(type = SettleOpLogType.class, name = "修改收货方费用单，单号：{}", params = "#code")
   @OrderTimeLineLog(type = UpdateOrderTimeLineBizType.class, orderId = "#vo.id", name = "修改费用单")
   @Transactional(rollbackFor = Exception.class)
   @Override
@@ -127,15 +127,15 @@ public class CustomerSettleFeeSheetServiceImpl extends
 
     CustomerSettleFeeSheet sheet = getBaseMapper().selectById(vo.getId());
     if (sheet == null) {
-      throw new DefaultClientException("客户费用单不存在！");
+      throw new DefaultClientException("收货方费用单不存在！");
     }
 
     if (sheet.getStatus() != CustomerSettleFeeSheetStatus.CREATED
         && sheet.getStatus() != CustomerSettleFeeSheetStatus.APPROVE_REFUSE) {
       if (sheet.getStatus() == CustomerSettleFeeSheetStatus.APPROVE_PASS) {
-        throw new DefaultClientException("客户费用单已审核通过，无法修改！");
+        throw new DefaultClientException("收货方费用单已审核通过，无法修改！");
       } else {
-        throw new DefaultClientException("客户费用单无法修改！");
+        throw new DefaultClientException("收货方费用单无法修改！");
       }
     }
 
@@ -161,14 +161,14 @@ public class CustomerSettleFeeSheetServiceImpl extends
         .eq(CustomerSettleFeeSheet::getId, sheet.getId())
         .in(CustomerSettleFeeSheet::getStatus, statusList);
     if (getBaseMapper().updateAllColumn(sheet, updateWrapper) != 1) {
-      throw new DefaultClientException("客户费用单信息已过期，请刷新重试！");
+      throw new DefaultClientException("收货方费用单信息已过期，请刷新重试！");
     }
 
     OpLogUtil.setVariable("code", sheet.getCode());
     OpLogUtil.setExtra(vo);
   }
 
-  @OpLog(type = SettleOpLogType.class, name = "审核通过客户费用单，单号：{}", params = "#code")
+  @OpLog(type = SettleOpLogType.class, name = "审核通过收货方费用单，单号：{}", params = "#code")
   @OrderTimeLineLog(type = ApprovePassOrderTimeLineBizType.class, orderId = "#vo.id", name = "审核通过")
   @Transactional(rollbackFor = Exception.class)
   @Override
@@ -176,15 +176,15 @@ public class CustomerSettleFeeSheetServiceImpl extends
 
     CustomerSettleFeeSheet sheet = getBaseMapper().selectById(vo.getId());
     if (sheet == null) {
-      throw new DefaultClientException("客户费用单不存在！");
+      throw new DefaultClientException("收货方费用单不存在！");
     }
 
     if (sheet.getStatus() != CustomerSettleFeeSheetStatus.CREATED
         && sheet.getStatus() != CustomerSettleFeeSheetStatus.APPROVE_REFUSE) {
       if (sheet.getStatus() == CustomerSettleFeeSheetStatus.APPROVE_PASS) {
-        throw new DefaultClientException("客户费用单已审核通过，不允许继续执行审核！");
+        throw new DefaultClientException("收货方费用单已审核通过，不允许继续执行审核！");
       }
-      throw new DefaultClientException("客户费用单无法审核通过！");
+      throw new DefaultClientException("收货方费用单无法审核通过！");
     }
 
     sheet.setStatus(CustomerSettleFeeSheetStatus.APPROVE_PASS);
@@ -203,7 +203,7 @@ public class CustomerSettleFeeSheetServiceImpl extends
         .eq(CustomerSettleFeeSheet::getId, sheet.getId())
         .in(CustomerSettleFeeSheet::getStatus, statusList);
     if (getBaseMapper().updateAllColumn(sheet, updateWrapper) != 1) {
-      throw new DefaultClientException("客户费用单信息已过期，请刷新重试！");
+      throw new DefaultClientException("收货方费用单信息已过期，请刷新重试！");
     }
 
     OpLogUtil.setVariable("code", sheet.getCode());
@@ -227,7 +227,7 @@ public class CustomerSettleFeeSheetServiceImpl extends
     return id;
   }
 
-  @OpLog(type = SettleOpLogType.class, name = "审核拒绝客户费用单，单号：{}", params = "#code")
+  @OpLog(type = SettleOpLogType.class, name = "审核拒绝收货方费用单，单号：{}", params = "#code")
   @OrderTimeLineLog(type = ApproveReturnOrderTimeLineBizType.class, orderId = "#vo.id", name = "审核拒绝，拒绝理由：{}", params = "#vo.refuseReason")
   @Transactional(rollbackFor = Exception.class)
   @Override
@@ -235,17 +235,17 @@ public class CustomerSettleFeeSheetServiceImpl extends
 
     CustomerSettleFeeSheet sheet = getBaseMapper().selectById(vo.getId());
     if (sheet == null) {
-      throw new DefaultClientException("客户费用单不存在！");
+      throw new DefaultClientException("收货方费用单不存在！");
     }
 
     if (sheet.getStatus() != CustomerSettleFeeSheetStatus.CREATED) {
       if (sheet.getStatus() == CustomerSettleFeeSheetStatus.APPROVE_PASS) {
-        throw new DefaultClientException("客户费用单已审核通过，不允许继续执行审核！");
+        throw new DefaultClientException("收货方费用单已审核通过，不允许继续执行审核！");
       }
       if (sheet.getStatus() == CustomerSettleFeeSheetStatus.APPROVE_REFUSE) {
-        throw new DefaultClientException("客户费用单已审核拒绝，不允许继续执行审核！");
+        throw new DefaultClientException("收货方费用单已审核拒绝，不允许继续执行审核！");
       }
-      throw new DefaultClientException("客户费用单无法审核拒绝！");
+      throw new DefaultClientException("收货方费用单无法审核拒绝！");
     }
 
     sheet.setStatus(CustomerSettleFeeSheetStatus.APPROVE_REFUSE);
@@ -262,14 +262,14 @@ public class CustomerSettleFeeSheetServiceImpl extends
         .eq(CustomerSettleFeeSheet::getId, sheet.getId())
         .in(CustomerSettleFeeSheet::getStatus, statusList);
     if (getBaseMapper().updateAllColumn(sheet, updateWrapper) != 1) {
-      throw new DefaultClientException("客户费用单信息已过期，请刷新重试！");
+      throw new DefaultClientException("收货方费用单信息已过期，请刷新重试！");
     }
 
     OpLogUtil.setVariable("code", sheet.getCode());
     OpLogUtil.setExtra(vo);
   }
 
-  @OpLog(type = SettleOpLogType.class, name = "删除客户费用单，单号：{}", params = "#code")
+  @OpLog(type = SettleOpLogType.class, name = "删除收货方费用单，单号：{}", params = "#code")
   @OrderTimeLineLog(orderId = "#id", delete = true)
   @Transactional(rollbackFor = Exception.class)
   @Override
@@ -278,17 +278,17 @@ public class CustomerSettleFeeSheetServiceImpl extends
     Assert.notBlank(id);
     CustomerSettleFeeSheet sheet = getBaseMapper().selectById(id);
     if (sheet == null) {
-      throw new InputErrorException("客户费用单不存在！");
+      throw new InputErrorException("收货方费用单不存在！");
     }
 
     if (sheet.getStatus() != CustomerSettleFeeSheetStatus.CREATED
         && sheet.getStatus() != CustomerSettleFeeSheetStatus.APPROVE_REFUSE) {
 
       if (sheet.getStatus() == CustomerSettleFeeSheetStatus.APPROVE_PASS) {
-        throw new DefaultClientException("“审核通过”的客户费用单不允许执行删除操作！");
+        throw new DefaultClientException("“审核通过”的收货方费用单不允许执行删除操作！");
       }
 
-      throw new DefaultClientException("客户费用单无法删除！");
+      throw new DefaultClientException("收货方费用单无法删除！");
     }
 
     // 删除明细

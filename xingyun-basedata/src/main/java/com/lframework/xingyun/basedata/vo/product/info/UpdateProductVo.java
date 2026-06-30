@@ -7,6 +7,7 @@ import com.lframework.xingyun.basedata.enums.ProductType;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.Digits;
@@ -94,6 +95,20 @@ public class UpdateProductVo implements BaseVo, Serializable {
   private BigDecimal volume;
 
   /**
+   * 生产时间
+   */
+  @ApiModelProperty(value = "生产时间", required = true)
+  @NotNull(message = "请选择生产时间！")
+  private LocalDate productionTime;
+
+  /**
+   * 截止时间
+   */
+  @ApiModelProperty(value = "截止时间", required = true)
+  @NotNull(message = "请选择截止时间！")
+  private LocalDate deadlineTime;
+
+  /**
    * 进项税率（%）
    */
   @ApiModelProperty(value = "进项税率（%）")
@@ -108,11 +123,11 @@ public class UpdateProductVo implements BaseVo, Serializable {
   private BigDecimal saleTaxRate;
 
   /**
-   * 商品类型
+   * 药品类型
    */
-  @ApiModelProperty(value = "商品类型", required = true)
-  @NotNull(message = "商品类型不能为空！")
-  @IsEnum(message = "商品类型格式错误！", enumClass = ProductType.class)
+  @ApiModelProperty(value = "药品类型", required = true)
+  @NotNull(message = "药品类型不能为空！")
+  @IsEnum(message = "药品类型格式错误！", enumClass = ProductType.class)
   private Integer productType;
 
   /**
@@ -123,9 +138,9 @@ public class UpdateProductVo implements BaseVo, Serializable {
   private List<ProductBundleVo> productBundles;
 
   /**
-   * 商品属性
+   * 药品属性
    */
-  @ApiModelProperty(value = "商品属性")
+  @ApiModelProperty(value = "药品属性")
   @Valid
   private List<ProductPropertyRelationVo> properties;
 

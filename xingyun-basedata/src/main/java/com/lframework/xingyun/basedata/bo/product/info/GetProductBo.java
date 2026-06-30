@@ -1,5 +1,6 @@
 package com.lframework.xingyun.basedata.bo.product.info;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.lframework.starter.common.constants.StringPool;
 import com.lframework.starter.common.utils.CollectionUtil;
 import com.lframework.starter.common.utils.StringUtil;
@@ -27,6 +28,7 @@ import com.lframework.xingyun.basedata.service.product.ProductRetailService;
 import com.lframework.xingyun.basedata.service.product.ProductSaleService;
 import io.swagger.annotations.ApiModelProperty;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -138,9 +140,23 @@ public class GetProductBo extends BaseBo<Product> {
   private String unit;
 
   /**
-   * 商品类型
+   * 生产时间
    */
-  @ApiModelProperty("商品类型")
+  @ApiModelProperty("生产时间")
+  @JsonFormat(pattern = StringPool.DATE_PATTERN)
+  private LocalDate productionTime;
+
+  /**
+   * 截止时间
+   */
+  @ApiModelProperty("截止时间")
+  @JsonFormat(pattern = StringPool.DATE_PATTERN)
+  private LocalDate deadlineTime;
+
+  /**
+   * 药品类型
+   */
+  @ApiModelProperty("药品类型")
   @EnumConvert
   private Integer productType;
 

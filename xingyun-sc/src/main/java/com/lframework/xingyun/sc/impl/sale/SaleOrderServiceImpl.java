@@ -229,7 +229,7 @@ public class SaleOrderServiceImpl extends BaseMpServiceImpl<SaleOrderMapper, Sal
         .eq(SaleOrderDetail::getOrderId, order.getId());
     saleOrderDetailService.remove(deleteDetailWrapper);
 
-    // 删除组合商品信息
+    // 删除组合药品信息
     Wrapper<SaleOrderDetailBundle> deleteDetailBundleWrapper = Wrappers.lambdaQuery(
         SaleOrderDetailBundle.class).eq(SaleOrderDetailBundle::getOrderId, order.getId());
     saleOrderDetailBundleService.remove(deleteDetailBundleWrapper);
@@ -454,7 +454,7 @@ public class SaleOrderServiceImpl extends BaseMpServiceImpl<SaleOrderMapper, Sal
         .eq(SaleOrderDetail::getOrderId, order.getId());
     saleOrderDetailService.remove(deleteDetailWrapper);
 
-    // 删除组合商品信息
+    // 删除组合药品信息
     Wrapper<SaleOrderDetailBundle> deleteDetailBundleWrapper = Wrappers.lambdaQuery(
         SaleOrderDetailBundle.class).eq(SaleOrderDetailBundle::getOrderId, order.getId());
     saleOrderDetailBundleService.remove(deleteDetailBundleWrapper);
@@ -521,7 +521,7 @@ public class SaleOrderServiceImpl extends BaseMpServiceImpl<SaleOrderMapper, Sal
 
     Customer customer = customerService.findById(vo.getCustomerId());
     if (customer == null) {
-      throw new InputErrorException("客户不存在！");
+      throw new InputErrorException("收货方不存在！");
     }
     order.setCustomerId(vo.getCustomerId());
 
@@ -558,7 +558,7 @@ public class SaleOrderServiceImpl extends BaseMpServiceImpl<SaleOrderMapper, Sal
 
       Product product = productService.findById(productVo.getProductId());
       if (product == null) {
-        throw new InputErrorException("第" + orderNo + "行商品不存在！");
+        throw new InputErrorException("第" + orderNo + "行药品不存在！");
       }
 
       orderDetail.setProductId(productVo.getProductId());
@@ -578,10 +578,10 @@ public class SaleOrderServiceImpl extends BaseMpServiceImpl<SaleOrderMapper, Sal
 
       saleOrderDetailService.save(orderDetail);
 
-      // 这里处理组合商品
+      // 这里处理组合药品
       if (product.getProductType() == ProductType.BUNDLE) {
         if (!NumberUtil.isInteger(productVo.getOrderNum())) {
-          throw new InputErrorException("第" + orderNo + "行商品销售数量必须是整数！");
+          throw new InputErrorException("第" + orderNo + "行药品销售数量必须是整数！");
         }
         List<ProductBundle> productBundles = productBundleService.getByMainProductId(
             product.getId());

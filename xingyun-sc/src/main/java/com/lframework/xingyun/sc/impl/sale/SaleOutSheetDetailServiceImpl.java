@@ -111,7 +111,7 @@ public class SaleOutSheetDetailServiceImpl extends
           Product targetProduct = productService.findById(b.getProductId());
           if (targetProduct.getWeight() == null) {
             throw new DefaultClientException(
-                "商品（" + targetProduct.getCode() + "）" + targetProduct.getName()
+                "药品（" + targetProduct.getCode() + "）" + targetProduct.getName()
                     + "尚未设置重量，请检查！");
           }
 
@@ -121,7 +121,7 @@ public class SaleOutSheetDetailServiceImpl extends
       } else {
         if (product.getWeight() == null) {
           throw new DefaultClientException(
-              "商品（" + product.getCode() + "）" + product.getName() + "尚未设置重量，请检查！");
+              "药品（" + product.getCode() + "）" + product.getName() + "尚未设置重量，请检查！");
         }
         return NumberUtil.getNumber(NumberUtil.mul(t.getOrderNum(), product.getWeight()), 2);
       }
@@ -150,7 +150,7 @@ public class SaleOutSheetDetailServiceImpl extends
           Product targetProduct = productService.findById(b.getProductId());
           if (targetProduct.getVolume() == null) {
             throw new DefaultClientException(
-                "商品（" + targetProduct.getCode() + "）" + targetProduct.getName()
+                "药品（" + targetProduct.getCode() + "）" + targetProduct.getName()
                     + "尚未设置体积，请检查！");
           }
 
@@ -160,7 +160,7 @@ public class SaleOutSheetDetailServiceImpl extends
       } else {
         if (product.getVolume() == null) {
           throw new DefaultClientException(
-              "商品（" + product.getCode() + "）" + product.getName() + "尚未设置体积，请检查！");
+              "药品（" + product.getCode() + "）" + product.getName() + "尚未设置体积，请检查！");
         }
         return NumberUtil.getNumber(NumberUtil.mul(t.getOrderNum(), product.getVolume()), 2);
       }

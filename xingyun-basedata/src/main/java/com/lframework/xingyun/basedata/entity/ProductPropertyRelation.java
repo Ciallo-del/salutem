@@ -25,12 +25,12 @@ public class ProductPropertyRelation extends BaseEntity implements BaseDto {
   private String id;
 
   /**
-   * 商品ID
+   * 药品ID
    */
   private String productId;
 
   /**
-   * 商品属性ID
+   * 药品属性ID
    */
   private String propertyId;
 
@@ -40,7 +40,7 @@ public class ProductPropertyRelation extends BaseEntity implements BaseDto {
   private String propertyItemId;
 
   /**
-   * 商品属性值
+   * 药品属性值
    */
   private String propertyText;
 

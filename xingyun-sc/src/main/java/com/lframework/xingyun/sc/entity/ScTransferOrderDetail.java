@@ -31,7 +31,7 @@ public class ScTransferOrderDetail extends BaseEntity implements BaseDto {
   private String orderId;
 
   /**
-   * 商品ID
+   * 药品ID
    */
   private String productId;
 

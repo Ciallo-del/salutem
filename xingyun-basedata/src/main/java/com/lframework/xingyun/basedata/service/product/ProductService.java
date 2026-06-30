@@ -35,7 +35,7 @@ public interface ProductService extends BaseMpService<Product> {
   PageResult<Product> selector(Integer pageIndex, Integer pageSize, QueryProductSelectorVo vo);
 
   /**
-   * 查询商品品种数
+   * 查询药品品种数
    *
    * @param vo
    * @return
@@ -106,7 +106,7 @@ public interface ProductService extends BaseMpService<Product> {
   List<Product> getByBrandIds(List<String> brandIds, Integer productType);
 
   /**
-   * 根据商品编号查询商品
+   * 根据药品编号查询药品
    *
    * @param code
    * @return

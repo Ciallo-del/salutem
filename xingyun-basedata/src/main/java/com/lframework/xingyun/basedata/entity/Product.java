@@ -7,12 +7,13 @@ import com.lframework.starter.web.core.entity.BaseEntity;
 import com.lframework.starter.web.core.dto.BaseDto;
 import com.lframework.xingyun.basedata.enums.ProductType;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import lombok.Data;
 
 /**
  * <p>
- * 商品
+ * 药品
  * </p>
  *
  * @author zmj
@@ -62,7 +63,7 @@ public class Product extends BaseEntity implements BaseDto {
   private String brandId;
 
   /**
-   * 商品类型
+   * 药品类型
    */
   private ProductType productType;
 
@@ -95,6 +96,16 @@ public class Product extends BaseEntity implements BaseDto {
    * 体积（cm3）
    */
   private BigDecimal volume;
+
+  /**
+   * 生产时间
+   */
+  private LocalDate productionTime;
+
+  /**
+   * 截止时间
+   */
+  private LocalDate deadlineTime;
 
   /**
    * 状态

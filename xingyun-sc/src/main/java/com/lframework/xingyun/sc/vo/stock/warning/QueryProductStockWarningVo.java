@@ -20,9 +20,9 @@ public class QueryProductStockWarningVo extends SortPageVo implements BaseVo, Se
   private String scId;
 
   /**
-   * 商品ID
+   * 药品ID
    */
-  @ApiModelProperty("商品ID")
+  @ApiModelProperty("药品ID")
   private String productId;
 
   /**

@@ -29,12 +29,12 @@ public class PurchaseOrderDetailBundle extends BaseEntity implements BaseDto {
   private String detailId;
 
   /**
-   * 组合商品ID
+   * 组合药品ID
    */
   private String mainProductId;
 
   /**
-   * 组合商品数量
+   * 组合药品数量
    */
   private BigDecimal orderNum;
 

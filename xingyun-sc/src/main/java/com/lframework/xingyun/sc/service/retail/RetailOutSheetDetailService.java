@@ -32,14 +32,14 @@ public interface RetailOutSheetDetailService extends BaseMpService<RetailOutShee
   void subReturnNum(String id, BigDecimal num);
 
   /**
-   * 根据出库单ID查询商品总重量
+   * 根据出库单ID查询药品总重量
    * @param sheetIds
    * @return
    */
   BigDecimal getTotalWeightBySheetIds(List<String> sheetIds);
 
   /**
-   * 根据出库单ID查询商品总体积
+   * 根据出库单ID查询药品总体积
    * @param sheetIds
    * @return
    */

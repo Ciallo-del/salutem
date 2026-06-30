@@ -76,7 +76,7 @@ public class ProductBrandServiceImpl extends BaseMpServiceImpl<ProductBrandMappe
     return getBaseMapper().selectById(id);
   }
 
-  @OpLog(type = BaseDataOpLogType.class, name = "删除商品品牌，ID：{}", params = "#id")
+  @OpLog(type = BaseDataOpLogType.class, name = "删除药品品牌，ID：{}", params = "#id")
   @Transactional(rollbackFor = Exception.class)
   @Override
   public void deleteById(String id) {
@@ -90,7 +90,7 @@ public class ProductBrandServiceImpl extends BaseMpServiceImpl<ProductBrandMappe
     DataChangeEventBuilder.publishLogicDelete(this, DeleteProductBrandEvent.class, brand);
   }
 
-  @OpLog(type = BaseDataOpLogType.class, name = "新增商品品牌，ID：{}, 编号：{}", params = {"#id",
+  @OpLog(type = BaseDataOpLogType.class, name = "新增药品品牌，ID：{}, 编号：{}", params = {"#id",
       "#code"})
   @Transactional(rollbackFor = Exception.class)
   @Override
@@ -132,7 +132,7 @@ public class ProductBrandServiceImpl extends BaseMpServiceImpl<ProductBrandMappe
     return data.getId();
   }
 
-  @OpLog(type = BaseDataOpLogType.class, name = "修改商品品牌，ID：{}, 编号：{}", params = {"#id",
+  @OpLog(type = BaseDataOpLogType.class, name = "修改药品品牌，ID：{}, 编号：{}", params = {"#id",
       "#code"})
   @Transactional(rollbackFor = Exception.class)
   @Override

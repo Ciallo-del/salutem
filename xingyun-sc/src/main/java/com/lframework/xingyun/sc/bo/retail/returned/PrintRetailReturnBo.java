@@ -44,15 +44,15 @@ public class PrintRetailReturnBo extends BaseBo<RetailReturnFullDto> {
   private String scName;
 
   /**
-   * 客户编号
+   * 收货方编号
    */
-  @ApiModelProperty("客户编号")
+  @ApiModelProperty("收货方编号")
   private String memberCode;
 
   /**
-   * 客户名称
+   * 收货方名称
    */
-  @ApiModelProperty("客户名称")
+  @ApiModelProperty("收货方名称")
   private String memberName;
 
   /**
@@ -175,15 +175,15 @@ public class PrintRetailReturnBo extends BaseBo<RetailReturnFullDto> {
   public static class ReturnDetailBo extends BaseBo<RetailReturnFullDto.ReturnDetailDto> {
 
     /**
-     * 商品编号
+     * 药品编号
      */
-    @ApiModelProperty("商品编号")
+    @ApiModelProperty("药品编号")
     private String productCode;
 
     /**
-     * 商品名称
+     * 药品名称
      */
-    @ApiModelProperty("商品名称")
+    @ApiModelProperty("药品名称")
     private String productName;
 
     /**

@@ -64,7 +64,7 @@ public class ProductStockWarningServiceImpl extends
         .eq(ProductStockWarning::getScId, vo.getScId())
         .eq(ProductStockWarning::getProductId, vo.getProductId());
     if (this.count(checkWrapper) > 0) {
-      throw new DefaultClientException("该仓库、商品已存在库存预警，不允许重复添加！");
+      throw new DefaultClientException("该仓库、药品已存在库存预警，不允许重复添加！");
     }
 
     ProductStockWarning record = new ProductStockWarning();
@@ -97,7 +97,7 @@ public class ProductStockWarningServiceImpl extends
         .eq(ProductStockWarning::getProductId, vo.getProductId())
         .ne(ProductStockWarning::getId, record.getId());
     if (this.count(checkWrapper) > 0) {
-      throw new DefaultClientException("该仓库、商品已存在库存预警，不允许重复添加！");
+      throw new DefaultClientException("该仓库、药品已存在库存预警，不允许重复添加！");
     }
 
     Wrapper<ProductStockWarning> updateWrapper = Wrappers.lambdaUpdate(ProductStockWarning.class)

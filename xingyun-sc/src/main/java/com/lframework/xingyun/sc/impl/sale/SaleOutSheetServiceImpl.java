@@ -39,6 +39,7 @@ import com.lframework.xingyun.basedata.service.storecenter.StoreCenterService;
 import com.lframework.xingyun.core.utils.SplitNumberUtil;
 import com.lframework.xingyun.sc.components.code.GenerateCodeTypePool;
 import com.lframework.xingyun.sc.dto.purchase.receive.GetPaymentDateDto;
+import com.lframework.xingyun.sc.dto.sale.out.SaleOutProductDto;
 import com.lframework.xingyun.sc.dto.sale.out.SaleOutSheetFullDto;
 import com.lframework.xingyun.sc.dto.sale.out.SaleOutSheetWithReturnDto;
 import com.lframework.xingyun.sc.dto.stock.ProductStockChangeDto;
@@ -70,6 +71,7 @@ import com.lframework.xingyun.sc.service.stock.ProductStockService;
 import com.lframework.xingyun.sc.vo.sale.out.ApprovePassSaleOutSheetVo;
 import com.lframework.xingyun.sc.vo.sale.out.ApproveRefuseSaleOutSheetVo;
 import com.lframework.xingyun.sc.vo.sale.out.CreateSaleOutSheetVo;
+import com.lframework.xingyun.sc.vo.sale.out.QuerySaleOutProductVo;
 import com.lframework.xingyun.sc.vo.sale.out.QuerySaleOutSheetVo;
 import com.lframework.xingyun.sc.vo.sale.out.QuerySaleOutSheetWithReturnVo;
 import com.lframework.xingyun.sc.vo.sale.out.SaleOutProductVo;
@@ -172,9 +174,12 @@ public class SaleOutSheetServiceImpl extends
   @Override
   public GetPaymentDateDto getPaymentDate(String customerId) {
 
-    //默认为当前日期的30天后，如当天为2021-10-01，则付款日期默认为2021-11-01
-    //（1）客户的结算方式为“任意指定”，则付款日期按照以上规则展示默认值，允许用户更改，但仅能选择当天及当天之后的日期。
-    //（2）客户的结算方式为“货到付款”（这个参数的名字后期会改，如“货销付款”），则付款日期默认为此刻，且不允许修改，即出库单的创建时间，可能会遇到跨日的问题，但付款日期，均赋值为出库单的创建日期。
+    if (StringUtil.isBlank(customerId)) {
+      GetPaymentDateDto result = new GetPaymentDateDto();
+      result.setAllowModify(Boolean.TRUE);
+      result.setPaymentDate(LocalDate.now());
+      return result;
+    }
 
     Customer customer = customerService.findById(customerId);
 
@@ -274,24 +279,20 @@ public class SaleOutSheetServiceImpl extends
     boolean requireSale = !StringUtil.isBlank(sheet.getSaleOrderId());
 
     if (requireSale) {
-      //查询出库单明细
       Wrapper<SaleOutSheetDetail> queryDetailWrapper = Wrappers.lambdaQuery(
           SaleOutSheetDetail.class).eq(SaleOutSheetDetail::getSheetId, sheet.getId());
       List<SaleOutSheetDetail> details = saleOutSheetDetailService.list(queryDetailWrapper);
       for (SaleOutSheetDetail detail : details) {
         if (!StringUtil.isBlank(detail.getSaleOrderDetailId())) {
-          //先恢复已出库数量
           saleOrderDetailService.subOutNum(detail.getSaleOrderDetailId(), detail.getOrderNum());
         }
       }
     }
 
-    // 删除出库单明细
     Wrapper<SaleOutSheetDetail> deleteDetailWrapper = Wrappers.lambdaQuery(SaleOutSheetDetail.class)
         .eq(SaleOutSheetDetail::getSheetId, sheet.getId());
     saleOutSheetDetailService.remove(deleteDetailWrapper);
 
-    // 删除组合商品信息
     Wrapper<SaleOutSheetDetailBundle> deleteDetailBundleWrapper = Wrappers.lambdaQuery(
         SaleOutSheetDetailBundle.class).eq(SaleOutSheetDetailBundle::getSheetId, sheet.getId());
     saleOutSheetDetailBundleService.remove(deleteDetailBundleWrapper);
@@ -351,7 +352,6 @@ public class SaleOutSheetServiceImpl extends
     }
 
     if (saleConfig.getOutStockRequireLogistics()) {
-      // 关联物流单
       LogisticsSheetDetail logisticsSheetDetail = logisticsSheetDetailService.getByBizId(
           sheet.getId(), LogisticsSheetDetailBizType.SALE_OUT_SHEET);
       if (logisticsSheetDetail == null) {
@@ -439,11 +439,11 @@ public class SaleOutSheetServiceImpl extends
           newDetail.setIsGift(detail.getIsGift());
           newDetail.setTaxRate(saleOutSheetDetailBundle.getProductTaxRate());
           newDetail.setDescription(detail.getDescription());
-          newDetail.setOrderNo(orderNo++);
+          newDetail.setOrderNo(detail.getOrderNo());
           newDetail.setSettleStatus(detail.getSettleStatus());
-          newDetail.setSaleOrderDetailId(detail.getSaleOrderDetailId());
-          newDetail.setOriBundleDetailId(detail.getId());
           newDetail.setTaxAmount(saleOutSheetDetailBundle.getProductTaxAmount());
+          newDetail.setSaleOrderDetailId(detail.getSaleOrderDetailId());
+          newDetail.setReturnNum(detail.getReturnNum());
 
           SubProductStockVo subProductStockVo = new SubProductStockVo();
           subProductStockVo.setProductId(newDetail.getProductId());
@@ -457,7 +457,6 @@ public class SaleOutSheetServiceImpl extends
           ProductStockChangeDto stockChange = productStockService.subStock(subProductStockVo);
 
           SaleOutSheetDetailLot detailLot = new SaleOutSheetDetailLot();
-
           detailLot.setId(IdUtil.getId());
           detailLot.setDetailId(newDetail.getId());
           detailLot.setOrderNum(newDetail.getOrderNum());
@@ -482,7 +481,6 @@ public class SaleOutSheetServiceImpl extends
       orderNo++;
     }
 
-    // 这里需要重新统计明细信息，因为明细发生变动了
     Wrapper<SaleOutSheet> updateWrapper = Wrappers.lambdaUpdate(SaleOutSheet.class)
         .set(SaleOutSheet::getTotalNum, totalNum).set(SaleOutSheet::getTotalGiftNum, giftNum)
         .set(SaleOutSheet::getTotalAmount, totalAmount).eq(SaleOutSheet::getId, sheet.getId());
@@ -577,7 +575,6 @@ public class SaleOutSheetServiceImpl extends
       throw new DefaultClientException("销售出库单已关联物流单，请先删除物流单！");
     }
 
-    //查询销售出库单明细
     Wrapper<SaleOutSheetDetail> queryDetailWrapper = Wrappers.lambdaQuery(SaleOutSheetDetail.class)
         .eq(SaleOutSheetDetail::getSheetId, sheet.getId());
     List<SaleOutSheetDetail> details = saleOutSheetDetailService.list(queryDetailWrapper);
@@ -585,18 +582,15 @@ public class SaleOutSheetServiceImpl extends
     if (!StringUtil.isBlank(sheet.getSaleOrderId())) {
       for (SaleOutSheetDetail detail : details) {
         if (!StringUtil.isBlank(detail.getSaleOrderDetailId())) {
-          //恢复已出库数量
           saleOrderDetailService.subOutNum(detail.getSaleOrderDetailId(), detail.getOrderNum());
         }
       }
     }
 
-    // 删除订单明细
     Wrapper<SaleOutSheetDetail> deleteDetailWrapper = Wrappers.lambdaQuery(SaleOutSheetDetail.class)
         .eq(SaleOutSheetDetail::getSheetId, sheet.getId());
     saleOutSheetDetailService.remove(deleteDetailWrapper);
 
-    // 删除组合商品信息
     Wrapper<SaleOutSheetDetailBundle> deleteDetailBundleWrapper = Wrappers.lambdaQuery(
         SaleOutSheetDetailBundle.class).eq(SaleOutSheetDetailBundle::getSheetId, sheet.getId());
     saleOutSheetDetailBundleService.remove(deleteDetailBundleWrapper);
@@ -606,7 +600,6 @@ public class SaleOutSheetServiceImpl extends
         details.stream().map(SaleOutSheetDetail::getId).collect(Collectors.toList()));
     saleOutSheetDetailLotService.remove(deleteDetailLotWrapper);
 
-    // 删除订单
     Wrapper<SaleOutSheet> deleteWrapper = Wrappers.lambdaQuery(SaleOutSheet.class)
         .in(SaleOutSheet::getId, id)
         .in(SaleOutSheet::getStatus, SaleOutSheetStatus.CREATED, SaleOutSheetStatus.APPROVE_REFUSE);
@@ -660,6 +653,35 @@ public class SaleOutSheetServiceImpl extends
     return getBaseMapper().getApprovedList(customerId, startTime, endTime, settleStatus);
   }
 
+  @Override
+  public PageResult<SaleOutProductDto> querySaleOutByCondition(Integer pageIndex, Integer pageSize,
+      String scId, String condition) {
+
+    Assert.greaterThanZero(pageIndex);
+    Assert.greaterThanZero(pageSize);
+    Assert.notBlank(scId);
+
+    PageHelperUtil.startPage(pageIndex, pageSize);
+    List<SaleOutProductDto> datas = getBaseMapper().querySaleOutByCondition(scId, condition);
+
+    return PageResultUtil.convert(new PageInfo<>(datas));
+  }
+
+  @Override
+  public PageResult<SaleOutProductDto> querySaleOutList(Integer pageIndex, Integer pageSize,
+      QuerySaleOutProductVo vo) {
+
+    Assert.greaterThanZero(pageIndex);
+    Assert.greaterThanZero(pageSize);
+    Assert.notNull(vo);
+    Assert.notBlank(vo.getScId());
+
+    PageHelperUtil.startPage(pageIndex, pageSize);
+    List<SaleOutProductDto> datas = getBaseMapper().querySaleOutList(vo);
+
+    return PageResultUtil.convert(new PageInfo<>(datas));
+  }
+
   private void create(SaleOutSheet sheet, CreateSaleOutSheetVo vo, boolean requireSale) {
 
     StoreCenter sc = storeCenterService.findById(vo.getScId());
@@ -668,12 +690,18 @@ public class SaleOutSheetServiceImpl extends
     }
 
     sheet.setScId(vo.getScId());
+    sheet.setSaleOrderId(null);
 
-    Customer customer = customerService.findById(vo.getCustomerId());
-    if (customer == null) {
-      throw new InputErrorException("客户不存在！");
+    Customer customer = null;
+    if (StringUtil.isNotBlank(vo.getCustomerId())) {
+      customer = customerService.findById(vo.getCustomerId());
+      if (customer == null) {
+        throw new InputErrorException("收货方不存在！");
+      }
+      sheet.setCustomerId(vo.getCustomerId());
+    } else {
+      sheet.setCustomerId(null);
     }
-    sheet.setCustomerId(vo.getCustomerId());
 
     if (!StringUtil.isBlank(vo.getSalerId())) {
       SysUser saler = userService.findById(vo.getSalerId());
@@ -682,21 +710,22 @@ public class SaleOutSheetServiceImpl extends
       }
 
       sheet.setSalerId(vo.getSalerId());
+    } else {
+      sheet.setSalerId(null);
     }
 
     SaleConfig saleConfig = saleConfigService.get();
-
-    GetPaymentDateDto paymentDate = this.getPaymentDate(customer.getId());
-
-    sheet.setPaymentDate(
-        vo.getAllowModifyPaymentDate() || paymentDate.getAllowModify() ? vo.getPaymentDate()
-            : paymentDate.getPaymentDate());
 
     if (requireSale) {
 
       SaleOrder saleOrder = saleOrderService.getById(vo.getSaleOrderId());
       if (saleOrder == null) {
         throw new DefaultClientException("销售订单不存在！");
+      }
+
+      customer = customerService.findById(saleOrder.getCustomerId());
+      if (customer == null) {
+        throw new InputErrorException("收货方不存在！");
       }
 
       sheet.setScId(saleOrder.getScId());
@@ -712,6 +741,19 @@ public class SaleOutSheetServiceImpl extends
               + "，已关联其他销售出库单，不允许关联多个销售出库单！");
         }
       }
+    }
+
+    GetPaymentDateDto paymentDate = customer == null ? null : this.getPaymentDate(customer.getId());
+    if (paymentDate == null) {
+      sheet.setPaymentDate(vo.getPaymentDate() == null ? LocalDate.now() : vo.getPaymentDate());
+    } else {
+      sheet.setPaymentDate(
+          vo.getAllowModifyPaymentDate() || paymentDate.getAllowModify() ? vo.getPaymentDate()
+              : paymentDate.getPaymentDate());
+    }
+
+    if (sheet.getPaymentDate() == null) {
+      sheet.setPaymentDate(LocalDate.now());
     }
 
     BigDecimal purchaseNum = BigDecimal.ZERO;
@@ -735,10 +777,8 @@ public class SaleOutSheetServiceImpl extends
       boolean isGift = productVo.getTaxPrice().doubleValue() == 0D;
 
       if (requireSale) {
-        if (StringUtil.isBlank(productVo.getSaleOrderDetailId())) {
-          if (!isGift) {
-            throw new InputErrorException("第" + orderNo + "行商品必须为“赠品”！");
-          }
+        if (StringUtil.isBlank(productVo.getSaleOrderDetailId()) && !isGift) {
+          throw new InputErrorException("第" + orderNo + "行药品必须为“赠品”！");
         }
       }
 
@@ -758,7 +798,7 @@ public class SaleOutSheetServiceImpl extends
 
       Product product = productService.findById(productVo.getProductId());
       if (product == null) {
-        throw new InputErrorException("第" + orderNo + "行商品不存在！");
+        throw new InputErrorException("第" + orderNo + "行药品不存在！");
       }
 
       detail.setProductId(productVo.getProductId());
@@ -781,14 +821,12 @@ public class SaleOutSheetServiceImpl extends
 
       saleOutSheetDetailService.save(detail);
 
-      // 这里处理组合商品
       if (product.getProductType() == ProductType.BUNDLE) {
         if (!NumberUtil.isInteger(productVo.getOrderNum())) {
-          throw new InputErrorException("第" + orderNo + "行商品出库数量必须是整数！");
+          throw new InputErrorException("第" + orderNo + "行药品出库数量必须是整数！");
         }
         List<ProductBundle> productBundles = productBundleService.getByMainProductId(
             product.getId());
-        // 构建指标项
         Map<Object, Number> bundleWeight = new HashMap<>(productBundles.size());
         for (ProductBundle productBundle : productBundles) {
           bundleWeight.put(productBundle.getProductId(),
@@ -811,7 +849,6 @@ public class SaleOutSheetServiceImpl extends
               saleOutSheetDetailBundle.setProductOriPrice(productBundle.getSalePrice());
               saleOutSheetDetailBundle.setProductTaxAmount(BigDecimal.valueOf(
                   splitPriceMap.get(productBundle.getProductId()).doubleValue()));
-              // 这里会有尾差
               saleOutSheetDetailBundle.setProductTaxPrice(NumberUtil.getNumber(NumberUtil.div(
                   saleOutSheetDetailBundle.getProductTaxAmount(),
                   saleOutSheetDetailBundle.getProductOrderNum()), 6));
@@ -822,33 +859,6 @@ public class SaleOutSheetServiceImpl extends
 
         saleOutSheetDetailBundleService.saveBatch(saleOutSheetDetailBundles);
       }
-      // 这里记录没有什么意义，因为销售单审核通过后就已经成单品了
-      /* else {
-        if (requireSale && !StringUtil.isBlank(detail.getSaleOrderDetailId())) {
-          // 这里如果是关联销售单的话，需要把组合商品信息拿过来，价格不用重新算，因为关联销售单的话，价格不允许修改
-          Wrapper<SaleOrderDetailBundle> querySaleOrderDetailBundleWrapper = Wrappers.lambdaQuery(
-                  SaleOrderDetailBundle.class)
-              .eq(SaleOrderDetailBundle::getOrderId, sheet.getSaleOrderId())
-              .eq(SaleOrderDetailBundle::getProductDetailId, detail.getSaleOrderDetailId());
-          SaleOrderDetailBundle saleOrderDetailBundle = saleOrderDetailBundleService.getOne(
-              querySaleOrderDetailBundleWrapper);
-          if (saleOrderDetailBundle != null) {
-            SaleOutSheetDetailBundle saleOutSheetDetailBundle = new SaleOutSheetDetailBundle();
-            saleOutSheetDetailBundle.setId(IdUtil.getId());
-            saleOutSheetDetailBundle.setSheetId(sheet.getId());
-            saleOutSheetDetailBundle.setDetailId(detail.getId());
-            saleOutSheetDetailBundle.setMainProductId(saleOrderDetailBundle.getMainProductId());
-            saleOutSheetDetailBundle.setOrderNum(detail.getOrderNum());
-            saleOutSheetDetailBundle.setProductId(saleOrderDetailBundle.getProductId());
-            saleOutSheetDetailBundle.setProductOrderNum(saleOrderDetailBundle.getProductOrderNum());
-            saleOutSheetDetailBundle.setProductOriPrice(saleOrderDetailBundle.getProductOriPrice());
-            saleOutSheetDetailBundle.setProductTaxPrice(saleOrderDetailBundle.getProductTaxPrice());
-            saleOutSheetDetailBundle.setProductTaxRate(saleOrderDetailBundle.getProductTaxRate());
-            saleOutSheetDetailBundle.setProductDetailId(detail.getId());
-            saleOutSheetDetailBundleService.save(saleOutSheetDetailBundle);
-          }
-        }
-      }*/
       orderNo++;
     }
     sheet.setTotalNum(purchaseNum);
@@ -859,12 +869,6 @@ public class SaleOutSheetServiceImpl extends
     sheet.setSettleStatus(this.getInitSettleStatus(customer));
   }
 
-  /**
-   * 根据客户获取初始结算状态
-   *
-   * @param customer
-   * @return
-   */
   private SettleStatus getInitSettleStatus(Customer customer) {
 
     return SettleStatus.UN_SETTLE;

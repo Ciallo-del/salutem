@@ -67,7 +67,7 @@ public class ReceiveSheet extends BaseEntity implements BaseDto {
   private String purchaseOrderId;
 
   /**
-   * 商品数量
+   * 药品数量
    */
   private BigDecimal totalNum;
 

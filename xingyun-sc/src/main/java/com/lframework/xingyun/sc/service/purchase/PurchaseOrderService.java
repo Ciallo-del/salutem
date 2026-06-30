@@ -125,7 +125,7 @@ public interface PurchaseOrderService extends BaseMpService<PurchaseOrder> {
   void cancelApprovePass(String id);
 
   /**
-   * 根据关键字查询采购商品信息
+   * 根据关键字查询采购药品信息
    *
    * @param pageIndex
    * @param pageSize
@@ -136,7 +136,7 @@ public interface PurchaseOrderService extends BaseMpService<PurchaseOrder> {
   PageResult<PurchaseProductDto> queryPurchaseByCondition(Integer pageIndex, Integer pageSize, String condition, Boolean isReturn);
 
   /**
-   * 查询可采购商品信息
+   * 查询可采购药品信息
    *
    * @param pageIndex
    * @param pageSize

@@ -24,7 +24,7 @@ public class ProductForDeleteProductBrandListener implements
         .eq(Product::getAvailable, Boolean.TRUE);
     if (productService.count(queryWrapper) > 0) {
       throw new DefaultClientException(
-          "商品品牌：" + event.getEntity().getName() + "下存在商品信息，无法删除！");
+          "药品品牌：" + event.getEntity().getName() + "下存在药品信息，无法删除！");
     }
   }
 }

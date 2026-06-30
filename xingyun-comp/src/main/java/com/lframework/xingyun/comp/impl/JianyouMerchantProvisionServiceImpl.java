@@ -82,7 +82,18 @@ public class JianyouMerchantProvisionServiceImpl implements JianyouMerchantProvi
       queryVo.setUsername(vo.getUsername());
       List<SysUser> existsUsers = sysUserService.query(queryVo);
       if (!CollectionUtil.isEmpty(existsUsers)) {
-        throw new DefaultClientException("该租户下用户名已存在");
+        // 幂等：用户名已存在（通常是上一次初始化中断后被定时任务重新驱动），复用已有用户并补齐绑定后按成功返回
+        SysUser existsUser = existsUsers.get(0);
+        ensureUserDeptBindings(existsUser.getId(), vo.getDeptIds());
+        ensureUserRoleBindings(existsUser.getId(), vo.getRoleIds());
+        log.info("建友商户星陨用户已存在，复用并补齐绑定: tenantId={}, userId={}, username={}, deptIds={}, roleIds={}",
+            vo.getTenantId(), existsUser.getId(), vo.getUsername(), vo.getDeptIds(), vo.getRoleIds());
+
+        JianyouMerchantProvisionBo existsBo = new JianyouMerchantProvisionBo();
+        existsBo.setTargetTenantId(vo.getTenantId());
+        existsBo.setTargetXingyunUserId(existsUser.getId());
+        existsBo.setTargetXingyunUsername(existsUser.getUsername());
+        return existsBo;
       }
 
       CreateSysUserVo createVo = new CreateSysUserVo();

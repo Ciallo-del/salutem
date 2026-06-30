@@ -342,9 +342,9 @@ public class PurchaseOrderController extends DefaultBaseController {
   }
 
   /**
-   * 根据关键字查询商品
+   * 根据关键字查询药品
    */
-  @ApiOperation("根据关键字查询可采购商品")
+  @ApiOperation("根据关键字查询可采购药品")
   @ApiImplicitParams({
       @ApiImplicitParam(value = "仓库ID", name = "scId", paramType = "query", required = true),
       @ApiImplicitParam(value = "关键字", name = "condition", paramType = "query", required = true)})
@@ -375,9 +375,9 @@ public class PurchaseOrderController extends DefaultBaseController {
   }
 
   /**
-   * 查询商品列表
+   * 查询药品列表
    */
-  @ApiOperation("查询可采购商品列表")
+  @ApiOperation("查询可采购药品列表")
   @HasPermission({"purchase:order:add", "purchase:order:modify", "purchase:receive:add",
       "purchase:receive:modify", "purchase:return:add", "purchase:return:modify"})
   @GetMapping("/product/list")

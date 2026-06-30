@@ -31,7 +31,7 @@ public class SaleOrderDetail extends BaseEntity implements BaseDto {
   private String orderId;
 
   /**
-   * 商品ID
+   * 药品ID
    */
   private String productId;
 
@@ -81,7 +81,7 @@ public class SaleOrderDetail extends BaseEntity implements BaseDto {
   private BigDecimal outNum;
 
   /**
-   * 组合商品原始明细ID
+   * 组合药品原始明细ID
    */
   private String oriBundleDetailId;
 

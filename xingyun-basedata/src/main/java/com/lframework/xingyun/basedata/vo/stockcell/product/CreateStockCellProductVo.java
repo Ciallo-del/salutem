@@ -21,9 +21,9 @@ public class CreateStockCellProductVo implements BaseVo, Serializable {
   private String stockCellId;
 
   /**
-   * 商品ID
+   * 药品ID
    */
-  @ApiModelProperty("商品ID")
-  @NotEmpty(message = "请选择商品！")
+  @ApiModelProperty("药品ID")
+  @NotEmpty(message = "请选择药品！")
   private List<String> productIds;
 }

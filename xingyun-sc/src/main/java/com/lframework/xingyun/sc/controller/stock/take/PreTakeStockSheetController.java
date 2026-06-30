@@ -119,9 +119,9 @@ public class PreTakeStockSheetController extends DefaultBaseController {
   }
 
   /**
-   * 根据预先盘点单、盘点任务查询商品信息
+   * 根据预先盘点单、盘点任务查询药品信息
    */
-  @ApiOperation("根据预先盘点单、盘点任务查询商品信息")
+  @ApiOperation("根据预先盘点单、盘点任务查询药品信息")
   @ApiImplicitParams({
       @ApiImplicitParam(value = "ID", name = "id", paramType = "query", required = true),
       @ApiImplicitParam(value = "盘点任务ID", name = "planId", paramType = "query", required = true)})
@@ -192,9 +192,9 @@ public class PreTakeStockSheetController extends DefaultBaseController {
   }
 
   /**
-   * 根据关键字查询商品列表
+   * 根据关键字查询药品列表
    */
-  @ApiOperation("根据关键字查询预先盘点单商品列表")
+  @ApiOperation("根据关键字查询预先盘点单药品列表")
   @ApiImplicitParam(value = "关键字", name = "condition", paramType = "query", required = true)
   @HasPermission({"stock:take:pre:add", "stock:take:pre:modify"})
   @GetMapping("/product/search")
@@ -215,9 +215,9 @@ public class PreTakeStockSheetController extends DefaultBaseController {
   }
 
   /**
-   * 查询商品列表
+   * 查询药品列表
    */
-  @ApiOperation("查询预先盘点单商品列表")
+  @ApiOperation("查询预先盘点单药品列表")
   @HasPermission({"stock:take:pre:add", "stock:take:pre:modify"})
   @GetMapping("/product/list")
   public InvokeResult<PageResult<PreTakeStockProductBo>> queryProductList(

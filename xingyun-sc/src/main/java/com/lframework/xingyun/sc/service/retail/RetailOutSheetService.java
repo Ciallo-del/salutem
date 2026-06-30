@@ -126,7 +126,7 @@ public interface RetailOutSheetService extends BaseMpService<RetailOutSheet> {
   void deleteById(String id);
 
   /**
-   * 根据关键字查询零售商品信息
+   * 根据关键字查询零售药品信息
    *
    * @param pageIndex
    * @param pageSize
@@ -137,7 +137,7 @@ public interface RetailOutSheetService extends BaseMpService<RetailOutSheet> {
       String condition, Boolean isReturn);
 
   /**
-   * 查询可零售商品信息
+   * 查询可零售药品信息
    *
    * @param pageIndex
    * @param pageSize

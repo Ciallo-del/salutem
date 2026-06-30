@@ -12,9 +12,9 @@ public class SaleOutProductVo implements BaseVo, Serializable {
   private static final long serialVersionUID = 1L;
 
   /**
-   * 商品ID
+   * 药品ID
    */
-  @ApiModelProperty("商品ID")
+  @ApiModelProperty("药品ID")
   private String productId;
 
   /**

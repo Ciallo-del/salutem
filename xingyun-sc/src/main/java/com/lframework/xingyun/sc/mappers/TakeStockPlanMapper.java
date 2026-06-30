@@ -51,7 +51,7 @@ public interface TakeStockPlanMapper extends BaseMapper<TakeStockPlan> {
   List<TakeStockPlan> selector(@Param("vo") TakeStockPlanSelectorVo vo);
 
   /**
-   * 根据盘点任务ID查询商品信息
+   * 根据盘点任务ID查询药品信息
    *
    * @param planId
    * @return

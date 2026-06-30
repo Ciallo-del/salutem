@@ -38,27 +38,27 @@ public class ProductStockLogExportModel extends BaseBo<ProductStockLog> implemen
   private String scName;
 
   /**
-   * 商品编号
+   * 药品编号
    */
-  @ExcelProperty("商品编号")
+  @ExcelProperty("药品编号")
   private String productCode;
 
   /**
-   * 商品名称
+   * 药品名称
    */
-  @ExcelProperty("商品名称")
+  @ExcelProperty("药品名称")
   private String productName;
 
   /**
-   * 商品分类
+   * 药品分类
    */
-  @ExcelProperty("商品分类")
+  @ExcelProperty("药品分类")
   private String categoryName;
 
   /**
-   * 商品品牌
+   * 药品品牌
    */
-  @ExcelProperty("商品品牌")
+  @ExcelProperty("药品品牌")
   private String brandName;
 
   /**

@@ -43,15 +43,15 @@ public class SaleReturnExportModel extends BaseBo<SaleReturn> implements ExcelMo
   private String scName;
 
   /**
-   * 客户编号
+   * 收货方编号
    */
-  @ExcelProperty("客户编号")
+  @ExcelProperty("收货方编号")
   private String customerCode;
 
   /**
-   * 客户名称
+   * 收货方名称
    */
-  @ExcelProperty("客户名称")
+  @ExcelProperty("收货方名称")
   private String customerName;
 
   /**
@@ -67,9 +67,9 @@ public class SaleReturnExportModel extends BaseBo<SaleReturn> implements ExcelMo
   private BigDecimal totalAmount;
 
   /**
-   * 商品数量
+   * 药品数量
    */
-  @ExcelProperty("商品数量")
+  @ExcelProperty("药品数量")
   private BigDecimal totalNum;
 
   /**

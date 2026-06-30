@@ -49,11 +49,11 @@ public class CreateStockAdjustSheetVo implements BaseVo, Serializable {
   private String description;
 
   /**
-   * 商品信息
+   * 药品信息
    */
-  @ApiModelProperty(value = "商品信息", required = true)
+  @ApiModelProperty(value = "药品信息", required = true)
   @Valid
-  @NotEmpty(message = "请录入商品！")
+  @NotEmpty(message = "请录入药品！")
   private List<StockAdjustProductVo> products;
 
   public void validate() {
@@ -61,10 +61,10 @@ public class CreateStockAdjustSheetVo implements BaseVo, Serializable {
     int orderNo = 1;
     for (StockAdjustProductVo product : this.products) {
       if (NumberUtil.le(product.getStockNum(), BigDecimal.ZERO)) {
-        throw new DefaultClientException("第" + orderNo + "行商品的调整库存数量必须大于0！");
+        throw new DefaultClientException("第" + orderNo + "行药品的调整库存数量必须大于0！");
       }
       if (!NumberUtil.isNumberPrecision(product.getStockNum(), 8)) {
-        throw new DefaultClientException("第" + orderNo + "行商品的调整库存数量最多允许8位小数！");
+        throw new DefaultClientException("第" + orderNo + "行药品的调整库存数量最多允许8位小数！");
       }
     }
   }

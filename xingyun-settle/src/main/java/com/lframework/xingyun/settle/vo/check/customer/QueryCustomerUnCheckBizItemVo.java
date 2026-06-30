@@ -13,10 +13,10 @@ public class QueryCustomerUnCheckBizItemVo implements BaseVo, Serializable {
   private static final long serialVersionUID = 1L;
 
   /**
-   * 客户ID
+   * 收货方ID
    */
-  @ApiModelProperty("客户ID")
-  @NotNull(message = "客户ID不能为空！")
+  @ApiModelProperty("收货方ID")
+  @NotNull(message = "收货方ID不能为空！")
   private String customerId;
 
   /**

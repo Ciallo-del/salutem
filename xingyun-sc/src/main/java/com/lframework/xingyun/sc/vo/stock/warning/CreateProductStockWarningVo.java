@@ -24,10 +24,10 @@ public class CreateProductStockWarningVo implements BaseVo, Serializable {
   private String scId;
 
   /**
-   * 商品ID
+   * 药品ID
    */
-  @ApiModelProperty(value = "商品ID", required = true)
-  @NotBlank(message = "商品ID不能为空！")
+  @ApiModelProperty(value = "药品ID", required = true)
+  @NotBlank(message = "药品ID不能为空！")
   private String productId;
 
   /**

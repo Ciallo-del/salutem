@@ -79,7 +79,7 @@ public class PurchaseOrderImportListener extends ExcelImportListener<PurchaseOrd
     }
     if (StringUtil.isBlank(data.getProductCode())) {
       throw new DefaultClientException(
-          "第" + context.readRowHolder().getRowIndex() + "行“商品编号”不能为空");
+          "第" + context.readRowHolder().getRowIndex() + "行“药品编号”不能为空");
     } else {
       ProductService productService = ApplicationUtil.getBean(ProductService.class);
       Wrapper<Product> queryWrapper = new MPJLambdaWrapper<Product>().selectAll(Product.class)
@@ -89,7 +89,7 @@ public class PurchaseOrderImportListener extends ExcelImportListener<PurchaseOrd
       Product product = productService.getOne(queryWrapper);
       if (product == null) {
         throw new DefaultClientException(
-            "第" + context.readRowHolder().getRowIndex() + "行“商品编号”不存在");
+            "第" + context.readRowHolder().getRowIndex() + "行“药品编号”不存在");
       }
       data.setProductId(product.getId());
     }

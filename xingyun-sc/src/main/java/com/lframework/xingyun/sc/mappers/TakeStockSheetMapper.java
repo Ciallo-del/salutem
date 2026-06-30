@@ -65,7 +65,7 @@ public interface TakeStockSheetMapper extends BaseMapper<TakeStockSheet> {
   Boolean hasUnApprove(String planId);
 
   /**
-   * 根据关键字查询盘点单商品信息
+   * 根据关键字查询盘点单药品信息
    *
    * @param condition
    * @return
@@ -79,7 +79,7 @@ public interface TakeStockSheetMapper extends BaseMapper<TakeStockSheet> {
       @Param("condition") String condition);
 
   /**
-   * 查询盘点单商品信息
+   * 查询盘点单药品信息
    *
    * @param vo
    * @return

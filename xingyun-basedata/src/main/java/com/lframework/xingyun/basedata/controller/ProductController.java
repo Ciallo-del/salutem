@@ -42,11 +42,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
- * 商品管理
+ * 药品管理
  *
  * @author zmj
  */
-@Api(tags = "商品管理")
+@Api(tags = "药品管理")
 @Validated
 @RestController
 @RequestMapping("/basedata/product")
@@ -65,9 +65,9 @@ public class ProductController extends DefaultBaseController {
   private ProductCodeService productCodeService;
 
   /**
-   * 商品列表
+   * 药品列表
    */
-  @ApiOperation("商品列表")
+  @ApiOperation("药品列表")
   @HasPermission({"base-data:product:info:query", "base-data:product:info:add",
       "base-data:product:info:modify"})
   @GetMapping("/query")
@@ -87,14 +87,14 @@ public class ProductController extends DefaultBaseController {
   }
 
   /**
-   * 根据商品编号查询商品ID
+   * 根据药品编号查询药品ID
    */
-  @ApiOperation(value = "根据商品编号查询商品ID", notes = "返回商品ID，如果商品不存在则返回null")
-  @ApiImplicitParam(value = "商品编号", name = "code", paramType = "query", required = true)
+  @ApiOperation(value = "根据药品编号查询药品ID", notes = "返回药品ID，如果药品不存在则返回null")
+  @ApiImplicitParam(value = "药品编号", name = "code", paramType = "query", required = true)
   @HasPermission({"base-data:product:info:query"})
   @GetMapping("/id/code")
   public InvokeResult<String> getIdByCode(
-      @NotBlank(message = "商品编号不能为空！") String code) {
+      @NotBlank(message = "药品编号不能为空！") String code) {
 
     Product product = productService.findByCode(code);
 
@@ -102,9 +102,9 @@ public class ProductController extends DefaultBaseController {
   }
 
   /**
-   * 商品详情
+   * 药品详情
    */
-  @ApiOperation("商品详情")
+  @ApiOperation("药品详情")
   @ApiImplicitParam(value = "ID", name = "id", paramType = "query", required = true)
   @HasPermission({"base-data:product:info:query", "base-data:product:info:add",
       "base-data:product:info:modify"})
@@ -119,9 +119,9 @@ public class ProductController extends DefaultBaseController {
   }
 
   /**
-   * 新增商品
+   * 新增药品
    */
-  @ApiOperation("新增商品")
+  @ApiOperation("新增药品")
   @HasPermission({"base-data:product:info:add"})
   @PostMapping
   public InvokeResult<Void> create(@Valid @RequestBody CreateProductVo vo) {
@@ -132,9 +132,9 @@ public class ProductController extends DefaultBaseController {
   }
 
   /**
-   * 修改商品
+   * 修改药品
    */
-  @ApiOperation("修改商品")
+  @ApiOperation("修改药品")
   @HasPermission({"base-data:product:info:modify"})
   @PutMapping
   public InvokeResult<Void> update(@Valid @RequestBody UpdateProductVo vo) {
@@ -178,7 +178,7 @@ public class ProductController extends DefaultBaseController {
   @HasPermission({"base-data:product:info:import"})
   @GetMapping("/import/template")
   public void downloadImportTemplate() {
-    ExcelUtil.exportXls("商品导入模板", ProductImportModel.class);
+    ExcelUtil.exportXls("药品导入模板", ProductImportModel.class);
   }
 
   @ApiOperation("导入")

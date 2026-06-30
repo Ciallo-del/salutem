@@ -5,7 +5,7 @@ import com.lframework.xingyun.basedata.entity.ProductBundle;
 
 /**
  * <p>
- * 组合商品 Mapper 接口
+ * 组合药品 Mapper 接口
  * </p>
  *
  * @author zmj

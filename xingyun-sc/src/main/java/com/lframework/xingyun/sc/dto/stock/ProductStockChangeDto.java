@@ -17,7 +17,7 @@ public class ProductStockChangeDto implements BaseDto, Serializable {
   private String scId;
 
   /**
-   * 商品ID
+   * 药品ID
    */
   private String productId;
 

@@ -46,11 +46,11 @@ public class CreatePreTakeStockSheetVo implements BaseVo, Serializable {
   private String description;
 
   /**
-   * 商品
+   * 药品
    */
-  @ApiModelProperty(value = "商品", required = true)
+  @ApiModelProperty(value = "药品", required = true)
   @Valid
-  @NotEmpty(message = "请录入商品！")
+  @NotEmpty(message = "请录入药品！")
   private List<PreTakeStockProductVo> products;
 
   public void validate() {
@@ -61,46 +61,46 @@ public class CreatePreTakeStockSheetVo implements BaseVo, Serializable {
     for (int i = 0; i < this.getProducts().size(); i++) {
       PreTakeStockProductVo product = this.getProducts().get(i);
       if (checkSet.contains(product.getProductId())) {
-        throw new InputErrorException("第" + (i + 1) + "行商品已存在列表中，请勿重复添加！");
+        throw new InputErrorException("第" + (i + 1) + "行药品已存在列表中，请勿重复添加！");
       }
 
       checkSet.add(product.getProductId());
 
       if (takeStatus == PreTakeStockSheetStatus.FIRST_TAKE) {
         if (product.getFirstNum() == null) {
-          throw new InputErrorException("第" + (i + 1) + "行商品的初盘数量不允许为空！");
+          throw new InputErrorException("第" + (i + 1) + "行药品的初盘数量不允许为空！");
         }
 
         if (NumberUtil.lt(product.getFirstNum(), 0)) {
-          throw new InputErrorException("第" + (i + 1) + "行商品的初盘数量不允许小于0！");
+          throw new InputErrorException("第" + (i + 1) + "行药品的初盘数量不允许小于0！");
         }
 
         if (!NumberUtil.isNumberPrecision(product.getFirstNum(), 8)) {
-          throw new InputErrorException("第" + (i + 1) + "行商品的初盘数量最多允许8位小数！");
+          throw new InputErrorException("第" + (i + 1) + "行药品的初盘数量最多允许8位小数！");
         }
       } else if (takeStatus == PreTakeStockSheetStatus.SECOND_TAKE) {
         if (product.getSecondNum() == null) {
-          throw new InputErrorException("第" + (i + 1) + "行商品的复盘数量不允许为空！");
+          throw new InputErrorException("第" + (i + 1) + "行药品的复盘数量不允许为空！");
         }
 
         if (NumberUtil.lt(product.getSecondNum(), 0)) {
-          throw new InputErrorException("第" + (i + 1) + "行商品的复盘数量不允许小于0！");
+          throw new InputErrorException("第" + (i + 1) + "行药品的复盘数量不允许小于0！");
         }
 
         if (!NumberUtil.isNumberPrecision(product.getSecondNum(), 8)) {
-          throw new InputErrorException("第" + (i + 1) + "行商品的复盘数量最多允许8位小数！");
+          throw new InputErrorException("第" + (i + 1) + "行药品的复盘数量最多允许8位小数！");
         }
       } else if (takeStatus == PreTakeStockSheetStatus.RAND_TAKE) {
         if (product.getRandNum() == null) {
-          throw new InputErrorException("第" + (i + 1) + "行商品的抽盘数量不允许为空！");
+          throw new InputErrorException("第" + (i + 1) + "行药品的抽盘数量不允许为空！");
         }
 
         if (NumberUtil.lt(product.getRandNum(), 0)) {
-          throw new InputErrorException("第" + (i + 1) + "行商品的抽盘数量不允许小于0！");
+          throw new InputErrorException("第" + (i + 1) + "行药品的抽盘数量不允许小于0！");
         }
 
         if (!NumberUtil.isNumberPrecision(product.getRandNum(), 8)) {
-          throw new InputErrorException("第" + (i + 1) + "行商品的抽盘数量最多允许8位小数！");
+          throw new InputErrorException("第" + (i + 1) + "行药品的抽盘数量最多允许8位小数！");
         }
       } else {
         throw new InputErrorException("预先盘点状态格式错误！");

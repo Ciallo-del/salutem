@@ -24,17 +24,17 @@ public class TakeStockConfig extends BaseEntity implements BaseDto {
   private String id;
 
   /**
-   * 库存盘点单关联盘点任务后，是否显示盘点任务中的商品数据
+   * 库存盘点单关联盘点任务后，是否显示盘点任务中的药品数据
    */
   private Boolean showProduct;
 
   /**
-   * 库存盘点单是否显示盘点任务创建时商品的系统库存数量
+   * 库存盘点单是否显示盘点任务创建时药品的系统库存数量
    */
   private Boolean showStock;
 
   /**
-   * 盘点差异生成时是否自动调整盘点任务中商品的系统库存数量
+   * 盘点差异生成时是否自动调整盘点任务中药品的系统库存数量
    */
   private Boolean autoChangeStock;
 

@@ -138,7 +138,7 @@ public class ProductStockServiceImpl extends BaseMpServiceImpl<ProductStockMappe
     Product product = productService.findById(vo.getProductId());
     if (product.getProductType() != ProductType.NORMAL) {
       throw new DefaultClientException(
-          "只有商品类型为【" + ProductType.NORMAL.getDesc() + "】的商品支持入库！");
+          "只有药品类型为【" + ProductType.NORMAL.getDesc() + "】的药品支持入库！");
     }
 
     Wrapper<ProductStock> queryWrapper = Wrappers.lambdaQuery(ProductStock.class)
@@ -173,7 +173,7 @@ public class ProductStockServiceImpl extends BaseMpServiceImpl<ProductStockMappe
     if (vo.getTaxAmount() == null) {
       // 如果此时taxPrice还是null，则代表taxPrice和defaultTaxPrice均为null
       throw new DefaultSysException(
-          "商品ID：" + vo.getProductId() + "，没有库存，taxAmount和defaultTaxAmount不能同时为null！");
+          "药品ID：" + vo.getProductId() + "，没有库存，taxAmount和defaultTaxAmount不能同时为null！");
     }
 
     if (isStockEmpty) {
@@ -187,7 +187,7 @@ public class ProductStockServiceImpl extends BaseMpServiceImpl<ProductStockMappe
         productStock.getTaxAmount(), reCalcCostPrice);
     if (count != 1) {
       throw new DefaultClientException(
-          "商品（" + product.getCode() + "）" + product.getName() + "入库失败，请稍后重试！");
+          "药品（" + product.getCode() + "）" + product.getName() + "入库失败，请稍后重试！");
     }
 
     AddLogWithAddStockVo addLogWithAddStockVo = new AddLogWithAddStockVo();
@@ -236,7 +236,7 @@ public class ProductStockServiceImpl extends BaseMpServiceImpl<ProductStockMappe
     Product product = productService.findById(vo.getProductId());
     if (product.getProductType() != ProductType.NORMAL) {
       throw new DefaultClientException(
-          "只有商品类型为【" + ProductType.NORMAL.getDesc() + "】的商品支持出库！");
+          "只有药品类型为【" + ProductType.NORMAL.getDesc() + "】的药品支持出库！");
     }
 
     Wrapper<ProductStock> queryWrapper = Wrappers.lambdaQuery(ProductStock.class)
@@ -245,12 +245,12 @@ public class ProductStockServiceImpl extends BaseMpServiceImpl<ProductStockMappe
     ProductStock productStock = getBaseMapper().selectOne(queryWrapper);
     if (productStock == null) {
       throw new DefaultClientException(
-          "商品（" + product.getCode() + "）" + product.getName() + "当前库存为0，无法出库！");
+          "药品（" + product.getCode() + "）" + product.getName() + "当前库存为0，无法出库！");
     }
 
     if (NumberUtil.lt(productStock.getStockNum(), vo.getStockNum())) {
       throw new DefaultClientException(
-          "商品（" + product.getCode() + "）" + product.getName() + "当前库存为"
+          "药品（" + product.getCode() + "）" + product.getName() + "当前库存为"
               + productStock.getStockNum()
               + "，库存不足，无法出库！");
     }
@@ -270,7 +270,7 @@ public class ProductStockServiceImpl extends BaseMpServiceImpl<ProductStockMappe
         productStock.getStockNum(), productStock.getTaxAmount(), reCalcCostPrice);
     if (count != 1) {
       throw new DefaultClientException(
-          "商品（" + product.getCode() + "）" + product.getName() + "出库失败，请稍后重试！");
+          "药品（" + product.getCode() + "）" + product.getName() + "出库失败，请稍后重试！");
     }
 
     AddLogWithSubStockVo addLogWithAddStockVo = new AddLogWithSubStockVo();

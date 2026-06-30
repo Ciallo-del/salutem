@@ -176,9 +176,9 @@ public class StockAdjustSheetFullBo extends BaseBo<StockAdjustSheetFullDto> {
     private String id;
 
     /**
-     * 商品ID
+     * 药品ID
      */
-    @ApiModelProperty("商品ID")
+    @ApiModelProperty("药品ID")
     private String productId;
 
     /**

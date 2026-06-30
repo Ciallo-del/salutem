@@ -49,7 +49,7 @@ public interface StockAdjustSheetMapper extends BaseMapper<StockAdjustSheet> {
   StockAdjustSheetFullDto getDetail(@Param("id") String id);
 
   /**
-   * 根据关键字查询库存调整单商品信息
+   * 根据关键字查询库存调整单药品信息
    *
    * @param scId
    * @param condition
@@ -64,7 +64,7 @@ public interface StockAdjustSheetMapper extends BaseMapper<StockAdjustSheet> {
       @Param("scId") String scId, @Param("condition") String condition);
 
   /**
-   * 查询库存调整单商品信息
+   * 查询库存调整单药品信息
    *
    * @param vo
    * @return

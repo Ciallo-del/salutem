@@ -57,7 +57,7 @@ public class RetailOutSheet extends BaseEntity implements BaseDto {
   private LocalDate paymentDate;
 
   /**
-   * 商品数量
+   * 药品数量
    */
   private BigDecimal totalNum;
 

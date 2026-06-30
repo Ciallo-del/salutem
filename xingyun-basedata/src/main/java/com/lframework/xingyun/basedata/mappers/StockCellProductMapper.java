@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>
- * 仓位商品 Mapper 接口
+ * 仓位药品 Mapper 接口
  * </p>
  *
  * @author zmj

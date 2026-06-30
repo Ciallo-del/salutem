@@ -39,6 +39,7 @@ import com.lframework.xingyun.basedata.service.storecenter.StoreCenterService;
 import com.lframework.xingyun.basedata.service.supplier.SupplierService;
 import com.lframework.xingyun.core.utils.SplitNumberUtil;
 import com.lframework.xingyun.sc.components.code.GenerateCodeTypePool;
+import com.lframework.xingyun.sc.dto.purchase.PurchaseProductDto;
 import com.lframework.xingyun.sc.dto.purchase.receive.GetPaymentDateDto;
 import com.lframework.xingyun.sc.dto.purchase.receive.ReceiveSheetFullDto;
 import com.lframework.xingyun.sc.dto.purchase.receive.ReceiveSheetWithReturnDto;
@@ -63,6 +64,7 @@ import com.lframework.xingyun.sc.service.stock.ProductStockService;
 import com.lframework.xingyun.sc.vo.purchase.receive.ApprovePassReceiveSheetVo;
 import com.lframework.xingyun.sc.vo.purchase.receive.ApproveRefuseReceiveSheetVo;
 import com.lframework.xingyun.sc.vo.purchase.receive.CreateReceiveSheetVo;
+import com.lframework.xingyun.sc.vo.purchase.receive.QueryReceiveProductVo;
 import com.lframework.xingyun.sc.vo.purchase.receive.QueryReceiveSheetVo;
 import com.lframework.xingyun.sc.vo.purchase.receive.QueryReceiveSheetWithReturnVo;
 import com.lframework.xingyun.sc.vo.purchase.receive.ReceiveProductVo;
@@ -530,7 +532,7 @@ public class ReceiveSheetServiceImpl extends
         .eq(ReceiveSheetDetail::getSheetId, sheet.getId());
     receiveSheetDetailService.remove(deleteDetailWrapper);
 
-    // 删除组合商品明细
+    // 删除组合药品明细
     Wrapper<ReceiveSheetDetailBundle> deleteBundleWrapper = Wrappers.lambdaQuery(
         ReceiveSheetDetailBundle.class).eq(ReceiveSheetDetailBundle::getSheetId, sheet.getId());
     receiveSheetDetailBundleService.remove(deleteBundleWrapper);
@@ -664,7 +666,7 @@ public class ReceiveSheetServiceImpl extends
       if (receiveRequirePurchase) {
         if (StringUtil.isBlank(productVo.getPurchaseOrderDetailId())) {
           if (!isGift) {
-            throw new InputErrorException("第" + orderNo + "行商品必须为“赠品”！");
+            throw new InputErrorException("第" + orderNo + "行药品必须为“赠品”！");
           }
         }
       }
@@ -685,15 +687,15 @@ public class ReceiveSheetServiceImpl extends
 
       Product product = productService.findById(productVo.getProductId());
       if (product == null) {
-        throw new InputErrorException("第" + orderNo + "行商品不存在！");
+        throw new InputErrorException("第" + orderNo + "行药品不存在！");
       }
 
       if (!NumberUtil.isNumberPrecision(productVo.getPurchasePrice(), 6)) {
-        throw new InputErrorException("第" + orderNo + "行商品采购价最多允许6位小数！");
+        throw new InputErrorException("第" + orderNo + "行药品采购价最多允许6位小数！");
       }
 
       if (!NumberUtil.isNumberPrecision(productVo.getReceiveNum(), 8)) {
-        throw new InputErrorException("第" + orderNo + "行商品收货数量最多允许8位小数！");
+        throw new InputErrorException("第" + orderNo + "行药品收货数量最多允许8位小数！");
       }
 
       detail.setProductId(productVo.getProductId());
@@ -713,10 +715,10 @@ public class ReceiveSheetServiceImpl extends
 
       receiveSheetDetailService.save(detail);
 
-      // 这里处理组合商品
+      // 这里处理组合药品
       if (product.getProductType() == ProductType.BUNDLE) {
         if (!NumberUtil.isInteger(productVo.getReceiveNum())) {
-          throw new InputErrorException("第" + orderNo + "行商品收货数量必须是整数！");
+          throw new InputErrorException("第" + orderNo + "行药品收货数量必须是整数！");
         }
         List<ProductBundle> productBundles = productBundleService.getByMainProductId(
             product.getId());
@@ -777,5 +779,34 @@ public class ReceiveSheetServiceImpl extends
     } else {
       return SettleStatus.UN_REQUIRE;
     }
+  }
+
+  @Override
+  public PageResult<PurchaseProductDto> queryReceiveByCondition(Integer pageIndex, Integer pageSize,
+      String scId, String condition) {
+
+    Assert.greaterThanZero(pageIndex);
+    Assert.greaterThanZero(pageSize);
+    Assert.notBlank(scId);
+
+    PageHelperUtil.startPage(pageIndex, pageSize);
+    List<PurchaseProductDto> datas = getBaseMapper().queryReceiveByCondition(scId, condition);
+
+    return PageResultUtil.convert(new PageInfo<>(datas));
+  }
+
+  @Override
+  public PageResult<PurchaseProductDto> queryReceiveList(Integer pageIndex, Integer pageSize,
+      QueryReceiveProductVo vo) {
+
+    Assert.greaterThanZero(pageIndex);
+    Assert.greaterThanZero(pageSize);
+    Assert.notNull(vo);
+    Assert.notBlank(vo.getScId());
+
+    PageHelperUtil.startPage(pageIndex, pageSize);
+    List<PurchaseProductDto> datas = getBaseMapper().queryReceiveList(vo);
+
+    return PageResultUtil.convert(new PageInfo<>(datas));
   }
 }

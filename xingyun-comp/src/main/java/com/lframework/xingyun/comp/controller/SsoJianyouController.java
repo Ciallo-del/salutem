@@ -50,9 +50,9 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * 鎺ユ敹鏈烘瀯绔彂璧风殑鏄熶簯 SSO銆?
+ * 接收机构端发起的星云 SSO銆?
  */
-@Api(tags = "寤哄弸鏄熶簯鍗曠偣鐧诲綍")
+@Api(tags = "建友星云单点登录")
 @Slf4j
 @RestController
 @RequestMapping("/auth/sso/jianyou")
@@ -60,7 +60,7 @@ public class SsoJianyouController extends DefaultBaseController {
 
     private static final String USER_INFO_SESSION_KEY = "user_info_key";
 
-    private static final String DEFAULT_SSO_ERROR_MESSAGE = "鏄熶簯鍗曠偣鐧诲綍澶辫触锛岃鑱旂郴绯荤粺绠＄悊鍛橈紒";
+    private static final String DEFAULT_SSO_ERROR_MESSAGE = "星云单点登录失败，请联系系统管理员！";
 
     private static final String CORE_DEPT_PERMISSION = "system:dept:query";
 
@@ -69,16 +69,16 @@ public class SsoJianyouController extends DefaultBaseController {
     private static final List<String> ALLOWED_SSO_ERROR_MESSAGES = new ArrayList<>();
 
     static {
-        ALLOWED_SSO_ERROR_MESSAGES.add("鏈烘瀯绔エ鎹秷璐瑰湴鍧€鏈厤缃紒");
-        ALLOWED_SSO_ERROR_MESSAGES.add("璺宠浆椤甸潰涓嶅湪鍏佽鑼冨洿鍐咃紒");
-        ALLOWED_SSO_ERROR_MESSAGES.add("鍙椾俊浠诲鎴风鏈惎鐢紒");
-        ALLOWED_SSO_ERROR_MESSAGES.add("鏈烘瀯绔湭杩斿洖鏈夋晥绁ㄦ嵁鏁版嵁锛?");
-        ALLOWED_SSO_ERROR_MESSAGES.add("鏄熶簯绉熸埛鏈厤缃紒");
-        ALLOWED_SSO_ERROR_MESSAGES.add("鏄熶簯绉熸埛鏍￠獙澶辫触锛?");
-        ALLOWED_SSO_ERROR_MESSAGES.add("鏄熶簯璐﹀彿涓嶅瓨鍦紒");
-        ALLOWED_SSO_ERROR_MESSAGES.add("鏄熶簯璐﹀彿宸茬鐢紒");
-        ALLOWED_SSO_ERROR_MESSAGES.add("鏄熶簯 SSO 鐧诲綍鎬佸垵濮嬪寲澶辫触锛氭湭鍔犺浇鍒颁换浣曟潈闄愶紒");
-        ALLOWED_SSO_ERROR_MESSAGES.add("鏄熶簯 SSO 鐧诲綍鎬佸垵濮嬪寲澶辫触锛氭湭鍔犺浇鍒扮敤鎴蜂俊鎭紒");
+        ALLOWED_SSO_ERROR_MESSAGES.add("机构端票据消费地址未配置！");
+        ALLOWED_SSO_ERROR_MESSAGES.add("跳转页面不在允许范围内！");
+        ALLOWED_SSO_ERROR_MESSAGES.add("受信任客户端未启用！");
+        ALLOWED_SSO_ERROR_MESSAGES.add("机构端未返回有效票据数据");
+        ALLOWED_SSO_ERROR_MESSAGES.add("星云租户未配置！");
+        ALLOWED_SSO_ERROR_MESSAGES.add("星云租户校验失败");
+        ALLOWED_SSO_ERROR_MESSAGES.add("星云账号不存在！");
+        ALLOWED_SSO_ERROR_MESSAGES.add("星云账号已禁用！");
+        ALLOWED_SSO_ERROR_MESSAGES.add("星云 SSO 登录态初始化失败：未加载到任何权限！");
+        ALLOWED_SSO_ERROR_MESSAGES.add("星云 SSO 登录态初始化失败：未加载到用户信息！");
     }
 
     @Autowired
@@ -131,16 +131,16 @@ public class SsoJianyouController extends DefaultBaseController {
         boolean tenantSwitched = false;
         try {
             if (StringUtils.isBlank(consumeUrl)) {
-                throw new IllegalStateException("鏈烘瀯绔エ鎹秷璐瑰湴鍧€鏈厤缃紒");
+                throw new IllegalStateException("机构端票据消费地址未配置！");
             }
             String normalizedRedirect = normalizeRedirect(redirect);
             if (normalizedRedirect == null) {
-                throw new IllegalArgumentException("璺宠浆椤甸潰涓嶅湪鍏佽鑼冨洿鍐咃紒");
+                throw new IllegalArgumentException("跳转页面不在允许范围内！");
             }
 
             SysOpenDomain openDomain = getOpenDomain(clientId);
             if (openDomain == null || !Boolean.TRUE.equals(openDomain.getAvailable())) {
-                throw new IllegalArgumentException("鍙椾俊浠诲鎴风鏈惎鐢紒");
+                throw new IllegalArgumentException("受信任客户端未启用！");
             }
 
             Map<String, Object> requestParams = new HashMap<>();
@@ -159,17 +159,17 @@ public class SsoJianyouController extends DefaultBaseController {
 
             Map data = JsonUtil.convert(respMap.get("data"), Map.class);
             if (data == null) {
-                throw new IllegalStateException("鏈烘瀯绔湭杩斿洖鏈夋晥绁ㄦ嵁鏁版嵁锛?");
+                throw new IllegalStateException("机构端未返回有效票据数据");
             }
 
             Integer targetTenantId = toInteger(data.get("targetTenantId"));
             if (targetTenantId == null) {
-                throw new IllegalStateException("鏄熶簯绉熸埛鏈厤缃紒");
+                throw new IllegalStateException("星云租户未配置！");
             }
             if (openDomain.getTenantId() != null && !openDomain.getTenantId().equals(targetTenantId)) {
-                log.warn("寤哄弸 SSO 鍥炶皟绉熸埛鏍￠獙澶辫触锛宻cene=callback, clientId={}, openDomainTenantId={}, targetTenantId={}, targetUserId={}",
+                log.warn("寤哄弸 SSO 回调租户校验失败，scene=callback, clientId={}, openDomainTenantId={}, targetTenantId={}, targetUserId={}",
                         clientId, openDomain.getTenantId(), targetTenantId, toStringValue(data.get("targetXingyunUserId")));
-                throw new IllegalStateException("鏄熶簯绉熸埛鏍￠獙澶辫触锛?");
+                throw new IllegalStateException("星云租户校验失败");
             }
 
             ensureTenantDataSourceReady(targetTenantId);
@@ -179,15 +179,15 @@ public class SsoJianyouController extends DefaultBaseController {
 
             String targetUserId = toStringValue(data.get("targetXingyunUserId"));
             if (StringUtils.isBlank(targetUserId)) {
-                throw new IllegalStateException("鏄熶簯璐﹀彿涓嶅瓨鍦紒");
+                throw new IllegalStateException("星云账号不存在！");
             }
 
             SysUser targetUser = sysUserService.findById(targetUserId);
             if (targetUser == null) {
-                throw new IllegalStateException("鏄熶簯璐﹀彿涓嶅瓨鍦紒");
+                throw new IllegalStateException("星云账号不存在！");
             }
             if (!Boolean.TRUE.equals(targetUser.getAvailable()) || Boolean.TRUE.equals(targetUser.getLockStatus())) {
-                throw new IllegalStateException("鏄熶簯璐﹀彿宸茬鐢紒");
+                throw new IllegalStateException("星云账号已禁用！");
             }
 
             StpUtil.login(targetUser.getId());
@@ -208,7 +208,7 @@ public class SsoJianyouController extends DefaultBaseController {
             session.set("sourceOpenDomainId", openDomain.getId());
 
             List<String> permissionCodes = new ArrayList<>(userDetails.getPermissions());
-            log.info("寤哄弸 SSO 鐧诲綍鎴愬姛锛宼enantId={}, userId={}, username={}, permissionCount={}, hasUserQueryPermission={}, hasDeptQueryPermission={}",
+            log.info("寤哄弸 SSO 登录成功，tenantId={}, userId={}, username={}, permissionCount={}, hasUserQueryPermission={}, hasDeptQueryPermission={}",
                     targetTenantId, targetUser.getId(), targetUser.getUsername(),
                     permissionCodes.size(),
                     permissionCodes.contains(CORE_USER_PERMISSION),
@@ -217,7 +217,7 @@ public class SsoJianyouController extends DefaultBaseController {
             String redirectUrl = buildResultUrl(token, normalizedRedirect);
             response.sendRedirect(redirectUrl);
         } catch (Exception e) {
-            log.error("寤哄弸 SSO 鍥炶皟澶辫触锛宑lientId={}, ticket={}", clientId, ticket, e);
+            log.error("寤哄弸 SSO 回调失败，clientId={}, ticket={}", clientId, ticket, e);
             response.sendRedirect(buildLoginFailUrl(resolveErrorMessage(e)));
         } finally {
             if (tenantSwitched) {
@@ -227,21 +227,21 @@ public class SsoJianyouController extends DefaultBaseController {
         }
     }
 
-    @ApiOperation("鑾峰彇褰撳墠寤哄弸 SSO 鐧诲綍鐢ㄦ埛淇℃伅")
+    @ApiOperation("获取当前建友 SSO 登录用户信息")
     @GetMapping("/current-user")
     public InvokeResult<SsoJianyouCurrentUserBo> currentUser() {
         AbstractUserDetails currentUser = getCurrentUser();
         if (currentUser == null) {
-            throw new DefaultClientException("鏄熶簯 SSO 鐧诲綍鎬佸垵濮嬪寲澶辫触锛氭湭鍔犺浇鍒扮敤鎴蜂俊鎭紒");
+            throw new DefaultClientException("星云 SSO 登录态初始化失败：未加载到用户信息！");
         }
         Set<String> permissions = currentUser.getPermissions();
         if (permissions == null || permissions.isEmpty()) {
-            throw new DefaultClientException("鏄熶簯 SSO 鐧诲綍鎬佸垵濮嬪寲澶辫触锛氭湭鍔犺浇鍒颁换浣曟潈闄愶紒");
+            throw new DefaultClientException("星云 SSO 登录态初始化失败：未加载到任何权限！");
         }
 
         SysUser user = sysUserService.findById(String.valueOf(currentUser.getId()));
         if (user == null) {
-            throw new DefaultClientException("鏄熶簯璐﹀彿涓嶅瓨鍦紒");
+            throw new DefaultClientException("星云账号不存在！");
         }
 
         SsoJianyouCurrentUserBo bo = new SsoJianyouCurrentUserBo();
@@ -254,7 +254,7 @@ public class SsoJianyouController extends DefaultBaseController {
         return InvokeResultBuilder.success(bo);
     }
 
-    @ApiOperation("鑾峰彇寤哄弸 inventory 鍙敤鑿滃崟")
+    @ApiOperation("鑾峰彇寤哄弸 inventory 可用菜单")
     @GetMapping("/menu-preview")
     public InvokeResult<List<SsoJianyouMenuPreviewGroupBo>> menuPreview(@RequestParam("clientId") String clientId,
                                                                         @RequestParam("targetTenantId") Integer targetTenantId,
@@ -264,7 +264,7 @@ public class SsoJianyouController extends DefaultBaseController {
                                                                         HttpServletResponse response) {
         disableCache(response);
         if (StringUtils.isAnyBlank(clientId, targetUserId, sign) || targetTenantId == null || timestamp == null) {
-            throw new DefaultClientException("SSO 鍙傛暟涓嶅畬鏁达紒");
+            throw new DefaultClientException("SSO 参数不完整！");
         }
         if (StringUtils.isBlank(apiSecret)) {
             throw new DefaultClientException(DEFAULT_SSO_ERROR_MESSAGE);
@@ -272,22 +272,22 @@ public class SsoJianyouController extends DefaultBaseController {
 
         long now = System.currentTimeMillis();
         if (Math.abs(now - timestamp) > timestampSkewSeconds * 1000L) {
-            throw new DefaultClientException("璇锋眰宸茶繃鏈燂紝璇烽噸鏂拌繘鍏?inventory锛?");
+            throw new DefaultClientException("请求已过期，请重新进入 inventory）");
         }
 
         SysOpenDomain openDomain = getOpenDomain(clientId);
         if (openDomain == null || !Boolean.TRUE.equals(openDomain.getAvailable())) {
-            throw new DefaultClientException("鍙椾俊浠诲鎴风鏈惎鐢紒");
+            throw new DefaultClientException("受信任客户端未启用！");
         }
         if (openDomain.getTenantId() != null && !openDomain.getTenantId().equals(targetTenantId)) {
-            log.warn("寤哄弸 inventory 鑿滃崟棰勮绉熸埛鏍￠獙澶辫触锛宻cene=menu-preview, clientId={}, openDomainTenantId={}, targetTenantId={}, targetUserId={}",
+            log.warn("寤哄弸 inventory 菜单预览租户校验失败，scene=menu-preview, clientId={}, openDomainTenantId={}, targetTenantId={}, targetUserId={}",
                     clientId, openDomain.getTenantId(), targetTenantId, targetUserId);
-            throw new DefaultClientException("鏄熶簯绉熸埛鏍￠獙澶辫触锛?");
+            throw new DefaultClientException("星云租户校验失败");
         }
 
         String expectedSign = buildMenuPreviewSign(clientId, targetTenantId, targetUserId, timestamp);
         if (!StringUtils.equalsIgnoreCase(expectedSign, sign)) {
-            throw new DefaultClientException("鑿滃崟棰勮绛惧悕鏍￠獙澶辫触锛?");
+            throw new DefaultClientException("菜单预览签名校验失败");
         }
 
         boolean tenantSwitched = false;
@@ -299,10 +299,10 @@ public class SsoJianyouController extends DefaultBaseController {
 
             SysUser targetUser = sysUserService.findById(targetUserId);
             if (targetUser == null) {
-                throw new DefaultClientException("鏄熶簯璐﹀彿涓嶅瓨鍦紒");
+                throw new DefaultClientException("星云账号不存在！");
             }
             if (!Boolean.TRUE.equals(targetUser.getAvailable()) || Boolean.TRUE.equals(targetUser.getLockStatus())) {
-                throw new DefaultClientException("鏄熶簯璐﹀彿宸茬鐢紒");
+                throw new DefaultClientException("星云账号已禁用！");
             }
 
             return InvokeResultBuilder.success(ssoJianyouMenuPreviewService.getMenuPreview(targetUserId));
@@ -344,7 +344,7 @@ public class SsoJianyouController extends DefaultBaseController {
     private AbstractUserDetails loadUserDetails(SysUser targetUser, Integer targetTenantId, String loginId) {
         AbstractUserDetails userDetails = userDetailsService.loadUserByUsername(targetUser.getUsername());
         if (userDetails == null) {
-            throw new DefaultClientException("鏄熶簯 SSO 鐧诲綍鎬佸垵濮嬪寲澶辫触锛氭湭鍔犺浇鍒扮敤鎴蜂俊鎭紒");
+            throw new DefaultClientException("星云 SSO 登录态初始化失败：未加载到用户信息！");
         }
 
         userDetails.setTenantId(targetTenantId);
@@ -357,9 +357,9 @@ public class SsoJianyouController extends DefaultBaseController {
         userDetails.setPermissions(permissions);
 
         if (permissions.isEmpty()) {
-            log.error("寤哄弸 SSO 鐧诲綍鎬佹潈闄愪负绌猴紝tenantId={}, userId={}, username={}",
+            log.error("寤哄弸 SSO 登录态权限为空，tenantId={}, userId={}, username={}",
                     targetTenantId, targetUser.getId(), targetUser.getUsername());
-            throw new DefaultClientException("鏄熶簯 SSO 鐧诲綍鎬佸垵濮嬪寲澶辫触锛氭湭鍔犺浇鍒颁换浣曟潈闄愶紒");
+            throw new DefaultClientException("星云 SSO 登录态初始化失败：未加载到任何权限！");
         }
 
         return userDetails;

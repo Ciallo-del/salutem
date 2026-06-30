@@ -56,15 +56,15 @@ public class GetRetailReturnBo extends BaseBo<RetailReturnFullDto> {
   private String scName;
 
   /**
-   * 客户ID
+   * 收货方ID
    */
-  @ApiModelProperty("客户ID")
+  @ApiModelProperty("收货方ID")
   private String memberId;
 
   /**
-   * 客户名称
+   * 收货方名称
    */
-  @ApiModelProperty("客户名称")
+  @ApiModelProperty("收货方名称")
   private String memberName;
 
   /**
@@ -244,21 +244,21 @@ public class GetRetailReturnBo extends BaseBo<RetailReturnFullDto> {
     private String id;
 
     /**
-     * 商品ID
+     * 药品ID
      */
-    @ApiModelProperty("商品ID")
+    @ApiModelProperty("药品ID")
     private String productId;
 
     /**
-     * 商品编号
+     * 药品编号
      */
-    @ApiModelProperty("商品编号")
+    @ApiModelProperty("药品编号")
     private String productCode;
 
     /**
-     * 商品名称
+     * 药品名称
      */
-    @ApiModelProperty("商品名称")
+    @ApiModelProperty("药品名称")
     private String productName;
 
     /**

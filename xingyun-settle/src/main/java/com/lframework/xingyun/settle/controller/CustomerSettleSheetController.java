@@ -41,11 +41,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 客户结算单
+ * 收货方结算单
  *
  * @author zmj
  */
-@Api(tags = "客户结算单")
+@Api(tags = "收货方结算单")
 @Validated
 @RestController
 @RequestMapping("/customer/settle/sheet")
@@ -55,9 +55,9 @@ public class CustomerSettleSheetController extends DefaultBaseController {
   private CustomerSettleSheetService customerSettleSheetService;
 
   /**
-   * 客户结算单列表
+   * 收货方结算单列表
    */
-  @ApiOperation("客户结算单列表")
+  @ApiOperation("收货方结算单列表")
   @HasPermission({"customer-settle:sheet:query"})
   @GetMapping("/query")
   public InvokeResult<PageResult<QueryCustomerSettleSheetBo>> query(
@@ -84,7 +84,7 @@ public class CustomerSettleSheetController extends DefaultBaseController {
   @PostMapping("/export")
   public InvokeResult<Void> export(@Valid QueryCustomerSettleSheetVo vo) {
 
-    ExportTaskUtil.exportTask("客户结算单信息", CustomerSettleSheetExportTaskWorker.class, vo);
+    ExportTaskUtil.exportTask("收货方结算单信息", CustomerSettleSheetExportTaskWorker.class, vo);
 
     return InvokeResultBuilder.success();
   }
@@ -97,7 +97,7 @@ public class CustomerSettleSheetController extends DefaultBaseController {
   @HasPermission({"customer-settle:sheet:query"})
   @GetMapping
   public InvokeResult<GetCustomerSettleSheetBo> findById(
-      @NotBlank(message = "客户结算单ID不能为空！") String id) {
+      @NotBlank(message = "收货方结算单ID不能为空！") String id) {
 
     CustomerSettleSheetFullDto data = customerSettleSheetService.getDetail(id);
 
@@ -107,9 +107,9 @@ public class CustomerSettleSheetController extends DefaultBaseController {
   }
 
   /**
-   * 创建客户结算单
+   * 创建收货方结算单
    */
-  @ApiOperation("创建客户结算单")
+  @ApiOperation("创建收货方结算单")
   @HasPermission({"customer-settle:sheet:add"})
   @PostMapping
   public InvokeResult<String> create(@RequestBody @Valid CreateCustomerSettleSheetVo vo) {
@@ -122,9 +122,9 @@ public class CustomerSettleSheetController extends DefaultBaseController {
   }
 
   /**
-   * 修改客户结算单
+   * 修改收货方结算单
    */
-  @ApiOperation("修改客户结算单")
+  @ApiOperation("修改收货方结算单")
   @HasPermission({"customer-settle:sheet:modify"})
   @PutMapping
   public InvokeResult<Void> update(@RequestBody @Valid UpdateCustomerSettleSheetVo vo) {
@@ -137,9 +137,9 @@ public class CustomerSettleSheetController extends DefaultBaseController {
   }
 
   /**
-   * 审核通过客户结算单
+   * 审核通过收货方结算单
    */
-  @ApiOperation("审核通过客户结算单")
+  @ApiOperation("审核通过收货方结算单")
   @HasPermission({"customer-settle:sheet:approve"})
   @PatchMapping("/approve/pass")
   public InvokeResult<Void> approvePass(@RequestBody @Valid ApprovePassCustomerSettleSheetVo vo) {
@@ -150,9 +150,9 @@ public class CustomerSettleSheetController extends DefaultBaseController {
   }
 
   /**
-   * 直接审核通过客户结算单
+   * 直接审核通过收货方结算单
    */
-  @ApiOperation("直接审核通过客户结算单")
+  @ApiOperation("直接审核通过收货方结算单")
   @HasPermission({"customer-settle:sheet:approve"})
   @PostMapping("/approve/pass/direct")
   public InvokeResult<Void> directApprovePass(@RequestBody @Valid CreateCustomerSettleSheetVo vo) {
@@ -165,9 +165,9 @@ public class CustomerSettleSheetController extends DefaultBaseController {
   }
 
   /**
-   * 审核拒绝客户结算单
+   * 审核拒绝收货方结算单
    */
-  @ApiOperation("审核拒绝客户结算单")
+  @ApiOperation("审核拒绝收货方结算单")
   @HasPermission({"customer-settle:sheet:approve"})
   @PatchMapping("/approve/refuse")
   public InvokeResult<Void> approveRefuse(
@@ -179,13 +179,13 @@ public class CustomerSettleSheetController extends DefaultBaseController {
   }
 
   /**
-   * 删除客户结算单
+   * 删除收货方结算单
    */
-  @ApiOperation("删除客户结算单")
+  @ApiOperation("删除收货方结算单")
   @ApiImplicitParam(value = "ID", name = "id", paramType = "query", required = true)
   @HasPermission({"customer-settle:sheet:delete"})
   @DeleteMapping
-  public InvokeResult<Void> deleteById(@NotBlank(message = "客户结算单ID不能为空！") String id) {
+  public InvokeResult<Void> deleteById(@NotBlank(message = "收货方结算单ID不能为空！") String id) {
 
     customerSettleSheetService.deleteById(id);
 

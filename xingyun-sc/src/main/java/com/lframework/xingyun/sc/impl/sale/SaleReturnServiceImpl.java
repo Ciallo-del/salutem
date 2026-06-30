@@ -465,7 +465,7 @@ public class SaleReturnServiceImpl extends
 
     Customer customer = customerService.findById(vo.getCustomerId());
     if (customer == null) {
-      throw new InputErrorException("客户不存在！");
+      throw new InputErrorException("收货方不存在！");
     }
     saleReturn.setCustomerId(vo.getCustomerId());
 
@@ -531,7 +531,7 @@ public class SaleReturnServiceImpl extends
       if (requireOut) {
         if (StringUtil.isBlank(productVo.getOutSheetDetailId())) {
           if (!isGift) {
-            throw new InputErrorException("第" + orderNo + "行商品必须为“赠品”！");
+            throw new InputErrorException("第" + orderNo + "行药品必须为“赠品”！");
           }
         }
       }
@@ -552,7 +552,7 @@ public class SaleReturnServiceImpl extends
 
       Product product = productService.findById(productVo.getProductId());
       if (product == null) {
-        throw new InputErrorException("第" + orderNo + "行商品不存在！");
+        throw new InputErrorException("第" + orderNo + "行药品不存在！");
       }
 
       detail.setProductId(productVo.getProductId());
@@ -586,7 +586,7 @@ public class SaleReturnServiceImpl extends
   }
 
   /**
-   * 根据客户获取初始结算状态
+   * 根据收货方获取初始结算状态
    *
    * @param customer
    * @return

@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import lombok.Data;
 
 /**
- * 查询盘点任务详情中的商品信息 Dto
+ * 查询盘点任务详情中的药品信息 Dto
  */
 @Data
 public class GetTakeStockPlanDetailProductDto implements BaseDto, Serializable {
@@ -19,7 +19,7 @@ public class GetTakeStockPlanDetailProductDto implements BaseDto, Serializable {
   private String id;
 
   /**
-   * 商品ID
+   * 药品ID
    */
   private String productId;
 

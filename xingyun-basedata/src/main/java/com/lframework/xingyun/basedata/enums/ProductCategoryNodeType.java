@@ -18,6 +18,6 @@ public final class ProductCategoryNodeType implements NodeType, Serializable {
   @Override
   public String getDesc() {
 
-    return "商品分类";
+    return "药品分类";
   }
 }

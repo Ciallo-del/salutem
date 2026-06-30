@@ -33,7 +33,7 @@ public class ProductStockWarning extends BaseEntity implements BaseDto {
   private String scId;
 
   /**
-   * 商品ID
+   * 药品ID
    */
   private String productId;
 

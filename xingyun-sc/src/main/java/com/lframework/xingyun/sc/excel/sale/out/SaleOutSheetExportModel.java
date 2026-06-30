@@ -24,107 +24,56 @@ import lombok.Data;
 @Data
 public class SaleOutSheetExportModel extends BaseBo<SaleOutSheet> implements ExcelModel {
 
-  /**
-   * 单号
-   */
   @ExcelProperty("业务单据号")
   private String code;
 
-  /**
-   * 仓库编号
-   */
   @ExcelProperty("仓库编号")
   private String scCode;
 
-  /**
-   * 仓库名称
-   */
   @ExcelProperty("仓库名称")
   private String scName;
 
-  /**
-   * 客户编号
-   */
-  @ExcelProperty("客户编号")
+  @ExcelProperty("收货方编号")
   private String customerCode;
 
-  /**
-   * 客户名称
-   */
-  @ExcelProperty("客户名称")
+  @ExcelProperty("收货方名称")
   private String customerName;
 
-  /**
-   * 销售员姓名
-   */
   @ExcelProperty("销售员")
   private String salerName;
 
-  /**
-   * 单据总金额
-   */
   @ExcelProperty("单据总金额")
   private BigDecimal totalAmount;
 
-  /**
-   * 商品数量
-   */
-  @ExcelProperty("商品数量")
+  @ExcelProperty("药品数量")
   private BigDecimal receiveNum;
 
-  /**
-   * 赠品数量
-   */
   @ExcelProperty("赠品数量")
   private BigDecimal giftNum;
 
-  /**
-   * 操作时间
-   */
   @ExcelProperty("操作时间")
   @DateTimeFormat(StringPool.DATE_TIME_PATTERN)
   private Date createTime;
 
-  /**
-   * 操作人
-   */
   @ExcelProperty("操作人")
   private String createBy;
 
-  /**
-   * 审核状态
-   */
   @ExcelProperty("审核状态")
   private String status;
 
-  /**
-   * 审核时间
-   */
   @ExcelProperty("审核时间")
   @DateTimeFormat(StringPool.DATE_TIME_PATTERN)
   private Date approveTime;
 
-  /**
-   * 审核人
-   */
   @ExcelProperty("审核人")
   private String approveBy;
 
-  /**
-   * 结算状态
-   */
   @ExcelProperty("结算状态")
   private String settleStatus;
 
-  /**
-   * 备注
-   */
   @ExcelProperty("备注")
   private String description;
 
-  /**
-   * 采购订单号
-   */
   @ExcelProperty("销售订单号")
   private String purchaseOrderCode;
 
@@ -149,8 +98,16 @@ public class SaleOutSheetExportModel extends BaseBo<SaleOutSheet> implements Exc
     StoreCenterService storeCenterService = ApplicationUtil.getBean(StoreCenterService.class);
     StoreCenter sc = storeCenterService.findById(dto.getScId());
 
-    CustomerService customerService = ApplicationUtil.getBean(CustomerService.class);
-    Customer customer = customerService.findById(dto.getCustomerId());
+    this.customerCode = StringPool.EMPTY_STR;
+    this.customerName = StringPool.EMPTY_STR;
+    if (StringUtil.isNotBlank(dto.getCustomerId())) {
+      CustomerService customerService = ApplicationUtil.getBean(CustomerService.class);
+      Customer customer = customerService.findById(dto.getCustomerId());
+      if (customer != null) {
+        this.customerCode = customer.getCode();
+        this.customerName = customer.getName();
+      }
+    }
 
     SysUserService userService = ApplicationUtil.getBean(SysUserService.class);
     SysUser saler = null;
@@ -165,8 +122,6 @@ public class SaleOutSheetExportModel extends BaseBo<SaleOutSheet> implements Exc
     this.setCode(dto.getCode());
     this.setScCode(sc.getCode());
     this.setScName(sc.getName());
-    this.setCustomerCode(customer.getCode());
-    this.setCustomerName(customer.getName());
     this.setSalerName(saler == null ? null : saler.getName());
     this.setTotalAmount(dto.getTotalAmount());
     this.setReceiveNum(dto.getTotalNum());

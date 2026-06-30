@@ -31,7 +31,7 @@ public class PurchaseOrderDetail extends BaseEntity implements BaseDto {
   protected String orderId;
 
   /**
-   * 商品ID
+   * 药品ID
    */
   protected String productId;
 

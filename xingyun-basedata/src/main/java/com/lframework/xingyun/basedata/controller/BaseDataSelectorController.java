@@ -126,9 +126,9 @@ public class BaseDataSelectorController extends DefaultBaseController {
   private LogisticsCompanyService logisticsCompanyService;
 
   /**
-   * 商品
+   * 药品
    */
-  @ApiOperation("商品")
+  @ApiOperation("药品")
   @GetMapping("/product")
   public InvokeResult<PageResult<ProductSelectorBo>> product(
       @Valid QueryProductSelectorVo vo) {
@@ -146,9 +146,9 @@ public class BaseDataSelectorController extends DefaultBaseController {
   }
 
   /**
-   * 加载商品
+   * 加载药品
    */
-  @ApiOperation("加载商品")
+  @ApiOperation("加载药品")
   @PostMapping("/product/load")
   public InvokeResult<List<ProductSelectorBo>> loadProduct(
       @RequestBody(required = false) List<String> ids) {
@@ -401,9 +401,9 @@ public class BaseDataSelectorController extends DefaultBaseController {
   }
 
   /**
-   * 客户
+   * 收货方
    */
-  @ApiOperation("客户")
+  @ApiOperation("收货方")
   @GetMapping("/customer")
   public InvokeResult<PageResult<CustomerSelectorBo>> selector(@Valid QueryCustomerSelectorVo vo) {
 
@@ -421,9 +421,9 @@ public class BaseDataSelectorController extends DefaultBaseController {
   }
 
   /**
-   * 加载客户
+   * 加载收货方
    */
-  @ApiOperation("加载客户")
+  @ApiOperation("加载收货方")
   @PostMapping("/customer/load")
   public InvokeResult<List<CustomerSelectorBo>> loadCustomer(
       @RequestBody(required = false) List<String> ids) {

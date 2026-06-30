@@ -49,21 +49,21 @@ public class GetProductStockWarningBo extends BaseBo<ProductStockWarning> {
   private String scName;
 
   /**
-   * 商品ID
+   * 药品ID
    */
-  @ApiModelProperty("商品ID")
+  @ApiModelProperty("药品ID")
   private String productId;
 
   /**
-   * 商品编号
+   * 药品编号
    */
-  @ApiModelProperty("商品编号")
+  @ApiModelProperty("药品编号")
   private String productCode;
 
   /**
-   * 商品名称
+   * 药品名称
    */
-  @ApiModelProperty("商品名称")
+  @ApiModelProperty("药品名称")
   private String productName;
 
   /**

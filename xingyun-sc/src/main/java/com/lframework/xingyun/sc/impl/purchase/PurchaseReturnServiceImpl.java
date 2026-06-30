@@ -532,7 +532,7 @@ public class PurchaseReturnServiceImpl extends
       if (requireReceive) {
         if (StringUtil.isBlank(productVo.getReceiveSheetDetailId())) {
           if (!isGift) {
-            throw new InputErrorException("第" + orderNo + "行商品必须为“赠品”！");
+            throw new InputErrorException("第" + orderNo + "行药品必须为“赠品”！");
           }
         }
       }
@@ -552,15 +552,15 @@ public class PurchaseReturnServiceImpl extends
 
       Product product = productService.findById(productVo.getProductId());
       if (product == null) {
-        throw new InputErrorException("第" + orderNo + "行商品不存在！");
+        throw new InputErrorException("第" + orderNo + "行药品不存在！");
       }
 
       if (!NumberUtil.isNumberPrecision(productVo.getPurchasePrice(), 6)) {
-        throw new InputErrorException("第" + orderNo + "行商品采购价最多允许6位小数！");
+        throw new InputErrorException("第" + orderNo + "行药品采购价最多允许6位小数！");
       }
 
       if (!NumberUtil.isNumberPrecision(productVo.getReturnNum(), 8)) {
-        throw new InputErrorException("第" + orderNo + "行商品退货数量最多允许8位小数！");
+        throw new InputErrorException("第" + orderNo + "行药品退货数量最多允许8位小数！");
       }
 
       detail.setProductId(productVo.getProductId());

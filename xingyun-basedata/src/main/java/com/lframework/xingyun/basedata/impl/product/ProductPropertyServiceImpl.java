@@ -94,7 +94,7 @@ public class ProductPropertyServiceImpl extends
     return getBaseMapper().selectById(id);
   }
 
-  @OpLog(type = BaseDataOpLogType.class, name = "删除商品属性，ID：{}", params = "#id")
+  @OpLog(type = BaseDataOpLogType.class, name = "删除药品属性，ID：{}", params = "#id")
   @Transactional(rollbackFor = Exception.class)
   @Override
   public void deleteById(String id) {
@@ -134,7 +134,7 @@ public class ProductPropertyServiceImpl extends
     return results;
   }
 
-  @OpLog(type = BaseDataOpLogType.class, name = "新增商品属性，ID：{}, 编号：{}", params = {"#id",
+  @OpLog(type = BaseDataOpLogType.class, name = "新增药品属性，ID：{}, 编号：{}", params = {"#id",
       "#code"})
   @Transactional(rollbackFor = Exception.class)
   @Override
@@ -155,13 +155,13 @@ public class ProductPropertyServiceImpl extends
     if (vo.getPropertyType() == PropertyType.APPOINT.getCode().intValue()) {
       //如果是指定分类
       if (CollectionUtil.isEmpty(vo.getCategoryIds())) {
-        throw new InputErrorException("请选择商品分类！");
+        throw new InputErrorException("请选择药品分类！");
       }
 
       for (String categoryId : vo.getCategoryIds()) {
         ProductCategory productCategory = productCategoryService.findById(categoryId);
         if (productCategory == null) {
-          throw new InputErrorException("商品分类数据有误，请检查！");
+          throw new InputErrorException("药品分类数据有误，请检查！");
         }
       }
 
@@ -201,7 +201,7 @@ public class ProductPropertyServiceImpl extends
     return data.getId();
   }
 
-  @OpLog(type = BaseDataOpLogType.class, name = "修改商品属性，ID：{}, 编号：{}", params = {"#id",
+  @OpLog(type = BaseDataOpLogType.class, name = "修改药品属性，ID：{}, 编号：{}", params = {"#id",
       "#code"})
   @Transactional(rollbackFor = Exception.class)
   @Override
@@ -266,13 +266,13 @@ public class ProductPropertyServiceImpl extends
     if (vo.getPropertyType() == PropertyType.APPOINT.getCode().intValue()) {
       //如果是指定分类
       if (CollectionUtil.isEmpty(vo.getCategoryIds())) {
-        throw new InputErrorException("请选择商品分类！");
+        throw new InputErrorException("请选择药品分类！");
       }
 
       for (String categoryId : vo.getCategoryIds()) {
         ProductCategory productCategory = productCategoryService.findById(categoryId);
         if (productCategory == null) {
-          throw new InputErrorException("商品分类数据有误，请检查！");
+          throw new InputErrorException("药品分类数据有误，请检查！");
         }
       }
 

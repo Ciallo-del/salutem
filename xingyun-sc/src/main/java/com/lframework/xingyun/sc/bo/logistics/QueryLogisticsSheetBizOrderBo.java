@@ -89,8 +89,12 @@ public class QueryLogisticsSheetBizOrderBo extends BaseBo<LogisticsSheetBizOrder
 
     if (dto.getBizType() == LogisticsSheetDetailBizType.SALE_OUT_SHEET) {
       CustomerService customerService = ApplicationUtil.getBean(CustomerService.class);
-      Customer customer = customerService.findById(dto.getReceiverId());
-      this.receiverName = customer.getName();
+      if (StringUtil.isNotBlank(dto.getReceiverId())) {
+        Customer customer = customerService.findById(dto.getReceiverId());
+        if (customer != null) {
+          this.receiverName = customer.getName();
+        }
+      }
     } else if (dto.getBizType() == LogisticsSheetDetailBizType.RETAIL_OUT_SHEET) {
       if (StringUtil.isNotBlank(dto.getReceiverId())) {
         MemberService memberService = ApplicationUtil.getBean(MemberService.class);

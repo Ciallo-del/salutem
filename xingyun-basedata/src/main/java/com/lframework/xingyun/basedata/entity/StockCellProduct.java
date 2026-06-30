@@ -11,7 +11,7 @@ import lombok.Data;
 
 /**
  * <p>
- * 仓位商品
+ * 仓位药品
  * </p>
  *
  * @author lframework
@@ -39,7 +39,7 @@ public class StockCellProduct extends BaseEntity implements BaseDto {
   private String stockCellId;
 
   /**
-   * 商品ID
+   * 药品ID
    */
   private String productId;
 

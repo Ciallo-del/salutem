@@ -30,7 +30,7 @@ public class TakeStockPlanDetail extends BaseEntity implements BaseDto {
   private String planId;
 
   /**
-   * 商品ID
+   * 药品ID
    */
   private String productId;
 

@@ -4,8 +4,8 @@ import com.baomidou.mybatisplus.annotation.EnumValue;
 import com.lframework.starter.web.core.enums.BaseEnum;
 
 public enum CustomerSettleCheckSheetBizType implements BaseEnum<Integer> {
-  OUT_SHEET(1, "销售出库单"), SALE_RETURN(2, "销售退单"), SETTLE_FEE_SHEET(3, "客户费用单"), SETTLE_PRE_SHEET(4,
-      "客户预收款单");
+  OUT_SHEET(1, "销售出库单"), SALE_RETURN(2, "销售退单"), SETTLE_FEE_SHEET(3, "收货方费用单"), SETTLE_PRE_SHEET(4,
+      "收货方预收款单");
 
   @EnumValue
   private final Integer code;

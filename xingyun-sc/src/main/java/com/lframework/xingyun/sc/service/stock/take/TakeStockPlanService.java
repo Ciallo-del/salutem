@@ -70,7 +70,7 @@ public interface TakeStockPlanService extends BaseMpService<TakeStockPlan> {
   void update(UpdateTakeStockPlanVo vo);
 
   /**
-   * 根据盘点任务ID查询商品信息
+   * 根据盘点任务ID查询药品信息
    *
    * @param planId
    * @return

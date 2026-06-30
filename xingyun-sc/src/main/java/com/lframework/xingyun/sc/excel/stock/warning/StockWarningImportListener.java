@@ -43,7 +43,7 @@ public class StockWarningImportListener extends ExcelImportListener<StockWarning
     Product product = productService.getOne(queryProductWrapper);
     if (product == null) {
       throw new DefaultClientException(
-          "第" + context.readRowHolder().getRowIndex() + "行“商品编号”不存在");
+          "第" + context.readRowHolder().getRowIndex() + "行“药品编号”不存在");
     }
     data.setProductId(product.getId());
 

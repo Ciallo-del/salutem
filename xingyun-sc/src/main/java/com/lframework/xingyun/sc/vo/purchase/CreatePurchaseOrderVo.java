@@ -50,11 +50,11 @@ public class CreatePurchaseOrderVo implements BaseVo, Serializable {
   private LocalDate expectArriveDate;
 
   /**
-   * 商品信息
+   * 药品信息
    */
-  @ApiModelProperty(value = "商品信息", required = true)
+  @ApiModelProperty(value = "药品信息", required = true)
   @Valid
-  @NotEmpty(message = "商品不能为空！")
+  @NotEmpty(message = "药品不能为空！")
   private List<PurchaseProductVo> products;
 
   /**
@@ -76,31 +76,31 @@ public class CreatePurchaseOrderVo implements BaseVo, Serializable {
     for (PurchaseProductVo product : this.products) {
 
       if (StringUtil.isBlank(product.getProductId())) {
-        throw new InputErrorException("第" + orderNo + "行商品不能为空！");
+        throw new InputErrorException("第" + orderNo + "行药品不能为空！");
       }
 
       if (product.getPurchaseNum() == null) {
-        throw new InputErrorException("第" + orderNo + "行商品采购数量不能为空！");
+        throw new InputErrorException("第" + orderNo + "行药品采购数量不能为空！");
       }
 
       if (NumberUtil.le(product.getPurchaseNum(), BigDecimal.ZERO)) {
-        throw new InputErrorException("第" + orderNo + "行商品采购数量必须大于0！");
+        throw new InputErrorException("第" + orderNo + "行药品采购数量必须大于0！");
       }
 
       if (!NumberUtil.isNumberPrecision(product.getPurchaseNum(), 8)) {
-        throw new InputErrorException("第" + orderNo + "行商品采购数量最多允许8位小数！");
+        throw new InputErrorException("第" + orderNo + "行药品采购数量最多允许8位小数！");
       }
 
       if (product.getPurchasePrice() == null) {
-        throw new InputErrorException("第" + orderNo + "行商品采购价不能为空！");
+        throw new InputErrorException("第" + orderNo + "行药品采购价不能为空！");
       }
 
       if (NumberUtil.lt(product.getPurchasePrice(), BigDecimal.ZERO)) {
-        throw new InputErrorException("第" + orderNo + "行商品采购价不允许小于0！");
+        throw new InputErrorException("第" + orderNo + "行药品采购价不允许小于0！");
       }
 
       if (!NumberUtil.isNumberPrecision(product.getPurchasePrice(), 6)) {
-        throw new InputErrorException("第" + orderNo + "行商品采购价最多允许6位小数！");
+        throw new InputErrorException("第" + orderNo + "行药品采购价最多允许6位小数！");
       }
 
       orderNo++;

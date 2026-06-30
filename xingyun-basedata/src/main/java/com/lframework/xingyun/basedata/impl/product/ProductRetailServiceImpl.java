@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class ProductRetailServiceImpl extends BaseMpServiceImpl<ProductRetailMapper, ProductRetail>
     implements ProductRetailService {
 
-  @OpLog(type = BaseDataOpLogType.class, name = "设置商品零售价，ID：{}, 零售价：{}", params = {"#vo.id", "#vo.price"})
+  @OpLog(type = BaseDataOpLogType.class, name = "设置药品零售价，ID：{}, 零售价：{}", params = {"#vo.id", "#vo.price"})
   @Transactional(rollbackFor = Exception.class)
   @Override
   public String create(CreateProductRetailVo vo) {
@@ -36,7 +36,7 @@ public class ProductRetailServiceImpl extends BaseMpServiceImpl<ProductRetailMap
     return data.getId();
   }
 
-  @OpLog(type = BaseDataOpLogType.class, name = "设置商品零售价，ID：{}, 零售价：{}", params = {"#vo.id", "#vo.price"})
+  @OpLog(type = BaseDataOpLogType.class, name = "设置药品零售价，ID：{}, 零售价：{}", params = {"#vo.id", "#vo.price"})
   @Transactional(rollbackFor = Exception.class)
   @Override
   public void update(UpdateProductRetailVo vo) {

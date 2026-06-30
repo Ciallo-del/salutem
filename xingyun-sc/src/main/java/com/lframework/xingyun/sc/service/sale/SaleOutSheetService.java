@@ -3,6 +3,7 @@ package com.lframework.xingyun.sc.service.sale;
 import com.lframework.starter.web.core.components.resp.PageResult;
 import com.lframework.starter.web.core.service.BaseMpService;
 import com.lframework.xingyun.sc.dto.purchase.receive.GetPaymentDateDto;
+import com.lframework.xingyun.sc.dto.sale.out.SaleOutProductDto;
 import com.lframework.xingyun.sc.dto.sale.out.SaleOutSheetFullDto;
 import com.lframework.xingyun.sc.dto.sale.out.SaleOutSheetWithReturnDto;
 import com.lframework.xingyun.sc.entity.SaleOutSheet;
@@ -10,6 +11,7 @@ import com.lframework.xingyun.sc.enums.SettleStatus;
 import com.lframework.xingyun.sc.vo.sale.out.ApprovePassSaleOutSheetVo;
 import com.lframework.xingyun.sc.vo.sale.out.ApproveRefuseSaleOutSheetVo;
 import com.lframework.xingyun.sc.vo.sale.out.CreateSaleOutSheetVo;
+import com.lframework.xingyun.sc.vo.sale.out.QuerySaleOutProductVo;
 import com.lframework.xingyun.sc.vo.sale.out.QuerySaleOutSheetVo;
 import com.lframework.xingyun.sc.vo.sale.out.QuerySaleOutSheetWithReturnVo;
 import com.lframework.xingyun.sc.vo.sale.out.SaleOutSheetSelectorVo;
@@ -48,7 +50,7 @@ public interface SaleOutSheetService extends BaseMpService<SaleOutSheet> {
   PageResult<SaleOutSheet> selector(Integer pageIndex, Integer pageSize, SaleOutSheetSelectorVo vo);
 
   /**
-   * 根据客户ID查询默认付款日期
+   * 根据收货方ID查询默认付款日期
    *
    * @param customerId
    */
@@ -80,6 +82,18 @@ public interface SaleOutSheetService extends BaseMpService<SaleOutSheet> {
    */
   PageResult<SaleOutSheet> queryWithReturn(Integer pageIndex, Integer pageSize,
       QuerySaleOutSheetWithReturnVo vo);
+
+  /**
+   * 根据关键字查询出库药品
+   */
+  PageResult<SaleOutProductDto> querySaleOutByCondition(Integer pageIndex, Integer pageSize,
+      String scId, String condition);
+
+  /**
+   * 查询出库药品列表
+   */
+  PageResult<SaleOutProductDto> querySaleOutList(Integer pageIndex, Integer pageSize,
+      QuerySaleOutProductVo vo);
 
   /**
    * 创建

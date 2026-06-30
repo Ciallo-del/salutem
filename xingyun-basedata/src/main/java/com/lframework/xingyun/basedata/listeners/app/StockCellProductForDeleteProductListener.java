@@ -25,7 +25,7 @@ public class StockCellProductForDeleteProductListener implements
         .eq(StockCellProduct::getProductId, event.getEntity().getId());
     if (stockCellProductService.count(queryWrapper) > 0) {
       throw new DefaultClientException(
-          "商品：" + event.getEntity().getName() + "已关联仓位，不允许删除！");
+          "药品：" + event.getEntity().getName() + "已关联仓位，不允许删除！");
     }
   }
 }

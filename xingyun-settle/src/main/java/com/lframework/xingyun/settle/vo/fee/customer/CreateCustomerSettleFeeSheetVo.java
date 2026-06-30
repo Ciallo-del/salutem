@@ -19,10 +19,10 @@ public class CreateCustomerSettleFeeSheetVo implements BaseVo, Serializable {
   private static final long serialVersionUID = 1L;
 
   /**
-   * 客户ID
+   * 收货方ID
    */
-  @ApiModelProperty(value = "客户ID", required = true)
-  @NotNull(message = "客户ID不能为空！")
+  @ApiModelProperty(value = "收货方ID", required = true)
+  @NotNull(message = "收货方ID不能为空！")
   private String customerId;
 
   /**

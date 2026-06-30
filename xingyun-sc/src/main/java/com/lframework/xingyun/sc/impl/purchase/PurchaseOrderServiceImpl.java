@@ -528,7 +528,7 @@ public class PurchaseOrderServiceImpl extends
         PurchaseOrderDetail.class).eq(PurchaseOrderDetail::getOrderId, order.getId());
     purchaseOrderDetailService.remove(deleteDetailWrapper);
 
-    // 删除组合商品明细
+    // 删除组合药品明细
     Wrapper<PurchaseOrderDetailBundle> deleteBundleWrapper = Wrappers.lambdaQuery(
         PurchaseOrderDetailBundle.class).eq(PurchaseOrderDetailBundle::getOrderId, order.getId());
     purchaseOrderDetailBundleService.remove(deleteBundleWrapper);
@@ -630,7 +630,7 @@ public class PurchaseOrderServiceImpl extends
 
       Product product = productService.findById(productVo.getProductId());
       if (product == null) {
-        throw new InputErrorException("第" + orderNo + "行商品不存在！");
+        throw new InputErrorException("第" + orderNo + "行药品不存在！");
       }
 
       orderDetail.setProductId(productVo.getProductId());
@@ -650,10 +650,10 @@ public class PurchaseOrderServiceImpl extends
         purchaseOrderDetailService.save(orderDetail);
       }
 
-      // 这里处理组合商品
+      // 这里处理组合药品
       if (product.getProductType() == ProductType.BUNDLE) {
         if (!NumberUtil.isInteger(productVo.getPurchaseNum())) {
-          throw new InputErrorException("第" + orderNo + "行商品采购数量必须是整数！");
+          throw new InputErrorException("第" + orderNo + "行药品采购数量必须是整数！");
         }
         List<ProductBundle> productBundles = productBundleService.getByMainProductId(
             product.getId());

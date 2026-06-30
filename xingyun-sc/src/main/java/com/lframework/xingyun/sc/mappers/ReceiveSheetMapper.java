@@ -6,10 +6,12 @@ import com.lframework.starter.web.core.annotations.permission.DataPermissions;
 import com.lframework.starter.web.core.annotations.sort.Sort;
 import com.lframework.starter.web.core.annotations.sort.Sorts;
 import com.lframework.starter.web.inner.components.permission.OrderDataPermissionDataPermissionType;
+import com.lframework.xingyun.sc.dto.purchase.PurchaseProductDto;
 import com.lframework.xingyun.sc.dto.purchase.receive.ReceiveSheetFullDto;
 import com.lframework.xingyun.sc.dto.purchase.receive.ReceiveSheetWithReturnDto;
 import com.lframework.xingyun.sc.entity.ReceiveSheet;
 import com.lframework.xingyun.sc.enums.SettleStatus;
+import com.lframework.xingyun.sc.vo.purchase.receive.QueryReceiveProductVo;
 import com.lframework.xingyun.sc.vo.purchase.receive.QueryReceiveSheetVo;
 import com.lframework.xingyun.sc.vo.purchase.receive.QueryReceiveSheetWithReturnVo;
 import com.lframework.xingyun.sc.vo.purchase.receive.ReceiveSheetSelectorVo;
@@ -94,4 +96,15 @@ public interface ReceiveSheetMapper extends BaseMapper<ReceiveSheet> {
   List<ReceiveSheet> getApprovedList(@Param("supplierId") String supplierId,
       @Param("startTime") LocalDateTime startTime, @Param("endTime") LocalDateTime endTime,
       @Param("settleStatus") SettleStatus settleStatus);
+
+  /**
+   * 根据关键字查询收货药品
+   */
+  List<PurchaseProductDto> queryReceiveByCondition(@Param("scId") String scId,
+      @Param("condition") String condition);
+
+  /**
+   * 查询收货药品列表
+   */
+  List<PurchaseProductDto> queryReceiveList(@Param("vo") QueryReceiveProductVo vo);
 }

@@ -2,6 +2,7 @@ package com.lframework.xingyun.sc.service.purchase;
 
 import com.lframework.starter.web.core.components.resp.PageResult;
 import com.lframework.starter.web.core.service.BaseMpService;
+import com.lframework.xingyun.sc.dto.purchase.PurchaseProductDto;
 import com.lframework.xingyun.sc.dto.purchase.receive.GetPaymentDateDto;
 import com.lframework.xingyun.sc.dto.purchase.receive.ReceiveSheetFullDto;
 import com.lframework.xingyun.sc.dto.purchase.receive.ReceiveSheetWithReturnDto;
@@ -10,6 +11,7 @@ import com.lframework.xingyun.sc.enums.SettleStatus;
 import com.lframework.xingyun.sc.vo.purchase.receive.ApprovePassReceiveSheetVo;
 import com.lframework.xingyun.sc.vo.purchase.receive.ApproveRefuseReceiveSheetVo;
 import com.lframework.xingyun.sc.vo.purchase.receive.CreateReceiveSheetVo;
+import com.lframework.xingyun.sc.vo.purchase.receive.QueryReceiveProductVo;
 import com.lframework.xingyun.sc.vo.purchase.receive.QueryReceiveSheetVo;
 import com.lframework.xingyun.sc.vo.purchase.receive.QueryReceiveSheetWithReturnVo;
 import com.lframework.xingyun.sc.vo.purchase.receive.ReceiveSheetSelectorVo;
@@ -159,4 +161,16 @@ public interface ReceiveSheetService extends BaseMpService<ReceiveSheet> {
   List<ReceiveSheet> getApprovedList(String supplierId, LocalDateTime startTime,
       LocalDateTime endTime,
       SettleStatus settleStatus);
+
+  /**
+   * 根据关键字查询收货药品
+   */
+  PageResult<PurchaseProductDto> queryReceiveByCondition(Integer pageIndex, Integer pageSize,
+      String scId, String condition);
+
+  /**
+   * 查询收货药品列表
+   */
+  PageResult<PurchaseProductDto> queryReceiveList(Integer pageIndex, Integer pageSize,
+      QueryReceiveProductVo vo);
 }

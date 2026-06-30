@@ -41,15 +41,15 @@ public class QuerySaleOrderWithOutBo extends BaseBo<SaleOrder> {
     private String scName;
 
     /**
-     * 客户编号
+     * 收货方编号
      */
-    @ApiModelProperty("客户编号")
+    @ApiModelProperty("收货方编号")
     private String customerCode;
 
     /**
-     * 客户名称
+     * 收货方名称
      */
-    @ApiModelProperty("客户名称")
+    @ApiModelProperty("收货方名称")
     private String customerName;
 
     /**

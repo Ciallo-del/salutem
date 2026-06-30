@@ -296,9 +296,9 @@ public class RetailOutSheetController extends DefaultBaseController {
   }
 
   /**
-   * 根据关键字查询商品
+   * 根据关键字查询药品
    */
-  @ApiOperation("根据关键字查询可零售商品")
+  @ApiOperation("根据关键字查询可零售药品")
   @ApiImplicitParams({
       @ApiImplicitParam(value = "仓库ID", name = "scId", paramType = "query", required = true),
       @ApiImplicitParam(value = "关键字", name = "condition", paramType = "query", required = true)})
@@ -329,9 +329,9 @@ public class RetailOutSheetController extends DefaultBaseController {
   }
 
   /**
-   * 查询商品列表
+   * 查询药品列表
    */
-  @ApiOperation("查询可零售商品列表")
+  @ApiOperation("查询可零售药品列表")
   @HasPermission({"retail:out:add", "retail:out:modify", "retail:return:add",
       "retail:return:modify"})
   @GetMapping("/product/list")

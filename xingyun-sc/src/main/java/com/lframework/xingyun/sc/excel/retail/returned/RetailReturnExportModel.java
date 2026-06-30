@@ -80,9 +80,9 @@ public class RetailReturnExportModel extends BaseBo<RetailReturn> implements Exc
   private String payTypeStr;
 
   /**
-   * 商品数量
+   * 药品数量
    */
-  @ExcelProperty("商品数量")
+  @ExcelProperty("药品数量")
   private BigDecimal totalNum;
 
   /**

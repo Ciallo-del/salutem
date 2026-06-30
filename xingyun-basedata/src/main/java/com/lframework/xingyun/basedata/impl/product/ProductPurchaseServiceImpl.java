@@ -19,7 +19,7 @@ public class ProductPurchaseServiceImpl extends
     BaseMpServiceImpl<ProductPurchaseMapper, ProductPurchase>
     implements ProductPurchaseService {
 
-  @OpLog(type = BaseDataOpLogType.class, name = "设置商品采购价，ID：{}, 采购价：{}", params = {"#vo.id", "#vo.price"})
+  @OpLog(type = BaseDataOpLogType.class, name = "设置药品采购价，ID：{}, 采购价：{}", params = {"#vo.id", "#vo.price"})
   @Transactional(rollbackFor = Exception.class)
   @Override
   public String create(CreateProductPurchaseVo vo) {
@@ -37,7 +37,7 @@ public class ProductPurchaseServiceImpl extends
     return data.getId();
   }
 
-  @OpLog(type = BaseDataOpLogType.class, name = "设置商品采购价，ID：{}, 采购价：{}", params = {"#vo.id", "#vo.price"})
+  @OpLog(type = BaseDataOpLogType.class, name = "设置药品采购价，ID：{}, 采购价：{}", params = {"#vo.id", "#vo.price"})
   @Transactional(rollbackFor = Exception.class)
   @Override
   public void update(UpdateProductPurchaseVo vo) {

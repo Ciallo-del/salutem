@@ -31,7 +31,7 @@ public class SaleReturnFullDto implements BaseDto, Serializable {
   private String scId;
 
   /**
-   * 客户ID
+   * 收货方ID
    */
   private String customerId;
 
@@ -46,7 +46,7 @@ public class SaleReturnFullDto implements BaseDto, Serializable {
   private LocalDate paymentDate;
 
   /**
-   * 商品数量
+   * 药品数量
    */
   private BigDecimal totalNum;
 
@@ -131,7 +131,7 @@ public class SaleReturnFullDto implements BaseDto, Serializable {
     private String id;
 
     /**
-     * 商品ID
+     * 药品ID
      */
     private String productId;
 

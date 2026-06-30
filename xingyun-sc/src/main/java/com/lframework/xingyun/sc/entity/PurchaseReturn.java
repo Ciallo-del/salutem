@@ -62,7 +62,7 @@ public class PurchaseReturn extends BaseEntity implements BaseDto {
   private String receiveSheetId;
 
   /**
-   * 商品数量
+   * 药品数量
    */
   private BigDecimal totalNum;
 

@@ -50,22 +50,22 @@ public class StockCellProductDto implements BaseDto, Serializable {
   private Integer stockCellType;
 
   /**
-   * 商品ID
+   * 药品ID
    */
   private String productId;
 
   /**
-   * 商品编号
+   * 药品编号
    */
   private String productCode;
 
   /**
-   * 商品名称
+   * 药品名称
    */
   private String productName;
 
   /**
-   * 商品规格
+   * 药品规格
    */
   private String spec;
 

@@ -11,7 +11,7 @@ import lombok.Data;
 
 /**
  * <p>
- * 组合商品
+ * 组合药品
  * </p>
  *
  * @author zmj
@@ -31,7 +31,7 @@ public class ProductBundle extends BaseEntity implements BaseDto {
   private String id;
 
   /**
-   * 主商品ID
+   * 主药品ID
    */
   private String mainProductId;
 

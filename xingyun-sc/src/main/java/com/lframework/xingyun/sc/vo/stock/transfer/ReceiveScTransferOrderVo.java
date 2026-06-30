@@ -25,11 +25,11 @@ public class ReceiveScTransferOrderVo implements BaseVo, Serializable {
   private String id;
 
   /**
-   * 商品信息
+   * 药品信息
    */
-  @ApiModelProperty(value = "收货商品", required = true)
+  @ApiModelProperty(value = "收货药品", required = true)
   @Valid
-  @NotEmpty(message = "收货商品不能为空！")
+  @NotEmpty(message = "收货药品不能为空！")
   private List<ReceiveScTransferProductVo> products;
 
   @Data
@@ -38,10 +38,10 @@ public class ReceiveScTransferOrderVo implements BaseVo, Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 商品ID
+     * 药品ID
      */
-    @ApiModelProperty(value = "商品ID", required = true)
-    @NotBlank(message = "商品ID不能为空！")
+    @ApiModelProperty(value = "药品ID", required = true)
+    @NotBlank(message = "药品ID不能为空！")
     private String productId;
 
     /**

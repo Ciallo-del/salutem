@@ -83,7 +83,7 @@ public interface SaleOrderMapper extends BaseMapper<SaleOrder> {
       @Param("multipleRelate") boolean multipleRelate);
 
   /**
-   * 根据关键字销售采购商品信息
+   * 根据关键字销售采购药品信息
    *
    * @param condition
    * @return
@@ -97,7 +97,7 @@ public interface SaleOrderMapper extends BaseMapper<SaleOrder> {
       @Param("condition") String condition, @Param("isReturn") Boolean isReturn);
 
   /**
-   * 查询可销售商品信息
+   * 查询可销售药品信息
    *
    * @param vo
    * @return

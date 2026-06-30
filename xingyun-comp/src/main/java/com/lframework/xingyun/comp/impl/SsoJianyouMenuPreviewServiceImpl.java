@@ -66,7 +66,7 @@ public class SsoJianyouMenuPreviewServiceImpl implements SsoJianyouMenuPreviewSe
             new GroupConfig("System", "系统管理", Collections.singleton("System"), menu -> true),
             new GroupConfig("MsgCenter", "消息中心", Collections.singleton("MsgCenter"), menu -> true),
             new GroupConfig("BaseData", "基础信息管理", Collections.singleton("BaseData"), menu -> true),
-            new GroupConfig("Product", "商品中心", Collections.singleton("Product"), menu -> true),
+            new GroupConfig("Product", "药品中心", Collections.singleton("Product"), menu -> true),
             new GroupConfig("StockManage", "库存管理", Collections.singleton(ROOT_MENU_STOCK_MANAGE), menu -> true),
             new GroupConfig("TakeStock", "库存盘点", Collections.singleton(ROOT_MENU_TAKE_STOCK), menu -> true),
             new GroupConfig("StockAdjust", "库存调整", Collections.singleton(ROOT_MENU_STOCK_ADJUST), menu -> true),

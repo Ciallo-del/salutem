@@ -117,7 +117,7 @@ public interface SaleOrderService extends BaseMpService<SaleOrder> {
   void deleteById(String id);
 
   /**
-   * 根据关键字查询销售商品信息
+   * 根据关键字查询销售药品信息
    *
    * @param pageIndex
    * @param pageSize
@@ -127,7 +127,7 @@ public interface SaleOrderService extends BaseMpService<SaleOrder> {
   PageResult<SaleProductDto> querySaleByCondition(Integer pageIndex, Integer pageSize, String condition, Boolean isReturn);
 
   /**
-   * 查询可销售商品信息
+   * 查询可销售药品信息
    *
    * @param pageIndex
    * @param pageSize

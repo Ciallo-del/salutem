@@ -12,6 +12,7 @@ import com.lframework.xingyun.basedata.entity.ProductCategory;
 import com.lframework.xingyun.basedata.service.product.ProductBrandService;
 import com.lframework.xingyun.basedata.service.product.ProductCategoryService;
 import io.swagger.annotations.ApiModelProperty;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import lombok.Data;
 
@@ -55,11 +56,25 @@ public class QueryProductBo extends BaseBo<Product> {
   private String brandName;
 
   /**
-   * 商品类型
+   * 药品类型
    */
-  @ApiModelProperty("商品类型")
+  @ApiModelProperty("药品类型")
   @EnumConvert
   private Integer productType;
+
+  /**
+   * 生产时间
+   */
+  @ApiModelProperty("生产时间")
+  @JsonFormat(pattern = StringPool.DATE_PATTERN)
+  private LocalDate productionTime;
+
+  /**
+   * 截止时间
+   */
+  @ApiModelProperty("截止时间")
+  @JsonFormat(pattern = StringPool.DATE_PATTERN)
+  private LocalDate deadlineTime;
 
   /**
    * 创建时间

@@ -28,11 +28,11 @@ public class HandleTakeStockPlanVo implements BaseVo, Serializable {
   private String id;
 
   /**
-   * 商品信息
+   * 药品信息
    */
-  @ApiModelProperty(value = "商品信息", required = true)
+  @ApiModelProperty(value = "药品信息", required = true)
   @Valid
-  @NotEmpty(message = "商品信息不能为空！")
+  @NotEmpty(message = "药品信息不能为空！")
   private List<ProductVo> products;
 
   /**
@@ -59,10 +59,10 @@ public class HandleTakeStockPlanVo implements BaseVo, Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 商品ID
+     * 药品ID
      */
-    @ApiModelProperty(value = "商品ID", required = true)
-    @NotBlank(message = "商品ID不能为空！")
+    @ApiModelProperty(value = "药品ID", required = true)
+    @NotBlank(message = "药品ID不能为空！")
     private String productId;
 
     /**
@@ -87,15 +87,15 @@ public class HandleTakeStockPlanVo implements BaseVo, Serializable {
       int orderNo = 1;
       for (ProductVo product : this.products) {
         if (product.getTakeNum() == null) {
-          throw new DefaultClientException("第" + orderNo + "行商品修改后盘点数量不能为空！");
+          throw new DefaultClientException("第" + orderNo + "行药品修改后盘点数量不能为空！");
         }
 
         if (NumberUtil.lt(product.getTakeNum(), BigDecimal.ZERO)) {
-          throw new DefaultClientException("第" + orderNo + "行商品修改后盘点数量不能小于0！");
+          throw new DefaultClientException("第" + orderNo + "行药品修改后盘点数量不能小于0！");
         }
 
         if (!NumberUtil.isNumberPrecision(product.getTakeNum(), 8)) {
-          throw new DefaultClientException("第" + orderNo + "行商品修改后盘点数量最多允许8位小数！");
+          throw new DefaultClientException("第" + orderNo + "行药品修改后盘点数量最多允许8位小数！");
         }
 
         orderNo++;

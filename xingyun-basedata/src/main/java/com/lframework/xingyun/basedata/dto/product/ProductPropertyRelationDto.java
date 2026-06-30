@@ -18,7 +18,7 @@ public class ProductPropertyRelationDto implements BaseDto, Serializable {
   private String id;
 
   /**
-   * 商品ID
+   * 药品ID
    */
   private String productId;
 

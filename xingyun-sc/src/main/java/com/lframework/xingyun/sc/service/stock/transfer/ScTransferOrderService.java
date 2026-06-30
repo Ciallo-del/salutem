@@ -91,7 +91,7 @@ public interface ScTransferOrderService extends BaseMpService<ScTransferOrder> {
   void receive(ReceiveScTransferOrderVo vo);
 
   /**
-   * 根据关键字查询仓库调拨单商品信息
+   * 根据关键字查询仓库调拨单药品信息
    *
    * @param pageIndex
    * @param pageSize
@@ -103,7 +103,7 @@ public interface ScTransferOrderService extends BaseMpService<ScTransferOrder> {
       String scId, String condition);
 
   /**
-   * 查询仓库调拨单商品信息
+   * 查询仓库调拨单药品信息
    *
    * @param pageIndex
    * @param pageSize

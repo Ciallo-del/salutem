@@ -57,9 +57,9 @@ public class QueryProductSelectorVo extends PageVo implements BaseVo, Serializab
   private LocalDateTime endTime;
 
   /**
-   * 商品类型
+   * 药品类型
    */
-  @ApiModelProperty("商品类型")
-  @IsEnum(message = "商品类型格式错误！", enumClass = ProductType.class)
+  @ApiModelProperty("药品类型")
+  @IsEnum(message = "药品类型格式错误！", enumClass = ProductType.class)
   private Integer productType;
 }

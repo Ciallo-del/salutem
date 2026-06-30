@@ -143,9 +143,9 @@ public class TakeStockPlanController extends DefaultBaseController {
   }
 
   /**
-   * 根据盘点任务ID查询商品信息
+   * 根据盘点任务ID查询药品信息
    */
-  @ApiOperation("根据盘点任务ID查询商品信息")
+  @ApiOperation("根据盘点任务ID查询药品信息")
   @ApiImplicitParam(value = "ID", name = "id", paramType = "query", required = true)
   @HasPermission({"stock:take:sheet:add", "stock:take:sheet:modify"})
   @GetMapping("/products")
@@ -154,7 +154,7 @@ public class TakeStockPlanController extends DefaultBaseController {
 
     TakeStockConfig config = takeStockConfigService.get();
     if (!config.getShowProduct()) {
-      // 如果不显示商品的话，则显示emptyList
+      // 如果不显示药品的话，则显示emptyList
       return InvokeResultBuilder.success(CollectionUtil.emptyList());
     }
 

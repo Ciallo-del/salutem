@@ -42,7 +42,7 @@ public interface ProductMapper extends BaseMapper<Product> {
   List<Product> query(@Param("vo") QueryProductVo vo);
 
   /**
-   * 查询商品品种数
+   * 查询药品品种数
    *
    * @param vo
    * @return

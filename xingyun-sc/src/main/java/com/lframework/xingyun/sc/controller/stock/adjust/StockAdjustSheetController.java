@@ -114,9 +114,9 @@ public class StockAdjustSheetController extends DefaultBaseController {
   }
 
   /**
-   * 根据关键字查询商品列表
+   * 根据关键字查询药品列表
    */
-  @ApiOperation("根据关键字查询商品列表")
+  @ApiOperation("根据关键字查询药品列表")
   @ApiImplicitParams({
       @ApiImplicitParam(value = "仓库ID", name = "scId", paramType = "query", required = true),
       @ApiImplicitParam(value = "关键字", name = "condition", paramType = "query", required = true)})
@@ -142,9 +142,9 @@ public class StockAdjustSheetController extends DefaultBaseController {
   }
 
   /**
-   * 查询商品列表
+   * 查询药品列表
    */
-  @ApiOperation("查询商品列表")
+  @ApiOperation("查询药品列表")
   @HasPermission({"stock:adjust:add", "stock:adjust:modify"})
   @GetMapping("/product/list")
   public InvokeResult<PageResult<StockAdjustProductBo>> queryProductList(

@@ -386,7 +386,7 @@ public class ScTransferOrderServiceImpl extends
                 productVo.getReceiveNum(), addProductStockVo.getTaxAmount()) != 1) {
             Product product = productService.findById(productVo.getProductId());
             throw new DefaultClientException(
-                    "商品（" + product.getCode() + "）" + product.getName() + "待收货数量不足，请检查！");
+                    "药品（" + product.getCode() + "）" + product.getName() + "待收货数量不足，请检查！");
         }
     }
 
@@ -460,7 +460,7 @@ public class ScTransferOrderServiceImpl extends
       detail.setOrderId(data.getId());
       detail.setProductId(product.getProductId());
       if (!NumberUtil.isNumberPrecision(product.getTransferNum(), 8)) {
-        throw new DefaultClientException("第" + orderNo + "行商品的调拨数量最多允许8位小数！");
+        throw new DefaultClientException("第" + orderNo + "行药品的调拨数量最多允许8位小数！");
       }
       detail.setTransferNum(product.getTransferNum());
       detail.setDescription(

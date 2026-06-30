@@ -38,11 +38,11 @@ public class CreateScTransferOrderVo implements BaseVo, Serializable {
   private String description;
 
   /**
-   * 商品信息
+   * 药品信息
    */
-  @ApiModelProperty(value = "商品信息", required = true)
+  @ApiModelProperty(value = "药品信息", required = true)
   @Valid
-  @NotEmpty(message = "请录入商品！")
+  @NotEmpty(message = "请录入药品！")
   private List<ScTransferProductVo> products;
 
   public void validate() {
@@ -50,11 +50,11 @@ public class CreateScTransferOrderVo implements BaseVo, Serializable {
     int orderNo = 1;
     for (ScTransferProductVo product : this.products) {
       if (NumberUtil.le(product.getTransferNum(), BigDecimal.ZERO)) {
-        throw new DefaultClientException("第" + orderNo + "行商品的调拨数量必须大于0！");
+        throw new DefaultClientException("第" + orderNo + "行药品的调拨数量必须大于0！");
       }
 
       if (!NumberUtil.isNumberPrecision(product.getTransferNum(), 8)) {
-        throw new DefaultClientException("第" + orderNo + "行商品的调拨数量最多允许8位小数！");
+        throw new DefaultClientException("第" + orderNo + "行药品的调拨数量最多允许8位小数！");
       }
     }
   }

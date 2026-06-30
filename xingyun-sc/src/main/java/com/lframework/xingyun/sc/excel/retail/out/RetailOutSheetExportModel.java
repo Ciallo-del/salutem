@@ -48,13 +48,13 @@ public class RetailOutSheetExportModel extends BaseBo<RetailOutSheet> implements
   private String scName;
 
   /**
-   * 客户编号
+   * 收货方编号
    */
   @ExcelProperty("会员编号")
   private String memberCode;
 
   /**
-   * 客户名称
+   * 收货方名称
    */
   @ExcelProperty("会员名称")
   private String memberName;
@@ -78,9 +78,9 @@ public class RetailOutSheetExportModel extends BaseBo<RetailOutSheet> implements
   private String payTypeStr;
 
   /**
-   * 商品数量
+   * 药品数量
    */
-  @ExcelProperty("商品数量")
+  @ExcelProperty("药品数量")
   private BigDecimal receiveNum;
 
   /**

@@ -110,7 +110,7 @@ public interface TakeStockSheetService extends BaseMpService<TakeStockSheet> {
   Boolean hasUnApprove(String planId);
 
   /**
-   * 根据关键字查询盘点单商品信息
+   * 根据关键字查询盘点单药品信息
    *
    * @param pageIndex
    * @param pageSize
@@ -121,7 +121,7 @@ public interface TakeStockSheetService extends BaseMpService<TakeStockSheet> {
       String condition);
 
   /**
-   * 查询盘点单商品信息
+   * 查询盘点单药品信息
    *
    * @param pageIndex
    * @param pageSize

@@ -20,9 +20,9 @@ public class QuerySaleReturnVo extends SortPageVo {
   private String code;
 
   /**
-   * 客户ID
+   * 收货方ID
    */
-  @ApiModelProperty("客户ID")
+  @ApiModelProperty("收货方ID")
   private String customerId;
 
   /**

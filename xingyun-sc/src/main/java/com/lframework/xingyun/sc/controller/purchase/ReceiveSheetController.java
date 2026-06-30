@@ -1,6 +1,7 @@
 package com.lframework.xingyun.sc.controller.purchase;
 
 import com.lframework.starter.common.utils.CollectionUtil;
+import com.lframework.starter.common.utils.StringUtil;
 import com.lframework.starter.web.core.annotations.security.HasPermission;
 import com.lframework.starter.web.core.controller.DefaultBaseController;
 import com.lframework.starter.web.core.components.resp.InvokeResult;
@@ -9,12 +10,14 @@ import com.lframework.starter.web.core.components.resp.PageResult;
 import com.lframework.starter.web.core.utils.ExcelUtil;
 import com.lframework.starter.web.core.utils.PageResultUtil;
 import com.lframework.starter.mq.core.utils.ExportTaskUtil;
+import com.lframework.xingyun.sc.bo.purchase.PurchaseProductBo;
 import com.lframework.xingyun.sc.bo.purchase.receive.GetPaymentDateBo;
 import com.lframework.xingyun.sc.bo.purchase.receive.GetReceiveSheetBo;
 import com.lframework.xingyun.sc.bo.purchase.receive.PrintReceiveSheetBo;
 import com.lframework.xingyun.sc.bo.purchase.receive.QueryReceiveSheetBo;
 import com.lframework.xingyun.sc.bo.purchase.receive.QueryReceiveSheetWithReturnBo;
 import com.lframework.xingyun.sc.bo.purchase.receive.ReceiveSheetWithReturnBo;
+import com.lframework.xingyun.sc.dto.purchase.PurchaseProductDto;
 import com.lframework.xingyun.sc.dto.purchase.receive.GetPaymentDateDto;
 import com.lframework.xingyun.sc.dto.purchase.receive.ReceiveSheetFullDto;
 import com.lframework.xingyun.sc.dto.purchase.receive.ReceiveSheetWithReturnDto;
@@ -28,11 +31,13 @@ import com.lframework.xingyun.sc.service.purchase.ReceiveSheetService;
 import com.lframework.xingyun.sc.vo.purchase.receive.ApprovePassReceiveSheetVo;
 import com.lframework.xingyun.sc.vo.purchase.receive.ApproveRefuseReceiveSheetVo;
 import com.lframework.xingyun.sc.vo.purchase.receive.CreateReceiveSheetVo;
+import com.lframework.xingyun.sc.vo.purchase.receive.QueryReceiveProductVo;
 import com.lframework.xingyun.sc.vo.purchase.receive.QueryReceiveSheetVo;
 import com.lframework.xingyun.sc.vo.purchase.receive.QueryReceiveSheetWithReturnVo;
 import com.lframework.xingyun.sc.vo.purchase.receive.UpdateReceiveSheetVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -148,6 +153,56 @@ public class ReceiveSheetController extends DefaultBaseController {
     GetPaymentDateBo result = new GetPaymentDateBo(data);
 
     return InvokeResultBuilder.success(result);
+  }
+
+  /**
+   * 根据关键字查询收货药品
+   */
+  @ApiOperation("根据关键字查询收货药品")
+  @ApiImplicitParams({
+      @ApiImplicitParam(value = "仓库ID", name = "scId", paramType = "query", required = true),
+      @ApiImplicitParam(value = "关键字", name = "condition", paramType = "query", required = true)})
+  @HasPermission({"purchase:receive:add", "purchase:receive:modify"})
+  @GetMapping("/product/search")
+  public InvokeResult<List<PurchaseProductBo>> searchProducts(
+      @NotBlank(message = "仓库ID不能为空！") String scId, String condition) {
+
+    if (StringUtil.isBlank(condition)) {
+      return InvokeResultBuilder.success(CollectionUtil.emptyList());
+    }
+
+    PageResult<PurchaseProductDto> pageResult = receiveSheetService.queryReceiveByCondition(
+        getPageIndex(), getPageSize(), scId, condition);
+    List<PurchaseProductBo> results = CollectionUtil.emptyList();
+    List<PurchaseProductDto> datas = pageResult.getDatas();
+    if (!CollectionUtil.isEmpty(datas)) {
+      results = datas.stream().map(t -> new PurchaseProductBo(scId, t))
+          .collect(Collectors.toList());
+    }
+
+    return InvokeResultBuilder.success(results);
+  }
+
+  /**
+   * 查询收货药品列表
+   */
+  @ApiOperation("查询收货药品列表")
+  @HasPermission({"purchase:receive:add", "purchase:receive:modify"})
+  @GetMapping("/product/list")
+  public InvokeResult<PageResult<PurchaseProductBo>> queryProductList(
+      @Valid QueryReceiveProductVo vo) {
+
+    PageResult<PurchaseProductDto> pageResult = receiveSheetService.queryReceiveList(
+        getPageIndex(vo), getPageSize(vo), vo);
+    List<PurchaseProductBo> results = null;
+    List<PurchaseProductDto> datas = pageResult.getDatas();
+
+    if (!CollectionUtil.isEmpty(datas)) {
+      results = datas.stream().map(t -> new PurchaseProductBo(vo.getScId(), t))
+          .collect(Collectors.toList());
+    }
+
+    return InvokeResultBuilder.success(PageResultUtil.rebuild(pageResult, results));
   }
 
   /**

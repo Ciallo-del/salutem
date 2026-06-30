@@ -54,7 +54,7 @@ public interface PreTakeStockSheetService extends BaseMpService<PreTakeStockShee
   PreTakeStockSheetFullDto getDetail(String id);
 
   /**
-   * 根据预先盘点单、盘点任务查询商品信息
+   * 根据预先盘点单、盘点任务查询药品信息
    *
    * @param id
    * @param planId
@@ -85,7 +85,7 @@ public interface PreTakeStockSheetService extends BaseMpService<PreTakeStockShee
   void deleteById(String id);
 
   /**
-   * 根据关键字查询预先盘点单商品信息
+   * 根据关键字查询预先盘点单药品信息
    *
    * @param pageIndex
    * @param pageSize
@@ -96,7 +96,7 @@ public interface PreTakeStockSheetService extends BaseMpService<PreTakeStockShee
       String condition);
 
   /**
-   * 查询预先盘点单商品信息
+   * 查询预先盘点单药品信息
    *
    * @param pageIndex
    * @param pageSize

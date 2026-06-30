@@ -117,9 +117,9 @@ public class TakeStockSheetController extends DefaultBaseController {
   }
 
   /**
-   * 根据关键字查询商品列表
+   * 根据关键字查询药品列表
    */
-  @ApiOperation("根据关键字查询商品列表")
+  @ApiOperation("根据关键字查询药品列表")
   @ApiImplicitParams({
       @ApiImplicitParam(value = "盘点任务ID", name = "planId", paramType = "query", required = true),
       @ApiImplicitParam(value = "关键字", name = "condition", paramType = "query", required = true)})
@@ -153,9 +153,9 @@ public class TakeStockSheetController extends DefaultBaseController {
   }
 
   /**
-   * 查询商品列表
+   * 查询药品列表
    */
-  @ApiOperation("查询商品列表")
+  @ApiOperation("查询药品列表")
   @HasPermission({"stock:take:sheet:add", "stock:take:sheet:modify"})
   @GetMapping("/product/list")
   public InvokeResult<PageResult<TakeStockSheetProductBo>> queryProductList(

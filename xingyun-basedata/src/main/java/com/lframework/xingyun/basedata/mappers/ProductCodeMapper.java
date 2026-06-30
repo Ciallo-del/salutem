@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>
- * 商品编号 Mapper 接口
+ * 药品编号 Mapper 接口
  * </p>
  *
  * @author lframework

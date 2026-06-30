@@ -25,11 +25,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 商品库存变动记录
+ * 药品库存变动记录
  *
  * @author zmj
  */
-@Api(tags = "商品库存变动记录")
+@Api(tags = "药品库存变动记录")
 @Validated
 @RestController
 @RequestMapping("/stock/product/log")
@@ -39,9 +39,9 @@ public class ProductStockLogController extends DefaultBaseController {
   private ProductStockLogService productStockLogService;
 
   /**
-   * 查询商品库存变动记录
+   * 查询药品库存变动记录
    */
-  @ApiOperation("查询商品库存变动记录")
+  @ApiOperation("查询药品库存变动记录")
   @HasPermission({"stock:product-log:query"})
   @GetMapping("/query")
   public InvokeResult<PageResult<QueryProductStockLogBo>> query(@Valid QueryProductStockLogVo vo) {
@@ -59,14 +59,14 @@ public class ProductStockLogController extends DefaultBaseController {
   }
 
   /**
-   * 导出商品库存变动记录
+   * 导出药品库存变动记录
    */
-  @ApiOperation("导出商品库存变动记录")
+  @ApiOperation("导出药品库存变动记录")
   @HasPermission({"stock:product-log:export"})
   @GetMapping("/export")
   public InvokeResult<Void> export(@Valid QueryProductStockLogVo vo) {
 
-    ExportTaskUtil.exportTask("商品库存变动记录信息", ProductStockLogExportTaskWorker.class, vo);
+    ExportTaskUtil.exportTask("药品库存变动记录信息", ProductStockLogExportTaskWorker.class, vo);
 
     return InvokeResultBuilder.success();
   }

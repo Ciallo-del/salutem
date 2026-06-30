@@ -30,7 +30,7 @@ public interface ProductStockService extends BaseMpService<ProductStock> {
   List<ProductStock> query(QueryProductStockVo vo);
 
   /**
-   * 根据商品ID、仓库ID查询
+   * 根据药品ID、仓库ID查询
    *
    * @param productId
    * @param scId
@@ -39,7 +39,7 @@ public interface ProductStockService extends BaseMpService<ProductStock> {
   ProductStock getByProductIdAndScId(String productId, String scId);
 
   /**
-   * 根据商品ID、仓库ID查询
+   * 根据药品ID、仓库ID查询
    *
    * @param productIds
    * @param scId

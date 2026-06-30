@@ -26,38 +26,38 @@ public class UpdateProductPolyVo implements BaseVo, Serializable {
   private String id;
 
   /**
-   * 商品货号
+   * 药品货号
    */
-  @ApiModelProperty(value = "商品货号", required = true)
+  @ApiModelProperty(value = "药品货号", required = true)
   @IsCode
-  @NotBlank(message = "商品货号不能为空！")
+  @NotBlank(message = "药品货号不能为空！")
   private String code;
 
   /**
-   * 商品名称
+   * 药品名称
    */
-  @ApiModelProperty(value = "商品名称", required = true)
-  @NotBlank(message = "商品名称不能为空！")
+  @ApiModelProperty(value = "药品名称", required = true)
+  @NotBlank(message = "药品名称不能为空！")
   private String name;
 
   /**
-   * 商品简称
+   * 药品简称
    */
-  @ApiModelProperty("商品简称")
+  @ApiModelProperty("药品简称")
   private String shortName;
 
   /**
    * 分类ID
    */
   @ApiModelProperty(value = "分类ID", required = true)
-  @NotBlank(message = "请选择商品分类！")
+  @NotBlank(message = "请选择药品分类！")
   private String categoryId;
 
   /**
    * 品牌ID
    */
   @ApiModelProperty(value = "品牌ID", required = true)
-  @NotBlank(message = "请选择商品品牌！")
+  @NotBlank(message = "请选择药品品牌！")
   private String brandId;
 
   /**
@@ -79,9 +79,9 @@ public class UpdateProductPolyVo implements BaseVo, Serializable {
   private BigDecimal saleTaxRate;
 
   /**
-   * 商品属性
+   * 药品属性
    */
-  @ApiModelProperty(value = "商品属性", required = true)
+  @ApiModelProperty(value = "药品属性", required = true)
   @Valid
   private List<PropertyVo> properties;
 

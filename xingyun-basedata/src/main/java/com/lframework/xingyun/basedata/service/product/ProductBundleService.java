@@ -7,7 +7,7 @@ import java.util.List;
 public interface ProductBundleService extends BaseMpService<ProductBundle> {
 
   /**
-   * 根据组合商品ID查询
+   * 根据组合药品ID查询
    * @param id
    * @return
    */

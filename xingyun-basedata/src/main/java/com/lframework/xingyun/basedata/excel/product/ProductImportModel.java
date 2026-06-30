@@ -5,6 +5,7 @@ import com.alibaba.excel.annotation.ExcelProperty;
 import com.lframework.starter.web.core.annotations.excel.ExcelRequired;
 import com.lframework.starter.web.core.components.excel.ExcelModel;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 import lombok.Data;
 
@@ -118,4 +119,18 @@ public class ProductImportModel implements ExcelModel {
   @ExcelRequired
   @ExcelProperty("零售价（元）")
   private BigDecimal retailPrice;
+
+  /**
+   * 生产时间
+   */
+  @ExcelRequired
+  @ExcelProperty("生产时间")
+  private Date productionTime;
+
+  /**
+   * 截止时间
+   */
+  @ExcelRequired
+  @ExcelProperty("截止时间")
+  private Date deadlineTime;
 }

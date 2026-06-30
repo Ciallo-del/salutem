@@ -59,6 +59,7 @@ import com.lframework.xingyun.basedata.vo.product.sale.CreateProductSaleVo;
 import com.lframework.xingyun.basedata.vo.product.sale.UpdateProductSaleVo;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -167,7 +168,7 @@ public class ProductServiceImpl extends BaseMpServiceImpl<ProductMapper, Product
     return getBaseMapper().getIdByCategoryId(categoryId);
   }
 
-  @OpLog(type = BaseDataOpLogType.class, name = "删除商品，ID：{}", params = "#id")
+  @OpLog(type = BaseDataOpLogType.class, name = "删除药品，ID：{}", params = "#id")
   @Transactional(rollbackFor = Exception.class)
   @Override
   public void deleteById(String id) {
@@ -181,7 +182,7 @@ public class ProductServiceImpl extends BaseMpServiceImpl<ProductMapper, Product
     DataChangeEventBuilder.publishLogicDelete(this, DeleteProductEvent.class, product);
   }
 
-  @OpLog(type = BaseDataOpLogType.class, name = "新增商品，ID：{}, 编号：{}", params = {"#_result",
+  @OpLog(type = BaseDataOpLogType.class, name = "新增药品，ID：{}, 编号：{}", params = {"#_result",
       "#vo.code"}, autoSaveParams = true)
   @Transactional(rollbackFor = Exception.class)
   @Override
@@ -236,7 +237,7 @@ public class ProductServiceImpl extends BaseMpServiceImpl<ProductMapper, Product
         .eq(ProductCategory::getAvailable, Boolean.TRUE);
     if (productCategoryService.count(checkCategoryWrapper) > 0) {
       throw new DefaultClientException(
-          "“商品分类”不是末级分类，请选择末级分类");
+          "“药品分类”不是末级分类，请选择末级分类");
     }
 
     if (StringUtil.isNotBlank(vo.getSpec())) {
@@ -253,6 +254,9 @@ public class ProductServiceImpl extends BaseMpServiceImpl<ProductMapper, Product
     data.setSaleTaxRate(vo.getSaleTaxRate() == null ? BigDecimal.ZERO : vo.getSaleTaxRate());
     data.setWeight(vo.getWeight());
     data.setVolume(vo.getVolume());
+    validateProductTime(vo.getProductionTime(), vo.getDeadlineTime());
+    data.setProductionTime(vo.getProductionTime());
+    data.setDeadlineTime(vo.getDeadlineTime());
 
     data.setAvailable(Boolean.TRUE);
 
@@ -260,7 +264,7 @@ public class ProductServiceImpl extends BaseMpServiceImpl<ProductMapper, Product
 
     recordMultiCodes(data.getId(), vo.getMultiCodes());
 
-    // 组合商品
+    // 组合药品
     if (data.getProductType() == ProductType.BUNDLE) {
       if (CollectionUtil.isEmpty(vo.getProductBundles())) {
         throw new DefaultClientException("单品数据不能为空！");
@@ -346,17 +350,17 @@ public class ProductServiceImpl extends BaseMpServiceImpl<ProductMapper, Product
     productRetailService.create(createProductRetailVo);
 
     if (!CollectionUtil.isEmpty(vo.getProperties())) {
-      // 商品和商品属性的关系
+      // 药品和药品属性的关系
       for (ProductPropertyRelationVo property : vo.getProperties()) {
         ProductProperty productProperty = productPropertyService.findById(property.getId());
         if (productProperty == null) {
-          throw new DefaultClientException("商品属性不存在！");
+          throw new DefaultClientException("药品属性不存在！");
         }
         if (productProperty.getColumnType() == ColumnType.SINGLE) {
           ProductPropertyItem propertyItem = productPropertyItemService.findById(
               property.getText());
           if (propertyItem == null) {
-            throw new DefaultClientException("商品属性值不存在！");
+            throw new DefaultClientException("药品属性值不存在！");
           }
 
           CreateProductPropertyRelationVo createProductPropertyRelationVo = new CreateProductPropertyRelationVo();
@@ -385,7 +389,7 @@ public class ProductServiceImpl extends BaseMpServiceImpl<ProductMapper, Product
           createProductPropertyRelationVo.setPropertyText(property.getText());
           productPropertyRelationService.create(createProductPropertyRelationVo);
         } else {
-          throw new DefaultClientException("商品属性字段类型不存在！");
+          throw new DefaultClientException("药品属性字段类型不存在！");
         }
       }
     }
@@ -393,7 +397,7 @@ public class ProductServiceImpl extends BaseMpServiceImpl<ProductMapper, Product
     return data.getId();
   }
 
-  @OpLog(type = BaseDataOpLogType.class, name = "修改商品，ID：{}, 编号：{}", params = {"#id",
+  @OpLog(type = BaseDataOpLogType.class, name = "修改药品，ID：{}, 编号：{}", params = {"#id",
       "#code"})
   @Transactional(rollbackFor = Exception.class)
   @Override
@@ -401,7 +405,7 @@ public class ProductServiceImpl extends BaseMpServiceImpl<ProductMapper, Product
 
     Product data = getBaseMapper().selectById(vo.getId());
     if (ObjectUtil.isNull(data)) {
-      throw new DefaultClientException("商品不存在！");
+      throw new DefaultClientException("药品不存在！");
     }
 
     List<String> allCodes = new ArrayList<>();
@@ -442,8 +446,10 @@ public class ProductServiceImpl extends BaseMpServiceImpl<ProductMapper, Product
         .eq(ProductCategory::getAvailable, Boolean.TRUE);
     if (productCategoryService.count(checkCategoryWrapper) > 0) {
       throw new DefaultClientException(
-          "“商品分类”不是末级分类，请选择末级分类");
+          "“药品分类”不是末级分类，请选择末级分类");
     }
+
+    validateProductTime(vo.getProductionTime(), vo.getDeadlineTime());
 
     LambdaUpdateWrapper<Product> updateWrapper = Wrappers.lambdaUpdate(Product.class)
         .set(Product::getCode, vo.getCode()).set(Product::getName, vo.getName())
@@ -459,6 +465,8 @@ public class ProductServiceImpl extends BaseMpServiceImpl<ProductMapper, Product
             vo.getSaleTaxRate() == null ? BigDecimal.ZERO : vo.getSaleTaxRate())
         .set(Product::getWeight, vo.getWeight())
         .set(Product::getVolume, vo.getVolume())
+        .set(Product::getProductionTime, vo.getProductionTime())
+        .set(Product::getDeadlineTime, vo.getDeadlineTime())
         .set(Product::getMultiCode, CollectionUtil.isNotEmpty(vo.getMultiCodes()))
         .eq(Product::getId, vo.getId());
 
@@ -466,7 +474,7 @@ public class ProductServiceImpl extends BaseMpServiceImpl<ProductMapper, Product
 
     recordMultiCodes(data.getId(), vo.getMultiCodes());
 
-    // 组合商品
+    // 组合药品
     if (data.getProductType() == ProductType.BUNDLE) {
       if (CollectionUtil.isEmpty(vo.getProductBundles())) {
         throw new DefaultClientException("单品数据不能为空！");
@@ -515,17 +523,17 @@ public class ProductServiceImpl extends BaseMpServiceImpl<ProductMapper, Product
 
     productPropertyRelationService.deleteByProductId(data.getId());
     if (!CollectionUtil.isEmpty(vo.getProperties())) {
-      // 商品和商品属性的关系
+      // 药品和药品属性的关系
       for (ProductPropertyRelationVo property : vo.getProperties()) {
         ProductProperty productProperty = productPropertyService.findById(property.getId());
         if (productProperty == null) {
-          throw new DefaultClientException("商品属性不存在！");
+          throw new DefaultClientException("药品属性不存在！");
         }
         if (productProperty.getColumnType() == ColumnType.SINGLE) {
           ProductPropertyItem propertyItem = productPropertyItemService.findById(
               property.getText());
           if (propertyItem == null) {
-            throw new DefaultClientException("商品属性值不存在！");
+            throw new DefaultClientException("药品属性值不存在！");
           }
 
           CreateProductPropertyRelationVo createProductPropertyRelationVo = new CreateProductPropertyRelationVo();
@@ -554,7 +562,7 @@ public class ProductServiceImpl extends BaseMpServiceImpl<ProductMapper, Product
           createProductPropertyRelationVo.setPropertyText(property.getText());
           productPropertyRelationService.create(createProductPropertyRelationVo);
         } else {
-          throw new DefaultClientException("商品属性字段类型不存在！");
+          throw new DefaultClientException("药品属性字段类型不存在！");
         }
       }
     }
@@ -658,6 +666,18 @@ public class ProductServiceImpl extends BaseMpServiceImpl<ProductMapper, Product
     codes.add(code);
 
     productCodeService.saveBatch(codes);
+  }
+
+  private void validateProductTime(LocalDate productionTime, LocalDate deadlineTime) {
+    if (productionTime == null) {
+      throw new DefaultClientException("请选择生产时间！");
+    }
+    if (deadlineTime == null) {
+      throw new DefaultClientException("请选择截止时间！");
+    }
+    if (deadlineTime.isBefore(productionTime)) {
+      throw new DefaultClientException("截止时间不能早于生产时间！");
+    }
   }
 
   @CacheEvict(value = Product.CACHE_NAME, key = "@cacheVariables.tenantId() + #key")

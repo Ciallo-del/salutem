@@ -59,11 +59,11 @@ public class CreateRetailOutSheetVo implements BaseVo, Serializable {
   private Boolean allowModifyPaymentDate = Boolean.FALSE;
 
   /**
-   * 商品信息
+   * 药品信息
    */
-  @ApiModelProperty(value = "商品信息", required = true)
+  @ApiModelProperty(value = "药品信息", required = true)
   @Valid
-  @NotEmpty(message = "商品不能为空！")
+  @NotEmpty(message = "药品不能为空！")
   private List<RetailOutProductVo> products;
 
   /**
@@ -102,35 +102,35 @@ public class CreateRetailOutSheetVo implements BaseVo, Serializable {
     for (RetailOutProductVo product : this.products) {
 
       if (StringUtil.isBlank(product.getProductId())) {
-        throw new InputErrorException("第" + orderNo + "行商品不能为空！");
+        throw new InputErrorException("第" + orderNo + "行药品不能为空！");
       }
 
       if (product.getOrderNum() == null) {
-        throw new InputErrorException("第" + orderNo + "行商品零售数量不能为空！");
+        throw new InputErrorException("第" + orderNo + "行药品零售数量不能为空！");
       }
 
       if (NumberUtil.le(product.getOrderNum(), BigDecimal.ZERO)) {
-        throw new InputErrorException("第" + orderNo + "行商品零售数量必须大于0！");
+        throw new InputErrorException("第" + orderNo + "行药品零售数量必须大于0！");
       }
 
       if (!NumberUtil.isNumberPrecision(product.getOrderNum(), 8)) {
-        throw new InputErrorException("第" + orderNo + "行商品零售数量最多允许8位小数！");
+        throw new InputErrorException("第" + orderNo + "行药品零售数量最多允许8位小数！");
       }
 
       if (product.getOriPrice() == null) {
-        throw new InputErrorException("第" + orderNo + "行商品参考零售价不能为空！");
+        throw new InputErrorException("第" + orderNo + "行药品参考零售价不能为空！");
       }
 
       if (product.getTaxPrice() == null) {
-        throw new InputErrorException("第" + orderNo + "行商品价格不能为空！");
+        throw new InputErrorException("第" + orderNo + "行药品价格不能为空！");
       }
 
       if (NumberUtil.lt(product.getTaxPrice(), 0D)) {
-        throw new InputErrorException("第" + orderNo + "行商品价格不允许小于0！");
+        throw new InputErrorException("第" + orderNo + "行药品价格不允许小于0！");
       }
 
       if (!NumberUtil.isNumberPrecision(product.getTaxPrice(), 6)) {
-        throw new InputErrorException("第" + orderNo + "行商品价格最多允许6位小数！");
+        throw new InputErrorException("第" + orderNo + "行药品价格最多允许6位小数！");
       }
 
       if (!NumberUtil.equal(product.getOriPrice(), 0D)) {

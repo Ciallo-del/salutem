@@ -17,7 +17,7 @@ import org.apache.ibatis.annotations.Param;
 public interface TakeStockPlanDetailMapper extends BaseMapper<TakeStockPlanDetail> {
 
   /**
-   * 根据盘点任务ID、商品ID查询
+   * 根据盘点任务ID、药品ID查询
    *
    * @param planId
    * @param productId

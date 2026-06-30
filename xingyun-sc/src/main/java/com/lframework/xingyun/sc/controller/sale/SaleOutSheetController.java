@@ -2,20 +2,23 @@ package com.lframework.xingyun.sc.controller.sale;
 
 import com.lframework.starter.common.exceptions.impl.DefaultClientException;
 import com.lframework.starter.common.utils.CollectionUtil;
+import com.lframework.starter.common.utils.StringUtil;
+import com.lframework.starter.mq.core.utils.ExportTaskUtil;
 import com.lframework.starter.web.core.annotations.security.HasPermission;
-import com.lframework.starter.web.core.controller.DefaultBaseController;
 import com.lframework.starter.web.core.components.resp.InvokeResult;
 import com.lframework.starter.web.core.components.resp.InvokeResultBuilder;
 import com.lframework.starter.web.core.components.resp.PageResult;
+import com.lframework.starter.web.core.controller.DefaultBaseController;
 import com.lframework.starter.web.core.utils.PageResultUtil;
-import com.lframework.starter.mq.core.utils.ExportTaskUtil;
 import com.lframework.xingyun.sc.bo.purchase.receive.GetPaymentDateBo;
 import com.lframework.xingyun.sc.bo.sale.out.GetSaleOutSheetBo;
 import com.lframework.xingyun.sc.bo.sale.out.PrintSaleOutSheetBo;
 import com.lframework.xingyun.sc.bo.sale.out.QuerySaleOutSheetBo;
 import com.lframework.xingyun.sc.bo.sale.out.QuerySaleOutSheetWithReturnBo;
+import com.lframework.xingyun.sc.bo.sale.out.SaleOutProductBo;
 import com.lframework.xingyun.sc.bo.sale.out.SaleOutSheetWithReturnBo;
 import com.lframework.xingyun.sc.dto.purchase.receive.GetPaymentDateDto;
+import com.lframework.xingyun.sc.dto.sale.out.SaleOutProductDto;
 import com.lframework.xingyun.sc.dto.sale.out.SaleOutSheetFullDto;
 import com.lframework.xingyun.sc.dto.sale.out.SaleOutSheetWithReturnDto;
 import com.lframework.xingyun.sc.entity.SaleOutSheet;
@@ -24,6 +27,7 @@ import com.lframework.xingyun.sc.service.sale.SaleOutSheetService;
 import com.lframework.xingyun.sc.vo.sale.out.ApprovePassSaleOutSheetVo;
 import com.lframework.xingyun.sc.vo.sale.out.ApproveRefuseSaleOutSheetVo;
 import com.lframework.xingyun.sc.vo.sale.out.CreateSaleOutSheetVo;
+import com.lframework.xingyun.sc.vo.sale.out.QuerySaleOutProductVo;
 import com.lframework.xingyun.sc.vo.sale.out.QuerySaleOutSheetVo;
 import com.lframework.xingyun.sc.vo.sale.out.QuerySaleOutSheetWithReturnVo;
 import com.lframework.xingyun.sc.vo.sale.out.UpdateSaleOutSheetVo;
@@ -131,20 +135,66 @@ public class SaleOutSheetController extends DefaultBaseController {
   }
 
   /**
-   * 根据客户ID查询默认付款日期
+   * 根据收货方ID查询默认付款日期
    */
-  @ApiOperation("根据客户ID查询默认付款日期")
-  @ApiImplicitParam(value = "客户ID", name = "customerId", paramType = "query", required = true)
+  @ApiOperation("根据收货方ID查询默认付款日期")
+  @ApiImplicitParam(value = "收货方ID", name = "customerId", paramType = "query", required = true)
   @HasPermission({"sale:out:add", "sale:out:modify"})
   @GetMapping("/paymentdate")
   public InvokeResult<GetPaymentDateBo> getPaymentDate(
-      @NotBlank(message = "客户ID不能为空！") String customerId) {
+      @NotBlank(message = "收货方ID不能为空！") String customerId) {
 
     GetPaymentDateDto data = saleOutSheetService.getPaymentDate(customerId);
 
     GetPaymentDateBo result = new GetPaymentDateBo(data);
 
     return InvokeResultBuilder.success(result);
+  }
+
+  /**
+   * 根据关键字查询销售出库药品
+   */
+  @ApiOperation("根据关键字查询销售出库药品")
+  @HasPermission({"sale:out:add", "sale:out:modify"})
+  @GetMapping("/product/search")
+  public InvokeResult<List<SaleOutProductBo>> searchProducts(
+      @NotBlank(message = "仓库ID不能为空！") String scId, String condition) {
+
+    if (StringUtil.isBlank(condition)) {
+      return InvokeResultBuilder.success(CollectionUtil.emptyList());
+    }
+
+    PageResult<SaleOutProductDto> pageResult = saleOutSheetService.querySaleOutByCondition(
+        getPageIndex(), getPageSize(), scId, condition);
+    List<SaleOutProductBo> results = CollectionUtil.emptyList();
+    List<SaleOutProductDto> datas = pageResult.getDatas();
+    if (!CollectionUtil.isEmpty(datas)) {
+      results = datas.stream().map(t -> new SaleOutProductBo(scId, t))
+          .collect(Collectors.toList());
+    }
+
+    return InvokeResultBuilder.success(results);
+  }
+
+  /**
+   * 查询销售出库药品列表
+   */
+  @ApiOperation("查询销售出库药品列表")
+  @HasPermission({"sale:out:add", "sale:out:modify"})
+  @GetMapping("/product/list")
+  public InvokeResult<PageResult<SaleOutProductBo>> queryProductList(
+      @Valid QuerySaleOutProductVo vo) {
+
+    PageResult<SaleOutProductDto> pageResult = saleOutSheetService.querySaleOutList(
+        getPageIndex(vo), getPageSize(vo), vo);
+    List<SaleOutProductBo> results = null;
+    List<SaleOutProductDto> datas = pageResult.getDatas();
+    if (!CollectionUtil.isEmpty(datas)) {
+      results = datas.stream().map(t -> new SaleOutProductBo(vo.getScId(), t))
+          .collect(Collectors.toList());
+    }
+
+    return InvokeResultBuilder.success(PageResultUtil.rebuild(pageResult, results));
   }
 
   /**
@@ -173,8 +223,7 @@ public class SaleOutSheetController extends DefaultBaseController {
       @Valid QuerySaleOutSheetWithReturnVo vo) {
 
     PageResult<SaleOutSheet> pageResult = saleOutSheetService.queryWithReturn(getPageIndex(vo),
-        getPageSize(vo),
-        vo);
+        getPageSize(vo), vo);
     List<SaleOutSheet> datas = pageResult.getDatas();
 
     List<QuerySaleOutSheetWithReturnBo> results = null;

@@ -53,11 +53,11 @@ public class CreateTakeStockPlanVo implements BaseVo, Serializable {
     TakeStockPlanType takeType = EnumUtil.getByCode(TakeStockPlanType.class, this.takeType);
     if (takeType == TakeStockPlanType.CATEGORY) {
       if (CollectionUtil.isEmpty(this.bizIds)) {
-        throw new InputErrorException("请选择商品分类！");
+        throw new InputErrorException("请选择药品分类！");
       }
     } else if (takeType == TakeStockPlanType.BRAND) {
       if (CollectionUtil.isEmpty(this.bizIds)) {
-        throw new InputErrorException("请选择商品品牌！");
+        throw new InputErrorException("请选择药品品牌！");
       }
     }
   }

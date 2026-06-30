@@ -9,7 +9,7 @@ import java.util.List;
 public interface TakeStockPlanDetailService extends BaseMpService<TakeStockPlanDetail> {
 
   /**
-   * 根据盘点任务ID、商品ID查询
+   * 根据盘点任务ID、药品ID查询
    *
    * @param planId
    * @param productId

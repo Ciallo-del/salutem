@@ -7,7 +7,7 @@ import java.util.List;
 public interface ProductCodeService extends BaseMpService<ProductCode> {
 
   /**
-   * 根据商品ID查询
+   * 根据药品ID查询
    *
    * @param productId
    * @return

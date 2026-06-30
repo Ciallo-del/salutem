@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.EnumValue;
 import com.lframework.starter.web.core.enums.BaseEnum;
 
 public enum AddressEntityType implements BaseEnum<Integer> {
-  SC(1, "仓库"), CUSTOMER(2, "客户"), SUPPLIER(3, "供应商"), MEMBER(4, "会员"), SHOP(5, "门店");
+  SC(1, "仓库"), CUSTOMER(2, "收货方"), SUPPLIER(3, "供应商"), MEMBER(4, "会员"), SHOP(5, "门店");
 
   @EnumValue
   private final Integer code;

@@ -3,7 +3,6 @@ package com.lframework.xingyun.sc.bo.sale.out;
 import com.lframework.starter.common.constants.StringPool;
 import com.lframework.starter.common.utils.CollectionUtil;
 import com.lframework.starter.common.utils.DateUtil;
-import com.lframework.starter.common.utils.NumberUtil;
 import com.lframework.starter.common.utils.StringUtil;
 import com.lframework.starter.web.core.bo.BaseBo;
 import com.lframework.starter.web.core.utils.ApplicationUtil;
@@ -26,87 +25,45 @@ import lombok.Data;
 @Data
 public class PrintSaleOutSheetBo extends BaseBo<SaleOutSheetFullDto> {
 
-  /**
-   * 单号
-   */
   @ApiModelProperty("单号")
   private String code;
 
-  /**
-   * 仓库编号
-   */
   @ApiModelProperty("仓库编号")
   private String scCode;
 
-  /**
-   * 仓库名称
-   */
   @ApiModelProperty("仓库名称")
   private String scName;
 
-  /**
-   * 客户编号
-   */
-  @ApiModelProperty("客户编号")
+  @ApiModelProperty("收货方编号")
   private String customerCode;
 
-  /**
-   * 客户名称
-   */
-  @ApiModelProperty("客户名称")
+  @ApiModelProperty("收货方名称")
   private String customerName;
 
-  /**
-   * 销售员姓名
-   */
   @ApiModelProperty("销售员姓名")
   private String salerName;
 
-  /**
-   * 付款日期
-   */
   @ApiModelProperty("付款日期")
   private String paymentDate;
 
-  /**
-   * 销售订单号
-   */
   @ApiModelProperty("销售订单号")
   private String saleOrderCode;
 
-  /**
-   * 备注
-   */
   @ApiModelProperty("备注")
   private String description;
 
-  /**
-   * 创建人
-   */
   @ApiModelProperty("创建人")
   private String createBy;
 
-  /**
-   * 创建时间
-   */
   @ApiModelProperty("创建时间")
   private String createTime;
 
-  /**
-   * 审核人
-   */
   @ApiModelProperty("审核人")
   private String approveBy;
 
-  /**
-   * 审核时间
-   */
   @ApiModelProperty("审核时间")
   private String approveTime;
 
-  /**
-   * 订单明细
-   */
   @ApiModelProperty("订单明细")
   private List<OrderDetailBo> details;
 
@@ -133,16 +90,22 @@ public class PrintSaleOutSheetBo extends BaseBo<SaleOutSheetFullDto> {
     this.saleOrderCode = StringPool.EMPTY_STR;
     this.approveBy = StringPool.EMPTY_STR;
     this.approveTime = StringPool.EMPTY_STR;
+    this.customerCode = StringPool.EMPTY_STR;
+    this.customerName = StringPool.EMPTY_STR;
 
     StoreCenterService storeCenterService = ApplicationUtil.getBean(StoreCenterService.class);
     StoreCenter sc = storeCenterService.findById(dto.getScId());
     this.scCode = sc.getCode();
     this.scName = sc.getName();
 
-    CustomerService customerService = ApplicationUtil.getBean(CustomerService.class);
-    Customer customer = customerService.findById(dto.getCustomerId());
-    this.customerCode = customer.getCode();
-    this.customerName = customer.getName();
+    if (StringUtil.isNotBlank(dto.getCustomerId())) {
+      CustomerService customerService = ApplicationUtil.getBean(CustomerService.class);
+      Customer customer = customerService.findById(dto.getCustomerId());
+      if (customer != null) {
+        this.customerCode = customer.getCode();
+        this.customerName = customer.getName();
+      }
+    }
 
     SysUserService userService = ApplicationUtil.getBean(SysUserService.class);
     if (!StringUtil.isBlank(dto.getSalerId())) {
@@ -175,33 +138,18 @@ public class PrintSaleOutSheetBo extends BaseBo<SaleOutSheetFullDto> {
   @Data
   public static class OrderDetailBo extends BaseBo<SaleOutSheetFullDto.SheetDetailDto> {
 
-    /**
-     * 商品编号
-     */
-    @ApiModelProperty("商品编号")
+    @ApiModelProperty("药品编号")
     private String productCode;
 
-    /**
-     * 商品名称
-     */
-    @ApiModelProperty("商品名称")
+    @ApiModelProperty("药品名称")
     private String productName;
 
-    /**
-     * 出库数量
-     */
     @ApiModelProperty("出库数量")
     private BigDecimal outNum;
 
-    /**
-     * 价格
-     */
     @ApiModelProperty("价格")
     private BigDecimal taxPrice;
 
-    /**
-     * 折扣
-     */
     @ApiModelProperty("折扣")
     private BigDecimal outAmount;
 

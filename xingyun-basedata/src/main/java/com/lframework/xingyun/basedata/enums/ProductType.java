@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.EnumValue;
 import com.lframework.starter.web.core.enums.BaseEnum;
 
 public enum ProductType implements BaseEnum<Integer> {
-  NORMAL(1, "普通商品"), BUNDLE(2, "组合商品");
+  NORMAL(1, "普通药品"), BUNDLE(2, "组合药品");
 
   @EnumValue
   private final Integer code;

@@ -25,11 +25,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 商品库存
+ * 药品库存
  *
  * @author zmj
  */
-@Api(tags = "商品库存")
+@Api(tags = "药品库存")
 @Validated
 @RestController
 @RequestMapping("/stock/product")
@@ -39,9 +39,9 @@ public class ProductStockController extends DefaultBaseController {
   private ProductStockService productStockService;
 
   /**
-   * 查询商品库存
+   * 查询药品库存
    */
-  @ApiOperation("查询商品库存")
+  @ApiOperation("查询药品库存")
   @HasPermission({"stock:product:query"})
   @GetMapping("/query")
   public InvokeResult<PageResult<QueryProductStockBo>> query(@Valid QueryProductStockVo vo) {
@@ -59,14 +59,14 @@ public class ProductStockController extends DefaultBaseController {
   }
 
   /**
-   * 导出商品库存
+   * 导出药品库存
    */
-  @ApiOperation("导出商品库存")
+  @ApiOperation("导出药品库存")
   @HasPermission({"stock:product:export"})
   @GetMapping("/export")
   public InvokeResult<Void> export(@Valid QueryProductStockVo vo) {
 
-    ExportTaskUtil.exportTask("商品库存信息", ProductStockExportTaskWorker.class, vo);
+    ExportTaskUtil.exportTask("药品库存信息", ProductStockExportTaskWorker.class, vo);
 
     return InvokeResultBuilder.success();
   }

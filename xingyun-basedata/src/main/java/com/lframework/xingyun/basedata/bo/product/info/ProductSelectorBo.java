@@ -70,9 +70,9 @@ public class ProductSelectorBo extends BaseBo<Product> {
   private String unit;
 
   /**
-   * 商品类型
+   * 药品类型
    */
-  @ApiModelProperty("商品类型")
+  @ApiModelProperty("药品类型")
   @EnumConvert
   private Integer productType;
 

@@ -51,7 +51,7 @@ public class PurchaseReturnFullDto implements BaseDto, Serializable {
   private LocalDate paymentDate;
 
   /**
-   * 商品数量
+   * 药品数量
    */
   private BigDecimal totalNum;
 
@@ -131,7 +131,7 @@ public class PurchaseReturnFullDto implements BaseDto, Serializable {
     private String id;
 
     /**
-     * 商品ID
+     * 药品ID
      */
     private String productId;
 

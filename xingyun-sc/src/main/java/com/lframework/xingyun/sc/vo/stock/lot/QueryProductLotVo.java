@@ -15,27 +15,27 @@ public class QueryProductLotVo extends PageVo {
   private String scId;
 
   /**
-   * 商品编号
+   * 药品编号
    */
-  @ApiModelProperty("商品编号")
+  @ApiModelProperty("药品编号")
   private String productCode;
 
   /**
-   * 商品名称
+   * 药品名称
    */
-  @ApiModelProperty("商品名称")
+  @ApiModelProperty("药品名称")
   private String productName;
 
   /**
-   * 商品分类ID
+   * 药品分类ID
    */
-  @ApiModelProperty("商品分类ID")
+  @ApiModelProperty("药品分类ID")
   private String categoryId;
 
   /**
-   * 商品品牌ID
+   * 药品品牌ID
    */
-  @ApiModelProperty("商品品牌ID")
+  @ApiModelProperty("药品品牌ID")
   private String brandId;
 
   /**

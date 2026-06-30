@@ -9,7 +9,7 @@ import java.util.List;
 public interface ProductPropertyRelationService extends BaseMpService<ProductPropertyRelation> {
 
   /**
-   * 根据商品Id查询
+   * 根据药品Id查询
    *
    * @param productId
    * @return
@@ -53,7 +53,7 @@ public interface ProductPropertyRelationService extends BaseMpService<ProductPro
   String create(CreateProductPropertyRelationVo vo);
 
   /**
-   * 根据商品Id删除
+   * 根据药品Id删除
    *
    * @param productId
    */

@@ -30,7 +30,7 @@ public class TakeStockSheetDetail extends BaseEntity implements BaseDto {
   private String sheetId;
 
   /**
-   * 商品ID
+   * 药品ID
    */
   private String productId;
 

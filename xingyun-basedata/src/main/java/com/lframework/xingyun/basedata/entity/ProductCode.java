@@ -26,7 +26,7 @@ public class ProductCode extends BaseEntity implements BaseDto {
   private String id;
 
   /**
-   * 商品ID
+   * 药品ID
    */
   private String productId;
 

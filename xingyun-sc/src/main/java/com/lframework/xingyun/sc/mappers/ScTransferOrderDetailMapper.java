@@ -25,7 +25,7 @@ public interface ScTransferOrderDetailMapper extends BaseMapper<ScTransferOrderD
       @Param("receiveNum") BigDecimal receiveNum, @Param("receiveAmount") BigDecimal receiveAmount);
 
   /**
-   * 统计未收货的商品
+   * 统计未收货的药品
    *
    * @param orderId
    * @return

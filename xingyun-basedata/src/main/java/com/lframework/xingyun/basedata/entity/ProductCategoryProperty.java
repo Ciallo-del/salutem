@@ -25,12 +25,12 @@ public class ProductCategoryProperty extends BaseEntity implements BaseDto {
   private String id;
 
   /**
-   * 商品属性ID
+   * 药品属性ID
    */
   private String propertyId;
 
   /**
-   * 商品分类ID
+   * 药品分类ID
    */
   private String categoryId;
 }

@@ -85,7 +85,7 @@ public interface PurchaseOrderMapper extends BaseMapper<PurchaseOrder> {
       @Param("multipleRelate") boolean multipleRelate);
 
   /**
-   * 根据关键字查询采购商品信息
+   * 根据关键字查询采购药品信息
    *
    * @param condition
    * @return
@@ -99,7 +99,7 @@ public interface PurchaseOrderMapper extends BaseMapper<PurchaseOrder> {
       @Param("condition") String condition, @Param("isReturn") Boolean isReturn);
 
   /**
-   * 查询可采购商品信息
+   * 查询可采购药品信息
    *
    * @param vo
    * @return

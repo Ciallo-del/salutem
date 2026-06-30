@@ -7,6 +7,7 @@ import com.lframework.starter.common.constants.PatternPool;
 import com.lframework.starter.common.constants.StringPool;
 import com.lframework.starter.common.exceptions.impl.DefaultClientException;
 import com.lframework.starter.common.utils.CollectionUtil;
+import com.lframework.starter.common.utils.DateUtil;
 import com.lframework.starter.common.utils.NumberUtil;
 import com.lframework.starter.common.utils.RegUtil;
 import com.lframework.starter.common.utils.StringUtil;
@@ -28,6 +29,7 @@ import com.lframework.xingyun.basedata.vo.product.purchase.CreateProductPurchase
 import com.lframework.xingyun.basedata.vo.product.retail.CreateProductRetailVo;
 import com.lframework.xingyun.basedata.vo.product.sale.CreateProductSaleVo;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
@@ -185,6 +187,23 @@ public class ProductImportListener extends ExcelImportListener<ProductImportMode
       throw new DefaultClientException(
           "第" + context.readRowHolder().getRowIndex() + "行“零售价（元）”不允许小于0");
     }
+
+    if (data.getProductionTime() == null) {
+      throw new DefaultClientException(
+          "第" + context.readRowHolder().getRowIndex() + "行“生产时间”不能为空");
+    }
+
+    if (data.getDeadlineTime() == null) {
+      throw new DefaultClientException(
+          "第" + context.readRowHolder().getRowIndex() + "行“截止时间”不能为空");
+    }
+
+    LocalDate productionTime = DateUtil.toLocalDate(data.getProductionTime());
+    LocalDate deadlineTime = DateUtil.toLocalDate(data.getDeadlineTime());
+    if (deadlineTime.isBefore(productionTime)) {
+      throw new DefaultClientException(
+          "第" + context.readRowHolder().getRowIndex() + "行“截止时间”不能早于“生产时间”");
+    }
   }
 
   @Override
@@ -229,7 +248,7 @@ public class ProductImportListener extends ExcelImportListener<ProductImportMode
           .eq(ProductCategory::getAvailable, Boolean.TRUE);
       if (productCategoryService.count(checkCategoryWrapper) > 0) {
         throw new DefaultClientException(
-            "第" + (i + 1) + "行“商品分类”不是末级分类，请使用末级分类");
+            "第" + (i + 1) + "行“药品分类”不是末级分类，请使用末级分类");
       }
       record.setBrandId(data.getBrandId());
       record.setTaxRate(data.getTaxRate() == null ? BigDecimal.ZERO : data.getTaxRate());
@@ -237,6 +256,8 @@ public class ProductImportListener extends ExcelImportListener<ProductImportMode
           data.getSaleTaxRate() == null ? BigDecimal.ZERO : data.getSaleTaxRate());
       record.setSpec(data.getSpec());
       record.setUnit(data.getUnit());
+      record.setProductionTime(DateUtil.toLocalDate(data.getProductionTime()));
+      record.setDeadlineTime(DateUtil.toLocalDate(data.getDeadlineTime()));
       record.setProductType(ProductType.NORMAL);
 
       record.setAvailable(Boolean.TRUE);

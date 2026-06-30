@@ -63,7 +63,7 @@ public class StockCellProductImportListener extends
 
     if (StringUtil.isBlank(data.getProductCode())) {
       throw new DefaultClientException(
-          "第" + context.readRowHolder().getRowIndex() + "行“商品编号”不能为空");
+          "第" + context.readRowHolder().getRowIndex() + "行“药品编号”不能为空");
     }
 
     ProductService productService = ApplicationUtil.getBean(ProductService.class);
@@ -74,7 +74,7 @@ public class StockCellProductImportListener extends
     Product product = productService.getOne(productWrapper);
     if (product == null) {
       throw new DefaultClientException(
-          "第" + context.readRowHolder().getRowIndex() + "行“商品编号”不存在");
+          "第" + context.readRowHolder().getRowIndex() + "行“药品编号”不存在");
     }
     data.setProductId(product.getId());
   }

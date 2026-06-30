@@ -41,6 +41,22 @@
                 AND g.create_time <= #{vo.endTime}
                 ]]>
                 </if>
+                <if test="vo.productionTimeStart != null">
+                    AND g.production_time >= #{vo.productionTimeStart}
+                </if>
+                <if test="vo.productionTimeEnd != null">
+                    <![CDATA[
+                AND g.production_time <= #{vo.productionTimeEnd}
+                ]]>
+                </if>
+                <if test="vo.deadlineTimeStart != null">
+                    AND g.deadline_time >= #{vo.deadlineTimeStart}
+                </if>
+                <if test="vo.deadlineTimeEnd != null">
+                    <![CDATA[
+                AND g.deadline_time <= #{vo.deadlineTimeEnd}
+                ]]>
+                </if>
             </if>
             AND g.available = TRUE
         </where>
@@ -98,6 +114,22 @@
                 AND g.create_time <= #{vo.endTime}
                 ]]>
                 </if>
+                <if test="vo.productionTimeStart != null">
+                    AND g.production_time >= #{vo.productionTimeStart}
+                </if>
+                <if test="vo.productionTimeEnd != null">
+                    <![CDATA[
+                AND g.production_time <= #{vo.productionTimeEnd}
+                ]]>
+                </if>
+                <if test="vo.deadlineTimeStart != null">
+                    AND g.deadline_time >= #{vo.deadlineTimeStart}
+                </if>
+                <if test="vo.deadlineTimeEnd != null">
+                    <![CDATA[
+                AND g.deadline_time <= #{vo.deadlineTimeEnd}
+                ]]>
+                </if>
             </if>
             AND g.available = TRUE
         </where>
@@ -144,6 +176,22 @@
               <if test="vo.endTime != null">
                   <![CDATA[
                   AND g.create_time <= #{vo.endTime}
+                  ]]>
+              </if>
+              <if test="vo.productionTimeStart != null">
+                  AND g.production_time >= #{vo.productionTimeStart}
+              </if>
+              <if test="vo.productionTimeEnd != null">
+                  <![CDATA[
+                  AND g.production_time <= #{vo.productionTimeEnd}
+                  ]]>
+              </if>
+              <if test="vo.deadlineTimeStart != null">
+                  AND g.deadline_time >= #{vo.deadlineTimeStart}
+              </if>
+              <if test="vo.deadlineTimeEnd != null">
+                  <![CDATA[
+                  AND g.deadline_time <= #{vo.deadlineTimeEnd}
                   ]]>
               </if>
           </if>

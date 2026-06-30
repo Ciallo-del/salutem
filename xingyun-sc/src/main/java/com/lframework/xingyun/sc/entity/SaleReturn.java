@@ -42,7 +42,7 @@ public class SaleReturn extends BaseEntity implements BaseDto {
   private String scId;
 
   /**
-   * 客户ID
+   * 收货方ID
    */
   private String customerId;
 
@@ -62,7 +62,7 @@ public class SaleReturn extends BaseEntity implements BaseDto {
   private String outSheetId;
 
   /**
-   * 商品数量
+   * 药品数量
    */
   private BigDecimal totalNum;
 

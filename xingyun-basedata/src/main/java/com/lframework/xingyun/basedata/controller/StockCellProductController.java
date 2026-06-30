@@ -38,11 +38,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
- * 仓位商品管理
+ * 仓位药品管理
  *
  * @author zmj
  */
-@Api(tags = "仓位商品管理")
+@Api(tags = "仓位药品管理")
 @Validated
 @RestController
 @RequestMapping("/basedata/stock-cell/product")
@@ -106,7 +106,7 @@ public class StockCellProductController extends DefaultBaseController {
   @HasPermission({"base-data:stock-cell-product:import"})
   @GetMapping("/import/template")
   public void downloadImportTemplate() {
-    ExcelUtil.exportXls("仓位商品导入模板", StockCellProductImportModel.class);
+    ExcelUtil.exportXls("仓位药品导入模板", StockCellProductImportModel.class);
   }
 
   /**
@@ -137,7 +137,7 @@ public class StockCellProductController extends DefaultBaseController {
   @HasPermission({"base-data:stock-cell-product:import"})
   @GetMapping("/import/by-cell/template")
   public void downloadImportByCellTemplate() {
-    ExcelUtil.exportXls("指定仓位导入仓位商品模板", StockCellProductImportByStockCellModel.class);
+    ExcelUtil.exportXls("指定仓位导入仓位药品模板", StockCellProductImportByStockCellModel.class);
   }
 
   /**

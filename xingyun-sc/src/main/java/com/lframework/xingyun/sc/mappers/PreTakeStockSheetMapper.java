@@ -61,7 +61,7 @@ public interface PreTakeStockSheetMapper extends BaseMapper<PreTakeStockSheet> {
   List<PreTakeStockSheet> selector(@Param("vo") PreTakeStockSheetSelectorVo vo);
 
   /**
-   * 根据预先盘点单、盘点任务查询商品信息
+   * 根据预先盘点单、盘点任务查询药品信息
    *
    * @param id
    * @param planId
@@ -71,7 +71,7 @@ public interface PreTakeStockSheetMapper extends BaseMapper<PreTakeStockSheet> {
       @Param("planId") String planId);
 
   /**
-   * 根据关键字查询预先盘点单商品信息
+   * 根据关键字查询预先盘点单药品信息
    *
    * @param condition
    * @return
@@ -84,7 +84,7 @@ public interface PreTakeStockSheetMapper extends BaseMapper<PreTakeStockSheet> {
   List<PreTakeStockProductDto> queryPreTakeStockByCondition(@Param("condition") String condition);
 
   /**
-   * 查询预先盘点单商品信息
+   * 查询预先盘点单药品信息
    *
    * @param vo
    * @return

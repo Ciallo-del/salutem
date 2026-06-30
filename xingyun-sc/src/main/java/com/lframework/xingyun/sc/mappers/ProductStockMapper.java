@@ -41,7 +41,7 @@ public interface ProductStockMapper extends BaseMapper<ProductStock> {
   List<ProductStock> query(@Param("vo") QueryProductStockVo vo);
 
   /**
-   * 根据商品ID、仓库ID查询
+   * 根据药品ID、仓库ID查询
    *
    * @param productId
    * @param scId
@@ -51,7 +51,7 @@ public interface ProductStockMapper extends BaseMapper<ProductStock> {
       @Param("scId") String scId);
 
   /**
-   * 根据商品ID、仓库ID查询
+   * 根据药品ID、仓库ID查询
    *
    * @param productIds
    * @param scId

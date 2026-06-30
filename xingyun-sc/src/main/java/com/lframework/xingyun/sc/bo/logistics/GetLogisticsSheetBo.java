@@ -33,184 +33,94 @@ import lombok.Data;
 @Data
 public class GetLogisticsSheetBo extends BaseBo<LogisticsSheetFullDto> {
 
-  /**
-   * ID
-   */
   @ApiModelProperty("ID")
   private String id;
 
-  /**
-   * 单号
-   */
   @ApiModelProperty("单号")
   private String code;
 
-  /**
-   * 物流单号
-   */
   @ApiModelProperty("物流单号")
   private String logisticsNo;
 
-  /**
-   * 物流公司ID
-   */
   @ApiModelProperty("物流公司ID")
   private String logisticsCompanyId;
 
-  /**
-   * 寄件人姓名
-   */
   @ApiModelProperty("寄件人姓名")
   private String senderName;
 
-  /**
-   * 寄件人联系电话
-   */
   @ApiModelProperty("寄件人联系电话")
   private String senderTelephone;
 
-  /**
-   * 寄件人省
-   */
   @ApiModelProperty("寄件人省")
   private String senderProvinceId;
 
-  /**
-   * 寄件人市
-   */
   @ApiModelProperty("寄件人市")
   private String senderCityId;
 
-  /**
-   * 寄件人区
-   */
   @ApiModelProperty("寄件人区")
   private String senderDistrictId;
 
-  /**
-   * 寄件人地区
-   */
   @ApiModelProperty("寄件人地区")
   private String senderCity;
 
-  /**
-   * 寄件人地址
-   */
   @ApiModelProperty("寄件人地址")
   private String senderAddress;
 
-  /**
-   * 收件人姓名
-   */
   @ApiModelProperty("收件人姓名")
   private String receiverName;
 
-  /**
-   * 收件人联系电话
-   */
   @ApiModelProperty("收件人联系电话")
   private String receiverTelephone;
 
-  /**
-   * 收件人省
-   */
   @ApiModelProperty("收件人省")
   private String receiverProvinceId;
 
-  /**
-   * 收件人市
-   */
   @ApiModelProperty("收件人市")
   private String receiverCityId;
 
-  /**
-   * 收件人区
-   */
   @ApiModelProperty("收件人区")
   private String receiverDistrictId;
 
-  /**
-   * 收件人地区
-   */
   @ApiModelProperty("收件人地区")
   private String receiverCity;
 
-  /**
-   * 收件人地址
-   */
   @ApiModelProperty("收件人地址")
   private String receiverAddress;
 
-  /**
-   * 状态
-   */
   @ApiModelProperty("状态")
   @EnumConvert
   private Integer status;
 
-  /**
-   * 备注
-   */
   @ApiModelProperty("备注")
   private String description;
 
-  /**
-   * 总重量
-   */
   @ApiModelProperty("总重量")
   private BigDecimal totalWeight;
 
-  /**
-   * 总体积
-   */
   @ApiModelProperty("总体积")
   private BigDecimal totalVolume;
 
-  /**
-   * 物流费
-   */
   @ApiModelProperty("物流费")
   private BigDecimal totalAmount;
 
-  /**
-   * 发货人
-   */
   @ApiModelProperty("发货人")
   private String deliveryBy;
 
-  /**
-   * 发货时间
-   */
   @ApiModelProperty("发货时间")
   private LocalDateTime deliveryTime;
 
-  /**
-   * 创建人
-   */
   @ApiModelProperty("创建人")
   private String createBy;
 
-  /**
-   * 创建时间
-   */
   @ApiModelProperty("创建时间")
   private LocalDateTime createTime;
 
-  /**
-   * 修改人
-   */
   @ApiModelProperty("修改人")
   private String updateBy;
 
-  /**
-   * 修改时间
-   */
   @ApiModelProperty("修改时间")
   private LocalDateTime updateTime;
 
-  /**
-   * 订单明细
-   */
   @ApiModelProperty("订单明细")
   private List<OrderDetailBo> details;
 
@@ -245,79 +155,48 @@ public class GetLogisticsSheetBo extends BaseBo<LogisticsSheetFullDto> {
 
     DicCityService dicCityService = ApplicationUtil.getBean(DicCityService.class);
     List<DicCityDto> senderCitys = dicCityService.getChainById(senderDistrictId);
-    this.senderCity = senderCitys.stream().map(DicCityDto::getName).collect(Collectors.joining(StringPool.CITY_SPLIT));
+    this.senderCity = senderCitys.stream().map(DicCityDto::getName)
+        .collect(Collectors.joining(StringPool.CITY_SPLIT));
 
     List<DicCityDto> receiverCitys = dicCityService.getChainById(receiverDistrictId);
-    this.receiverCity = receiverCitys.stream().map(DicCityDto::getName).collect(Collectors.joining(StringPool.CITY_SPLIT));
+    this.receiverCity = receiverCitys.stream().map(DicCityDto::getName)
+        .collect(Collectors.joining(StringPool.CITY_SPLIT));
   }
 
   @Data
   public static class OrderDetailBo extends BaseBo<LogisticsSheetFullDto.DetailDto> {
 
-    /**
-     * ID
-     */
     @ApiModelProperty("ID")
     private String id;
 
-    /**
-     * 物流单ID
-     */
     @ApiModelProperty("物流单ID")
     private String sheetId;
 
-    /**
-     * 业务单据ID
-     */
     @ApiModelProperty("业务单据ID")
     private String bizId;
 
-    /**
-     * 业务单据号
-     */
     @ApiModelProperty("业务单据号")
     private String bizCode;
 
-    /**
-     * 业务类型
-     */
     @ApiModelProperty("业务类型")
     @EnumConvert
     private Integer bizType;
 
-    /**
-     * 仓库ID
-     */
     @ApiModelProperty("仓库ID")
     private String scId;
 
-    /**
-     * 仓库名称
-     */
     @ApiModelProperty("仓库名称")
     private String scName;
 
-    /**
-     * 收货人ID
-     */
     @ApiModelProperty("收货人ID")
     private String receiverId;
 
-    /**
-     * 收货人姓名
-     */
     @ApiModelProperty("收货人姓名")
     private String receiverName;
 
-    /**
-     * 创建人
-     */
     @ApiModelProperty("创建人")
     private String createBy;
 
-    /**
-     * 创建时间
-     */
     @ApiModelProperty("创建时间")
     private LocalDateTime createTime;
 
@@ -344,10 +223,15 @@ public class GetLogisticsSheetBo extends BaseBo<LogisticsSheetFullDto> {
         this.scId = sc.getId();
         this.scName = sc.getName();
 
-        CustomerService customerService = ApplicationUtil.getBean(CustomerService.class);
-        Customer customer = customerService.findById(saleOutSheet.getCustomerId());
-        this.receiverId = customer.getId();
-        this.receiverName = customer.getName();
+        this.receiverName = StringPool.EMPTY_STR;
+        if (StringUtil.isNotBlank(saleOutSheet.getCustomerId())) {
+          CustomerService customerService = ApplicationUtil.getBean(CustomerService.class);
+          Customer customer = customerService.findById(saleOutSheet.getCustomerId());
+          if (customer != null) {
+            this.receiverId = customer.getId();
+            this.receiverName = customer.getName();
+          }
+        }
 
         this.createBy = saleOutSheet.getCreateBy();
         this.createTime = saleOutSheet.getCreateTime();

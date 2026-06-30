@@ -258,7 +258,7 @@ public class RetailOutSheetServiceImpl extends
         RetailOutSheetDetail.class).eq(RetailOutSheetDetail::getSheetId, sheet.getId());
     retailOutSheetDetailService.remove(deleteDetailWrapper);
 
-    // 删除组合商品信息
+    // 删除组合药品信息
     Wrapper<RetailOutSheetDetailBundle> deleteDetailBundleWrapper = Wrappers.lambdaQuery(
         RetailOutSheetDetailBundle.class).eq(RetailOutSheetDetailBundle::getSheetId, sheet.getId());
     retailOutSheetDetailBundleService.remove(deleteDetailBundleWrapper);
@@ -550,7 +550,7 @@ public class RetailOutSheetServiceImpl extends
     List<RetailOutSheetDetail> details = retailOutSheetDetailService.list(queryDetailWrapper);
     retailOutSheetDetailService.remove(queryDetailWrapper);
 
-    // 删除组合商品信息
+    // 删除组合药品信息
     Wrapper<RetailOutSheetDetailBundle> deleteDetailBundleWrapper = Wrappers.lambdaQuery(
         RetailOutSheetDetailBundle.class).eq(RetailOutSheetDetailBundle::getSheetId, sheet.getId());
     retailOutSheetDetailBundleService.remove(deleteDetailBundleWrapper);
@@ -668,7 +668,7 @@ public class RetailOutSheetServiceImpl extends
 
       Product product = productService.findById(productVo.getProductId());
       if (product == null) {
-        throw new InputErrorException("第" + orderNo + "行商品不存在！");
+        throw new InputErrorException("第" + orderNo + "行药品不存在！");
       }
 
       detail.setProductId(productVo.getProductId());
@@ -687,10 +687,10 @@ public class RetailOutSheetServiceImpl extends
 
       retailOutSheetDetailService.save(detail);
 
-      // 这里处理组合商品
+      // 这里处理组合药品
       if (product.getProductType() == ProductType.BUNDLE) {
         if (!NumberUtil.isInteger(productVo.getOrderNum())) {
-          throw new InputErrorException("第" + orderNo + "行商品出库数量必须是整数！");
+          throw new InputErrorException("第" + orderNo + "行药品出库数量必须是整数！");
         }
         List<ProductBundle> productBundles = productBundleService.getByMainProductId(
             product.getId());

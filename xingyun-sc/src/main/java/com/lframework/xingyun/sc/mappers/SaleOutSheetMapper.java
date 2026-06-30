@@ -6,10 +6,12 @@ import com.lframework.starter.web.core.annotations.permission.DataPermissions;
 import com.lframework.starter.web.core.annotations.sort.Sort;
 import com.lframework.starter.web.core.annotations.sort.Sorts;
 import com.lframework.starter.web.inner.components.permission.OrderDataPermissionDataPermissionType;
+import com.lframework.xingyun.sc.dto.sale.out.SaleOutProductDto;
 import com.lframework.xingyun.sc.dto.sale.out.SaleOutSheetFullDto;
 import com.lframework.xingyun.sc.dto.sale.out.SaleOutSheetWithReturnDto;
 import com.lframework.xingyun.sc.entity.SaleOutSheet;
 import com.lframework.xingyun.sc.enums.SettleStatus;
+import com.lframework.xingyun.sc.vo.sale.out.QuerySaleOutProductVo;
 import com.lframework.xingyun.sc.vo.sale.out.QuerySaleOutSheetVo;
 import com.lframework.xingyun.sc.vo.sale.out.QuerySaleOutSheetWithReturnVo;
 import com.lframework.xingyun.sc.vo.sale.out.SaleOutSheetSelectorVo;
@@ -82,6 +84,17 @@ public interface SaleOutSheetMapper extends BaseMapper<SaleOutSheet> {
   })
   List<SaleOutSheet> queryWithReturn(@Param("vo") QuerySaleOutSheetWithReturnVo vo,
       @Param("multipleRelate") boolean multipleRelate);
+
+  /**
+   * 根据关键字查询出库药品
+   */
+  List<SaleOutProductDto> querySaleOutByCondition(@Param("scId") String scId,
+      @Param("condition") String condition);
+
+  /**
+   * 查询出库药品列表
+   */
+  List<SaleOutProductDto> querySaleOutList(@Param("vo") QuerySaleOutProductVo vo);
 
   /**
    * 查询已审核列表

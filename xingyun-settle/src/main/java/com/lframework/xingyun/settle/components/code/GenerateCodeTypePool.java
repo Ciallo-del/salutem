@@ -23,22 +23,22 @@ public interface GenerateCodeTypePool {
   Integer SETTLE_SHEET = 303;
 
   /**
-   * 客户对账单
+   * 收货方对账单
    */
   Integer CUSTOMER_SETTLE_CHECK_SHEET = 304;
 
   /**
-   * 客户费用单
+   * 收货方费用单
    */
   Integer CUSTOMER_SETTLE_FEE_SHEET = 305;
 
   /**
-   * 客户预付款单
+   * 收货方预付款单
    */
   Integer CUSTOMER_SETTLE_PRE_SHEET = 306;
 
   /**
-   * 客户结算单
+   * 收货方结算单
    */
   Integer CUSTOMER_SETTLE_SHEET = 307;
 }

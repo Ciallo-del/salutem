@@ -67,9 +67,9 @@ public class PurchaseReturnExportModel extends BaseBo<PurchaseReturn> implements
   private BigDecimal totalAmount;
 
   /**
-   * 商品数量
+   * 药品数量
    */
-  @ExcelProperty("商品数量")
+  @ExcelProperty("药品数量")
   private BigDecimal receiveNum;
 
   /**

@@ -47,9 +47,9 @@ public class CreateReceiveSheetVo implements BaseVo, Serializable {
   @ApiModelProperty("采购订单ID")
   private String purchaseOrderId;
 
-  @ApiModelProperty(value = "商品信息", required = true)
+  @ApiModelProperty(value = "药品信息", required = true)
   @Valid
-  @NotEmpty(message = "商品不能为空！")
+  @NotEmpty(message = "药品不能为空！")
   private List<ReceiveProductVo> products;
 
   @ApiModelProperty("备注")
@@ -80,34 +80,34 @@ public class CreateReceiveSheetVo implements BaseVo, Serializable {
     for (ReceiveProductVo product : this.products) {
 
       if (StringUtil.isBlank(product.getProductId())) {
-        throw new InputErrorException("第" + orderNo + "行商品不能为空！");
+        throw new InputErrorException("第" + orderNo + "行药品不能为空！");
       }
 
       if (product.getReceiveNum() == null) {
-        throw new InputErrorException("第" + orderNo + "行商品收货数量不能为空！");
+        throw new InputErrorException("第" + orderNo + "行药品收货数量不能为空！");
       }
 
       if (NumberUtil.le(product.getReceiveNum(), BigDecimal.ZERO)) {
-        throw new InputErrorException("第" + orderNo + "行商品收货数量必须大于0！");
+        throw new InputErrorException("第" + orderNo + "行药品收货数量必须大于0！");
       }
 
       if (!NumberUtil.isNumberPrecision(product.getReceiveNum(), 8)) {
-        throw new InputErrorException("第" + orderNo + "行商品收货数量最多允许8位小数！");
+        throw new InputErrorException("第" + orderNo + "行药品收货数量最多允许8位小数！");
       }
 
       if (!requirePurchase) {
         product.setPurchaseOrderDetailId(null);
 
         if (product.getPurchasePrice() == null) {
-          throw new InputErrorException("第" + orderNo + "行商品采购价不能为空！");
+          throw new InputErrorException("第" + orderNo + "行药品采购价不能为空！");
         }
 
         if (NumberUtil.lt(product.getPurchasePrice(), BigDecimal.ZERO)) {
-          throw new InputErrorException("第" + orderNo + "行商品采购价不允许小于0！");
+          throw new InputErrorException("第" + orderNo + "行药品采购价不允许小于0！");
         }
 
         if (!NumberUtil.isNumberPrecision(product.getPurchasePrice(), 6)) {
-          throw new InputErrorException("第" + orderNo + "行商品采购价最多允许6位小数！");
+          throw new InputErrorException("第" + orderNo + "行药品采购价最多允许6位小数！");
         }
       }
 

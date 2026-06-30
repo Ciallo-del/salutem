@@ -64,16 +64,16 @@ public class ReceiveSheetImportModel implements ExcelModel {
   private Date receiveDate;
 
   /**
-   * 商品ID
+   * 药品ID
    */
   @ExcelIgnore
   private String productId;
 
   /**
-   * 商品编号
+   * 药品编号
    */
   @ExcelRequired
-  @ExcelProperty("商品编号")
+  @ExcelProperty("药品编号")
   private String productCode;
 
   /**

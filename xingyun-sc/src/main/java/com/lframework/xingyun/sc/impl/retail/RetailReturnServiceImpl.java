@@ -443,7 +443,7 @@ public class RetailReturnServiceImpl extends
     if (!StringUtil.isBlank(vo.getMemberId())) {
       member = memberService.findById(vo.getMemberId());
       if (member == null) {
-        throw new InputErrorException("客户不存在！");
+        throw new InputErrorException("收货方不存在！");
       }
       retailReturn.setMemberId(vo.getMemberId());
     } else {
@@ -515,7 +515,7 @@ public class RetailReturnServiceImpl extends
       if (requireOut) {
         if (StringUtil.isBlank(productVo.getOutSheetDetailId())) {
           if (!isGift) {
-            throw new InputErrorException("第" + orderNo + "行商品必须为“赠品”！");
+            throw new InputErrorException("第" + orderNo + "行药品必须为“赠品”！");
           }
         }
       }
@@ -536,7 +536,7 @@ public class RetailReturnServiceImpl extends
 
       Product product = productService.findById(productVo.getProductId());
       if (product == null) {
-        throw new InputErrorException("第" + orderNo + "行商品不存在！");
+        throw new InputErrorException("第" + orderNo + "行药品不存在！");
       }
 
       detail.setProductId(productVo.getProductId());
@@ -572,7 +572,7 @@ public class RetailReturnServiceImpl extends
   }
 
   /**
-   * 根据客户获取初始结算状态
+   * 根据收货方获取初始结算状态
    *
    * @param member
    * @return

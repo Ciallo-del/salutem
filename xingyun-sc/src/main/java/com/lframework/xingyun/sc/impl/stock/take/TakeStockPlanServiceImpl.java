@@ -156,13 +156,13 @@ public class TakeStockPlanServiceImpl extends BaseMpServiceImpl<TakeStockPlanMap
       // 单品盘点不生成明细
       if (data.getTakeType() == TakeStockPlanType.ALL) {
         // 全场盘点
-        // 将所有商品添加明细
+        // 将所有药品添加明细
         QueryProductVo queryProductVo = new QueryProductVo();
         queryProductVo.setProductType(ProductType.NORMAL.getCode());
         Integer count = productService.queryCount(queryProductVo);
         if (count > 2000) {
           throw new DefaultClientException(
-              TakeStockPlanType.ALL.getDesc() + "最多支持2000个商品，当前系统内已经超过2000个商品，无法进行"
+              TakeStockPlanType.ALL.getDesc() + "最多支持2000个药品，当前系统内已经超过2000个药品，无法进行"
                   + TakeStockPlanType.ALL.getDesc());
         }
         products = productService.query(queryProductVo);
@@ -176,7 +176,7 @@ public class TakeStockPlanServiceImpl extends BaseMpServiceImpl<TakeStockPlanMap
     }
 
     if (data.getTakeType() != TakeStockPlanType.SIMPLE && CollectionUtil.isEmpty(products)) {
-      throw new DefaultClientException("没有查询到商品信息，无法生成盘点任务！");
+      throw new DefaultClientException("没有查询到药品信息，无法生成盘点任务！");
     }
 
     if (products != null) {
@@ -266,7 +266,7 @@ public class TakeStockPlanServiceImpl extends BaseMpServiceImpl<TakeStockPlanMap
         .orderByAsc(TakeStockPlanDetail::getOrderNo);
     List<TakeStockPlanDetail> details = takeStockPlanDetailService.list(queryDetailWrapper);
     if (CollectionUtil.isEmpty(details)) {
-      throw new DefaultClientException("盘点任务不存在商品信息，不允许执行差异生成操作！");
+      throw new DefaultClientException("盘点任务不存在药品信息，不允许执行差异生成操作！");
     }
     for (TakeStockPlanDetail detail : details) {
       if (detail.getOriTakeNum() != null) {
@@ -313,7 +313,7 @@ public class TakeStockPlanServiceImpl extends BaseMpServiceImpl<TakeStockPlanMap
         .orderByAsc(TakeStockPlanDetail::getOrderNo);
     List<TakeStockPlanDetail> details = takeStockPlanDetailService.list(queryDetailWrapper);
     if (CollectionUtil.isEmpty(details)) {
-      throw new DefaultClientException("盘点任务不存在商品信息，不允许执行差异处理操作！");
+      throw new DefaultClientException("盘点任务不存在药品信息，不允许执行差异处理操作！");
     }
 
     if (!config.getAllowChangeNum().equals(vo.getAllowChangeNum()) || !config.getAutoChangeStock()

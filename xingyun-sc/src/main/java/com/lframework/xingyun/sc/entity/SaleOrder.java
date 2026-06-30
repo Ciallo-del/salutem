@@ -40,7 +40,7 @@ public class SaleOrder extends BaseEntity implements BaseDto {
   private String scId;
 
   /**
-   * 客户ID
+   * 收货方ID
    */
   private String customerId;
 

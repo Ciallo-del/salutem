@@ -35,10 +35,9 @@ public class CreateSaleOutSheetVo implements BaseVo, Serializable {
   private String scId;
 
   /**
-   * 客户ID
+   * 收货方ID
    */
-  @ApiModelProperty(value = "客户ID", required = true)
-  @NotBlank(message = "客户ID不能为空！")
+  @ApiModelProperty("收货方ID")
   private String customerId;
 
   /**
@@ -60,11 +59,11 @@ public class CreateSaleOutSheetVo implements BaseVo, Serializable {
   private Boolean allowModifyPaymentDate = Boolean.FALSE;
 
   /**
-   * 商品信息
+   * 药品信息
    */
-  @ApiModelProperty(value = "商品信息", required = true)
+  @ApiModelProperty(value = "药品信息", required = true)
   @Valid
-  @NotEmpty(message = "商品不能为空！")
+  @NotEmpty(message = "药品不能为空！")
   private List<SaleOutProductVo> products;
 
   /**
@@ -91,7 +90,7 @@ public class CreateSaleOutSheetVo implements BaseVo, Serializable {
     SaleConfig saleConfig = saleConfigService.get();
 
     if (!saleConfig.getOutStockRequireSale().equals(this.required)) {
-      throw new DefaultClientException("系统参数发生改变，请刷新页面后重试！");
+      throw new DefaultClientException("系统参数发生变化，请刷新页面后重试！");
     }
 
     this.validate(saleConfig.getOutStockRequireSale());
@@ -99,17 +98,17 @@ public class CreateSaleOutSheetVo implements BaseVo, Serializable {
 
   protected void validate(boolean requireSale) {
 
-    SaleOutSheetService saleOutSheetService = ApplicationUtil.getBean(SaleOutSheetService.class);
-    GetPaymentDateDto paymentDate = saleOutSheetService.getPaymentDate(this.getCustomerId());
-    if (paymentDate.getAllowModify()) {
-      if (this.getPaymentDate() == null) {
-        throw new InputErrorException("付款日期不能为空！");
-      }
-    }
-
     if (requireSale) {
       if (StringUtil.isBlank(this.getSaleOrderId())) {
         throw new InputErrorException("销售订单不能为空！");
+      }
+    }
+
+    if (StringUtil.isNotBlank(this.getCustomerId())) {
+      SaleOutSheetService saleOutSheetService = ApplicationUtil.getBean(SaleOutSheetService.class);
+      GetPaymentDateDto paymentDate = saleOutSheetService.getPaymentDate(this.getCustomerId());
+      if (paymentDate.getAllowModify() && this.getPaymentDate() == null) {
+        throw new InputErrorException("付款日期不能为空！");
       }
     }
 
@@ -120,46 +119,45 @@ public class CreateSaleOutSheetVo implements BaseVo, Serializable {
     for (SaleOutProductVo product : this.products) {
 
       if (StringUtil.isBlank(product.getProductId())) {
-        throw new InputErrorException("第" + orderNo + "行商品不能为空！");
+        throw new InputErrorException("第" + orderNo + "行药品不能为空！");
       }
 
       if (product.getOrderNum() == null) {
-        throw new InputErrorException("第" + orderNo + "行商品销售数量不能为空！");
+        throw new InputErrorException("第" + orderNo + "行药品销售数量不能为空！");
       }
 
       if (NumberUtil.le(product.getOrderNum(), BigDecimal.ZERO)) {
-        throw new InputErrorException("第" + orderNo + "行商品销售数量必须大于0！");
+        throw new InputErrorException("第" + orderNo + "行药品销售数量必须大于0！");
       }
 
       if (!NumberUtil.isNumberPrecision(product.getOrderNum(), 8)) {
-        throw new InputErrorException("第" + orderNo + "行商品销售数量最多允许8位小数！");
+        throw new InputErrorException("第" + orderNo + "行药品销售数量最多允许8位小数！");
       }
 
       if (!requireSale) {
 
         if (product.getOriPrice() == null) {
-          throw new InputErrorException("第" + orderNo + "行商品参考销售价不能为空！");
+          throw new InputErrorException("第" + orderNo + "行药品参考销售价不能为空！");
         }
 
         if (product.getTaxPrice() == null) {
-          throw new InputErrorException("第" + orderNo + "行商品价格不能为空！");
+          throw new InputErrorException("第" + orderNo + "行药品价格不能为空！");
         }
 
         if (NumberUtil.lt(product.getTaxPrice(), 0D)) {
-          throw new InputErrorException("第" + orderNo + "行商品价格不允许小于0！");
+          throw new InputErrorException("第" + orderNo + "行药品价格不允许小于0！");
         }
 
         if (!NumberUtil.isNumberPrecision(product.getTaxPrice(), 6)) {
-          throw new InputErrorException("第" + orderNo + "行商品价格最多允许6位小数！");
+          throw new InputErrorException("第" + orderNo + "行药品价格最多允许6位小数！");
         }
 
         if (!NumberUtil.equal(product.getOriPrice(), 0D)) {
-          // 由 根据原价和折扣率校验现价 更改为 根据原价、现价计算折扣率，即：不以传入的折扣率为准
           BigDecimal discountRate = NumberUtil.getNumber(
-              NumberUtil.mul(NumberUtil.div(product.getTaxPrice(), product.getOriPrice()), 100), 2);
+              NumberUtil.mul(NumberUtil.div(product.getTaxPrice(), product.getOriPrice()), 100),
+              2);
           product.setDiscountRate(discountRate);
         } else {
-          //如果原价为0，折扣率固定为100
           product.setDiscountRate(BigDecimal.valueOf(100));
         }
       } else {

@@ -44,15 +44,15 @@ public class PrintSaleOrderBo extends BaseBo<SaleOrderFullDto> {
   private String scName;
 
   /**
-   * 客户编号
+   * 收货方编号
    */
-  @ApiModelProperty("客户编号")
+  @ApiModelProperty("收货方编号")
   private String customerCode;
 
   /**
-   * 客户名称
+   * 收货方名称
    */
-  @ApiModelProperty("客户名称")
+  @ApiModelProperty("收货方名称")
   private String customerName;
 
   /**
@@ -151,15 +151,15 @@ public class PrintSaleOrderBo extends BaseBo<SaleOrderFullDto> {
   public static class OrderDetailBo extends BaseBo<SaleOrderFullDto.OrderDetailDto> {
 
     /**
-     * 商品编号
+     * 药品编号
      */
-    @ApiModelProperty("商品编号")
+    @ApiModelProperty("药品编号")
     private String productCode;
 
     /**
-     * 商品名称
+     * 药品名称
      */
-    @ApiModelProperty("商品名称")
+    @ApiModelProperty("药品名称")
     private String productName;
 
     /**

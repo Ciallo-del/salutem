@@ -88,7 +88,7 @@ public class ProductStockWarningStockChangeListener {
       try {
         Product product = productService.findById(dto.getProductId());
         if (product == null) {
-          log.warn("商品 {} 不存在", dto.getProductId());
+          log.warn("药品 {} 不存在", dto.getProductId());
           return;
         }
 
