@@ -19,6 +19,7 @@ import com.lframework.xingyun.basedata.entity.ProductBundle;
 import com.lframework.xingyun.basedata.enums.ProductType;
 import com.lframework.xingyun.basedata.service.product.ProductBundleService;
 import com.lframework.xingyun.basedata.service.product.ProductService;
+import com.lframework.xingyun.sc.dto.stock.ExpireWarningProductDto;
 import com.lframework.xingyun.sc.dto.stock.ProductStockChangeDto;
 import com.lframework.xingyun.sc.entity.ProductStock;
 import com.lframework.xingyun.sc.events.stock.AddStockEvent;
@@ -32,6 +33,7 @@ import com.lframework.xingyun.sc.vo.stock.SubProductStockVo;
 import com.lframework.xingyun.sc.vo.stock.log.AddLogWithAddStockVo;
 import com.lframework.xingyun.sc.vo.stock.log.AddLogWithSubStockVo;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -310,5 +312,11 @@ public class ProductStockServiceImpl extends BaseMpServiceImpl<ProductStockMappe
     ApplicationUtil.publishEvent(subStockEvent);
 
     return stockChange;
+  }
+
+  @Override
+  public List<ExpireWarningProductDto> listExpiringProducts(LocalDate from, LocalDate to) {
+
+    return getBaseMapper().listExpiringProducts(from, to);
   }
 }

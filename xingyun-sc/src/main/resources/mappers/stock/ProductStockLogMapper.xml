@@ -19,6 +19,17 @@
         <result column="biz_type" property="bizType"/>
     </resultMap>
 
+    <resultMap id="StockReplenishCandidate"
+               type="com.lframework.xingyun.sc.dto.stock.StockReplenishCandidateDto">
+        <result column="sc_id" property="scId"/>
+        <result column="sc_name" property="scName"/>
+        <result column="product_id" property="productId"/>
+        <result column="product_code" property="productCode"/>
+        <result column="product_name" property="productName"/>
+        <result column="current_stock" property="currentStock"/>
+        <result column="last_week_outbound" property="lastWeekOutbound"/>
+    </resultMap>
+
     <sql id="ProductStockLogDto_sql">
         SELECT
             gsl.id,
@@ -78,5 +89,34 @@
             </if>
         </where>
         ORDER BY gsl.create_time DESC, sc.code, g.code
+    </select>
+
+    <select id="queryShortageProducts" resultMap="StockReplenishCandidate">
+        SELECT
+            gs.sc_id AS sc_id,
+            sc.name AS sc_name,
+            g.id AS product_id,
+            g.code AS product_code,
+            g.name AS product_name,
+            gs.stock_num AS current_stock,
+            o.out_num AS last_week_outbound
+        FROM tbl_product_stock AS gs
+        INNER JOIN (
+            SELECT gsl.sc_id, gsl.product_id, SUM(-gsl.stock_num) AS out_num
+            FROM tbl_product_stock_log AS gsl
+            WHERE gsl.biz_type = #{bizType}
+            AND gsl.create_time >= #{startTime}
+            <![CDATA[
+            AND gsl.create_time < #{endTime}
+            ]]>
+            GROUP BY gsl.sc_id, gsl.product_id
+        ) AS o ON o.sc_id = gs.sc_id AND o.product_id = gs.product_id
+        INNER JOIN base_data_product AS g ON g.id = gs.product_id AND g.product_type = 1 AND g.available = 1
+        INNER JOIN base_data_store_center AS sc ON sc.id = gs.sc_id AND sc.available = 1
+        <![CDATA[
+        WHERE o.out_num > 0
+        AND gs.stock_num < o.out_num
+        ]]>
+        ORDER BY sc.code ASC, g.code ASC
     </select>
 </mapper>

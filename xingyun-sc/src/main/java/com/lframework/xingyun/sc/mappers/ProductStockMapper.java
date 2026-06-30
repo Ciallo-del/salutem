@@ -6,9 +6,11 @@ import com.lframework.starter.web.core.annotations.permission.DataPermissions;
 import com.lframework.starter.web.core.annotations.sort.Sort;
 import com.lframework.starter.web.core.annotations.sort.Sorts;
 import com.lframework.starter.web.inner.components.permission.ProductDataPermissionDataPermissionType;
+import com.lframework.xingyun.sc.dto.stock.ExpireWarningProductDto;
 import com.lframework.xingyun.sc.entity.ProductStock;
 import com.lframework.xingyun.sc.vo.stock.QueryProductStockVo;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -93,4 +95,14 @@ public interface ProductStockMapper extends BaseMapper<ProductStock> {
       @Param("taxAmount") BigDecimal taxAmount,
       @Param("oriStockNum") BigDecimal oriStockNum, @Param("oriTaxAmount") BigDecimal oriTaxAmount,
       @Param("reCalcCostPrice") boolean reCalcCostPrice);
+
+  /**
+   * 查询截止时间在指定区间内、且当前有库存的药品（按药品聚合库存）
+   *
+   * @param from 区间起始日期（含）
+   * @param to   区间结束日期（含）
+   * @return 即将过期药品列表
+   */
+  List<ExpireWarningProductDto> listExpiringProducts(@Param("from") LocalDate from,
+      @Param("to") LocalDate to);
 }

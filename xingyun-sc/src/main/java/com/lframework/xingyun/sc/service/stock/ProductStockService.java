@@ -2,11 +2,13 @@ package com.lframework.xingyun.sc.service.stock;
 
 import com.lframework.starter.web.core.components.resp.PageResult;
 import com.lframework.starter.web.core.service.BaseMpService;
+import com.lframework.xingyun.sc.dto.stock.ExpireWarningProductDto;
 import com.lframework.xingyun.sc.dto.stock.ProductStockChangeDto;
 import com.lframework.xingyun.sc.entity.ProductStock;
 import com.lframework.xingyun.sc.vo.stock.AddProductStockVo;
 import com.lframework.xingyun.sc.vo.stock.QueryProductStockVo;
 import com.lframework.xingyun.sc.vo.stock.SubProductStockVo;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface ProductStockService extends BaseMpService<ProductStock> {
@@ -61,4 +63,13 @@ public interface ProductStockService extends BaseMpService<ProductStock> {
    * @param vo
    */
   ProductStockChangeDto subStock(SubProductStockVo vo);
+
+  /**
+   * 查询截止时间在指定区间内、且当前有库存的药品（按药品聚合库存）
+   *
+   * @param from 区间起始日期（含）
+   * @param to   区间结束日期（含）
+   * @return 即将过期药品列表
+   */
+  List<ExpireWarningProductDto> listExpiringProducts(LocalDate from, LocalDate to);
 }

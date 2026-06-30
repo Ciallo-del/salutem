@@ -10,6 +10,14 @@
         <result column="tax_amount" property="taxAmount"/>
     </resultMap>
 
+    <resultMap id="ExpireWarningProduct" type="com.lframework.xingyun.sc.dto.stock.ExpireWarningProductDto">
+        <result column="product_id" property="productId"/>
+        <result column="product_code" property="productCode"/>
+        <result column="product_name" property="productName"/>
+        <result column="deadline_time" property="deadlineTime"/>
+        <result column="stock_num" property="stockNum"/>
+    </resultMap>
+
     <sql id="ProductStockDto_sql">
         SELECT
             gs.id,
@@ -80,5 +88,23 @@
             AND g.product_type = #{productType}
         </if>
         AND gs.sc_id = #{scId}
+    </select>
+    <select id="listExpiringProducts" resultMap="ExpireWarningProduct">
+        SELECT
+            g.id AS product_id,
+            g.code AS product_code,
+            g.name AS product_name,
+            g.deadline_time AS deadline_time,
+            SUM(gs.stock_num) AS stock_num
+        FROM base_data_product AS g
+        INNER JOIN tbl_product_stock AS gs ON gs.product_id = g.id
+        WHERE g.product_type = 1
+        AND g.available = 1
+        AND g.deadline_time IS NOT NULL
+        AND g.deadline_time BETWEEN #{from} AND #{to}
+        AND gs.stock_num > 0
+        GROUP BY g.id, g.code, g.name, g.deadline_time
+        HAVING SUM(gs.stock_num) > 0
+        ORDER BY g.deadline_time ASC, g.code ASC
     </select>
 </mapper>
