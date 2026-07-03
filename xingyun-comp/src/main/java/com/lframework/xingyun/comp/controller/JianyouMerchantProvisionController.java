@@ -3,20 +3,26 @@ package com.lframework.xingyun.comp.controller;
 import com.lframework.starter.common.exceptions.impl.DefaultClientException;
 import com.lframework.starter.web.core.components.resp.InvokeResult;
 import com.lframework.starter.web.core.components.resp.InvokeResultBuilder;
+import com.lframework.starter.web.core.annotations.openapi.OpenApi;
 import com.lframework.starter.web.core.controller.DefaultBaseController;
+import com.lframework.xingyun.comp.bo.JianyouInventoryMenuTemplateBo;
 import com.lframework.xingyun.comp.bo.JianyouMerchantProvisionBo;
 import com.lframework.xingyun.comp.bo.JianyouMerchantRepairBo;
 import com.lframework.xingyun.comp.bo.JianyouMerchantUserSyncBo;
 import com.lframework.xingyun.comp.bo.JianyouPlatformProvisionBo;
 import com.lframework.xingyun.comp.bo.JianyouPlatformRepairBo;
+import com.lframework.xingyun.comp.bo.JianyouUserMenuPermissionsBo;
+import com.lframework.xingyun.comp.service.JianyouInventoryMenuPermissionService;
 import com.lframework.xingyun.comp.service.JianyouMerchantProvisionService;
 import com.lframework.xingyun.comp.service.JianyouPlatformProvisionService;
+import com.lframework.xingyun.comp.vo.JianyouInventoryMenuTemplateVo;
 import com.lframework.xingyun.comp.vo.JianyouMerchantProvisionVo;
 import com.lframework.xingyun.comp.vo.JianyouMerchantRepairVo;
 import com.lframework.xingyun.comp.vo.JianyouMerchantUserDisableVo;
 import com.lframework.xingyun.comp.vo.JianyouMerchantUserUpdateVo;
 import com.lframework.xingyun.comp.vo.JianyouPlatformProvisionVo;
 import com.lframework.xingyun.comp.vo.JianyouPlatformRepairVo;
+import com.lframework.xingyun.comp.vo.JianyouUserMenuPermissionsVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
@@ -32,6 +38,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @Api(tags = "建友星陨初始化接口")
+@OpenApi
 @Validated
 @RestController
 @RequestMapping("/xy/xingyun/jianyou")
@@ -47,6 +54,9 @@ public class JianyouMerchantProvisionController extends DefaultBaseController {
 
   @Autowired
   private JianyouPlatformProvisionService jianyouPlatformProvisionService;
+
+  @Autowired
+  private JianyouInventoryMenuPermissionService jianyouInventoryMenuPermissionService;
 
   @ApiOperation("建友平台商资源初始化")
   @PostMapping("/platform/provision")
@@ -116,6 +126,26 @@ public class JianyouMerchantProvisionController extends DefaultBaseController {
 
     validateSecret(apiSecret);
     return InvokeResultBuilder.success(jianyouMerchantProvisionService.disableUser(vo));
+  }
+
+  @ApiOperation("获取主商户可见的 Inventory 菜单模板")
+  @PostMapping("/merchant/inventory-menu-template")
+  public InvokeResult<JianyouInventoryMenuTemplateBo> inventoryMenuTemplate(
+      @RequestHeader(value = SECRET_HEADER, required = false) String apiSecret,
+      @Valid @RequestBody JianyouInventoryMenuTemplateVo vo) {
+
+    validateSecret(apiSecret);
+    return InvokeResultBuilder.success(jianyouInventoryMenuPermissionService.loadMenuTemplate(vo));
+  }
+
+  @ApiOperation("按 menuKey 更新子账号 Inventory 菜单权限")
+  @PostMapping("/merchant/user-menu-permissions")
+  public InvokeResult<JianyouUserMenuPermissionsBo> updateUserMenuPermissions(
+      @RequestHeader(value = SECRET_HEADER, required = false) String apiSecret,
+      @Valid @RequestBody JianyouUserMenuPermissionsVo vo) {
+
+    validateSecret(apiSecret);
+    return InvokeResultBuilder.success(jianyouInventoryMenuPermissionService.updateUserMenuPermissions(vo));
   }
 
   private void validateSecret(String apiSecret) {

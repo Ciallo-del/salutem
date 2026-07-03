@@ -115,7 +115,7 @@ public class SsoJianyouController extends DefaultBaseController {
     @Value("${xingyun.sso.jianyou.front-hash-route:true}")
     private Boolean frontHashRoute;
 
-    @Value("${xingyun.sso.jianyou.allowed-redirect-prefixes:/dashboard,/profile,/settings,/basedata,/base-data,/system,/msg-center,/product,/sc,/stock,/sale,/settle}")
+    @Value("${xingyun.sso.jianyou.allowed-redirect-prefixes:/dashboard,/profile,/settings,/basedata,/base-data,/system,/msg-center,/product,/sc,/stock,/sale,/settle,/take,/take-adjust}")
     private String allowedRedirectPrefixes;
 
     @Value("${xingyun.sso.jianyou.api-secret:}")

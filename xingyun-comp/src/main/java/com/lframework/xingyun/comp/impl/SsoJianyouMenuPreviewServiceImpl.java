@@ -32,20 +32,12 @@ public class SsoJianyouMenuPreviewServiceImpl implements SsoJianyouMenuPreviewSe
 
     private static final String GROUP_KEY_IN_OUT_MANAGE = "SaleOutSheet";
 
-    private static final Map<String, String> ROOT_REDIRECT_PREFIX_MAPPING;
-
     private static final Map<String, String> LEAF_REDIRECT_MAPPING;
 
     private static final Map<String, String> PREVIEW_MENU_NAME_MAPPING;
 
     static {
-        Map<String, String> rootMappings = new LinkedHashMap<>();
-        rootMappings.put(ROOT_MENU_STOCK_MANAGE, "/stock");
-        rootMappings.put(ROOT_MENU_TAKE_STOCK, "/stock/take");
-        rootMappings.put(ROOT_MENU_STOCK_ADJUST, "/stock/adjust");
-        ROOT_REDIRECT_PREFIX_MAPPING = Collections.unmodifiableMap(rootMappings);
-
-        // 叶子菜单 redirect 优先使用 sys_menu.component；此处仅保留历史兜底（正常叶子均有 component）
+        // 叶子菜单 redirect 统一按 sys_menu 原始 path 父子拼接；此处仅保留历史兜底
         LEAF_REDIRECT_MAPPING = Collections.emptyMap();
 
         Map<String, String> previewMenuNames = new LinkedHashMap<>();
@@ -221,36 +213,16 @@ public class SsoJianyouMenuPreviewServiceImpl implements SsoJianyouMenuPreviewSe
     }
 
     private String resolveRedirect(MenuRecord currentMenu, Map<String, MenuRecord> menuMap, String rootMenuName) {
+        // 星云前端真实可导航路由 = sys_menu 原始 path 父子拼接（与 component / index 无关）
         String pathRedirect = buildRedirectPath(currentMenu, menuMap, rootMenuName);
-        String component = normalizeComponentRedirect(currentMenu.getComponent());
-
-        if (StringUtils.isBlank(pathRedirect)) {
-            if (StringUtils.isNotBlank(component)) {
-                return component;
-            }
-            String leafRedirect = LEAF_REDIRECT_MAPPING.get(currentMenu.getName());
-            if (StringUtils.isNotBlank(leafRedirect)) {
-                return leafRedirect;
-            }
-            return null;
-        }
-        if (StringUtils.isBlank(component)) {
+        if (StringUtils.isNotBlank(pathRedirect)) {
             return pathRedirect;
         }
-
-        // System / base-data 等：component 与 path 前缀一致，直接用 component（含 /index）
-        if (component.equals(pathRedirect) || component.equals(pathRedirect + "/index")) {
-            return component;
+        String leafRedirect = LEAF_REDIRECT_MAPPING.get(currentMenu.getName());
+        if (StringUtils.isNotBlank(leafRedirect)) {
+            return leafRedirect;
         }
-        if (component.startsWith(pathRedirect + "/")) {
-            return component;
-        }
-
-        // 库存/销售等 /sc/* component：退回 path 拼接，并按 component 是否带 /index 决定是否追加
-        if (component.endsWith("/index")) {
-            return pathRedirect + "/index";
-        }
-        return pathRedirect;
+        return normalizeComponentRedirect(currentMenu.getComponent());
     }
 
     private String normalizeComponentRedirect(String component) {
@@ -283,16 +255,7 @@ public class SsoJianyouMenuPreviewServiceImpl implements SsoJianyouMenuPreviewSe
         while (cursor != null && StringUtils.isNotBlank(cursor.getId()) && visited.add(cursor.getId())) {
             String path = StringUtils.trimToEmpty(cursor.getPath());
             if (StringUtils.isNotBlank(path)) {
-                if (StringUtils.equals(cursor.getName(), rootMenuName)) {
-                    String normalizedRootPrefix = ROOT_REDIRECT_PREFIX_MAPPING.get(rootMenuName);
-                    if (StringUtils.isNotBlank(normalizedRootPrefix)) {
-                        segments.add(normalizedRootPrefix);
-                    } else {
-                        segments.add(normalizePathSegment(path));
-                    }
-                } else {
-                    segments.add(normalizePathSegment(path));
-                }
+                segments.add(normalizePathSegment(path));
             }
             if (StringUtils.isBlank(cursor.getParentId())) {
                 break;

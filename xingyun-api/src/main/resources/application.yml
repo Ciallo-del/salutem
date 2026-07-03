@@ -85,7 +85,7 @@ jugg:
     default-user-name: 系统管理员
   web:
     #不需要认证的Url
-    filter-url: ${magic-api.push_path},/error,/auth/sso/jianyou/callback,/auth/sso/jianyou/menu-preview,/api/auth/sso/jianyou/callback,/api/auth/sso/jianyou/menu-preview,/xy/xingyun/jianyou/platform/provision,/xy/xingyun/jianyou/platform/repair,/xy/xingyun/jianyou/merchant/provision,/xy/xingyun/jianyou/merchant/repair,/xy/xingyun/jianyou/merchant/ensure-permissions,/xy/xingyun/jianyou/merchant/user/update,/xy/xingyun/jianyou/merchant/user/disable
+    filter-url: ${magic-api.push_path},/error,/auth/sso/jianyou/callback,/auth/sso/jianyou/menu-preview,/api/auth/sso/jianyou/callback,/api/auth/sso/jianyou/menu-preview,/xy/xingyun/jianyou/platform/provision,/xy/xingyun/jianyou/platform/repair,/xy/xingyun/jianyou/merchant/provision,/xy/xingyun/jianyou/merchant/repair,/xy/xingyun/jianyou/merchant/ensure-permissions,/xy/xingyun/jianyou/merchant/user/update,/xy/xingyun/jianyou/merchant/user/disable,/xy/xingyun/jianyou/merchant/inventory-menu-template,/xy/xingyun/jianyou/merchant/user-menu-permissions
     #终端ID
     worker-id: 1
     #数据中心ID
@@ -228,5 +228,5 @@ xingyun:
       front-base-url: http://localhost:5173
       api-secret: B9A98667BD1FBC409768AEA8F9B33D09C3A1
       timestamp-skew-seconds: 300
-      allowed-redirect-prefixes: /dashboard,/profile,/settings,/basedata,/base-data,/system,/msg-center,/product,/sc,/stock,/sale,/settle
+      allowed-redirect-prefixes: /dashboard,/profile,/settings,/basedata,/base-data,/system,/msg-center,/product,/sc,/stock,/sale,/settle,/take,/take-adjust
       provision-secret: change-me

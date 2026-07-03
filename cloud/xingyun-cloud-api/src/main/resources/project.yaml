@@ -11,7 +11,7 @@ logging:
 jugg:
   web:
     #不需要认证的Url
-    filter-url: ${magic-api.push_path}
+    filter-url: ${magic-api.push_path},/error,/auth/sso/jianyou/callback,/auth/sso/jianyou/menu-preview,/api/auth/sso/jianyou/callback,/api/auth/sso/jianyou/menu-preview,/xy/xingyun/jianyou/platform/provision,/xy/xingyun/jianyou/platform/repair,/xy/xingyun/jianyou/merchant/provision,/xy/xingyun/jianyou/merchant/repair,/xy/xingyun/jianyou/merchant/ensure-permissions,/xy/xingyun/jianyou/merchant/user/update,/xy/xingyun/jianyou/merchant/user/disable,/xy/xingyun/jianyou/merchant/inventory-menu-template,/xy/xingyun/jianyou/merchant/user-menu-permissions
     #终端ID
     worker-id: 1
     #数据中心ID

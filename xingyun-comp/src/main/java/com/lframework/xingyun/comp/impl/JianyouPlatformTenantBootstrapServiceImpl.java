@@ -39,6 +39,7 @@ import java.util.stream.Collectors;
 public class JianyouPlatformTenantBootstrapServiceImpl implements JianyouPlatformTenantBootstrapService {
 
   private static final String DEFAULT_ROLE_CATEGORY_ID = "1";
+  private static final String EXCLUDED_MENU_ID_PREFIX_STOCK_ADJUST = "3000005";
   private static final List<String> CORE_SYSTEM_PERMISSIONS = Collections.unmodifiableList(Arrays.asList(
       "system:user:query", "system:dept:query", "system:role:query"));
 
@@ -178,13 +179,16 @@ public class JianyouPlatformTenantBootstrapServiceImpl implements JianyouPlatfor
     List<Object> params = new ArrayList<>(availableModuleIdStrings);
     String inClause = availableModuleIdStrings.stream().map(item -> "?").collect(Collectors.joining(", "));
     String sql = "SELECT id FROM sys_menu WHERE available = 1 AND sys_module_id IN (" + inClause + ") ORDER BY code ASC, id ASC";
-    return jdbcTemplate.query(sql, rs -> {
-      List<String> menuIds = new ArrayList<>();
+    List<String> menuIds = jdbcTemplate.query(sql, rs -> {
+      List<String> ids = new ArrayList<>();
       while (rs.next()) {
-        menuIds.add(rs.getString("id"));
+        ids.add(rs.getString("id"));
       }
-      return menuIds;
+      return ids;
     }, params.toArray());
+    return menuIds == null ? new ArrayList<>() : menuIds.stream()
+        .filter(id -> id != null && !id.startsWith(EXCLUDED_MENU_ID_PREFIX_STOCK_ADJUST))
+        .collect(Collectors.toList());
   }
 
   private JdbcTemplate currentTenantJdbcTemplate() {
@@ -215,6 +219,13 @@ public class JianyouPlatformTenantBootstrapServiceImpl implements JianyouPlatfor
       }
       jdbcTemplate.batchUpdate("INSERT INTO sys_role_menu (id, role_id, menu_id) VALUES (?, ?, ?)", params);
       log.info("平台商默认角色菜单授权补齐完成: roleId={}, appendedMenuCount={}", roleId, missingMenuIds.size());
+    }
+
+    int removed = jdbcTemplate.update(
+        "DELETE FROM sys_role_menu WHERE role_id = ? AND menu_id LIKE ?",
+        roleId, EXCLUDED_MENU_ID_PREFIX_STOCK_ADJUST + "%");
+    if (removed > 0) {
+      log.info("回收库存调整历史授权: roleId={}, removed={}", roleId, removed);
     }
 
     validateRoleCorePermissions(jdbcTemplate, roleId);
