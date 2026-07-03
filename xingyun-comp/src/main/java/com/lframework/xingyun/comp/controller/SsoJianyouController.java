@@ -25,6 +25,7 @@ import com.lframework.starter.web.inner.service.system.SysOpenDomainService;
 import com.lframework.starter.web.inner.service.system.SysUserService;
 import com.lframework.xingyun.comp.bo.SsoJianyouCurrentUserBo;
 import com.lframework.xingyun.comp.bo.SsoJianyouMenuPreviewGroupBo;
+import com.lframework.xingyun.comp.service.JianyouMerchantProvisionService;
 import com.lframework.xingyun.comp.service.SsoJianyouMenuPreviewService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -95,6 +96,9 @@ public class SsoJianyouController extends DefaultBaseController {
 
     @Autowired
     private SsoJianyouMenuPreviewService ssoJianyouMenuPreviewService;
+
+    @Autowired
+    private JianyouMerchantProvisionService jianyouMerchantProvisionService;
 
     @Autowired
     private DynamicRoutingDataSource dynamicRoutingDataSource;
@@ -354,13 +358,41 @@ public class SsoJianyouController extends DefaultBaseController {
         Set<String> permissions = userDetails.getPermissions() == null
                 ? new HashSet<>()
                 : new HashSet<>(userDetails.getPermissions());
-        userDetails.setPermissions(permissions);
+        int udsPermissionCount = permissions.size();
 
         if (permissions.isEmpty()) {
-            log.error("寤哄弸 SSO 登录态权限为空，tenantId={}, userId={}, username={}",
+            log.warn("建友 SSO 登录态 UDS 权限为空，尝试自动补齐: tenantId={}, userId={}, username={}",
                     targetTenantId, targetUser.getId(), targetUser.getUsername());
-            throw new DefaultClientException("星云 SSO 登录态初始化失败：未加载到任何权限！");
+            try {
+                jianyouMerchantProvisionService.backfillSsoUserPermissions(targetUser.getId(), null, null);
+            } catch (Exception e) {
+                log.error("建友 SSO 权限自动补齐失败: tenantId={}, userId={}, username={}, error={}",
+                        targetTenantId, targetUser.getId(), targetUser.getUsername(), e.getMessage(), e);
+            }
         }
+
+        Set<String> jdbcPermissions = jianyouMerchantProvisionService.loadUserPermissionCodes(targetUser.getId());
+        int jdbcPermissionCount = jdbcPermissions.size();
+        if (!jdbcPermissions.isEmpty()) {
+            permissions = new HashSet<>(jdbcPermissions);
+            userDetails.setPermissions(permissions);
+        }
+
+        if (permissions.isEmpty()) {
+            log.error("建友 SSO 登录态权限为空，tenantId={}, userId={}, username={}, udsPermissionCount={}, jdbcPermissionCount={}",
+                    targetTenantId, targetUser.getId(), targetUser.getUsername(), udsPermissionCount, jdbcPermissionCount);
+            throw new DefaultClientException("星云 SSO 登录态初始化失败：未加载到任何权限！tenantId="
+                    + targetTenantId + ", userId=" + targetUser.getId());
+        }
+
+        if (udsPermissionCount == 0 && jdbcPermissionCount > 0) {
+            log.warn("建友 SSO 权限由 JDBC 注入: tenantId={}, userId={}, username={}, udsPermissionCount={}, jdbcPermissionCount={}",
+                    targetTenantId, targetUser.getId(), targetUser.getUsername(), udsPermissionCount, jdbcPermissionCount);
+        }
+
+        log.info("建友 SSO 登录成功: tenantId={}, userId={}, username={}, permissionCount={}, udsPermissionCount={}, jdbcPermissionCount={}, hasUserQueryPermission={}",
+                targetTenantId, targetUser.getId(), targetUser.getUsername(), permissions.size(),
+                udsPermissionCount, jdbcPermissionCount, permissions.contains(CORE_USER_PERMISSION));
 
         return userDetails;
     }

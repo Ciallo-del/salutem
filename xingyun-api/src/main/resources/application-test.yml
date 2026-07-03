@@ -122,4 +122,3 @@ jugg:
     domain: ${jugg.upload.domain}
     # 上传文件的路径
     location: ${jugg.upload.location}
-

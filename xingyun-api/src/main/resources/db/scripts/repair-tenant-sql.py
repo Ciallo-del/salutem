@@ -66,16 +66,44 @@ def fix_sys_parameter_description_width(text: str) -> str:
     )
 
 
+# Typical UTF-8-as-GBK mojibake markers (Latin-1 supplement, CJK compatibility noise).
+MOJIBAKE_MARKERS = re.compile(
+    r"[\u0080-\u024f]|锟|拷|斤|涓|璇|缁|鍙|鏂|鐨|灏|姹|"
+)
+# Artifact from mis-applying mojibake recovery to valid UTF-8 Chinese (e.g. 结算 -> 算算算).
+REPEATED_CJK = re.compile(r"([\u4e00-\u9fff])\1{2,}")
+
+
+def looks_like_mojibake(line: str) -> bool:
+    """Return True only when a line likely contains mis-decoded UTF-8 text."""
+    if not line.strip():
+        return False
+    # Valid UTF-8 Chinese SQL without mojibake markers must not be transformed.
+    if re.search(r"[\u4e00-\u9fff]", line) and not MOJIBAKE_MARKERS.search(line):
+        return False
+    if MOJIBAKE_MARKERS.search(line):
+        return True
+    # Broken string placeholders from syntax corruption often accompany encoding issues.
+    if "?" in line and re.search(r"'[^']*\?", line):
+        return True
+    return False
+
+
 def fix_mojibake_line(line: str) -> str:
     """Recover UTF-8 text that was misinterpreted as GBK (classic mojibake)."""
+    if not looks_like_mojibake(line):
+        return line
     try:
-        return line.encode("gbk").decode("utf-8")
+        recovered = line.encode("gbk").decode("utf-8")
     except UnicodeError:
         return line
+    if REPEATED_CJK.search(recovered):
+        return line
+    return recovered
 
 
 def fix_mojibake(text: str) -> str:
-    """Apply mojibake recovery line-by-line to tolerate mixed/invalid sequences."""
+    """Apply mojibake recovery line-by-line; skip lines that already look like valid UTF-8."""
     return "".join(fix_mojibake_line(line) for line in text.splitlines(keepends=True))
 
 
@@ -106,7 +134,7 @@ def main() -> int:
     parser.add_argument(
         "--fix-encoding",
         action="store_true",
-        help="Apply GBK->UTF-8 mojibake recovery to entire file",
+        help="Apply GBK->UTF-8 mojibake recovery only to lines that look mis-encoded",
     )
     args = parser.parse_args()
 

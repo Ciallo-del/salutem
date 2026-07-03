@@ -45,20 +45,56 @@ public class SsoJianyouMenuPreviewServiceImpl implements SsoJianyouMenuPreviewSe
         rootMappings.put(ROOT_MENU_STOCK_ADJUST, "/stock/adjust");
         ROOT_REDIRECT_PREFIX_MAPPING = Collections.unmodifiableMap(rootMappings);
 
-        Map<String, String> leafMappings = new LinkedHashMap<>();
-        leafMappings.put("TakeStockConfig", "/stock/take/config");
-        leafMappings.put("PreTakeStockSheet", "/stock/take/pre");
-        leafMappings.put("TakeStockPlan", "/stock/take/plan");
-        leafMappings.put("TakeStockSheet", "/stock/take/sheet");
-        leafMappings.put("StockAdjustReason", "/stock/adjust/reason");
-        leafMappings.put("StockAdjustSheet", "/stock/stock-adjust");
-        leafMappings.put("SaleInSheet", "/sale/in");
-        leafMappings.put("SaleOutSheet", "/sale/out");
-        LEAF_REDIRECT_MAPPING = Collections.unmodifiableMap(leafMappings);
+        // 叶子菜单 redirect 优先使用 sys_menu.component；此处仅保留历史兜底（正常叶子均有 component）
+        LEAF_REDIRECT_MAPPING = Collections.emptyMap();
 
         Map<String, String> previewMenuNames = new LinkedHashMap<>();
+        previewMenuNames.put("ProductStock", "药品库存");
+        previewMenuNames.put("ProductStockLog", "药品库存变动记录");
+        previewMenuNames.put("ScTransferOrder", "仓库调拨单");
+        previewMenuNames.put("StockWarning", "库存预警");
+        previewMenuNames.put("StockCellProduct", "仓位药品管理");
+        previewMenuNames.put("TakeStockConfig", "盘点参数设置");
+        previewMenuNames.put("PreTakeStockSheet", "预先盘点单管理");
+        previewMenuNames.put("TakeStockPlan", "盘点任务管理");
+        previewMenuNames.put("TakeStockSheet", "盘点单管理");
+        previewMenuNames.put("StockAdjustReason", "库存调整原因");
+        previewMenuNames.put("StockAdjustSheet", "库存调整单管理");
         previewMenuNames.put("SaleInSheet", "入库管理");
         previewMenuNames.put("SaleOutSheet", "出库管理");
+        previewMenuNames.put("StoreCenterInfo", "仓库信息");
+        previewMenuNames.put("Customer", "收货方信息");
+        previewMenuNames.put("Supplier", "供应商信息");
+        previewMenuNames.put("Member", "会员信息");
+        previewMenuNames.put("Shop", "门店信息");
+        previewMenuNames.put("PayType", "支付方式");
+        previewMenuNames.put("Address", "地址簿");
+        previewMenuNames.put("LogisticsCompany", "物流公司");
+        previewMenuNames.put("PrintTemplate", "打印模板");
+        previewMenuNames.put("ProductCategory", "药品分类");
+        previewMenuNames.put("ProductBrand", "药品品牌");
+        previewMenuNames.put("ProductProperty", "药品属性");
+        previewMenuNames.put("ProductInfo", "药品管理");
+        previewMenuNames.put("Menu", "菜单管理");
+        previewMenuNames.put("Dept", "部门管理");
+        previewMenuNames.put("Role", "角色管理");
+        previewMenuNames.put("User", "用户管理");
+        previewMenuNames.put("Oplog", "操作日志");
+        previewMenuNames.put("SysParameter", "系统参数");
+        previewMenuNames.put("SysDataDic", "数据字典");
+        previewMenuNames.put("SysTenant", "租户管理");
+        previewMenuNames.put("OpenDomain", "开放域");
+        previewMenuNames.put("SysGenerateCode", "编号规则");
+        previewMenuNames.put("SysNotifyGroup", "消息通知组");
+        previewMenuNames.put("UserGroup", "用户组");
+        previewMenuNames.put("Qrtz", "定时任务管理");
+        previewMenuNames.put("FileBox", "文件箱");
+        previewMenuNames.put("Platform", "平台管理");
+        previewMenuNames.put("PublishSysNotice", "发布系统通知");
+        previewMenuNames.put("MySysNotice", "我的系统通知");
+        previewMenuNames.put("SiteMessage", "站内信");
+        previewMenuNames.put("MySiteMessage", "我的站内信");
+        previewMenuNames.put("MailMessage", "邮件消息");
         PREVIEW_MENU_NAME_MAPPING = Collections.unmodifiableMap(previewMenuNames);
     }
 
@@ -185,11 +221,47 @@ public class SsoJianyouMenuPreviewServiceImpl implements SsoJianyouMenuPreviewSe
     }
 
     private String resolveRedirect(MenuRecord currentMenu, Map<String, MenuRecord> menuMap, String rootMenuName) {
-        String leafRedirect = LEAF_REDIRECT_MAPPING.get(currentMenu.getName());
-        if (StringUtils.isNotBlank(leafRedirect)) {
-            return leafRedirect;
+        String pathRedirect = buildRedirectPath(currentMenu, menuMap, rootMenuName);
+        String component = normalizeComponentRedirect(currentMenu.getComponent());
+
+        if (StringUtils.isBlank(pathRedirect)) {
+            if (StringUtils.isNotBlank(component)) {
+                return component;
+            }
+            String leafRedirect = LEAF_REDIRECT_MAPPING.get(currentMenu.getName());
+            if (StringUtils.isNotBlank(leafRedirect)) {
+                return leafRedirect;
+            }
+            return null;
         }
-        return buildRedirectPath(currentMenu, menuMap, rootMenuName);
+        if (StringUtils.isBlank(component)) {
+            return pathRedirect;
+        }
+
+        // System / base-data 等：component 与 path 前缀一致，直接用 component（含 /index）
+        if (component.equals(pathRedirect) || component.equals(pathRedirect + "/index")) {
+            return component;
+        }
+        if (component.startsWith(pathRedirect + "/")) {
+            return component;
+        }
+
+        // 库存/销售等 /sc/* component：退回 path 拼接，并按 component 是否带 /index 决定是否追加
+        if (component.endsWith("/index")) {
+            return pathRedirect + "/index";
+        }
+        return pathRedirect;
+    }
+
+    private String normalizeComponentRedirect(String component) {
+        String value = StringUtils.trimToEmpty(component);
+        if (StringUtils.isBlank(value)) {
+            return null;
+        }
+        if (!value.startsWith("/")) {
+            value = "/" + value;
+        }
+        return StringUtils.removeEnd(value, "/");
     }
 
     private String resolvePreviewMenuName(MenuRecord menu) {

@@ -12,7 +12,7 @@ import org.quartz.JobExecutionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * 药品即将过期提醒定时任务（平台级，逐租户扫描）
+ * 药品即将过期提醒定时任务（平台级，逐可用租户扫描，含平台租户）
  */
 @Slf4j
 public class ProductExpireWarningJob extends QrtzJob {
@@ -35,9 +35,8 @@ public class ProductExpireWarningJob extends QrtzJob {
       if (tenant == null || tenant.getId() == null) {
         continue;
       }
-      if (Boolean.FALSE.equals(tenant.getAvailable()) || Boolean.TRUE.equals(
-          tenant.getIsPlatform())) {
-        // 跳过停用租户与平台租户
+      if (Boolean.FALSE.equals(tenant.getAvailable())) {
+        // 跳过停用租户
         continue;
       }
 

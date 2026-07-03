@@ -2,6 +2,7 @@ package com.lframework.xingyun.sc.impl.stock.warning;
 
 import com.lframework.starter.common.utils.CollectionUtil;
 import com.lframework.starter.mq.core.service.MqProducerService;
+import com.lframework.starter.web.core.components.tenant.TenantContextHolder;
 import com.lframework.starter.web.core.utils.JsonUtil;
 import com.lframework.starter.web.inner.dto.notify.SysNotifyDto;
 import com.lframework.xingyun.sc.dto.stock.StockReplenishCandidateDto;
@@ -42,20 +43,31 @@ public class ProductStockReplenishWarningServiceImpl implements ProductStockRepl
   @Override
   public void scanAndNotify() {
 
+    Integer tenantId = TenantContextHolder.getTenantId();
     LastWeekRange range = resolveLastWeekRange();
     LocalDate currentWeekMonday = range.getCurrentWeekMonday();
+
+    log.info("【补货提醒】租户 {} 统计区间 [{}, {})，当前周周一={}",
+        tenantId, range.getStartTime(), range.getEndTime(), currentWeekMonday);
 
     List<StockReplenishCandidateDto> candidates = productStockLogMapper.queryShortageProducts(
         range.getStartTime(), range.getEndTime(), ProductStockBizType.SALE.getCode());
     if (CollectionUtil.isEmpty(candidates)) {
+      log.info("【补货提醒】租户 {} 候选数=0，无需补货提醒", tenantId);
       return;
     }
 
     List<ProductStockWarningNotify> notifyList = productStockWarningNotifyService.list();
     if (CollectionUtil.isEmpty(notifyList)) {
-      log.info("没有设置预警通知组，不发送库存不足补货提醒");
+      log.info("【补货提醒】租户 {} 没有设置预警通知组，不发送库存不足补货提醒", tenantId);
       return;
     }
+
+    log.info("【补货提醒】租户 {} 候选数={}，通知组数={}",
+        tenantId, candidates.size(), notifyList.size());
+
+    int sentCount = 0;
+    int dedupSkippedCount = 0;
 
     for (StockReplenishCandidateDto candidate : candidates) {
       for (ProductStockWarningNotify notify : notifyList) {
@@ -63,6 +75,7 @@ public class ProductStockReplenishWarningServiceImpl implements ProductStockRepl
         LocalDate lastNotifyWeek = dedupCache.getLastNotifyWeek(candidate.getScId(),
             candidate.getProductId(), notify.getNotifyGroupId());
         if (lastNotifyWeek != null && lastNotifyWeek.isEqual(currentWeekMonday)) {
+          dedupSkippedCount++;
           continue;
         }
 
@@ -82,13 +95,22 @@ public class ProductStockReplenishWarningServiceImpl implements ProductStockRepl
           mqProducerService.createSysNotify(sysNotifyDto);
           dedupCache.setLastNotifyWeek(currentWeekMonday, candidate.getScId(),
               candidate.getProductId(), notify.getNotifyGroupId());
+          sentCount++;
+          log.info(
+              "【补货提醒】租户 {} 发送成功：仓库={}，药品={}，当前库存={}，上周出库={}，通知组={}",
+              tenantId, candidate.getScName(), candidate.getProductCode(),
+              candidate.getCurrentStock(), candidate.getLastWeekOutbound(),
+              notify.getNotifyGroupId());
         } catch (Exception e) {
-          log.error("发送库存不足补货提醒失败，scId = {}, productId = {}, notifyGroupId = {}: {}",
-              candidate.getScId(), candidate.getProductId(), notify.getNotifyGroupId(),
-              e.getMessage(), e);
+          log.error("【补货提醒】租户 {} 发送失败，scId={}，productId={}，notifyGroupId={}: {}",
+              tenantId, candidate.getScId(), candidate.getProductId(),
+              notify.getNotifyGroupId(), e.getMessage(), e);
         }
       }
     }
+
+    log.info("【补货提醒】租户 {} 扫描完成：发送={}，去重跳过={}",
+        tenantId, sentCount, dedupSkippedCount);
   }
 
   /**
